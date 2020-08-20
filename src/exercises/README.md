@@ -1,1 +1,27 @@
 # Skills Development Exercises
+
+For a participant to contribute effectively to CHERI-RISC-V evaluation,
+they will need a baseline skill-set that includes significant existing
+experience with:
+
+- C/C++-language memory-safety vulnerabilities
+- Binary reverse engineering for at least one ISA, such as x86, MIPS, ARMv7, or ARMv8
+- Low-level aspects of program representation, such as ELF, GOTs, and PLTs, as well as mechanisms such as dynamic linking and system-call handling
+- Attack techniques against program control flow and underlying data structures including ROP and JOP
+
+However, we expect that participants may need to build specific
+additional skills with respect to the specifics of RISC-V machine code,
+assembly, language, and linkage, as well as knowledge about the CHERI
+C/C++ protection model and CHERI-RISC-V extensions to RISC-V. These
+exercises are intended to assist in these latter two areas, faulting
+in missing knowledge and experience while building on existing skills
+gained on other architectures (such as x86-64 and ARMv8). participants
+successfully completing these exercises will be able to:
+- Compile, run, disassemble, and debug RISC-V compiled C/C++ programs
+- Compile, run, disassemble, and debug CHERI-RISC-V compiled C/C++ programs
+- Use specific debugging tools such as GDB and objdump with RISC-V and CHERI-RISC-V programs
+- Understand some of the implications of CHERI protections for specific aspects of C/C++ and process execution
+
+Each exercise will include:
+- Sample source code and build instructions
+- A short document describing what the program does and the objectives
