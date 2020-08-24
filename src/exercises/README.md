@@ -15,7 +15,7 @@ assembly, language, and linkage, as well as knowledge about the CHERI
 C/C++ protection model and CHERI-RISC-V extensions to RISC-V. These
 exercises are intended to assist in these latter two areas, faulting
 in missing knowledge and experience while building on existing skills
-gained on other architectures (such as x86-64 and ARMv8). participants
+gained on other architectures (such as x86-64 and ARMv8). Participants
 successfully completing these exercises will be able to:
 - Compile, run, disassemble, and debug RISC-V compiled C/C++ programs
 - Compile, run, disassemble, and debug CHERI-RISC-V compiled C/C++ programs
