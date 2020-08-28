@@ -30,18 +30,19 @@ Some conventions:
  - `$CLANG` is the path to your compiler.
  - All compiler commands begin with `$CLANG -target riscv64-unknown-freebsd --sysroot="$SYSROOT" -fuse-ld=lld -mno-relax`
  - As a rule, you will want to add `-g` to the command line to compile with debug symbols.
+ - You will generally want to compile with `-O2` as the unoptimized assembly is verbose and hard to follow.
 
 ### RISC-V
 Two additional arguments are required to specify the supported architectural features and ABI.  For conventional RISC-V, those are: `
 -march=rv64gc -mabi=lp64d`.
 Putting it all together:
 ```
-$CLANG -g -target riscv64-unknown-freebsd --sysroot="$SYSROOT" -fuse-ld=lld -mno-relax -march=rv64gc -mabi=lp64d
+$CLANG -g -O2 -target riscv64-unknown-freebsd --sysroot="$SYSROOT" -fuse-ld=lld -mno-relax -march=rv64gc -mabi=lp64d
 ```
 ### CheriABI
 For CheriABI, the architecture and ABI flags are:
 `-march=rv64gcxcheri -mabi=l64pc128d`.
 Putting it all together:
 ```
-$CLANG -g -target riscv64-unknown-freebsd --sysroot="$SYSROOT" -fuse-ld=lld -mno-relax -march=rv64gcxcheri -mabi=l64pc128d
+$CLANG -g -O2 -target riscv64-unknown-freebsd --sysroot="$SYSROOT" -fuse-ld=lld -mno-relax -march=rv64gcxcheri -mabi=l64pc128d
 ```
