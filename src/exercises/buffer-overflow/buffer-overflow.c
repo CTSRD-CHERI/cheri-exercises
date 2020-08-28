@@ -4,10 +4,10 @@ char buffer[128];
 char c;
 
 void
-fill_buf(char *buffer, size_t len)
+fill_buf(char *buf, size_t len)
 {
 	for (size_t i = 0; i <= len; i++)
-		buffer[i] = 'b';
+		buf[i] = 'b';
 }
 
 #include "main-asserts.inc"
