@@ -1,0 +1,113 @@
+#!/bin/sh
+#
+# ccc - Cross compilation script
+
+name=$(basename $0)
+
+CHERIBUILD_SDK=${CHERIBUILD_SDK:-${HOME}/cheri/output/sdk}
+CLANG=${CLANG:-${CHERIBUILD_SDK}/bin/clang}
+SYSROOT=${SYSROOT:-${CHERIBUILD_SDK}/sysroot-riscv64-purecap}
+
+VERBOSE=${VERBOSE:-0}
+QUIET=${QUIET:-0}
+
+usage()
+{
+	cat <<EOF
+$name <arch> [...]
+
+Supported architectures:
+	riscv64		- conventional riscv64
+	riscv64-hybrid	- RISC-V 64-bit supporting CHERI
+	riscv64-purecap	- RISC-V 64-bit pure-capability
+EOF
+	exit 1
+}
+
+err()
+{
+	ret=$1
+	shift
+	echo "$@" 2>&1
+	exit $ret
+}
+
+warn()
+{
+	echo "$@" 2>&1
+}
+
+debug()
+{
+	if [ $VERBOSE -ne 0 ]; then
+		echo "$@"
+	fi
+}
+
+info()
+{
+	if [ $QUIET -eq 0 ]; then
+		echo "$@"
+	fi
+}
+
+run()
+{
+	debug	# add space before normal multiline output
+	info "Running: $@"
+	eval "$@"
+}
+
+if [ $# -eq 0 ]; then
+	usage
+fi
+
+case $name in
+*clang|*cc)	prog="${CLANG}" ;;
+*clang++|*c++)	prog="${CLANG}++" ;;
+*)	err 1 "Unsupported program name '$name'" ;;
+esac
+if [ ! -x "$prog" ]; then
+	err 1 "Target program '$prog' not found. Set CLANG or CHERIBUILD_SDK."
+fi
+debug "prog: $prog"
+
+if [ ! -d "$SYSROOT" ]; then
+	err 1 "Sysroot '$SYSROOT' does not exist. Set SYSROOT or CHERIBUILD_SDK."
+fi
+debug "sysroot: $SYSROOT"
+
+debug_flags="-g"
+debug "debug_flags: $debug_flags"
+
+opt_flags="-O2"
+debug "opt_flags: $opt_flags"
+
+base_flags="-target riscv64-unknown-freebsd --sysroot='$SYSROOT'"
+debug "base_flags: $base_flags"
+
+linker_flags="-fuse-ld=lld -mno-relax"
+debug "linker_flags: $linker_flags"
+
+diag_flags="-fcolor-diagnostics -Wall -Wcheri"
+debug "diag_flags: $diag_flags"
+
+arch=$1
+shift
+case $arch in
+riscv64)
+	abi_flags="-march=rv64gc -mabi=lp64d"
+	;;
+riscv64-hybrid)
+	abi_flags="-march=rv64gcxcheri -mabi=lp64d"
+	;;
+riscv64-purecap)
+	abi_flags="-march=rv64gcxcheri -mabi=l64pc128d"
+	;;
+*)
+	err 1 "Unsupported architecture '$arch'"
+	;;
+esac
+debug "abi_flags: $abi_flags"
+
+run "$prog" $debug_flags $opt_flags $base_flags $linker_flags $abi_flags $diag_flags "$@"
