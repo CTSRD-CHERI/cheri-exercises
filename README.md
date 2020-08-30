@@ -1,6 +1,6 @@
 # CHERI Exercises
 
-This repository contains a series of development and adversarial exercises for
+This repository contains a series of skills development and adversarial exercises for
 [CHERI](http://cheri-cpu.org), specifically aimed at the CHERI-RISC-V
 implementation.
 
