@@ -15,5 +15,5 @@ For the exercises in this book you will use the `riscv64` and `riscv64-purecap` 
 
 If you have built a compiler and sysroot using `cheribuild` in the default location (`~/cheri`) then it should work out of the box.  If you've configured a different location you can set the `CHERIBUILD_SDK` environmental variable to point to to the location of your SDK.  Alternatively, you can set the `CLANG` and `SYSROOT` variables to point to the respective locations.
 ```sh
-{{#include ccc.sh}}
+{{#include ../../tools/ccc}}
 ```
