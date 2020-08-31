@@ -12,6 +12,7 @@
     - [Corrupt a control-flow pointer using a subobject buffer overflow](exercises/control-flow-pointer/README.md)
     - [Exercise integer-pointer type confusion vulnerability](exercises/type-confusion/README.md)
     - [Demonstrate pointer injection](exercises/pointer-injection/README.md)
+        - [Answers](exercises/pointer-injection/answers.md)
     - [Demonstrate pointer revocation](exercises/pointer-revocation/README.md)
 - [Focused Adversarial Missions](missions/README.md)
     - [Exploiting a buffer overflow to manipulate control flow](missions/buffer-overflow-control-flow/README.md)
