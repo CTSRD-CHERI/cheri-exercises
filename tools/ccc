@@ -1,6 +1,8 @@
 #!/bin/sh
 #
 # ccc - Cross compilation script
+set -e
+set -u
 
 name=$(basename $0)
 
@@ -55,7 +57,7 @@ run()
 {
 	debug	# add space before normal multiline output
 	info "Running: $@"
-	eval "$@"
+	"$@"
 }
 
 if [ $# -eq 0 ]; then
@@ -110,4 +112,13 @@ riscv64-purecap)
 esac
 debug "abi_flags: $abi_flags"
 
-run "$prog" $debug_flags $opt_flags $base_flags $linker_flags $abi_flags $diag_flags "$@"
+all_flags_rev=
+eval 'for flag in '$debug_flags $opt_flags $base_flags $linker_flags $abi_flags $diag_flags'; do
+	all_flags_rev="'"'"'$flag'"'"'${all_flags_rev:+ $all_flags_rev}"
+done'
+
+eval 'for flag in '$all_flags_rev'; do
+	set -- "$flag" "$@"
+done'
+
+run "$prog" "$@"
