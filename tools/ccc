@@ -89,7 +89,7 @@ debug "base_flags: $base_flags"
 linker_flags="-fuse-ld=lld -mno-relax"
 debug "linker_flags: $linker_flags"
 
-diag_flags="-fcolor-diagnostics -Wall -Wcheri"
+diag_flags="-Wall -Wcheri"
 debug "diag_flags: $diag_flags"
 
 arch=$1
