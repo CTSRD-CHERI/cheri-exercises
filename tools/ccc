@@ -112,8 +112,10 @@ riscv64-purecap)
 esac
 debug "abi_flags: $abi_flags"
 
+all_flags="$debug_flags $opt_flags $base_flags $linker_flags $abi_flags $diag_flags"
+
 all_flags_rev=
-eval 'for flag in '$debug_flags $opt_flags $base_flags $linker_flags $abi_flags $diag_flags'; do
+eval 'for flag in '$all_flags'; do
 	all_flags_rev="'"'"'$flag'"'"'${all_flags_rev:+ $all_flags_rev}"
 done'
 
