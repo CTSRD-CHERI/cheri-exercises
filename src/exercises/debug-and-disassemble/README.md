@@ -28,3 +28,4 @@ And for CHERI-RISC-V:
     Where do its bounds appear to originate from?
 12. Print out the register file using `info registers`.
     What mappings do the capabilities in the register file point to?
+    Notice that some capabilities are labeled with `(sentry)`. Sentry capabilities are sealed (can not be modified or used to load or store), but can be used as a jump target (where they are unsealed and installed in `pcc`). What implications does this have for attackers.
