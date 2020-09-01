@@ -6,6 +6,7 @@
         - [Helper script](introduction/ccc.md)
 - [Skills Development Exercises](exercises/README.md)
     - [Compile and run RISC-V and CHERI-RISC-V programs](exercises/compile-and-run/README.md)
+        - [Answers](exercises/compile-and-run/answers.md)
     - [Disassemble and debug RISC-V and CHERI-RISC-V programs](exercises/debug-and-disassemble/README.md)
     - [Exercise an inter-object buffer overflow](exercises/buffer-overflow/README.md)
     - [Exercise a subobject buffer overflow](exercises/buffer-overflow-subobject/README.md)

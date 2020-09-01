@@ -10,7 +10,7 @@ The first test program is written in conventional C, and can be compiled to RISC
 ```C
 {{#include print-pointer.c}}
 ```
-2. Run the binary: it should print a pointer size of `8` and an address size of `8`.
+2. Run the binary.
 3. Compile `print-pointer.c` with a CHERI-RISC-V target and a binary name of `print-pointer-cheri`.
 4. Run the binary: it should print a pointer size of `16` and address size of `8`.
 The second test program is written in CHERI C:
@@ -18,6 +18,6 @@ The second test program is written in CHERI C:
 ```C
 {{#include print-capability.c}}
 ```
-6. Run the binary: it should print a capability length of `4` (`sizeof(int)`).
+6. Run the binary.
 7. Modify `print-capability.c` to point the capability at a pointer instead of an integer, and recompile.
-8. Run the binary: it should print out a capability length of `16` (`sizeof(void*)`).
+8. Run the binary.
