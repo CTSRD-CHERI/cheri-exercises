@@ -8,6 +8,7 @@
     - [Compile and run RISC-V and CHERI-RISC-V programs](exercises/compile-and-run/README.md)
         - [Answers](exercises/compile-and-run/answers.md)
     - [Disassemble and debug RISC-V and CHERI-RISC-V programs](exercises/debug-and-disassemble/README.md)
+        - [Answers](exercises/debug-and-disassemble/answers.md)
     - [Exercise an inter-object buffer overflow](exercises/buffer-overflow/README.md)
     - [Exercise a subobject buffer overflow](exercises/buffer-overflow-subobject/README.md)
     - [Corrupt a control-flow pointer using a subobject buffer overflow](exercises/control-flow-pointer/README.md)
