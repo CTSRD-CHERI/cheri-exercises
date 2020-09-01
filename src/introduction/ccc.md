@@ -13,9 +13,9 @@ and it can be used in place of your compiler.
 
 For the exercises in this book you will use the `riscv64` and `riscv64-purecap` architectures.  The `riscv64-hybrid` architecture instantiates appropriately annotated pointers as capabilities leaving the rest as conventional integer addresses and it not used here.
 
-If you have built a compiler and sysroot using `cheribuild` in the default location (`~/cheri`) then it should work out of the box.  If you've configured a different location you can set the `CHERIBUILD_SDK` environmental variable to point to to the location of your SDK.  Alternatively, you can set the `CLANG` and `SYSROOT` variables to point to the respective locations.
+If you have built a compiler and sysroot using `cheribuild` in the default location (`~/cheri`) then it should work out of the box.  If you've configured a different location you can set the `CHERIBUILD_SDK` environment variable to point to to the location of your SDK.  Alternatively, you can set the `CLANG` and `SYSROOT` variables to point to the respective locations.
 ```sh
 {{#include ../../tools/ccc}}
 ```
 
-If you were provided a docker image along with these instructions (e.g. as part of a training exercise or bug-bounty), it should be configured such that `ccc` works without setting environmental variables.
+If you were provided a docker image along with these instructions (e.g. as part of a training exercise or bug-bounty), it should be configured such that `ccc` works without setting environment variables.
