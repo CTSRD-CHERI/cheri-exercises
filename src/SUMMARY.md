@@ -10,6 +10,7 @@
     - [Disassemble and debug RISC-V and CHERI-RISC-V programs](exercises/debug-and-disassemble/README.md)
         - [Answers](exercises/debug-and-disassemble/answers.md)
     - [Exercise an inter-object buffer overflow](exercises/buffer-overflow/README.md)
+        - [Answers](exercises/buffer-overflow/answers.md)
     - [Exercise a subobject buffer overflow](exercises/buffer-overflow-subobject/README.md)
     - [Corrupt a control-flow pointer using a subobject buffer overflow](exercises/control-flow-pointer/README.md)
     - [Exercise integer-pointer type confusion bug](exercises/type-confusion/README.md)
