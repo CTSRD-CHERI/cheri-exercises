@@ -14,6 +14,8 @@ This exercise is similar to the prior exercise, but is for an intra-object overf
 5. Run the program to demonstrate that the buffer overflow is now caught.
 6. Run the program under `gdb` and examine the bounds again. What has changed?
 
+## Support code
+
 **asserts.inc**
 ```C
 {{#include asserts.inc}}
