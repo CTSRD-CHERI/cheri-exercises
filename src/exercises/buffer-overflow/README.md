@@ -12,7 +12,7 @@ This exercise demonstrates an inter-object buffer overflow on RISC-V and CHERI-R
 3. Using GDB on the core dump: Why has the CHERI program failed?
 4. Modify buffer-overflow.c to increase the buffer size from 128 bytes to 1Mbyte + 1 byte.
 5. Recompile and re-run `buffer-overflow-cheri`. Why does it no longer crash, even though the buffer overflow exists in the source code? Is the adjacent field still corrupted (i.e., has spatial safety been violated between allocations)?
-6. Modify `buffer-overflow.c` to restore the original buffer size of 128 bytes, and fix the bug by limiting accesses to the allocated array.
+6. Modify `buffer-overflow.c` to restore the original buffer size of 128 bytes, and fix the bug by correcting accesses to the allocated array.
 7. Recompile and run `buffer-overflow-cheri` to demonstrate that the program is now able to continue.
 
 **main-asserts.inc**
