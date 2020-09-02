@@ -14,6 +14,7 @@
     - [Exercise a subobject buffer overflow](exercises/buffer-overflow-subobject/README.md)
         - [Answers](exercises/buffer-overflow-subobject/answers.md)
     - [Corrupt a control-flow pointer using a subobject buffer overflow](exercises/control-flow-pointer/README.md)
+        - [Answers](exercises/control-flow-pointer/answers.md)
     - [Exercise integer-pointer type confusion bug](exercises/type-confusion/README.md)
         - [Answers](exercises/type-confusion/answers.md)
     - [Demonstrate pointer injection](exercises/pointer-injection/README.md)
