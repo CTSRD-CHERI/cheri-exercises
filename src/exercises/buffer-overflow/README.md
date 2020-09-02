@@ -15,6 +15,8 @@ This exercise demonstrates an inter-object buffer overflow on RISC-V and CHERI-R
 6. Modify `buffer-overflow.c` to restore the original buffer size of 128 bytes, and fix the bug by correcting accesses to the allocated array.
 7. Recompile and run `buffer-overflow-cheri` to demonstrate that the program is now able to continue.
 
+## Support code
+
 **main-asserts.inc**
 ```C
 {{#include main-asserts.inc}}

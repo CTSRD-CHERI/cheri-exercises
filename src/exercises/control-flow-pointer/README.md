@@ -9,6 +9,8 @@
 2. Run the RISC-V program under GDB; why does it crash?
 3. Run the CHERI-RISC-V program under GDB; why does it crash?
 
+## Support code
+
 **asserts.inc**
 ```C
 {{#include asserts.inc}}
