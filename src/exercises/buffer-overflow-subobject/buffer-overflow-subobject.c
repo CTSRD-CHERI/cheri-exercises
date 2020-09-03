@@ -19,9 +19,12 @@ fill_buf(char *buf, size_t len)
 int
 main(void)
 {
+	b.i = 'c';
+	printf("b.i = %c\n", b.i);
+
 	fill_buf(b.buffer, sizeof(b.buffer));
 
-	printf("b.i = %d\n", b.i);
+	printf("b.i = %c\n", b.i);
 
 	return 0;
 }
