@@ -8,7 +8,8 @@ Starting program: /root/buffer-overflow-fnptr-riscv
 Program received signal SIGSEGV, Segmentation fault.
 0x00000000aaaaaaaa in ?? ()
 ```
-The program attempted an instruction fetch from a nonsensical address `0xaaaaaaaa`.
+The program attempted an instruction fetch from a nonsensical address
+`0xaaaaaaaa`.
 
 3. Example session:
 ```

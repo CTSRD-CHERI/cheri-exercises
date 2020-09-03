@@ -1,11 +1,13 @@
 # Answers - Disassemble and debug RISC-V and CHERI-RISC-V programs
 
-2. `jalr`. The target address is a pc-relative address in the `.plt` section addressed by a sequence like:
+2. `jalr`. The target address is a pc-relative address in the `.plt`
+   section addressed by a sequence like:
 ```
    1182a: 97 00 00 00   auipc   ra, 0
    1182e: e7 80 60 0e   jalr    230(ra)
 ```
-3. `cjalr`. The target capability is loaded from the `.captable` section by a sequence like:
+3. `cjalr`. The target capability is loaded from the `.captable` section
+   by a sequence like:
 ```
     1b2e: 17 24 00 00   auipcc  cs0, 2
     1b32: 0f 24 24 27   clc     cs0, 626(cs0)

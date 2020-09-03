@@ -1,6 +1,8 @@
 # Answers - Compile and run RISC-V and CHERI-RISC-V programs
 
-This exercise highlights the difference in size between addresses and pointers to draw attention to the pointer-focused nature of CHERI memory protection.
+This exercise highlights the difference in size between addresses and
+pointers to draw attention to the pointer-focused nature of CHERI memory
+protection.
 
 2. Expected output:
 ```

@@ -1,6 +1,7 @@
 # Answers - Exercise a subobject buffer overflow
 
-This exercise demonstrates how subobject bounds can correct and array in a structure.
+This exercise demonstrates how subobject bounds can correct and array in a
+structure.
 
 2. Expected output:
 ```

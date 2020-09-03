@@ -22,8 +22,10 @@ ca4            0xf17d00000439806400000000001040e0       0x1040e0 <c> [rwRW,0x104
 (gdb) x/i $pcc
 => 0x101cc8 <fill_buf+12>:  sb      a3,0(a4)
 ```
-The array has been incremented beyond the end of the allocation as out of bounds store has been attempted (`Capability bounds fault`).
-*Note:* due to deficiencies in the current GDB implementation, the instruction incorrectly decodes as `sb` rather than correctly as:
+The array has been incremented beyond the end of the allocation as out
+of bounds store has been attempted (`Capability bounds fault`).
+*Note:* due to deficiencies in the current GDB implementation, the
+instruction incorrectly decodes as `sb` rather than correctly as:
 ```
     1cc8: 23 00 d7 00   csb     a3, 0(ca4)
 ```
@@ -44,7 +46,11 @@ Breakpoint 1, fill_buf (buf=0x105000 <buffer> [rwRW,0x105000-0x205800] "",
     len=1048577) at src/exercises/buffer-overflow/buffer-overflow.c:11
 11      src/exercises/buffer-overflow/buffer-overflow.c: No such file or directory.
 ```
-This indicates that buffer has been allocated (1024 * 1026) bytes. This is due to the padding required to ensure that the bounds of `buffer` don't overlap with other allocations. As a result, there as an area beyond the end of the C-language object that is nonetheless in bounds.
+This indicates that buffer has been allocated (1024 * 1026) bytes. This
+is due to the padding required to ensure that the bounds of `buffer`
+don't overlap with other allocations. As a result, there as an area beyond
+the end of the C-language object that is nonetheless in bounds.
+
 6. Solution:
 ```diff
 --- buffer-overflow.c
