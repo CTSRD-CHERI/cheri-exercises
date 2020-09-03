@@ -1,7 +1,7 @@
 # Demonstrate pointer revocation
 ## Indirect control flow through aliased heap objects
 This exercise demonstrates CheriBSD's *pointer revocation* facility and its use
-by the system `malloc`.  It asks the participant to contrast the same program,
+by the system `malloc`. It asks the participant to contrast the same program,
 `temporal-control.c`, built and run in three slightly different environments.
 It must be run on a **heap-temporal-safety enabled** version of CheriBSD; at the
 time of writing, heap temporal safety remains an experimental feature not yet
@@ -21,22 +21,22 @@ from `fn2`, not `fn1`, even though the function pointer was fetched through
 `obj1` and `obj1->fn` was last set to `fn1`.
 3. Recompile `temporal-control.c` with a CHERI-RISC-V target and binary name of
 `temporal-control-cheri`.
-4. Run this program instead.  Why does it no longer exhibit the behavior from
-step 2?  Ponder the suitability of using just this approach for fixing temporal
+4. Run this program instead. Why does it no longer exhibit the behavior from
+step 2? Ponder the suitability of using just this approach for fixing temporal
 aliasing.
 5. Recompile `temporal-control.c`, adding `-DCAPREVOKE` to the command line
 this time, with a CHERI-RISC-V target and a binary name of
 `temporal-control-cheri-revoke`.
 6. Run this third program instead and note that it crashes, catching a
 `SIGPROT` between declaring its intent to call `obj1->fn` and declaring that it
-has made the call.  Can you spot why it has crashed?
+has made the call. Can you spot why it has crashed?
 7. Rerun the third program under `gdb` and look at both the instruction
-triggering the `SIGPROT` and the register(s) involved.  Why is the program
-crashing?  What must have happened while the system was executing the
+triggering the `SIGPROT` and the register(s) involved. Why is the program
+crashing? What must have happened while the system was executing the
 mysterious `malloc_revoke()` function?
 8. Modify `temporal-control.c` to try to induce aliasing by making many
 allocations: call `malloc` and `free` repeatedly until the new allocation
-compares equal to `obj1`.  Ah ha, you've caught the allocator now!  But wait,
+compares equal to `obj1`. Ah ha, you've caught the allocator now! But wait,
 what is `obj1` in full (i.e., as a capability, not merely a virtual address)?
 You likely have to call `free` in the loop for this exercise to work; merely
 calling `malloc` may instead simply always return new addresses, even if the
@@ -45,7 +45,7 @@ initial `obj1` has been `free`-d.
 ## More attacks through aliased heap objects
 The program is called `temporal-control.c` because it exhibits *temporal
 aliasing* of heap pointers and because the class of bugs it mimics involve
-transfers of control through function pointers held in heap objects.  While
+transfers of control through function pointers held in heap objects. While
 CHERI protects against pointer *injection*, it cannot so easily defend against
 either:
 
