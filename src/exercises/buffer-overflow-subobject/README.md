@@ -1,8 +1,10 @@
 # Exercise a subobject buffer overflow
 
-This exercise is similar to the prior exercise, but is for an
-intra-object overflow. In our example, we consider an array within
-another structure, overflowing onto an integer in the same allocation.
+This exercise demonstrates an intra-object overflow. In our example,
+we consider an array within a structure, overflowing onto an integer
+in the same allocation. Upon completion you should:
+- Have a stronger understanding of the limitations of CHERI C's default object-based bounds.
+- Have an initial understanding of CHERI C's optional subobject bounds.
 
 1. Compile `buffer-overflow-subobject.c` with a RISC-V target and binary
    name of `buffer-overflow-subobject-riscv`, and with a CHERI-RISC-V

@@ -3,7 +3,11 @@
 This exercise steps a participant through disassembling and debugging
 RISC-V and CHERI-RISC-V programs. It draws attention to differences in
 program structure and code generation, particularly relating to control
-flow, between the two compilation targets.
+flow, between the two compilation targets. Upon completion
+participants should be able to:
+- Use a `llvm-objdump` disassemble RISC-V and CHERI-RISC-V binaries.
+- Debug RISC-V and CHERI-RISC-V programs with GDB.
+- Articulate key differences in flow control between RISC-V and CHERI-RISC-V.
 
 First, we use `llvm-objdump` to disassemble and explore the two binaries
 from the previous exercise:

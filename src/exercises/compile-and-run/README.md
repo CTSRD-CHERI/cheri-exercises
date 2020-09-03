@@ -1,7 +1,9 @@
 # Compile and run RISC-V and CHERI-RISC-V programs
 
-This exercise steps a participant through getting up and running with
-code compilation and execution for RISC-V and CHERI-RISC-V programs.
+In this exercise you will compile and run a couple simple
+programs for RISC-V and CHERI-RISC-V. The objectives are:
+- To ensure that the participant can compile programs for RISC-V and CHERI-RISC-V, transfer them to a CHERI-RISC-V system, and run them.
+- To observe that on CHERI-RISC-V pointers have bounds derived from C-language types.
 
 The first test program is written in conventional C, and can be compiled
 to RISC-V or CHERI-RISC-V targets:
