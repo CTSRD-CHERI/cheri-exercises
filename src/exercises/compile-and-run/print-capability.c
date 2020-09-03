@@ -1,5 +1,7 @@
-// SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
-// Copyright 2020 SRI International
+/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright 2020 SRI International
+ */
 #include <stdio.h>
 #include <cheriintrin.h>
 
