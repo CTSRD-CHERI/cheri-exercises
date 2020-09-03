@@ -9,6 +9,10 @@ These activities necessarily seek to supplement existing experience
 with reverse engineering and exploitation on conventional architectures
 and software stacks.
 
+## Acknowledgements
+
+The authors gratefully acknowledge John Baldwin, Reuben Broadfoot, Brett Gutstein, Joe Kiniry, and Austin Roach, and Daniel Zimmerman for their feedback and support in developing these exercises.
+
 ## Skills development exercises
 
 **Skills development exercises** are intended to take 1-2 hours each,
