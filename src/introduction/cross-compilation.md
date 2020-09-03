@@ -23,7 +23,7 @@ In this set of exercises we cross compile in two basic modes.
 Conventional RISC-V ABI and the CheriABI pure-capability ABI.
 
 ### Common elements
-All command lines will share some comment elements to target 64-bit RISC-V, selet the linker, and indicate where to find the sysroot.
+All command lines will share some comment elements to target 64-bit RISC-V, select the linker, and indicate where to find the sysroot.
 
 Some conventions:
  - `$SYSROOT` is the path to your sysroot.
