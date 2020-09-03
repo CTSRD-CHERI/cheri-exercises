@@ -1,5 +1,7 @@
 # Corrupt a control-flow pointer using a subobject buffer overflow
 
+This exercise takes advantage of a lack of subobject bounds protection to corrupt a function pointer.
+
 1. Compile `buffer-overflow-fnptr.c` with a RISC-V target and binary name
    of `buffer-overflow-fnptr-riscv`, and a CHERI-RISC-V target and binary
    name of `buffer-overflow-fnptr`. Do not enable compilation with
