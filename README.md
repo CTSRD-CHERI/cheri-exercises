@@ -1,5 +1,7 @@
 # CHERI Exercises
 
+Robert N. M. Watson (University of Cambridge), Brooks Davis (SRI International), Wes Filardo (Microsoft Research), and Jessica Clarke (University of Cambridge)
+
 This repository contains a series of skills development and adversarial exercises for
 [CHERI](http://cheri-cpu.org), specifically aimed at the CHERI-RISC-V
 implementation.
