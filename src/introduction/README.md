@@ -11,7 +11,7 @@ and software stacks.
 
 ## Acknowledgements
 
-The authors gratefully acknowledge John Baldwin, Reuben Broadfoot, Brett Gutstein, Joe Kiniry, Alex Richardson, and Austin Roach, and Daniel Zimmerman for their feedback and support in developing these exercises.
+The authors gratefully acknowledge John Baldwin, Reuben Broadfoot, Lawrence Esswood, Brett Gutstein, Joe Kiniry, Alex Richardson, and Austin Roach, and Daniel Zimmerman for their feedback and support in developing these exercises.
 
 ## Skills development exercises
 
