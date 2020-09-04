@@ -19,9 +19,10 @@ gained on other architectures (such as x86-64 and ARMv8). Participants
 successfully completing these exercises will be able to:
 - Compile, run, disassemble, and debug RISC-V compiled C/C++ programs
 - Compile, run, disassemble, and debug CHERI-RISC-V compiled C/C++ programs
-- Use specific debugging tools such as GDB and objdump with RISC-V and CHERI-RISC-V programs
+- Use specific debugging tools such as GDB and llvm-objdump with RISC-V and CHERI-RISC-V programs
 - Understand some of the implications of CHERI protections for specific aspects of C/C++ and process execution
 
-Each exercise will include:
+Each exercise includes:
 - Sample source code and build instructions
 - A short document describing what the program does and the objectives
+- Where the are exercise questions, sample answers
