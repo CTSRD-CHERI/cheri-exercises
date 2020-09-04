@@ -20,7 +20,7 @@
     - [Demonstrate pointer injection](exercises/pointer-injection/README.md)
         - [Answers](exercises/pointer-injection/answers.md)
     - [Demonstrate pointer revocation](exercises/pointer-revocation/README.md)
-      - [Answers](exercises/pointer-revocation/answers.md)
+        - [Answers](exercises/pointer-revocation/answers.md)
 - [Focused Adversarial Missions](missions/README.md)
     - [Exploiting a buffer overflow to manipulate control flow](missions/buffer-overflow-control-flow/README.md)
     - [Exploiting an uninitialized stack frame to manipulate control flow](missions/uninitialized-stack-frame-control-flow/README.md)
