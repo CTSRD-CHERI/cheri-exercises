@@ -65,5 +65,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: book.zip
-          asset_name: cheri-examples-snapshot-${{ github.sha }}.zip
+          asset_name: cheri-exercises-snapshot-${{ github.sha }}.zip
           asset_content_type: application/zip
