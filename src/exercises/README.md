@@ -1,6 +1,6 @@
 # Skills Development Exercises
 
-For a participant to contribute effectively to CHERI-RISC-V evaluation,
+For a researcher to contribute effectively to CHERI-RISC-V evaluation,
 they will need a baseline skill-set that includes significant existing
 experience with:
 
@@ -9,7 +9,7 @@ experience with:
 - Low-level aspects of program representation, such as ELF, GOTs, and PLTs, as well as mechanisms such as dynamic linking and system-call handling
 - Attack techniques against program control flow and underlying data structures including ROP and JOP
 
-However, we expect that participants may need to build specific
+However, we expect that researchers may need to build specific
 additional skills with respect to the specifics of RISC-V machine code,
 assembly, language, and linkage, as well as knowledge about the CHERI
 C/C++ protection model and CHERI-RISC-V extensions to RISC-V. These
