@@ -1,9 +1,8 @@
 # Exercise an inter-object buffer overflow
 
 This exercise demonstrates an inter-object buffer overflow on RISC-V and
-CHERI-RISC-V, and asks the participant to fix the bug detected by CHERI
-bounds enforcement. It also asks the participant to use GDB for debugging
-purposes.
+CHERI-RISC-V, and asks you to characterize and fix the bug detected by CHERI
+bounds enforcement.  It also asks you to use GDB for debugging purposes.
 
 1. Compile `buffer-overflow.c` with a RISC-V target and binary name of
    `buffer-overflow-riscv`, and with a CHERI-RISC-V target and binary

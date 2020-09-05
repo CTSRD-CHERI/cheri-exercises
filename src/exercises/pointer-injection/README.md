@@ -1,6 +1,9 @@
 # Demonstrate pointer injection
 
-This exercise implements the direct pointer injection via pipe IPC.
+This exercise demonstrates how CHERI's pointer provenance validity prevents
+injected pointer values from being dereferenced.
+In this example code, a pointer is injected via pipe IPC, and then
+dereferenced.
 
 1. Compile `long-over-pipe.c` with a RISC-V target and a binary name of
    `long-over-pipe-riscv`, and with a CHERI-RISC-V target and a binary

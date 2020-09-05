@@ -1,6 +1,14 @@
 # Exercise a subobject buffer overflow
 
-This exercise is similar to the prior exercise, but is for an
+In the CheriABI run-time environment, bounds are typically associated with
+memory allocations rather than C types.
+For example, if a heap memory allocation is made for 1024 bytes, and the
+structure within it is 768 bytes, then the bounds associated with a pointer
+will be for the allocation size rather than the structure size.
+
+With subobject bounds, enforcement occurs on C-language objects within
+allocations.
+This exercise is similar to the prior exercise, but is for such an
 intra-object overflow. In our example, we consider an array within
 another structure, overflowing onto an integer in the same allocation.
 

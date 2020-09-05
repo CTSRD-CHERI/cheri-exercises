@@ -1,7 +1,7 @@
 # Demonstrate pointer revocation
 ## Indirect control flow through aliased heap objects
 This exercise demonstrates CheriBSD's *pointer revocation* facility and its use
-by the system `malloc`. It asks the participant to contrast the same program,
+by the system `malloc`. It asks you to contrast the same program,
 `temporal-control.c`, built and run in three slightly different environments.
 It must be run on a **heap-temporal-safety enabled** version of CheriBSD; at the
 time of writing, heap temporal safety remains an experimental feature not yet

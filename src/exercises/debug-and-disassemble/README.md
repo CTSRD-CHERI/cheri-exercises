@@ -1,11 +1,11 @@
 # Disassemble and debug RISC-V and CHERI-RISC-V programs
 
-This exercise steps a participant through disassembling and debugging
+This exercise steps you through disassembling and debugging
 RISC-V and CHERI-RISC-V programs. It draws attention to differences in
 program structure and code generation, particularly relating to control
 flow, between the two compilation targets.
 
-First, we use `llvm-objdump` to disassemble and explore the two binaries
+First, use `llvm-objdump` to disassemble and explore the two binaries
 from the previous exercise:
 
 1. Using `llvm-objdump -dS`, disassemble the `print-pointer-riscv` and
@@ -17,7 +17,7 @@ from the previous exercise:
    (Hint, you may find it helpful to add the `-s` flag to your
    `llvm-objdump` command to see all sections.)
 
-Next we use GDB to explore binary execution for RISC-V:
+Next use GDB to explore binary execution for RISC-V:
 
 4. Run `print-pointer-riscv` under GDB, setting a breakpoint at the start
    of `printf()`.
