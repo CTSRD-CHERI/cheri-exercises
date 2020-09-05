@@ -1,8 +1,9 @@
 # Background reading
 
-Participants are expected to have a solid working knowledge of CHERI.
-In order to gain that knowledge, we encourage you to explore the
-following resources.
+To perform these exercises most effectively, we recommend first building a
+working knowledge of CHERI.  The most critical references will be the
+*Introduction to CHERI* and *CHERI C/C++ Programming Guide*, but there is a
+broad variety of other reference material available regarding CHERI:
 
 - [An Introduction to CHERI](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-941.pdf) - An overview of the CHERI architecture, security model, and programming models.
 - [CHERI C/C++ Programming Guide](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-947.pdf) - This use of CHERI capabilities to represent C/C++ pointers requires modest changes to the way C and C++ are used. This document describes those changes.

@@ -16,9 +16,9 @@ The authors gratefully acknowledge John Baldwin, Reuben Broadfoot, Lawrence Essw
 ## Skills development exercises
 
 **Skills development exercises** are intended to take 1-2 hours each,
-and ask participants to build and perform minor modifications to simple
-RISC-V and CHERI-RISC-V C/C++ programs. These exercises will encourage
-participants to extend their skills to include compiling, executing,
+and ask you to build and perform minor modifications to simple
+RISC-V and CHERI-RISC-V C/C++ programs. These exercises are intended to
+facilitate building skills such as compiling, executing,
 and debugging RISC-V and CHERI-RISC-V programs, as well as to build basic
 understanding of CHERI C/C++ properties. We highlight some key edge
 cases in CHERI, including the effects of bounds imprecision, subobject
@@ -31,11 +31,11 @@ These exercises take for granted a strong existing understanding of:
 
 ## Focused adversarial missions
 **Focused adversarial missions** are intended to take
-1-3 days, and ask participants to exploit, first on RISC-V, and
+1-3 days, and ask you to exploit, first on RISC-V, and
 then on CHERI-RISC-V, documented vulnerabilities in simple "potted"
-C/C++-language programs provided by the CHERI-RISC-V team. These
-missions oblige participants to engage more specifically with RISC-V
-exploitation, and CHERI's security objectives and mechanisms.
+C/C++-language programs provided by the CHERI-RISC-V team. These missions
+will engage you more specifically in RISC-V exploitation, and CHERI's
+security objectives and mechanisms.
 
 **These will take for granted good existing experience with
 memory-safety-related attack techniques, such as buffer overflows,
@@ -49,7 +49,7 @@ attack techniques, this will also act as a warm-up exercise on the
 baseline RISC-V architecture and expand experience with RISC-V reverse
 engineering and exploitation.
 
-The CHERI-RISC-V team will confirm exploitability for the RISC-V binary
-in advance. A participant who is unable to complete the baseline
-RISC-V attack is unlikely to be effective in similar work targeting
-CHERI-RISC-V.
+The CHERI-RISC-V team has confirmed exploitability for the RISC-V binary
+in advance.  We strongly recommend exploiting the RISC-V version of the code
+first, as a starting point for understanding potential CHERI-RISC-V
+exploitability.
