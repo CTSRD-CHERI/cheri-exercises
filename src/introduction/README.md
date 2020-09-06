@@ -17,7 +17,7 @@ The authors gratefully acknowledge John Baldwin, Reuben Broadfoot, Lawrence Essw
 
 **Skills development exercises** are intended to take 1-2 hours each,
 and ask you to build and perform minor modifications to simple
-RISC-V and CHERI-RISC-V C/C++ programs. These exercises are intended to
+RISC-V and CHERI-RISC-V C/C++ programs. These exercises
 facilitate building skills such as compiling, executing,
 and debugging RISC-V and CHERI-RISC-V programs, as well as to build basic
 understanding of CHERI C/C++ properties. We highlight some key edge
@@ -34,15 +34,15 @@ These exercises take for granted a strong existing understanding of:
 1-3 days, and ask you to exploit, first on RISC-V, and
 then on CHERI-RISC-V, documented vulnerabilities in simple "potted"
 C/C++-language programs provided by the CHERI-RISC-V team. These missions
-will engage you more specifically in RISC-V exploitation, and CHERI's
+engage you more specifically in RISC-V exploitation, and CHERI's
 security objectives and mechanisms.
 
-**These will take for granted good existing experience with
+**These take for granted good existing experience with
 memory-safety-related attack techniques, such as buffer overflows,
 integer-pointer type confusion, Return-Oriented Programming (ROP), and
 Jump-Oriented Programming (JOP).**
 
-Successful exploitation of RISC-V variants by the participant will depend only upon
+Successful exploitation of RISC-V variants depends only upon
 widely published understanding and techniques (e.g., buffer overflows
 combined with ROP). For those familiar with conventional low-level
 attack techniques, this will also act as a warm-up exercise on the
