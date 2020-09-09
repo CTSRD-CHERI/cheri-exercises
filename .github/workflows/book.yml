@@ -2,6 +2,8 @@ name: Build book
 
 on:
   push:
+    branches-ignore:
+      - gh-pages
   release:
     types:
       - created
@@ -99,6 +101,8 @@ jobs:
 
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-20.04
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
