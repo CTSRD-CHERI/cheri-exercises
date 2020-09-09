@@ -45,7 +45,9 @@ And for CHERI-RISC-V:
    Where do its bounds appear to originate from?
 12. Print out the register file using `info registers`.
    What mappings do the capabilities in the register file point to?
-   Notice that some capabilities are labeled with `(sentry)`.
+   Notice that some capabilities are labeled with `(sentry)` (or `(sealed)` in
+   the case of older versions of GDB which do not distinguish sentries from
+   other sealed capabilities).
    Sentry capabilities are sealed (cannot be modified or used to load or
    store), but can be used as a jump target (where they are unsealed and
    installed in `pcc`).
