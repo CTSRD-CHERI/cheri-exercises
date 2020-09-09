@@ -6,8 +6,9 @@ bounds enforcement.  It also asks you to use GDB for debugging purposes.
 
 1. Compile `buffer-overflow.c` with a RISC-V target and binary name of
    `buffer-overflow-riscv`, and with a CHERI-RISC-V target and binary
-   name of `buffer-overflow-cheri`.  **When compiling, add `-G0` to the
-   compiler flags.**
+   name of `buffer-overflow-cheri`. **For this exercise, add `-G0` to your
+   compiler flags** (this ensures `c` is not placed in the small data section
+   away from `buffer`).
 
 **buffer-overflow.c**
 ```C
