@@ -1,6 +1,10 @@
 name: Build book
 
-on: push
+on:
+  push:
+  release:
+    types:
+      - created
 
 jobs:
   build:
@@ -27,7 +31,7 @@ jobs:
           name: book
           path: book
 
-  release:
+  draft-release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     needs: build
     runs-on: ubuntu-20.04
@@ -36,10 +40,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: book
-          path: book
+          path: cheri-exercises-snapshot
 
       - name: Create archive
-        run: zip -r book.zip book
+        run: zip -r cheri-exercises-snapshot-${{ github.sha }}.zip cheri-exercises-snapshot
 
       - name: Get current date
         id: date
@@ -64,6 +68,31 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: book.zip
+          asset_path: cheri-exercises-snapshot-${{ github.sha }}.zip
           asset_name: cheri-exercises-snapshot-${{ github.sha }}.zip
+          asset_content_type: application/zip
+
+  release:
+    if: github.event_name == 'release' && github.event.action == 'created'
+    needs: build
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: book
+          path: cheri-exercises-${{ github.event.release.tag_name }}
+
+      - name: Create archive
+        run: zip -r cheri-exercises-${{ github.event.release.tag_name }}.zip cheri-exercises-${{ github.event.release.tag_name }}
+
+      - name: Upload release asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: cheri-exercises-${{ github.event.release.tag_name }}.zip
+          asset_name: cheri-exercises-${{ github.event.release.tag_name }}.zip
           asset_content_type: application/zip
