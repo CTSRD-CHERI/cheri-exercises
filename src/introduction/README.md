@@ -2,8 +2,12 @@
 
 This set of exercises and adversarial missions is intended to:
 
-- Build a baseline skillset with RISC-V and CHERI-RISC-V, as well as awareness of some of the dynamics of CHERI-enabled software, through skills development exercises.
-- Develop adversarial experience with CHERI-RISC-V performing basic investigation around gradations of CHERI feature deployment through focused adversarial missions.
+- Build a baseline skillset with RISC-V and CHERI-RISC-V, as well as awareness
+  of some of the dynamics of CHERI-enabled software, through skills development
+  exercises.
+- Develop adversarial experience with CHERI-RISC-V performing basic
+  investigation around gradations of CHERI feature deployment through focused
+  adversarial missions.
 
 These activities supplement existing experience
 with reverse engineering and exploitation on conventional architectures
@@ -11,7 +15,9 @@ and software stacks.
 
 ## Acknowledgements
 
-The authors gratefully acknowledge John Baldwin, Reuben Broadfoot, Lawrence Esswood, Brett Gutstein, Joe Kiniry, Alex Richardson, and Austin Roach, and Daniel Zimmerman for their feedback and support in developing these exercises.
+The authors gratefully acknowledge John Baldwin, Reuben Broadfoot, Lawrence
+Esswood, Brett Gutstein, Joe Kiniry, Alex Richardson, Austin Roach, and Daniel
+Zimmerman for their feedback and support in developing these exercises.
 
 ## Skills development exercises
 
