@@ -32,7 +32,7 @@ struct obj {
 	char buf[32];
 	/* Volatile so that the compiler will always reload it */
 	void (* volatile fn)(uintptr_t);
-	uintptr_t arg;
+	volatile uintptr_t arg;
 };
 
 int
