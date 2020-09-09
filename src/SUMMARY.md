@@ -1,5 +1,6 @@
 # Summary
 
+[Cover Page](cover/README.md)
 - [Introduction](introduction/README.md)
     - [Background reading](introduction/background.md)
     - [Cross compilation](introduction/cross-compilation.md)
