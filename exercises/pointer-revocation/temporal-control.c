@@ -32,9 +32,14 @@ fn2(uintptr_t arg)
 
 struct obj {
 	char buf[32];
-	/* Volatile so that the compiler will always reload it */
+	/*
+	 * The following are marked volatile to ensure the compiler doesn't
+	 * constant propagate fn (making aliasing not work) and to ensure
+	 * neither stores to them are optimised away entirely as dead due
+	 * to calling free.
+	 */
 	void (* volatile fn)(uintptr_t);
-	uintptr_t arg;
+	volatile uintptr_t arg;
 };
 
 int
