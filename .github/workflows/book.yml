@@ -96,3 +96,17 @@ jobs:
           asset_path: cheri-exercises-${{ github.event.release.tag_name }}.zip
           asset_name: cheri-exercises-${{ github.event.release.tag_name }}.zip
           asset_content_type: application/zip
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: book
+          path: public
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
