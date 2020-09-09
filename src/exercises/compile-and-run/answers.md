@@ -6,22 +6,20 @@ protection.
 
 2. Expected output:
 ```
-# ./print-pointer-riscv 
+# ./print-pointer-riscv
 size of pointer: 8
-size of address: 8
-# ./print-pointer-cheri 
-size of pointer: 16
 size of address: 8
 ```
 4. Expected output:
 ```
-# ./print-capability 
-cap length: 4
+# ./print-pointer-cheri
+size of pointer: 16
+size of address: 8
 ```
 6. Expected output:
 ```
 # ./print-capability
-cap length: 16
+cap length: 4
 ```
 7. Possible solution:
 ```diff
