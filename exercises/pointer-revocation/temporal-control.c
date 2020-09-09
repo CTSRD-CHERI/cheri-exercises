@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 /* Ensure we're being run on a temporal-safety-aware system */
-#if __CHERI_PURE_CAPABILITY__
+#ifdef __CHERI_PURE_CAPABILITY__
 #include <sys/caprevoke.h>
 __attribute__((used))
 static void *check_caprevoke = caprevoke;
@@ -51,13 +51,13 @@ main(void)
 	fprintf(stderr, "Demonstrating use after free:\n");
 	obj1->fn(obj1->arg);
 
-#if defined(CAPREVOKE)
+#ifdef CAPREVOKE
 	/* Force recycling the free queue now, but with a revocation pass */
 	malloc_revoke();
 #endif
 
 	struct obj *obj2 = malloc(sizeof(*obj2));
-#if defined(CAPREVOKE)
+#ifdef CAPREVOKE
 	assert(obj1 == obj2);
 #endif
 

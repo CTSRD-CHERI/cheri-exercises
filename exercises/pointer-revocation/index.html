@@ -182,7 +182,7 @@ merged to mainline CheriBSD.</p>
 #include &lt;stdlib.h&gt;
 
 /* Ensure we're being run on a temporal-safety-aware system */
-#if __CHERI_PURE_CAPABILITY__
+#ifdef __CHERI_PURE_CAPABILITY__
 #include &lt;sys/caprevoke.h&gt;
 __attribute__((used))
 static void *check_caprevoke = caprevoke;
@@ -225,13 +225,13 @@ main(void)
 	fprintf(stderr, &quot;Demonstrating use after free:\n&quot;);
 	obj1-&gt;fn(obj1-&gt;arg);
 
-#if defined(CAPREVOKE)
+#ifdef CAPREVOKE
 	/* Force recycling the free queue now, but with a revocation pass */
 	malloc_revoke();
 #endif
 
 	struct obj *obj2 = malloc(sizeof(*obj2));
-#if defined(CAPREVOKE)
+#ifdef CAPREVOKE
 	assert(obj1 == obj2);
 #endif
 
