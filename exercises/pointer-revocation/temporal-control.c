@@ -10,9 +10,11 @@
 /* Ensure we're being run on a temporal-safety-aware system */
 #if __CHERI_PURE_CAPABILITY__
 #include <sys/caprevoke.h>
+__attribute__((used))
 static void *check_caprevoke = caprevoke;
 
 extern void malloc_revoke(void);
+__attribute__((used))
 static void *check_malloc_revoke = malloc_revoke;
 #endif
 
