@@ -1,0 +1,369 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Demonstrate pointer revocation - CHERI Exercises</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../../favicon.png">
+        
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/background.html"><strong aria-hidden="true">1.1.</strong> Background reading</a></li><li class="chapter-item expanded "><a href="../../introduction/cross-compilation.html"><strong aria-hidden="true">1.2.</strong> Cross compilation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/ccc.html"><strong aria-hidden="true">1.2.1.</strong> Helper script</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/index.html"><strong aria-hidden="true">2.</strong> Skills Development Exercises</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/index.html"><strong aria-hidden="true">2.1.</strong> Compile and run RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/answers.html"><strong aria-hidden="true">2.1.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/index.html"><strong aria-hidden="true">2.2.</strong> Disassemble and debug RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/answers.html"><strong aria-hidden="true">2.2.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow/index.html"><strong aria-hidden="true">2.3.</strong> Exercise an inter-object buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow/answers.html"><strong aria-hidden="true">2.3.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-subobject/index.html"><strong aria-hidden="true">2.4.</strong> Exercise a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-subobject/answers.html"><strong aria-hidden="true">2.4.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/index.html"><strong aria-hidden="true">2.5.</strong> Corrupt a control-flow pointer using a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/answers.html"><strong aria-hidden="true">2.5.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/type-confusion/index.html"><strong aria-hidden="true">2.6.</strong> Exercise integer-pointer type confusion bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/type-confusion/answers.html"><strong aria-hidden="true">2.6.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/index.html"><strong aria-hidden="true">2.7.</strong> Demonstrate pointer injection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/answers.html"><strong aria-hidden="true">2.7.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/index.html" class="active"><strong aria-hidden="true">2.8.</strong> Demonstrate pointer revocation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/answers.html"><strong aria-hidden="true">2.8.1.</strong> Answers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../missions/index.html"><strong aria-hidden="true">3.</strong> Focused Adversarial Missions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../missions/buffer-overflow-control-flow/index.html"><strong aria-hidden="true">3.1.</strong> Exploiting a buffer overflow to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/uninitialized-stack-frame-control-flow/index.html"><strong aria-hidden="true">3.2.</strong> Exploiting an uninitialized stack frame to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/use-after-free-control-flow/index.html"><strong aria-hidden="true">3.3.</strong> Exploiting heap use-after-free to manipulate control flow</a></li></ol></li><li class="chapter-item expanded "><a href="../../appendix/index.html"><strong aria-hidden="true">4.</strong> Appendix</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">CHERI Exercises</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#demonstrate-pointer-revocation" id="demonstrate-pointer-revocation">Demonstrate pointer revocation</a></h1>
+<h2><a class="header" href="#indirect-control-flow-through-aliased-heap-objects" id="indirect-control-flow-through-aliased-heap-objects">Indirect control flow through aliased heap objects</a></h2>
+<p>This exercise demonstrates CheriBSD's <em>pointer revocation</em> facility and its use
+by the system <code>malloc</code>. It asks you to contrast the same program,
+<code>temporal-control.c</code>, built and run in three slightly different environments.
+It must be run on a <strong>heap-temporal-safety enabled</strong> version of CheriBSD; at the
+time of writing, heap temporal safety remains an experimental feature not yet
+merged to mainline CheriBSD.</p>
+<ol>
+<li>Compile <code>temporal-control.c</code> with a RISC-V target and a binary name of
+<code>temporal-control-riscv</code>.</li>
+</ol>
+<p><strong>temporal-control.c</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause
+ * Copyright (c) 2020 Microsoft, Inc.
+ */
+#include &lt;assert.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+/* Ensure we're being run on a temporal-safety-aware system */
+#if __CHERI_PURE_CAPABILITY__
+#include &lt;sys/caprevoke.h&gt;
+static void *check_caprevoke = caprevoke;
+
+extern void malloc_revoke(void);
+static void *check_malloc_revoke = malloc_revoke;
+#endif
+
+static void
+fn1(uintptr_t arg)
+{
+	fprintf(stderr, &quot; First function: %#p\n&quot;, (void *)arg);
+}
+
+static void
+fn2(uintptr_t arg)
+{
+	fprintf(stderr, &quot; Second function: %#p\n&quot;, (void *)arg);
+}
+
+struct obj {
+	char buf[32];
+	/* Volatile so that the compiler will always reload it */
+	void (* volatile fn)(uintptr_t);
+	uintptr_t arg;
+};
+
+int
+main(void)
+{
+	struct obj *obj1 = calloc(1, sizeof(*obj1));
+
+	fprintf(stderr, &quot;Installing function pointer in obj1 at %#p\n&quot;, obj1);
+	obj1-&gt;fn = fn1;
+	obj1-&gt;arg = (uintptr_t)obj1;
+
+	free(obj1);
+
+	fprintf(stderr, &quot;Demonstrating use after free:\n&quot;);
+	obj1-&gt;fn(obj1-&gt;arg);
+
+#if defined(CAPREVOKE)
+	/* Force recycling the free queue now, but with a revocation pass */
+	malloc_revoke();
+#endif
+
+	struct obj *obj2 = malloc(sizeof(*obj2));
+#if defined(CAPREVOKE)
+	assert(obj1 == obj2);
+#endif
+
+	fprintf(stderr, &quot;Assigning function pointer through obj2 at %#p\n&quot;,
+	    obj2);
+	obj2-&gt;fn = fn2;
+
+	fprintf(stderr, &quot;Calling function pointer through obj1 (now %#p):\n&quot;,
+	    obj1);
+	obj1-&gt;fn(obj1-&gt;arg);
+
+	return (0);
+}
+</code></pre>
+<ol start="2">
+<li>Run the resulting program and observe that the system malloc has <strong>reused</strong>
+a location on the heap, such that <code>obj1</code> and <code>obj2</code> point to the same address.
+Moreover, the assignment of <code>fn2</code> into <code>obj2</code> causes the last printout to be
+from <code>fn2</code>, not <code>fn1</code>, even though the function pointer was fetched through
+<code>obj1</code> and <code>obj1-&gt;fn</code> was last set to <code>fn1</code>.</li>
+<li>Recompile <code>temporal-control.c</code> with a CHERI-RISC-V target and binary name of
+<code>temporal-control-cheri</code>.</li>
+<li>Run this program instead. Why does it no longer exhibit the behavior from
+step 2? Ponder the suitability of using just this approach for fixing temporal
+aliasing.</li>
+<li>Recompile <code>temporal-control.c</code>, adding <code>-DCAPREVOKE</code> to the command line
+this time, with a CHERI-RISC-V target and a binary name of
+<code>temporal-control-cheri-revoke</code>.</li>
+<li>Run this third program instead and note that it crashes, catching a
+<code>SIGPROT</code> between declaring its intent to call <code>obj1-&gt;fn</code> and declaring that it
+has made the call. Can you spot why it has crashed?</li>
+<li>Rerun the third program under <code>gdb</code> and look at both the instruction
+triggering the <code>SIGPROT</code> and the register(s) involved. Why is the program
+crashing? What must have happened while the system was executing the
+mysterious <code>malloc_revoke()</code> function?</li>
+<li>Modify <code>temporal-control.c</code> to try to induce aliasing by making many
+allocations: call <code>malloc</code> and <code>free</code> repeatedly until the new allocation
+compares equal to <code>obj1</code>. Ah ha, you've caught the allocator now! But wait,
+what is <code>obj1</code> in full (i.e., as a capability, not merely a virtual address)?
+You likely have to call <code>free</code> in the loop for this exercise to work; merely
+calling <code>malloc</code> may instead simply always return new addresses, even if the
+initial <code>obj1</code> has been <code>free</code>-d.</li>
+</ol>
+<h2><a class="header" href="#more-attacks-through-aliased-heap-objects" id="more-attacks-through-aliased-heap-objects">More attacks through aliased heap objects</a></h2>
+<p>The program is called <code>temporal-control.c</code> because it exhibits <em>temporal
+aliasing</em> of heap pointers and because the class of bugs it mimics involve
+transfers of control through function pointers held in heap objects. While
+CHERI protects against pointer <em>injection</em>, it cannot so easily defend against
+either:</p>
+<ul>
+<li><em>capability farming</em>: as in the example, a legitimately-held capability can
+be (caused to be) stored to a &quot;new&quot; heap object, altering an aliased view while
+preserving the set tag bit; or</li>
+<li><em>data-based</em> corruption through temporal aliasing.</li>
+</ul>
+<p>These windows open wider considering that, unlike this example, temporal
+aliasing often comes paired with <em>type-confusion</em>, so it may be possible to
+overlap an easily-controlled structure with an exploitable one.</p>
+<ol>
+<li>Write a program like <code>temporal-control.c</code> in which changing a <em>data byte</em>
+within a temporally-aliased heap object suffices to cause the program to error.
+Perhaps the heap object is the state associated with a client session and
+contains a flag that indicates superuser status.</li>
+<li>Demonstrate that this program fails as expected on RISC-V but that any
+attempt to induce aliasing is thwarted on CHERI-RISC-V with heap temporal
+safety: aliasing becomes possible only after revocation, ensuring that attempts
+to use the old session object fail-stop.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../exercises/pointer-injection/answers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../exercises/pointer-revocation/answers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../../exercises/pointer-injection/answers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../../exercises/pointer-revocation/answers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

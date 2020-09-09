@@ -1,0 +1,1808 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>CHERI Exercises</title>
+        
+        <meta name="robots" content="noindex" />
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="introduction/background.html"><strong aria-hidden="true">1.1.</strong> Background reading</a></li><li class="chapter-item expanded "><a href="introduction/cross-compilation.html"><strong aria-hidden="true">1.2.</strong> Cross compilation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="introduction/ccc.html"><strong aria-hidden="true">1.2.1.</strong> Helper script</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="exercises/index.html"><strong aria-hidden="true">2.</strong> Skills Development Exercises</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/compile-and-run/index.html"><strong aria-hidden="true">2.1.</strong> Compile and run RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/compile-and-run/answers.html"><strong aria-hidden="true">2.1.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/debug-and-disassemble/index.html"><strong aria-hidden="true">2.2.</strong> Disassemble and debug RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/debug-and-disassemble/answers.html"><strong aria-hidden="true">2.2.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/buffer-overflow/index.html"><strong aria-hidden="true">2.3.</strong> Exercise an inter-object buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/buffer-overflow/answers.html"><strong aria-hidden="true">2.3.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/buffer-overflow-subobject/index.html"><strong aria-hidden="true">2.4.</strong> Exercise a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/buffer-overflow-subobject/answers.html"><strong aria-hidden="true">2.4.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/control-flow-pointer/index.html"><strong aria-hidden="true">2.5.</strong> Corrupt a control-flow pointer using a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/control-flow-pointer/answers.html"><strong aria-hidden="true">2.5.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/type-confusion/index.html"><strong aria-hidden="true">2.6.</strong> Exercise integer-pointer type confusion bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/type-confusion/answers.html"><strong aria-hidden="true">2.6.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/pointer-injection/index.html"><strong aria-hidden="true">2.7.</strong> Demonstrate pointer injection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/pointer-injection/answers.html"><strong aria-hidden="true">2.7.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/pointer-revocation/index.html"><strong aria-hidden="true">2.8.</strong> Demonstrate pointer revocation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/pointer-revocation/answers.html"><strong aria-hidden="true">2.8.1.</strong> Answers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="missions/index.html"><strong aria-hidden="true">3.</strong> Focused Adversarial Missions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="missions/buffer-overflow-control-flow/index.html"><strong aria-hidden="true">3.1.</strong> Exploiting a buffer overflow to manipulate control flow</a></li><li class="chapter-item expanded "><a href="missions/uninitialized-stack-frame-control-flow/index.html"><strong aria-hidden="true">3.2.</strong> Exploiting an uninitialized stack frame to manipulate control flow</a></li><li class="chapter-item expanded "><a href="missions/use-after-free-control-flow/index.html"><strong aria-hidden="true">3.3.</strong> Exploiting heap use-after-free to manipulate control flow</a></li></ol></li><li class="chapter-item expanded "><a href="appendix/index.html"><strong aria-hidden="true">4.</strong> Appendix</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">CHERI Exercises</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
+<p>This set of exercises and adversarial missions is intended to:</p>
+<ul>
+<li>Build a baseline skillset with RISC-V and CHERI-RISC-V, as well as awareness of some of the dynamics of CHERI-enabled software, through skills development exercises.</li>
+<li>Develop adversarial experience with CHERI-RISC-V performing basic investigation around gradations of CHERI feature deployment through focused adversarial missions.</li>
+</ul>
+<p>These activities supplement existing experience
+with reverse engineering and exploitation on conventional architectures
+and software stacks.</p>
+<h2><a class="header" href="#acknowledgements" id="acknowledgements">Acknowledgements</a></h2>
+<p>The authors gratefully acknowledge John Baldwin, Reuben Broadfoot, Lawrence Esswood, Brett Gutstein, Joe Kiniry, Alex Richardson, and Austin Roach, and Daniel Zimmerman for their feedback and support in developing these exercises.</p>
+<h2><a class="header" href="#skills-development-exercises" id="skills-development-exercises">Skills development exercises</a></h2>
+<p><strong>Skills development exercises</strong> are intended to take 1-2 hours each,
+and ask you to build and perform minor modifications to simple
+RISC-V and CHERI-RISC-V C/C++ programs. These exercises
+facilitate building skills such as compiling, executing,
+and debugging RISC-V and CHERI-RISC-V programs, as well as to build basic
+understanding of CHERI C/C++ properties. We highlight some key edge
+cases in CHERI, including the effects of bounds imprecision, subobject
+bounds, weaker temporal safety, and C type confusion.</p>
+<p>These exercises take for granted a strong existing understanding of:</p>
+<ul>
+<li>The C/C++ languages</li>
+<li>UNIX program compilation, execution, and debugging</li>
+<li>RISC ISAs and binary structures/reverse engineering (e.g., on MIPS or ARMv8)</li>
+</ul>
+<h2><a class="header" href="#focused-adversarial-missions" id="focused-adversarial-missions">Focused adversarial missions</a></h2>
+<p><strong>Focused adversarial missions</strong> are intended to take
+1-3 days, and ask you to exploit, first on RISC-V, and
+then on CHERI-RISC-V, documented vulnerabilities in simple &quot;potted&quot;
+C/C++-language programs provided by the CHERI-RISC-V team. These missions
+engage you more specifically in RISC-V exploitation, and CHERI's
+security objectives and mechanisms.</p>
+<p><strong>These take for granted good existing experience with
+memory-safety-related attack techniques, such as buffer overflows,
+integer-pointer type confusion, Return-Oriented Programming (ROP), and
+Jump-Oriented Programming (JOP).</strong></p>
+<p>Successful exploitation of RISC-V variants depends only upon
+widely published understanding and techniques (e.g., buffer overflows
+combined with ROP). For those familiar with conventional low-level
+attack techniques, this will also act as a warm-up exercise on the
+baseline RISC-V architecture and expand experience with RISC-V reverse
+engineering and exploitation.</p>
+<p>The CHERI-RISC-V team has confirmed exploitability for the RISC-V binary
+in advance.  We strongly recommend exploiting the RISC-V version of the code
+first, as a starting point for understanding potential CHERI-RISC-V
+exploitability.</p>
+<h1><a class="header" href="#background-reading" id="background-reading">Background reading</a></h1>
+<p>To perform these exercises most effectively, we recommend first building a
+working knowledge of CHERI.  The most critical references will be the
+<em>Introduction to CHERI</em> and <em>CHERI C/C++ Programming Guide</em>, but there is a
+broad variety of other reference material available regarding CHERI:</p>
+<ul>
+<li><a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-941.pdf">An Introduction to CHERI</a> - An overview of the CHERI architecture, security model, and programming models.</li>
+<li><a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-947.pdf">CHERI C/C++ Programming Guide</a> - This use of CHERI capabilities to represent C/C++ pointers requires modest changes to the way C and C++ are used. This document describes those changes.</li>
+<li><a href="https://www.cl.cam.ac.uk/research/security/ctsrd/pdfs/201904-asplos-cheriabi.pdf">CheriABI: Enforcing Valid Pointer Provenance and Minimizing Pointer Privilege in the POSIX C Run-time Environment</a> - This paper describes the CheriABI pure-capability process environment these exercises are expected to use. An extended <a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-932.pdf">technical report</a> is also available.</li>
+<li><a href="https://www.cl.cam.ac.uk/research/security/ctsrd/pdfs/2020oakland-cornucopia.pdf">Cornucopia: Temporal Safety for CHERI Heaps</a> - The temporal-safety exercises require the use of Cornucopia's quarantine and revocation infrastructure.</li>
+<li><a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-927.pdf">Capability Hardware Enhanced RISC Instructions:
+CHERI Instruction-Set Architecture (version 7)</a> - Instruction reference and design discussion.</li>
+<li><a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-949.pdf">Complete spatial safety for C and C++ using CHERI capabilities</a> This PhD dissertation provides an extensive overview of the CHERI-MIPS linking model (also relevant to the current CHERI-RISC-V model), an implementation of opportunistic subobject bounds, and general C/C++ compatibility issues.</li>
+</ul>
+<h1><a class="header" href="#cross-compilation" id="cross-compilation">Cross compilation</a></h1>
+<h2><a class="header" href="#obtaining-a-compiler-and-sysroot" id="obtaining-a-compiler-and-sysroot">Obtaining a compiler and sysroot</a></h2>
+<p>If you already have a compiler and sysroot (e.g. you have a docker image with pre-compiled versions), you will need to know the path to <code>clang</code> and the path to your sysroot.  You can then proceed to <strong>Compiler command line</strong>.</p>
+<h3><a class="header" href="#building-a-cross-build-environment-with-cheribuild" id="building-a-cross-build-environment-with-cheribuild">Building a cross build environment with cheribuild</a></h3>
+<p>First, clone the cheribuild repo:</p>
+<pre><code>git clone https://github.com/CTSRD-CHERI/cheribuild.git
+</code></pre>
+<p>The <a href="https://github.com/CTSRD-CHERI/cheribuild/blob/master/README.md">README.md</a> file contains considerable information, but to get started, you'll need to bootstrap an LLVM compiler and a CheriBSD build and sysroot.  The easiest path to doing this is:</p>
+<pre><code>cheribuild.py cheribsd-riscv64-purecap -d
+</code></pre>
+<p>This will churn away, prompting occasionally as it bootstraps assorted dependencies.  On a fast machine this will take several hours.</p>
+<!-- XXX: Should we advocate `-f` here? -->
+<p>Upon completion, you will find a usable Clang compiler in <code>~/cheri/output/sdk/bin/clang</code> and a sysroot in <code>~/cheri/output/rootfs-riscv64-purecap</code> (unless you have altered <code>cheribuild</code>'s default paths).</p>
+<h2><a class="header" href="#compiler-command-line" id="compiler-command-line">Compiler command line</a></h2>
+<p>In this set of exercises we cross compile in two basic modes.
+Conventional RISC-V ABI and the CheriABI pure-capability ABI.</p>
+<h3><a class="header" href="#common-elements" id="common-elements">Common elements</a></h3>
+<p>All command lines will share some comment elements to target 64-bit RISC-V, select the linker, and indicate where to find the sysroot.</p>
+<p>Some conventions:</p>
+<ul>
+<li><code>$SYSROOT</code> is the path to your sysroot.</li>
+<li><code>$CLANG</code> is the path to your compiler.</li>
+<li>All compiler commands begin with <code>$CLANG -target riscv64-unknown-freebsd --sysroot=&quot;$SYSROOT&quot; -fuse-ld=lld -mno-relax</code></li>
+<li>As a rule, you will want to add <code>-g</code> to the command line to compile with debug symbols.</li>
+<li>You will generally want to compile with <code>-O2</code> as the unoptimized assembly is verbose and hard to follow.</li>
+<li>We strongly recommend you compile with warnings on including <code>-Wall</code> and <code>-Wcheri</code>.</li>
+</ul>
+<h3><a class="header" href="#risc-v" id="risc-v">RISC-V</a></h3>
+<p>Two additional arguments are required to specify the supported architectural features and ABI.  For conventional RISC-V, those are: <code> -march=rv64gc -mabi=lp64d</code>.
+Putting it all together:</p>
+<pre><code>$CLANG -g -O2 -target riscv64-unknown-freebsd --sysroot=&quot;$SYSROOT&quot; -fuse-ld=lld -mno-relax -march=rv64gc -mabi=lp64d -Wall -Wcheri
+</code></pre>
+<h3><a class="header" href="#cheriabi" id="cheriabi">CheriABI</a></h3>
+<p>For CheriABI, the architecture and ABI flags are:
+<code>-march=rv64gcxcheri -mabi=l64pc128d</code>.
+Putting it all together:</p>
+<pre><code>$CLANG -g -O2 -target riscv64-unknown-freebsd --sysroot=&quot;$SYSROOT&quot; -fuse-ld=lld -mno-relax -march=rv64gcxcheri -mabi=l64pc128d -Wall -Wcheri
+</code></pre>
+<h1><a class="header" href="#helper-script" id="helper-script">Helper script</a></h1>
+<p>Because the command line required to compile exercises is quite unwieldy, we've created a wrapper script to help out, shown below.  If you've checked out this repository it's present in <code>tools/ccc</code>.  The usage is:</p>
+<pre><code>ccc &lt;arch&gt; [...]
+
+Supported architectures:
+	riscv64		- conventional riscv64
+	riscv64-hybrid	- RISC-V 64-bit supporting CHERI
+	riscv64-purecap	- RISC-V 64-bit pure-capability
+</code></pre>
+<p>and it can be used in place of your compiler.</p>
+<p>For the exercises in this book you will use the <code>riscv64</code> and <code>riscv64-purecap</code> architectures.  The <code>riscv64-hybrid</code> architecture instantiates appropriately annotated pointers as capabilities leaving the rest as conventional integer addresses and it not used here.</p>
+<p>If you have built a compiler and sysroot using <code>cheribuild</code> in the default location (<code>~/cheri</code>) then it should work out of the box.  If you've configured a different location you can set the <code>CHERIBUILD_SDK</code> environment variable to point to to the location of your SDK.  Alternatively, you can set the <code>CLANG</code> and <code>SYSROOT</code> variables to point to the respective locations.</p>
+<pre><code class="language-sh">#!/bin/sh
+#
+# ccc - Cross compilation script
+set -e
+set -u
+
+name=$(basename $0)
+
+CHERIBUILD_SDK=${CHERIBUILD_SDK:-${HOME}/cheri/output/sdk}
+CLANG=${CLANG:-${CHERIBUILD_SDK}/bin/clang}
+SYSROOT=${SYSROOT:-${CHERIBUILD_SDK}/sysroot-riscv64-purecap}
+
+VERBOSE=${VERBOSE:-0}
+QUIET=${QUIET:-0}
+
+usage()
+{
+	cat &lt;&lt;EOF
+$name &lt;arch&gt; [...]
+
+Supported architectures:
+	riscv64		- conventional riscv64
+	riscv64-hybrid	- RISC-V 64-bit supporting CHERI
+	riscv64-purecap	- RISC-V 64-bit pure-capability
+EOF
+	exit 1
+}
+
+err()
+{
+	ret=$1
+	shift
+	echo &quot;$@&quot; 2&gt;&amp;1
+	exit $ret
+}
+
+warn()
+{
+	echo &quot;$@&quot; 2&gt;&amp;1
+}
+
+debug()
+{
+	if [ $VERBOSE -ne 0 ]; then
+		echo &quot;$@&quot;
+	fi
+}
+
+info()
+{
+	if [ $QUIET -eq 0 ]; then
+		echo &quot;$@&quot;
+	fi
+}
+
+run()
+{
+	debug	# add space before normal multiline output
+	info &quot;Running: $@&quot;
+	&quot;$@&quot;
+}
+
+if [ $# -eq 0 ]; then
+	usage
+fi
+
+case $name in
+*clang|*cc)	prog=&quot;${CLANG}&quot; ;;
+*clang++|*c++)	prog=&quot;${CLANG}++&quot; ;;
+*)	err 1 &quot;Unsupported program name '$name'&quot; ;;
+esac
+if [ ! -x &quot;$prog&quot; ]; then
+	err 1 &quot;Target program '$prog' not found. Set CLANG or CHERIBUILD_SDK.&quot;
+fi
+debug &quot;prog: $prog&quot;
+
+if [ ! -d &quot;$SYSROOT&quot; ]; then
+	err 1 &quot;Sysroot '$SYSROOT' does not exist. Set SYSROOT or CHERIBUILD_SDK.&quot;
+fi
+debug &quot;sysroot: $SYSROOT&quot;
+
+debug_flags=&quot;-g&quot;
+debug &quot;debug_flags: $debug_flags&quot;
+
+opt_flags=&quot;-O2&quot;
+debug &quot;opt_flags: $opt_flags&quot;
+
+base_flags=&quot;-target riscv64-unknown-freebsd --sysroot='$SYSROOT'&quot;
+debug &quot;base_flags: $base_flags&quot;
+
+linker_flags=&quot;-fuse-ld=lld -mno-relax&quot;
+debug &quot;linker_flags: $linker_flags&quot;
+
+diag_flags=&quot;-Wall -Wcheri&quot;
+debug &quot;diag_flags: $diag_flags&quot;
+
+arch=$1
+shift
+case $arch in
+riscv64)
+	abi_flags=&quot;-march=rv64gc -mabi=lp64d&quot;
+	;;
+riscv64-hybrid)
+	abi_flags=&quot;-march=rv64gcxcheri -mabi=lp64d&quot;
+	;;
+riscv64-purecap)
+	abi_flags=&quot;-march=rv64gcxcheri -mabi=l64pc128d&quot;
+	;;
+*)
+	err 1 &quot;Unsupported architecture '$arch'&quot;
+	;;
+esac
+debug &quot;abi_flags: $abi_flags&quot;
+
+all_flags=&quot;$debug_flags $opt_flags $base_flags $linker_flags $abi_flags $diag_flags&quot;
+
+all_flags_rev=
+eval 'for flag in '$all_flags'; do
+	all_flags_rev=&quot;'&quot;'&quot;'$flag'&quot;'&quot;'${all_flags_rev:+ $all_flags_rev}&quot;
+done'
+
+eval 'for flag in '$all_flags_rev'; do
+	set -- &quot;$flag&quot; &quot;$@&quot;
+done'
+
+run &quot;$prog&quot; &quot;$@&quot;
+</code></pre>
+<p>If you were provided a docker image along with these instructions (e.g. as part of a training exercise or bug-bounty), it should be configured such that <code>ccc</code> works without setting environment variables.</p>
+<h1><a class="header" href="#skills-development-exercises-1" id="skills-development-exercises-1">Skills Development Exercises</a></h1>
+<p>For a researcher to contribute effectively to CHERI-RISC-V evaluation,
+they will need a baseline skill-set that includes significant existing
+experience with:</p>
+<ul>
+<li>C/C++-language memory-safety vulnerabilities</li>
+<li>Binary reverse engineering for at least one ISA, such as x86, MIPS, ARMv7, or ARMv8</li>
+<li>Low-level aspects of program representation, such as ELF, GOTs, and PLTs, as well as mechanisms such as dynamic linking and system-call handling</li>
+<li>Attack techniques against program control flow and underlying data structures including ROP and JOP</li>
+</ul>
+<p>However, we expect that researchers may need to build specific
+additional skills with respect to the specifics of RISC-V machine code,
+assembly, language, and linkage, as well as knowledge about the CHERI
+C/C++ protection model and CHERI-RISC-V extensions to RISC-V. These
+exercises are intended to assist in these latter two areas, faulting
+in missing knowledge and experience while building on existing skills
+gained on other architectures (such as x86-64 and ARMv8). Participants
+successfully completing these exercises will be able to:</p>
+<ul>
+<li>Compile, run, disassemble, and debug RISC-V compiled C/C++ programs</li>
+<li>Compile, run, disassemble, and debug CHERI-RISC-V compiled C/C++ programs</li>
+<li>Use specific debugging tools such as GDB and llvm-objdump with RISC-V and CHERI-RISC-V programs</li>
+<li>Understand some of the implications of CHERI protections for specific aspects of C/C++ and process execution</li>
+</ul>
+<p>Each exercise includes:</p>
+<ul>
+<li>Sample source code and build instructions</li>
+<li>A short document describing what the program does and the objectives</li>
+<li>Where the are exercise questions, sample answers</li>
+</ul>
+<h1><a class="header" href="#compile-and-run-risc-v-and-cheri-risc-v-programs" id="compile-and-run-risc-v-and-cheri-risc-v-programs">Compile and run RISC-V and CHERI-RISC-V programs</a></h1>
+<p>This exercise steps you through getting up and running with code compilation
+and execution for RISC-V and CHERI-RISC-V programs.</p>
+<p>The first test program is written in conventional C, and can be compiled
+to RISC-V or CHERI-RISC-V targets:</p>
+<ol>
+<li>Compile <code>print-pointer.c</code> with a RISC-V target and a binary name of
+<code>print-pointer-riscv</code>.</li>
+</ol>
+<p><strong>print-pointer.c:</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 SRI International
+ */
+#include &lt;stdio.h&gt;
+
+int
+main(void)
+{
+	printf(&quot;size of pointer: %zu\n&quot;, sizeof(void *));
+	/* XXX: ideally we'd use ptraddr_t below */
+	printf(&quot;size of address: %zu\n&quot;, sizeof(size_t));
+
+	return (0);
+}
+</code></pre>
+<ol start="2">
+<li>Run the binary.</li>
+<li>Compile <code>print-pointer.c</code> with a CHERI-RISC-V target and a binary name
+of <code>print-pointer-cheri</code>.</li>
+<li>Run the binary: it should print a pointer size of <code>16</code> and address size
+of <code>8</code>.</li>
+</ol>
+<p>The second test program is written in CHERI C:</p>
+<ol start="5">
+<li>Compile print-capability.c with a CHERI-RISC-V target and a binary name
+of <code>print-capability</code>.</li>
+</ol>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 SRI International
+ */
+#include &lt;stdio.h&gt;
+#include &lt;cheriintrin.h&gt;
+
+int
+main(void)
+{
+	int i;
+	void *cap = &amp;i;
+
+	printf(&quot;cap length: %lu\n&quot;, cheri_length_get(cap));
+
+	return (0);
+}
+</code></pre>
+<ol start="6">
+<li>Run the binary.</li>
+<li>Modify <code>print-capability.c</code> to point the capability at a pointer instead
+of an integer, and recompile.</li>
+<li>Run the binary.</li>
+</ol>
+<h1><a class="header" href="#answers---compile-and-run-risc-v-and-cheri-risc-v-programs" id="answers---compile-and-run-risc-v-and-cheri-risc-v-programs">Answers - Compile and run RISC-V and CHERI-RISC-V programs</a></h1>
+<p>This exercise explores the difference in size between addresses and
+pointers, drawing attention to the pointer-focused nature of CHERI memory
+protection.</p>
+<ol start="2">
+<li>Expected output:</li>
+</ol>
+<pre><code># ./print-pointer-riscv
+size of pointer: 8
+size of address: 8
+</code></pre>
+<ol start="4">
+<li>Expected output:</li>
+</ol>
+<pre><code># ./print-pointer-cheri
+size of pointer: 16
+size of address: 8
+</code></pre>
+<ol start="6">
+<li>Expected output:</li>
+</ol>
+<pre><code># ./print-capability
+cap length: 4
+</code></pre>
+<ol start="7">
+<li>Possible solution:</li>
+</ol>
+<pre><code class="language-diff">--- print-capability.c.orig
++++ print-capability.c
+@@ -4,8 +4,8 @@
+ int
+ main(void)
+ {
+-       int i;
+-       void *cap = &amp;i;
++       char *c;
++       void *cap = &amp;c;
+ 
+        printf(&quot;cap length: %lu\n&quot;, cheri_length_get(cap));
+ 
+</code></pre>
+<ol start="8">
+<li>Expected output:</li>
+</ol>
+<pre><code># ./print-capability
+cap length: 16
+</code></pre>
+<h1><a class="header" href="#disassemble-and-debug-risc-v-and-cheri-risc-v-programs" id="disassemble-and-debug-risc-v-and-cheri-risc-v-programs">Disassemble and debug RISC-V and CHERI-RISC-V programs</a></h1>
+<p>This exercise steps you through disassembling and debugging
+RISC-V and CHERI-RISC-V programs. It draws attention to differences in
+program structure and code generation, particularly relating to control
+flow, between the two compilation targets.</p>
+<p>First, use <code>llvm-objdump</code> to disassemble and explore the two binaries
+from the previous exercise:</p>
+<ol>
+<li>Using <code>llvm-objdump -dS</code>, disassemble the <code>print-pointer-riscv</code> and
+<code>print-pointer-cheri</code> binaries.</li>
+<li>What jump instruction is used to call <code>printf()</code> in <code>print-pointer-riscv</code>?
+Where does the target address for that jump originate?</li>
+<li>What jump instruction is used to call <code>printf()</code> in <code>print-pointer-cheri</code>?
+Where does the target capability for that jump originate?
+(Hint, you may find it helpful to add the <code>-s</code> flag to your
+<code>llvm-objdump</code> command to see all sections.)</li>
+</ol>
+<p>Next use GDB to explore binary execution for RISC-V:</p>
+<ol start="4">
+<li>Run <code>print-pointer-riscv</code> under GDB, setting a breakpoint at the start
+of <code>printf()</code>.
+<em>Note:</em> GDB can't find the run-time linker of binaries of the
+non-default ABI on its own so you need to invoke
+<code>set program-interpreter /libexec/ld-elf64.so.1</code>
+before running the program.<!-- This might want to go in the introductory material -->
+</li>
+<li>Run the program and at the breakpoint, print out the value of the
+string pointer argument.</li>
+<li>Use <code>info proc mappings</code> in GDB to print out the layout of the
+process address space.</li>
+<li>Print out the program counter (<code>info reg pc</code>).
+What memory mapping is it derived from?</li>
+</ol>
+<p>And for CHERI-RISC-V:</p>
+<ol start="8">
+<li>Run <code>print-pointer-cheri</code> under GDB, setting a breakpoint at the start
+of <code>printf()</code>.</li>
+<li>Print out the value of the string pointer argument.</li>
+<li>Use <code>info proc mappings</code> (in GDB) to print out the layout of the
+process address space.</li>
+<li>Print out the program counter (<code>info reg pcc</code>).
+What memory mapping is it derived from?
+Where do its bounds appear to originate from?</li>
+<li>Print out the register file using <code>info registers</code>.
+What mappings do the capabilities in the register file point to?
+Notice that some capabilities are labeled with <code>(sentry)</code> (or <code>(sealed)</code> in
+the case of older versions of GDB which do not distinguish sentries from
+other sealed capabilities).
+Sentry capabilities are sealed (cannot be modified or used to load or
+store), but can be used as a jump target (where they are unsealed and
+installed in <code>pcc</code>).
+What implications does this have for attackers?</li>
+</ol>
+<h1><a class="header" href="#answers---disassemble-and-debug-risc-v-and-cheri-risc-v-programs" id="answers---disassemble-and-debug-risc-v-and-cheri-risc-v-programs">Answers - Disassemble and debug RISC-V and CHERI-RISC-V programs</a></h1>
+<ol start="2">
+<li><code>jalr</code>. The target address is a pc-relative address in the <code>.plt</code>
+section addressed by a sequence like:</li>
+</ol>
+<pre><code>   1182a: 97 00 00 00   auipc   ra, 0
+   1182e: e7 80 60 0e   jalr    230(ra)
+</code></pre>
+<ol start="3">
+<li><code>cjalr</code>. The target capability is loaded from the <code>.captable</code> section
+by a sequence like:</li>
+</ol>
+<pre><code>    1b2e: 17 24 00 00   auipcc  cs0, 2
+    1b32: 0f 24 24 27   clc     cs0, 626(cs0)
+    1b36: db 00 c4 fe   cjalr   cs0
+</code></pre>
+<ol start="4">
+<li>Example session:</li>
+</ol>
+<pre><code>(gdb) b printf
+Breakpoint 1 at 0x11914
+</code></pre>
+<ol start="5">
+<li>Example session:</li>
+</ol>
+<pre><code>(gdb) r
+Starting program: /root/print-pointer-riscv 
+
+Breakpoint 1, printf (fmt=&lt;optimized out&gt;)
+    at /Volumes/CheriBSD/cheribsd/lib/libc/stdio/printf.c:56
+56      /Volumes/CheriBSD/cheribsd/lib/libc/stdio/printf.c: No such file or directory.
+(gdb) info reg a0
+a0             0x1054f  66895
+</code></pre>
+<ol start="6">
+<li>Example session:</li>
+</ol>
+<pre><code>(gdb) info proc mappings
+process 764
+Mapped address spaces:
+
+          Start Addr           End Addr       Size     Offset   Flags   File
+             0x10000            0x11000     0x1000        0x0  r-- CN-- /root/print-pointer-riscv
+             0x11000            0x12000     0x1000        0x0  r-x C--- /root/print-pointer-riscv
+             0x12000            0x13000     0x1000        0x0  r-- C--- /root/print-pointer-riscv
+             0x13000            0x14000     0x1000        0x0  rw- ---- 
+          0x40013000         0x40018000     0x5000        0x0  r-- CN-- /libexec/ld-elf64.so.1
+          0x40018000         0x4002a000    0x12000     0x4000  r-x C--- /libexec/ld-elf64.so.1
+          0x4002a000         0x4002b000     0x1000    0x15000  rw- C--- /libexec/ld-elf64.so.1
+          0x4002b000         0x4004e000    0x23000        0x0  rw- ---- 
+          0x4004f000         0x400c2000    0x73000        0x0  r-- CN-- /usr/lib64/libc.so.7
+          0x400c2000         0x401de000   0x11c000    0x72000  r-x C--- /usr/lib64/libc.so.7
+          0x401de000         0x401e8000     0xa000   0x18d000  r-- C--- /usr/lib64/libc.so.7
+          0x401e8000         0x401ef000     0x7000   0x196000  rw- C--- /usr/lib64/libc.so.7
+          0x401ef000         0x40419000   0x22a000        0x0  rw- ---- 
+          0x40600000         0x40e00000   0x800000        0x0  rw- ---- 
+        0x3f3ef00000       0x3f7eee0000 0x3ffe0000        0x0  --- ---- 
+        0x3f7eee0000       0x3f7ef00000    0x20000        0x0  rw- ---D 
+        0x3f7efff000       0x3f7f000000     0x1000        0x0  r-x ---- 
+</code></pre>
+<ol start="7">
+<li>Example session:</li>
+</ol>
+<pre><code>(gdb) info reg pc 
+pc             0x401bf640       1075574336
+</code></pre>
+<p>In this example, the pointer resides in:</p>
+<pre><code>0x400c2000         0x401de000   0x11c000    0x72000  r-x C--- /usr/lib64/libc.so.7
+</code></pre>
+<ol start="8">
+<li>Example session:</li>
+</ol>
+<pre><code>(gdb) b printf
+Function &quot;printf&quot; not defined.
+Make breakpoint pending on future shared library load? (y or [n]) y
+Breakpoint 1 (printf) pending.
+</code></pre>
+<ol start="9">
+<li>Example session:</li>
+</ol>
+<pre><code>(gdb) r
+Starting program: /root/print-pointer-cheri 
+
+Breakpoint 1, printf (
+    fmt=0x1004ef [rR,0x1004ef-0x100505] &quot;size of pointer: %zu\n&quot;)
+    at /Volumes/CheriBSD/cheribsd/lib/libc/stdio/printf.c:54
+54      /Volumes/CheriBSD/cheribsd/lib/libc/stdio/printf.c: No such file or directory.
+(gdb) p fmt
+$1 = 0x1004ef [rR,0x1004ef-0x100505] &quot;size of pointer: %zu\n&quot;
+</code></pre>
+<ol start="10">
+<li>Example session:</li>
+</ol>
+<pre><code>(gdb) info proc mappings
+process 767
+Mapped address spaces:
+
+          Start Addr           End Addr       Size     Offset   Flags   File
+            0x100000           0x101000     0x1000        0x0  r-- CN-- /root/print-pointer-cheri
+            0x101000           0x102000     0x1000        0x0  r-x CN-- /root/print-pointer-cheri
+            0x102000           0x103000     0x1000        0x0  r-- C--- /root/print-pointer-cheri
+            0x103000           0x104000     0x1000        0x0  rw- ---- 
+          0x40103000         0x4010a000     0x7000        0x0  rw- ---- 
+          0x4010a000         0x4010c000     0x2000        0x0  --- CN-- 
+          0x4010d000         0x40193000    0x86000        0x0  r-- CN-- /lib/libc.so.7
+          0x40193000         0x4028c000    0xf9000    0x85000  r-x C--- /lib/libc.so.7
+          0x4028c000         0x40293000     0x7000   0x17d000  r-- C--- /lib/libc.so.7
+          0x40293000         0x402ac000    0x19000   0x183000  rw- C--- /lib/libc.so.7
+          0x402ac000         0x402c9000    0x1d000        0x0  rw- ---- 
+          0x402c9000         0x402f1000    0x28000        0x0  rw- ---- 
+          0x41000000         0x4100b000     0xb000        0x0  r-- CN-- /libexec/ld-elf.so.1
+          0x4100b000         0x4102a000    0x1f000     0xa000  r-x C--- /libexec/ld-elf.so.1
+          0x4102a000         0x4102b000     0x1000    0x28000  rw- C--- /libexec/ld-elf.so.1
+          0x4102b000         0x4102e000     0x3000    0x28000  rw- C--- /libexec/ld-elf.so.1
+          0x4102e000         0x41030000     0x2000        0x0  rw- ---- 
+        0x3f3ef00000       0x3f7ece0000 0x3fde0000        0x0  --- ---- 
+        0x3f7ece0000       0x3f7eee0000   0x200000        0x0  rw- ---D 
+        0x3f7eee0000       0x3f7ef00000    0x20000        0x0  rw- ---D 
+        0x3f7efff000       0x3f7f000000     0x1000        0x0  r-x ---- 
+        0x3f7f000000       0x4000000000 0x81000000        0x0  rw- ---- 
+</code></pre>
+<ol start="11">
+<li>Example session:</li>
+</ol>
+<pre><code>(gdb) info reg pcc
+pcc            0xf11720000325d0d4000000004026e9e6       0x4026e9e6 &lt;printf+14&gt; [rxR,0x4010d000-0x402c9000]
+</code></pre>
+<p>The capability points at:</p>
+<pre><code>          0x40193000         0x4028c000    0xf9000    0x85000 r-x C--- /lib/libc.so.7
+</code></pre>
+<ol start="12">
+<li>Left as an exercise to the reader.</li>
+</ol>
+<h1><a class="header" href="#exercise-an-inter-object-buffer-overflow" id="exercise-an-inter-object-buffer-overflow">Exercise an inter-object buffer overflow</a></h1>
+<p>This exercise demonstrates an inter-object buffer overflow on RISC-V and
+CHERI-RISC-V, and asks you to characterize and fix the bug detected by CHERI
+bounds enforcement.  It also asks you to use GDB for debugging purposes.</p>
+<ol>
+<li>Compile <code>buffer-overflow.c</code> with a RISC-V target and binary name of
+<code>buffer-overflow-riscv</code>, and with a CHERI-RISC-V target and binary
+name of <code>buffer-overflow-cheri</code>. <strong>For this exercise, add <code>-G0</code> to your
+compiler flags</strong> (this ensures <code>c</code> is not placed in the small data section
+away from <code>buffer</code>).</li>
+</ol>
+<p><strong>buffer-overflow.c</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 SRI International
+ */
+#include &lt;stdio.h&gt;
+
+char buffer[128];
+char c;
+
+#pragma weak fill_buf
+void
+fill_buf(char *buf, size_t len)
+{
+	for (size_t i = 0; i &lt;= len; i++)
+		buf[i] = 'b';
+}
+
+#include &quot;main-asserts.inc&quot;
+
+int
+main(void)
+{
+	(void)buffer;
+	main_asserts();
+
+	c = 'c';
+	printf(&quot;c = %c\n&quot;, c);
+
+	fill_buf(buffer, sizeof(buffer));
+
+	printf(&quot;c = %c\n&quot;, c);
+
+	return 0;
+}
+</code></pre>
+<ol start="2">
+<li>Run both programs and observe the output.</li>
+<li>Using GDB on the core dump: Why has the CHERI program failed?</li>
+<li>Modify buffer-overflow.c to increase the buffer size from 128 bytes to
+1Mbyte + 1 byte.</li>
+<li>Recompile and re-run <code>buffer-overflow-cheri</code>. Why does it no longer
+crash, even though the buffer overflow exists in the source code? Is
+the adjacent field still corrupted (i.e., has spatial safety been
+violated between allocations)?</li>
+<li>Modify <code>buffer-overflow.c</code> to restore the original buffer size of 128
+bytes, and fix the bug by correcting accesses to the allocated array.</li>
+<li>Recompile and run <code>buffer-overflow-cheri</code> to demonstrate that the
+program is now able to continue.</li>
+</ol>
+<h2><a class="header" href="#support-code" id="support-code">Support code</a></h2>
+<p><strong>main-asserts.inc</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 SRI International
+ */
+#include &lt;assert.h&gt;
+#include &lt;stddef.h&gt;
+#ifdef __CHERI_PURE_CAPABILITY__
+#include &lt;cheriintrin.h&gt;
+#endif
+
+#ifndef nitems
+#define	nitems(x)	(sizeof((x)) / sizeof((x)[0]))
+#endif
+
+static void
+main_asserts(void)
+{
+	/*
+	 * Ensure that overflowing `buffer` by 1 will hit `c`.
+	 * In the pure-capabilty case, don't assert if the size of
+	 * `buffer` requires padding.
+	 */
+	assert((ptraddr_t)&amp;buffer[nitems(buffer)] == (ptraddr_t)&amp;c
+#ifdef __CHERI_PURE_CAPABILITY__
+	    || sizeof(buffer) &lt; cheri_representable_length(sizeof(buffer))
+#endif
+	    );
+}
+</code></pre>
+<h1><a class="header" href="#answers---exercise-an-inter-object-buffer-overflow" id="answers---exercise-an-inter-object-buffer-overflow">Answers - Exercise an inter-object buffer overflow</a></h1>
+<ol start="2">
+<li>Expected output:</li>
+</ol>
+<pre><code># ./buffer-overflow-riscv
+c = c
+c = b
+# ./buffer-overflow-cheri
+c = c
+In-address space security exception (core dumped)
+</code></pre>
+<ol start="3">
+<li>Example session:</li>
+</ol>
+<pre><code>Program received signal SIGPROT, CHERI protection violation
+Capability bounds fault caused by register ca4.
+fill_buf (
+    buf=0x104060 &lt;buffer&gt; [rwRW,0x104060-0x1040e0] 'b' &lt;repeats 128 times&gt;,
+    len=128) at src/exercises/buffer-overflow/buffer-overflow.c:11
+11      in src/exercises/buffer-overflow/buffer-overflow.c
+(gdb) info reg ca4
+ca4            0xf17d00000439806400000000001040e0       0x1040e0 &lt;c&gt; [rwRW,0x104060-0x1040e0]
+(gdb) x/i $pcc
+=&gt; 0x101cc8 &lt;fill_buf+12&gt;:  sb      a3,0(a4)
+</code></pre>
+<p>The array has been incremented beyond the end of the allocation as out
+of bounds store has been attempted (<code>Capability bounds fault</code>).
+<em>Note:</em> due to deficiencies in the current GDB implementation, the
+instruction incorrectly decodes as <code>sb</code> rather than correctly as:</p>
+<pre><code>    1cc8: 23 00 d7 00   csb     a3, 0(ca4)
+</code></pre>
+<ol start="5">
+<li>Expected output:</li>
+</ol>
+<pre><code># ./buffer-overflow-cheri
+c = c
+c = c
+</code></pre>
+<p>To see why this occurs, examine the bounds of the buffer in <code>fill_buf</code>.</p>
+<pre><code>(gdb) b fill_buf
+Breakpoint 1 at 0x1cc2: file src/exercises/buffer-overflow/buffer-overflow.c, line 11.
+(gdb) r
+Starting program: /root/buffer-overflow-cheri
+
+Breakpoint 1, fill_buf (buf=0x105000 &lt;buffer&gt; [rwRW,0x105000-0x205800] &quot;&quot;,
+    len=1048577) at src/exercises/buffer-overflow/buffer-overflow.c:11
+11      src/exercises/buffer-overflow/buffer-overflow.c: No such file or directory.
+</code></pre>
+<p>This indicates that buffer has been allocated (1024 * 1026) bytes. This
+is due to the padding required to ensure that the bounds of <code>buffer</code>
+don't overlap with other allocations. As a result, there as an area beyond
+the end of the C-language object that is nonetheless in bounds.</p>
+<ol start="6">
+<li>Solution:</li>
+</ol>
+<pre><code class="language-diff">--- buffer-overflow.c
++++ buffer-overflow.c
+@@ -6,7 +6,7 @@ char c;
+ void
+ fill_buf(char *buf, size_t len)
+ {
+-       for (size_t i = 0; i &lt;= len; i++)
++       for (size_t i = 0; i &lt; len; i++)
+                buf[i] = 'b';
+ }
+</code></pre>
+<ol start="7">
+<li>Expected output:</li>
+</ol>
+<pre><code># ./buffer-overflow-cheri
+c = c
+c = c
+</code></pre>
+<h1><a class="header" href="#exercise-a-subobject-buffer-overflow" id="exercise-a-subobject-buffer-overflow">Exercise a subobject buffer overflow</a></h1>
+<p>In the CheriABI run-time environment, bounds are typically associated with
+memory allocations rather than C types.
+For example, if a heap memory allocation is made for 1024 bytes, and the
+structure within it is 768 bytes, then the bounds associated with a pointer
+will be for the allocation size rather than the structure size.</p>
+<p>With subobject bounds, enforcement occurs on C-language objects within
+allocations.
+This exercise is similar to the prior exercise, but is for such an
+intra-object overflow. In our example, we consider an array within
+another structure, overflowing onto an integer in the same allocation.</p>
+<ol>
+<li>Compile <code>buffer-overflow-subobject.c</code> with a RISC-V target and binary
+name of <code>buffer-overflow-subobject-riscv</code>, and with a CHERI-RISC-V
+target and binary name of <code>buffer-overflow-subobject-cheri</code>.</li>
+</ol>
+<p><strong>buffer-overflow-subobject.c</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 SRI International
+ */
+#include &lt;stdio.h&gt;
+
+struct buf {
+	char buffer[128];
+	int i;
+} b;
+
+#pragma weak fill_buf
+void
+fill_buf(char *buf, size_t len)
+{
+	for (size_t i = 0; i &lt;= len; i++)
+		buf[i] = 'b';
+}
+
+int
+main(void)
+{
+	b.i = 'c';
+	printf(&quot;b.i = %c\n&quot;, b.i);
+
+	fill_buf(b.buffer, sizeof(b.buffer));
+
+	printf(&quot;b.i = %c\n&quot;, b.i);
+
+	return 0;
+}
+
+#include &quot;asserts.inc&quot;
+</code></pre>
+<ol start="2">
+<li>As in the prior exercise, run the binaries.</li>
+<li>Explore why the CHERI binary didn't fail.
+Run <code>buffer-overflow-subobject-cheri</code> under <code>gdb</code> and examine the bounds
+of the <code>buffer</code> argument to <code>fill_buf()</code>.
+What do they correspond to?</li>
+<li>Recompile the <code>buffer-overflow-subobject-cheri</code> binary with the compiler
+flags <code>-Xclang -cheri-bounds=subobject-safe</code>.</li>
+<li>Run the program to demonstrate that the buffer overflow is now caught.</li>
+<li>Run the program under <code>gdb</code> and examine the bounds again. What has changed?</li>
+</ol>
+<h2><a class="header" href="#support-code-1" id="support-code-1">Support code</a></h2>
+<p><strong>asserts.inc</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 SRI International
+ */
+#include &lt;stddef.h&gt;
+
+_Static_assert(sizeof(b.buffer) == offsetof(struct buf, i),
+    &quot;There must be no padding in struct buf between buffer and i members&quot;);
+</code></pre>
+<h1><a class="header" href="#answers---exercise-a-subobject-buffer-overflow" id="answers---exercise-a-subobject-buffer-overflow">Answers - Exercise a subobject buffer overflow</a></h1>
+<p>This exercise demonstrates how subobject bounds can correct and array in a
+structure.</p>
+<ol start="2">
+<li>Expected output:</li>
+</ol>
+<pre><code># ./buffer-overflow-subobject-riscv
+b.i = c
+b.i = b
+# ./buffer-overflow-subobject-cheri
+b.i = c
+b.i = b
+</code></pre>
+<ol start="3">
+<li>Example session:</li>
+</ol>
+<pre><code>(gdb) f fill_buf
+No registers.
+(gdb) b fill_buf
+Breakpoint 1 at 0x1b3a: file src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c, line 13.
+(gdb) r
+Starting program: /root/buffer-overflow-subobject-cheri 
+
+Breakpoint 1, fill_buf (buf=0x103e50 &lt;b&gt; [rwRW,0x103e50-0x103ed4] &quot;&quot;, len=128)
+    at src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c:13
+13      src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c: No such file or directory.
+</code></pre>
+<p>The bounds are <code>132</code> bytes corresponding to the size of the underlying object.</p>
+<ol start="5">
+<li>Expected output:</li>
+</ol>
+<pre><code># ./buffer-overflow-subobject-cheri
+b.i = c
+In-address space security exception (core dumped)
+</code></pre>
+<ol start="6">
+<li>Example session:</li>
+</ol>
+<pre><code>(gdb) b fill_buf 
+Breakpoint 1 at 0x1b3a: file src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c, line 13.
+(gdb) r
+Starting program: /root/buffer-overflow-subobject-cheri-subobject 
+
+Breakpoint 1, fill_buf (buf=0x103e50 &lt;b&gt; [rwRW,0x103e50-0x103ed0] &quot;&quot;, len=128)
+    at src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c:13
+13      src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c: No such file or directory.
+</code></pre>
+<p>The pointer to the buffer is now bounded to the array rather than the object.</p>
+<h1><a class="header" href="#corrupt-a-control-flow-pointer-using-a-subobject-buffer-overflow" id="corrupt-a-control-flow-pointer-using-a-subobject-buffer-overflow">Corrupt a control-flow pointer using a subobject buffer overflow</a></h1>
+<p>This exercise demonstrates how CHERI pointer integrity protection prevents
+a function pointer overwritten with data due to a buffer overflow from being
+used for further memory access.</p>
+<ol>
+<li>Compile <code>buffer-overflow-fnptr.c</code> with a RISC-V target and binary name
+of <code>buffer-overflow-fnptr-riscv</code>, and a CHERI-RISC-V target and binary
+name of <code>buffer-overflow-fnptr-cheri</code>. Do not enable compilation with
+subobject bounds protection when compiling with the CHERI-RISC-V target.</li>
+</ol>
+<p><strong>buffer-overflow-fnptr.c</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 SRI International
+ */
+#include &lt;stdio.h&gt;
+
+struct buf {
+	size_t length;
+	int buffer[30];
+	size_t (*callback)(struct buf *);
+};
+
+void
+fill_buf(struct buf *bp)
+{
+	bp-&gt;length = sizeof(bp-&gt;buffer)/sizeof(*bp-&gt;buffer);
+	for (size_t i = 0; i &lt;= bp-&gt;length; i++)
+		bp-&gt;buffer[i] = 0xAAAAAAAA;
+}
+
+size_t
+count_screams(struct buf *bp)
+{
+	int screams = 0;
+
+	for (size_t i = 0; i &lt; bp-&gt;length; i++)
+		screams += bp-&gt;buffer[i] == 0xAAAAAAAA ? 1 : 0;
+	return screams;
+}
+
+struct buf b = {.callback = count_screams};
+
+int
+main(void)
+{
+	fill_buf(&amp;b);
+
+	printf(&quot;Words of screaming in b.buffer %zu\n&quot;, b.callback(&amp;b));
+
+	return 0;
+}
+
+#include &quot;asserts.inc&quot;
+</code></pre>
+<ol start="2">
+<li>Run the RISC-V program under GDB; why does it crash?</li>
+<li>Run the CHERI-RISC-V program under GDB; why does it crash?</li>
+</ol>
+<h2><a class="header" href="#support-code-2" id="support-code-2">Support code</a></h2>
+<p><strong>asserts.inc</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 SRI International
+ */
+#include &lt;stddef.h&gt;
+
+_Static_assert(offsetof(struct buf, buffer) + sizeof(b.buffer) ==
+    offsetof(struct buf, callback),
+    &quot;There must be no padding between buffer and callback members&quot;);
+</code></pre>
+<h1><a class="header" href="#answers---corrupt-a-control-flow-pointer-using-a-subobject-buffer-overflow" id="answers---corrupt-a-control-flow-pointer-using-a-subobject-buffer-overflow">Answers - Corrupt a control-flow pointer using a subobject buffer overflow</a></h1>
+<ol start="2">
+<li>Example session:</li>
+</ol>
+<pre><code>(gdb) r
+Starting program: /root/buffer-overflow-fnptr-riscv 
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00000000aaaaaaaa in ?? ()
+</code></pre>
+<p>The program attempted an instruction fetch from a nonsensical address
+<code>0xaaaaaaaa</code>.</p>
+<ol start="3">
+<li>Example session:</li>
+</ol>
+<pre><code>(gdb) r
+Starting program: /root/buffer-overflow-fnptr-cheri 
+
+Program received signal SIGPROT, CHERI protection violation
+Capability tag fault caused by register ca1.
+0x0000000000101c5e in main ()
+    at src/exercises/control-flow-pointer/buffer-overflow-fnptr.c:34
+34      src/exercises/control-flow-pointer/buffer-overflow-fnptr.c: No such file or directory.
+(gdb) info reg ca1
+ca1            0xd11720000801800600000000aaaaaaaa       0xaaaaaaaa [rxR,0xaaaa0000-0xaaaa4000] (sentry)
+(gdb) x/i $pcc
+=&gt; 0x101c5e &lt;main+58&gt;:      cjalr   cra,ca1
+</code></pre>
+<p>The program attempted to load an instruction via an untagged capability <code>ca1</code>.</p>
+<h1><a class="header" href="#exercise-integer-pointer-type-confusion-bug" id="exercise-integer-pointer-type-confusion-bug">Exercise integer-pointer type confusion bug</a></h1>
+<p>This exercise demonstrates how CHERI distinguishes between integer and pointer
+types, preventing certain types of type confusion.
+In this example, a union allows an integer value to be used as a pointer,
+which cannot then be dereferenced.</p>
+<ol>
+<li>Compiler <code>union-int-ptr.c</code> with a RISC-V target and binary name of
+<code>union-int-ptr-riscv</code>, and with a CHERI-RISC-V target and binary name
+<code>union-int-ptr-cheri</code>.</li>
+</ol>
+<p><strong>union-int-ptr.c</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 SRI International
+ */
+#include &lt;stdio.h&gt;
+
+const char hello[] = &quot;Hello World!&quot;;
+
+union long_ptr {
+	long l;
+	const char *ptr;
+} lp = { .ptr = hello };
+
+void
+inc_long_ptr(union long_ptr *lpp)
+{
+	lpp-&gt;l++;
+}
+
+int
+main(void)
+{
+	printf(&quot;lp.ptr %s\n&quot;, lp.ptr);
+	inc_long_ptr(&amp;lp);
+	printf(&quot;lp.ptr %s\n&quot;, lp.ptr);
+
+	return 0;
+}
+</code></pre>
+<ol start="2">
+<li>Run the RISC-V program. What is the result?</li>
+<li>Run the CHERI-RISC-V program.  What is the result?
+Run under <code>gdb</code> and explain why the program crashes in the second <code>printf</code>.</li>
+</ol>
+<h1><a class="header" href="#answers-exercise-integer-pointer-type-confusion-bug" id="answers-exercise-integer-pointer-type-confusion-bug">Answers: Exercise integer-pointer type confusion bug</a></h1>
+<p>When the integer value is updated, with CHERI-RISC-V compilation the
+pointer side will no longer be dereferenceable, as the tag has been cleared.</p>
+<ol start="2">
+<li>Expected output:</li>
+</ol>
+<pre><code># ./union-int-ptr-riscv
+lp.ptr Hello World!
+lp.ptr ello World!
+</code></pre>
+<p>The <code>long</code> member was loaded and stored as an integer (this is identical
+to the way it would have been handled if the pointer member were
+incremented instead).</p>
+<ol start="3">
+<li>Expected output:</li>
+</ol>
+<pre><code># ./union-int-ptr-cheri
+lp.ptr Hello World!
+In-address space security exception (core dumped)
+</code></pre>
+<p>When the <code>long</code> member was loaded and stored, it caused the tag to be
+cleared on the pointer.</p>
+<h1><a class="header" href="#demonstrate-pointer-injection" id="demonstrate-pointer-injection">Demonstrate pointer injection</a></h1>
+<p>This exercise demonstrates how CHERI's pointer provenance validity prevents
+injected pointer values from being dereferenced.
+In this example code, a pointer is injected via pipe IPC, and then
+dereferenced.</p>
+<ol>
+<li>Compile <code>long-over-pipe.c</code> with a RISC-V target and a binary name of
+<code>long-over-pipe-riscv</code>, and with a CHERI-RISC-V target and a binary
+name of <code>long-over-pipe-cheri</code>.</li>
+</ol>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 SRI International
+ */
+#include &lt;err.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int
+main(void)
+{
+	int fds[2];
+	pid_t pid;
+	long val;
+
+	if (pipe(fds) == -1)
+		err(1, &quot;pipe&quot;);
+	if ((pid = fork()) == -1)
+		err(1, &quot;fork&quot;);
+	if (pid == 0) {
+		val = 42;
+		if (write(fds[0], &amp;val, sizeof(val)) != sizeof(val))
+			err(1, &quot;write&quot;);
+	} else {
+		if (read(fds[1], &amp;val, sizeof(val)) != sizeof(val))
+			err(1, &quot;read&quot;);
+		printf(&quot;received %ld\n&quot;, val);
+	}
+
+	return 0;
+}
+</code></pre>
+<ol start="2">
+<li>Run the two binaries, which both send long integers over IPC, and print
+the sent and received values.</li>
+<li>Modify the program source to create <code>ptr-over-pipe.c</code> which sends
+pointers instead, and then to dereference the received copy of the
+pointer (e.g. send a pointer to a string and print it).</li>
+<li>Compile and run as <code>ptr-over-pipe-riscv</code> and <code>ptr-over-pipe-cheri</code>.
+What happens?</li>
+<li>Why does dereferencing the received pointer in a CHERI binary fail?</li>
+</ol>
+<h1><a class="header" href="#answers" id="answers">Answers</a></h1>
+<ol start="2">
+<li>Expected output:</li>
+</ol>
+<pre><code># ./long-over-pipe-riscv
+received 42
+# ./long-over-pipe-cheri
+received 42
+</code></pre>
+<ol start="3">
+<li>Possible solution:</li>
+</ol>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 SRI International
+ */
+#include &lt;err.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+const char hello[] = &quot;Hello world!&quot;;
+
+int
+main(void)
+{
+	int fds[2];
+	pid_t pid;
+	const char *ptr;
+
+	if (pipe(fds) == -1)
+		err(1, &quot;pipe&quot;);
+	if ((pid = fork()) == -1)
+		err(1, &quot;fork&quot;);
+	if (pid == 0) {
+		ptr = hello;
+		if (write(fds[0], &amp;ptr, sizeof(ptr)) != sizeof(ptr))
+			err(1, &quot;write&quot;);
+	} else {
+		if (read(fds[1], &amp;ptr, sizeof(ptr)) != sizeof(ptr))
+			err(1, &quot;read&quot;);
+		printf(&quot;received %s\n&quot;, ptr);
+	}
+
+	return 0;
+}
+</code></pre>
+<ol start="4">
+<li>Expected output:</li>
+</ol>
+<pre><code># ./ptr-over-pipe-riscv
+received Hello world!
+# ./ptr-over-pipe-cheri
+In-address space security exception (core dumped)
+</code></pre>
+<ol start="5">
+<li>Because the tag is stripped when sent via message-passing IPC, leading
+to a tag violation on dereference.</li>
+</ol>
+<h1><a class="header" href="#demonstrate-pointer-revocation" id="demonstrate-pointer-revocation">Demonstrate pointer revocation</a></h1>
+<h2><a class="header" href="#indirect-control-flow-through-aliased-heap-objects" id="indirect-control-flow-through-aliased-heap-objects">Indirect control flow through aliased heap objects</a></h2>
+<p>This exercise demonstrates CheriBSD's <em>pointer revocation</em> facility and its use
+by the system <code>malloc</code>. It asks you to contrast the same program,
+<code>temporal-control.c</code>, built and run in three slightly different environments.
+It must be run on a <strong>heap-temporal-safety enabled</strong> version of CheriBSD; at the
+time of writing, heap temporal safety remains an experimental feature not yet
+merged to mainline CheriBSD.</p>
+<ol>
+<li>Compile <code>temporal-control.c</code> with a RISC-V target and a binary name of
+<code>temporal-control-riscv</code>.</li>
+</ol>
+<p><strong>temporal-control.c</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause
+ * Copyright (c) 2020 Microsoft, Inc.
+ */
+#include &lt;assert.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+/* Ensure we're being run on a temporal-safety-aware system */
+#if __CHERI_PURE_CAPABILITY__
+#include &lt;sys/caprevoke.h&gt;
+static void *check_caprevoke = caprevoke;
+
+extern void malloc_revoke(void);
+static void *check_malloc_revoke = malloc_revoke;
+#endif
+
+static void
+fn1(uintptr_t arg)
+{
+	fprintf(stderr, &quot; First function: %#p\n&quot;, (void *)arg);
+}
+
+static void
+fn2(uintptr_t arg)
+{
+	fprintf(stderr, &quot; Second function: %#p\n&quot;, (void *)arg);
+}
+
+struct obj {
+	char buf[32];
+	/* Volatile so that the compiler will always reload it */
+	void (* volatile fn)(uintptr_t);
+	uintptr_t arg;
+};
+
+int
+main(void)
+{
+	struct obj *obj1 = calloc(1, sizeof(*obj1));
+
+	fprintf(stderr, &quot;Installing function pointer in obj1 at %#p\n&quot;, obj1);
+	obj1-&gt;fn = fn1;
+	obj1-&gt;arg = (uintptr_t)obj1;
+
+	free(obj1);
+
+	fprintf(stderr, &quot;Demonstrating use after free:\n&quot;);
+	obj1-&gt;fn(obj1-&gt;arg);
+
+#if defined(CAPREVOKE)
+	/* Force recycling the free queue now, but with a revocation pass */
+	malloc_revoke();
+#endif
+
+	struct obj *obj2 = malloc(sizeof(*obj2));
+#if defined(CAPREVOKE)
+	assert(obj1 == obj2);
+#endif
+
+	fprintf(stderr, &quot;Assigning function pointer through obj2 at %#p\n&quot;,
+	    obj2);
+	obj2-&gt;fn = fn2;
+
+	fprintf(stderr, &quot;Calling function pointer through obj1 (now %#p):\n&quot;,
+	    obj1);
+	obj1-&gt;fn(obj1-&gt;arg);
+
+	return (0);
+}
+</code></pre>
+<ol start="2">
+<li>Run the resulting program and observe that the system malloc has <strong>reused</strong>
+a location on the heap, such that <code>obj1</code> and <code>obj2</code> point to the same address.
+Moreover, the assignment of <code>fn2</code> into <code>obj2</code> causes the last printout to be
+from <code>fn2</code>, not <code>fn1</code>, even though the function pointer was fetched through
+<code>obj1</code> and <code>obj1-&gt;fn</code> was last set to <code>fn1</code>.</li>
+<li>Recompile <code>temporal-control.c</code> with a CHERI-RISC-V target and binary name of
+<code>temporal-control-cheri</code>.</li>
+<li>Run this program instead. Why does it no longer exhibit the behavior from
+step 2? Ponder the suitability of using just this approach for fixing temporal
+aliasing.</li>
+<li>Recompile <code>temporal-control.c</code>, adding <code>-DCAPREVOKE</code> to the command line
+this time, with a CHERI-RISC-V target and a binary name of
+<code>temporal-control-cheri-revoke</code>.</li>
+<li>Run this third program instead and note that it crashes, catching a
+<code>SIGPROT</code> between declaring its intent to call <code>obj1-&gt;fn</code> and declaring that it
+has made the call. Can you spot why it has crashed?</li>
+<li>Rerun the third program under <code>gdb</code> and look at both the instruction
+triggering the <code>SIGPROT</code> and the register(s) involved. Why is the program
+crashing? What must have happened while the system was executing the
+mysterious <code>malloc_revoke()</code> function?</li>
+<li>Modify <code>temporal-control.c</code> to try to induce aliasing by making many
+allocations: call <code>malloc</code> and <code>free</code> repeatedly until the new allocation
+compares equal to <code>obj1</code>. Ah ha, you've caught the allocator now! But wait,
+what is <code>obj1</code> in full (i.e., as a capability, not merely a virtual address)?
+You likely have to call <code>free</code> in the loop for this exercise to work; merely
+calling <code>malloc</code> may instead simply always return new addresses, even if the
+initial <code>obj1</code> has been <code>free</code>-d.</li>
+</ol>
+<h2><a class="header" href="#more-attacks-through-aliased-heap-objects" id="more-attacks-through-aliased-heap-objects">More attacks through aliased heap objects</a></h2>
+<p>The program is called <code>temporal-control.c</code> because it exhibits <em>temporal
+aliasing</em> of heap pointers and because the class of bugs it mimics involve
+transfers of control through function pointers held in heap objects. While
+CHERI protects against pointer <em>injection</em>, it cannot so easily defend against
+either:</p>
+<ul>
+<li><em>capability farming</em>: as in the example, a legitimately-held capability can
+be (caused to be) stored to a &quot;new&quot; heap object, altering an aliased view while
+preserving the set tag bit; or</li>
+<li><em>data-based</em> corruption through temporal aliasing.</li>
+</ul>
+<p>These windows open wider considering that, unlike this example, temporal
+aliasing often comes paired with <em>type-confusion</em>, so it may be possible to
+overlap an easily-controlled structure with an exploitable one.</p>
+<ol>
+<li>Write a program like <code>temporal-control.c</code> in which changing a <em>data byte</em>
+within a temporally-aliased heap object suffices to cause the program to error.
+Perhaps the heap object is the state associated with a client session and
+contains a flag that indicates superuser status.</li>
+<li>Demonstrate that this program fails as expected on RISC-V but that any
+attempt to induce aliasing is thwarted on CHERI-RISC-V with heap temporal
+safety: aliasing becomes possible only after revocation, ensuring that attempts
+to use the old session object fail-stop.</li>
+</ol>
+<h1><a class="header" href="#answers-1" id="answers-1">Answers</a></h1>
+<h2><a class="header" href="#indirect-control-flow-through-aliased-heap-objects-1" id="indirect-control-flow-through-aliased-heap-objects-1">Indirect control flow through aliased heap objects</a></h2>
+<ol start="2">
+<li>Expected output (addresses may vary):</li>
+</ol>
+<pre><code>Installing function pointer in obj1 at 0x40809000
+Demonstrating use after free:
+ First function: 0x40809000
+Assigning function pointer through obj2 at 0x40809000
+Calling function pointer through obj1 (now 0x40809000):
+ Second function: 0x40809000
+</code></pre>
+<ol start="4">
+<li>Expected output (addresses may vary):</li>
+</ol>
+<pre><code>Installing function pointer in obj1 at v:1 s:0 p:0006817d b:0000000041200040 l:0000000000000040 o:0 t:-1
+Demonstrating use after free:
+ First function: v:1 s:0 p:0006817d b:0000000041200040 l:0000000000000040 o:0 t:-1
+Assigning function pointer through obj2 at v:1 s:0 p:0006817d b:00000000412000c0 l:0000000000000040 o:0 t:-1
+Calling function pointer through obj1 (now v:1 s:0 p:0006817d b:0000000041200040 l:0000000000000040 o:0 t:-1):
+ First function: v:1 s:0 p:0006817d b:0000000041200040 l:0000000000000040 o:0 t:-1
+</code></pre>
+<ol start="6">
+<li>Expected output (addresses may vary):</li>
+</ol>
+<pre><code>Installing function pointer in obj1 at v:1 s:0 p:0006817d b:0000000041200040 l:0000000000000040 o:0 t:-1
+Demonstrating use after free:
+ First function: v:1 s:0 p:0006817d b:0000000041200040 l:0000000000000040 o:0 t:-1
+Assigning function pointer through obj2 at v:1 s:0 p:0006817d b:0000000041200040 l:0000000000000040 o:0 t:-1
+Calling function pointer through obj1 (now v:1 s:0 p:00000000 b:0000000041200040 l:0000000000000040 o:0 t:-1):
+In-address space security exception (core dumped)
+</code></pre>
+<ol start="7">
+<li>The process is attempting a load through a capability with valid tag but no
+permissions, as can be readily seen in <code>gdb</code>:</li>
+</ol>
+<pre><code>Program received signal SIGPROT, CHERI protection violation
+Capability permission fault caused by register ca2.
+0x0000000000102140 in main ()
+
+(gdb) x/i 0x0000000000102140
+=&gt; 0x102140 &lt;main+524&gt;:     lc      ca2,32(a2)
+
+(gdb) p $ca2
+$1 = (void *) 0x41200040 [,0x41200040-0x41200080]
+</code></pre>
+<p><code>malloc_revoke()</code> must have replaced the <code>obj1</code> capability, which previously
+had permissions for loading and storing both data and capabilities to the
+memory backing <code>obj1</code>, with this permissionless form.</p>
+<h1><a class="header" href="#focused-adversarial-missions-1" id="focused-adversarial-missions-1">Focused Adversarial Missions</a></h1>
+<h1><a class="header" href="#exploiting-a-buffer-overflow-to-manipulate-control-flow" id="exploiting-a-buffer-overflow-to-manipulate-control-flow">Exploiting a buffer overflow to manipulate control flow</a></h1>
+<p>The objective of this mission is to demonstrate arbitrary code execution
+through a control-flow attack, despite CHERI protections. You will attack three
+different versions of the program:</p>
+<ol>
+<li>
+<p>A baseline RISC-V compilation, to establish that the vulnerability is
+exploitable without any CHERI protections.</p>
+</li>
+<li>
+<p>A baseline CHERI-RISC-V compilation, offering strong spacial safety between
+heap allocations, including accounting for imprecision in the bounds of large
+capabilities.</p>
+</li>
+<li>
+<p>A weakened CHERI-RISC-V compilation, reflecting what would occur if a memory
+allocator failed to pad allocations to account for capability bounds
+imprecision.</p>
+</li>
+</ol>
+<p>The success condition for an exploit, given attacker-provided input overflowing
+a buffer, is to modify control flow in the program such that the <code>success</code>
+function is executed.</p>
+<ol>
+<li>Compile <code>buffer-overflow.c</code> and <code>btpalloc.c</code> together with a RISC-V target
+and exploit the binary to execute the <code>success</code> function.</li>
+</ol>
+<p><strong>buffer-overflow.c</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 Jessica Clarke
+ */
+#include &lt;stdint.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+#include &quot;btpalloc.h&quot;
+
+void
+success(void)
+{
+	puts(&quot;Exploit successful!&quot;);
+}
+
+void
+failure(void)
+{
+	puts(&quot;Exploit unsuccessful!&quot;);
+}
+
+static uint16_t
+ipv4_checksum(uint16_t *buf, size_t words)
+{
+	uint16_t *p;
+	uint_fast32_t sum;
+
+	sum = 0;
+	for (p = buf; words &gt; 0; --words, ++p) {
+		sum += *p;
+		if (sum &gt; 0xffff)
+			sum -= 0xffff;
+	}
+
+	return (~sum &amp; 0xffff);
+}
+
+#include &quot;main-asserts.inc&quot;
+
+int
+main(void)
+{
+	int ch;
+	char *buf, *p;
+	uint16_t sum;
+	void (**fptr)(void);
+
+	buf = btpmalloc(25000);
+	fptr = btpmalloc(sizeof(*fptr));
+
+	main_asserts(buf, fptr);
+
+	*fptr = &amp;failure;
+
+	p = buf;
+	while ((ch = getchar()) != EOF)
+		*p++ = (char)ch;
+
+	if ((uintptr_t)p &amp; 1)
+		*p++ = '\0';
+
+	sum = ipv4_checksum((uint16_t *)buf, (p - buf) / 2);
+	printf(&quot;Checksum: 0x%04x\n&quot;, sum);
+
+	btpfree(buf);
+
+	(**fptr)();
+
+	btpfree(fptr);
+
+	return (0);
+}
+</code></pre>
+<ol start="2">
+<li>Recompile with a CHERI-RISC-V target, attempt to exploit the binary and, if
+it cannot be exploited, explain why.</li>
+<li>Recompile with a CHERI-RISC-V target but this time adding
+<code>-DCHERI_NO_ALIGN_PAD</code>, attempt to exploit the binary and, if it cannot be
+exploited, explain why.</li>
+</ol>
+<p><strong>btpalloc.c</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 Jessica Clarke
+ */
+#include &quot;btpalloc.h&quot;
+
+#include &lt;assert.h&gt;
+#include &lt;stddef.h&gt;
+
+#include &lt;sys/mman.h&gt;
+
+#ifdef __CHERI_PURE_CAPABILITY__
+#include &lt;cheriintrin.h&gt;
+#endif
+
+static void *btpmem;
+static size_t btpsize;
+
+static void
+btpinit(void)
+{
+	btpsize = 0x100000;
+	btpmem = mmap(NULL, btpsize, PROT_READ | PROT_WRITE,
+	    MAP_PRIVATE | MAP_ANON, -1, 0);
+	assert(btpmem != MAP_FAILED);
+}
+
+void *
+btpmalloc(size_t size)
+{
+	void *alloc;
+	size_t allocsize;
+
+	if (btpmem == NULL)
+		btpinit();
+
+	alloc = btpmem;
+	/* RISC-V ABIs require 16-byte alignment */
+	allocsize = __builtin_align_up(size, 16);
+
+#if defined(__CHERI_PURE_CAPABILITY__) &amp;&amp; !defined(CHERI_NO_ALIGN_PAD)
+	allocsize = cheri_representable_length(allocsize);
+	alloc = __builtin_align_up(alloc,
+	    ~cheri_representable_alignment_mask(allocsize) + 1);
+	allocsize += (char *)alloc - (char *)btpmem;
+#endif
+
+	if (allocsize &gt; btpsize)
+		return (NULL);
+
+	btpmem = (char *)btpmem + allocsize;
+	btpsize -= allocsize;
+#ifdef __CHERI_PURE_CAPABILITY__
+	alloc = cheri_bounds_set(alloc, size);
+#endif
+	return (alloc);
+}
+
+void
+btpfree(void *ptr)
+{
+	(void)ptr;
+}
+</code></pre>
+<h2><a class="header" href="#support-code-3" id="support-code-3">Support code</a></h2>
+<p><strong>btpalloc.h</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 Jessica Clarke
+ */
+#include &lt;stddef.h&gt;
+
+void	*btpmalloc(size_t size);
+void	 btpfree(void *ptr);
+</code></pre>
+<p><strong>main-asserts.inc</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 Jessica Clarke
+ */
+#include &lt;assert.h&gt;
+#include &lt;stdint.h&gt;
+#ifdef __CHERI_PURE_CAPABILITY__
+#include &lt;cheriintrin.h&gt;
+#endif
+
+static void
+main_asserts(void *buf, void *fptr)
+{
+	uintptr_t ubuf = (uintptr_t)buf;
+	uintptr_t ufptr = (uintptr_t)fptr;
+#ifdef __CHERI_PURE_CAPABILITY__
+	ptraddr_t ubuf_top;
+#endif
+
+#ifdef __CHERI_PURE_CAPABILITY__
+	ubuf_top = cheri_base_get(ubuf) + cheri_length_get(ubuf);
+#endif
+
+#if defined(__CHERI_PURE_CAPABILITY__) &amp;&amp; !defined(CHERI_NO_ALIGN_PAD)
+	/*
+	 * For the normal pure-capability case, `buf`'s allocation should be
+	 * adequately padded to ensure precise capability bounds and `fptr`
+	 * should be adjacent.
+	 */
+	assert(ubuf_top == ufptr);
+#else
+	/*
+	 * Otherwise `fptr` should be 8 bytes (not 0 due to malloc's alignment
+	 * requirements) after the end of `buf`.
+	 */
+	assert(ubuf + 25008 == ufptr);
+#ifdef __CHERI_PURE_CAPABILITY__
+	/*
+	 * For pure-capability code this should result in the bounds of the
+	 * large `buf` allocation including all of `fptr`.
+	 */
+	assert(ubuf_top &gt;= ufptr + sizeof(void *));
+#endif
+#endif
+}
+</code></pre>
+<h1><a class="header" href="#exploiting-an-uninitialized-stack-frame-to-manipulate-control-flow" id="exploiting-an-uninitialized-stack-frame-to-manipulate-control-flow">Exploiting an uninitialized stack frame to manipulate control flow</a></h1>
+<h1><a class="header" href="#exploiting-heap-use-after-free-to-manipulate-control-flow" id="exploiting-heap-use-after-free-to-manipulate-control-flow">Exploiting heap use-after-free to manipulate control flow</a></h1>
+<h1><a class="header" href="#appendix" id="appendix">Appendix</a></h1>
+<p>This book and related source code are released under the following license:</p>
+<pre><code>SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+
+Copyright (c) 2020 Jessica Clarke
+Copyright (c) 2020 Robert N. M. Watson
+Copyright (c) 2020 SRI International
+
+This software was developed by SRI International and the University of
+Cambridge Computer Laboratory (Department of Computer Science and
+Technology) under DARPA contract HR0011-18-C-0016 (&quot;ECATS&quot;), as part of the
+DARPA SSITH research programme.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
