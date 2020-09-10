@@ -11,7 +11,7 @@ Supported architectures:
 ```
 and it can be used in place of your compiler.
 
-For the exercises in this book you will use the `riscv64` and `riscv64-purecap` architectures.  The `riscv64-hybrid` architecture instantiates appropriately annotated pointers as capabilities leaving the rest as conventional integer addresses and it not used here.
+For the exercises in this book you will use the `riscv64` and `riscv64-purecap` architectures.  The `riscv64-hybrid` architecture instantiates appropriately annotated pointers as capabilities leaving the rest as conventional integer addresses, but is not used here.
 
 If you have built a compiler and sysroot using `cheribuild` in the default location (`~/cheri`) then it should work out of the box.  If you've configured a different location you can set the `CHERIBUILD_SDK` environment variable to point to to the location of your SDK.  Alternatively, you can set the `CLANG` and `SYSROOT` variables to point to the respective locations.
 ```sh
