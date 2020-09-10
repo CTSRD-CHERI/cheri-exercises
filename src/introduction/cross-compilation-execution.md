@@ -1,4 +1,4 @@
-# Cross compilation
+# Cross compilation and execution
 
 ## Obtaining a compiler and sysroot
 
@@ -46,4 +46,30 @@ For CheriABI, the architecture and ABI flags are:
 Putting it all together:
 ```
 $CLANG -g -O2 -target riscv64-unknown-freebsd --sysroot="$SYSROOT" -fuse-ld=lld -mno-relax -march=rv64gcxcheri -mabi=l64pc128d -Wall -Wcheri
+```
+
+## Executing binaries
+CheriBSD supports running RISC-V and CHERI-RISC-V side-by-side on the same instance, so provided the instance has all features available for the exercise or mission in question, you should be able to complete it on a single CheriBSD instance.
+
+CheriBSD's `file(1)` has been extended to distinguish RISC-V binaries from CHERI-RISC-V (CheriABI) binaries. For example, on a CheriBSD instance:
+```
+# file riscv-binary
+riscv-binary: ELF 64-bit LSB shared object, UCB RISC-V, RVC, double-float ABI, version 1 (SYSV), dynamically linked, interpreter /libexec/ld-elf.so.1, for FreeBSD 13.0 (1300097), FreeBSD-style, with debug_info, not stripped
+# file cheri-binary
+cheri-binary: ELF 64-bit LSB shared object, UCB RISC-V, RVC, double-float ABI, capability mode, CheriABI, version 1 (SYSV), dynamically linked, interpreter /libexec/ld-elf.so.1, for FreeBSD 13.0 (1300097), FreeBSD-style, with debug_info, not stripped
+```
+
+CHERI-LLVM and the elfutils in CheriBSD also recognise the relevant ELF flags. For example, CHERI-LLVM on the host used for cross-compiling will report:
+```
+# llvm-readelf -h riscv-binary | grep Flags
+  Flags:                             0x5, RVC, double-float ABI
+# llvm-readelf -h cheri-binary | grep Flags
+  Flags:                             0x30005, RVC, double-float ABI, cheriabi, capability mode
+```
+and elfutils on a CheriBSD instance will report:
+```
+# readelf -h riscv-binary | grep Flags
+  Flags:                             0x5, double-float ABI, RVC
+# readelf -h cheri-binary | grep Flags
+  Flags:                             0x30005, double-float ABI, RVC, cheriabi, capmode
 ```

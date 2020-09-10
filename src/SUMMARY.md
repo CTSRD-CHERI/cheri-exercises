@@ -3,7 +3,7 @@
 [Cover Page](cover/README.md)
 - [Introduction](introduction/README.md)
     - [Background reading](introduction/background.md)
-    - [Cross compilation](introduction/cross-compilation.md)
+    - [Cross compilation and execution](introduction/cross-compilation-execution.md)
         - [Helper script](introduction/ccc.md)
 - [Skills Development Exercises](exercises/README.md)
     - [Compile and run RISC-V and CHERI-RISC-V programs](exercises/compile-and-run/README.md)
