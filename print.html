@@ -301,7 +301,7 @@ Supported architectures:
 	riscv64-purecap	- RISC-V 64-bit pure-capability
 </code></pre>
 <p>and it can be used in place of your compiler.</p>
-<p>For the exercises in this book you will use the <code>riscv64</code> and <code>riscv64-purecap</code> architectures.  The <code>riscv64-hybrid</code> architecture instantiates appropriately annotated pointers as capabilities leaving the rest as conventional integer addresses and it not used here.</p>
+<p>For the exercises in this book you will use the <code>riscv64</code> and <code>riscv64-purecap</code> architectures.  The <code>riscv64-hybrid</code> architecture instantiates appropriately annotated pointers as capabilities leaving the rest as conventional integer addresses, but is not used here.</p>
 <p>If you have built a compiler and sysroot using <code>cheribuild</code> in the default location (<code>~/cheri</code>) then it should work out of the box.  If you've configured a different location you can set the <code>CHERIBUILD_SDK</code> environment variable to point to to the location of your SDK.  Alternatively, you can set the <code>CLANG</code> and <code>SYSROOT</code> variables to point to the respective locations.</p>
 <pre><code class="language-sh">#!/bin/sh
 #
