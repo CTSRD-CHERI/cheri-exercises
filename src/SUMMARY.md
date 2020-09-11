@@ -5,6 +5,7 @@
     - [Background reading](introduction/background.md)
     - [Cross compilation and execution](introduction/cross-compilation-execution.md)
         - [Helper script](introduction/ccc.md)
+    - [Running QEMU](introduction/qemu.md)
 - [Skills Development Exercises](exercises/README.md)
     - [Compile and run RISC-V and CHERI-RISC-V programs](exercises/compile-and-run/README.md)
         - [Answers](exercises/compile-and-run/answers.md)
