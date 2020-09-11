@@ -1,6 +1,6 @@
 # Summary
 
-[Cover Page](cover/README.md)
+[Adversarial CHERI Exercises and Missions](cover/README.md)
 - [Introduction](introduction/README.md)
     - [Background reading](introduction/background.md)
     - [Cross compilation and execution](introduction/cross-compilation-execution.md)

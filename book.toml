@@ -3,7 +3,7 @@ authors = ["Jessica Clarke", "Brooks Davis", "Wes Filardo", "Robert N. M. Watson
 language = "en"
 multilingual = false
 src = "src"
-title = "CHERI Exercises"
+title = "Adversarial CHERI Exercises and Missions"
 
 [output.html]
 git-repository-url = "https://github.com/CTSRD-CHERI/cheri-exercises"
