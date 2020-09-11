@@ -2,7 +2,7 @@
 
 ## Obtaining a compiler and sysroot
 
-If you already have a compiler and sysroot (e.g. you have a docker image with pre-compiled versions), you will need to know the path to `clang` and the path to your sysroot.  You can then proceed to **Compiler command line**.
+If you already have a compiler and sysroot (e.g. you have a docker image with pre-compiled versions), you will need to know the path to `clang` and the path to your sysroot.  You can then proceed to [**Compiler command line**](#compiler-command-line).
 
 ### Building a cross build environment with cheribuild
 
