@@ -6,6 +6,7 @@
 	- [Using the CHERI Software Release](introduction/release.md)
     - [Cross compilation and execution](introduction/cross-compilation-execution.md)
         - [Helper script](introduction/ccc.md)
+    - [Running QEMU](introduction/qemu.md)
 - [Skills Development Exercises](exercises/README.md)
     - [Compile and run baseline and CHERI-enabled programs](exercises/compile-and-run/README.md)
         - [Answers](exercises/compile-and-run/answers.md)
