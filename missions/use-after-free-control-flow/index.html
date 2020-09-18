@@ -164,7 +164,428 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#exploiting-heap-use-after-free-to-manipulate-control-flow" id="exploiting-heap-use-after-free-to-manipulate-control-flow">Exploiting heap use-after-free to manipulate control flow</a></h1>
-<p><em>This section remains under implementation.</em></p>
+<p><strong>This mission applies only on CHERI-RISC-V builds with temporal safety!</strong> The
+executable runs on RISC-V and CHERI-RISC-V (and exploring on both may be
+worthwhile), but the mission is on CHERI-RISC-V with heap temporal safety
+enforcement in place.</p>
+<p>This mission is a potted exercise inspired by real-world vulnerabilities where
+an active adversary can influence the contents of a server's heap and, often
+without completing authentication, walk the server's protocol state machine
+through erroneous states. Popular bugs facilitating these exploits include
+double free, use-after-reallocation, and type confusion (esp. of temporally
+aliased objects). For this mission, we have simplified the interface to be a
+little &quot;command language&quot; read over <code>stdin</code>, detailed below.</p>
+<p>The success criterion is executing the <code>success</code> function. To ease testing,
+this is the only case in which the program source claims to exit with a code of
+<code>42</code>. Ordinary termination is signaled with <code>0</code> and invalid input results in
+the program terminating with <code>1</code>. While the source does not overtly claim any
+other outcome, if control flow can be redirected, almost anything goes.</p>
+<h3><a class="header" href="#program-overview" id="program-overview">Program Overview</a></h3>
+<p>This is a (very) minimal simulation of a program that manages multiple
+sessions, objects within each session, and limited information flow between
+those sessions. Rather than network sockets, each session is represented by a
+<code>struct farm</code> and there are up to four such active at any moment. Within each
+<code>struct farm</code> is a circular collection of <code>struct crop</code>s, at most one of which
+may be selected by the <code>cursor</code> of its owning <code>struct farm</code>. If no crop is
+selected, the cursor is said to be &quot;in the gap&quot;. The crop at the cursor, if
+any, can be asked to describe itself, using a function pointer within the
+<code>struct crop</code> itself.</p>
+<p>To make matters more exciting, a UFO may be summoned to perform particular
+kinds of mischief. The UFO may &quot;abduct&quot; a pointer into itself and can create
+crop signs within <code>struct crop</code> (with data) or <code>struct farm</code> (with a capability
+to the <code>success()</code> function).</p>
+<p>The gadgets offered by the UFO are somewhat limited (that is, they are not
+&quot;write what where&quot; or arbitrary control transfer) as one might expect to see in
+a real application. Nevertheless, they are sufficiently powerful to provide
+<em>myriad</em> exploitation vectors on RISC-V without CHERI, and even a few on
+CHERI-RISC-V. However, we believe that enforced heap temporal safety will
+ensure that any use of them is either overwritten by subsequent program
+operations before the gadgets' effects influence control flow or will cause the
+program to fail-stop with a default-fatal signal (e.g., <code>SIGSEGV</code> or
+<code>SIGPROT</code>).</p>
+<h3><a class="header" href="#building-and-running" id="building-and-running">Building and running</a></h3>
+<p>We suggest using the <code>ccc</code> tool provided with this book, building for
+<code>riscv64-purecap</code>. For experimentation, this program also builds for
+<code>riscv64</code>, without CHERI. On <code>riscv64-purecap</code> builds, heap temporal safety
+enforcement may be disabled at program load time by setting the environment
+variable <code>MALLOC_DISABLE_REVOCATION</code> to a non-empty value. (While setting this
+flag prior to program loading disqualifies such invocations from completing the
+mission, being able to disable revocation from within <code>main()</code> would be quite
+interesting indeed.)</p>
+<p>As said before, the program expects to read a command language from <code>stdin</code>.
+It will print &quot;Ready&quot; and then await input. Unlike real applications, this
+program is fairly chatty about its own operation to ease exploration.
+Nevertheless, it may be useful to run it within <code>gdb</code>, especially to
+differentiate causes of crashes.</p>
+<h3><a class="header" href="#command-language-directives" id="command-language-directives">Command Language Directives</a></h3>
+<ul>
+<li>
+<p>Whitespace is quietly ignored in most cases; this may simplify reading
+programs.</p>
+</li>
+<li>
+<p>Digits <code>0</code> through <code>3</code> focus on the corresponding farm slots, making it the
+locus of subsequent commands until altered.</p>
+</li>
+<li>
+<p><code>F</code> allocates a new farm at the current slot.</p>
+</li>
+<li>
+<p><code>f</code> frees the current slot's farm (along with any crops in its collection)</p>
+</li>
+<li>
+<p><code>C</code> creates a new crop in the current farm and puts it at the left of the
+collection. The cursor is left in the gap or pointing at the crop it was
+before. If the cursor is not in the gap, the new crop will inherit the
+description of the selected crop; otherwise, the program chooses one of two
+varieties of cherry.</p>
+</li>
+<li>
+<p><code>L</code> and <code>R</code> move the current farm's cursor left and right, respectively. The
+farm's collection is circular with a gap; moving left (right) from the gap
+places the cursor at the rightmost (leftmost) element, and walking off either
+end returns the cursor to the gap.</p>
+</li>
+<li>
+<p><code>Z</code> moves the current farm's cursor to the gap.</p>
+</li>
+<li>
+<p><code>D</code> describes the crop at the current farm's cursor, if that cursor is not in
+the gap.</p>
+</li>
+<li>
+<p><code>c</code> removes the crop at the current farm's cursor from the collection and
+frees it.</p>
+</li>
+<li>
+<p><code>U</code> causes a UFO to arrive; <code>u</code> causes it to leave. There is at most one UFO
+at any moment.</p>
+</li>
+<li>
+<p><code>A</code> causes the UFO, if present, to abduct the current farm's cursor,
+presumably for further scrutiny.</p>
+</li>
+<li>
+<p><code>S</code> causes the UFO to make a crop sign on the current farm; <code>s</code> causes the
+UFO to read the next <code>sizeof(void*)</code> characters from <code>stdin</code> (whitespace is
+not ignored for this) and use that to sign the crop indicated by the current
+farm's cursor (a smaller crop sign, if you will). Writing crop signs of
+either variety is very destabilizing and likely to lead to crashes!</p>
+</li>
+<li>
+<p>On CHERI-RISC-V builds running with heap temporal safety enforcement, <code>!</code>
+will force a revocation pass, destroying pointers to free objects and
+allowing reuse of memory and address space.</p>
+</li>
+</ul>
+<h3><a class="header" href="#example-session" id="example-session">Example Session</a></h3>
+<p>Here is a short session which creates one <code>struct farm</code>, two <code>struct crop</code>s,
+exhibits cursor control and description of <code>struct crop</code>s, and then tears down
+the <code>struct farm</code>:</p>
+<pre><code>$ echo FCC RD ZLD f | ./temporal-mission
+Ready (CHERI-RISC-V)
+New farm (index 0) at 0x41201080
+New crop at 0x41201100
+New crop at 0x41201180
+Farm 0 cursor 0x41201180
+FYI: Current farm is 0x41201080
+FYI:  cursor 0x41201180
+FYI:  cursor-&gt;describe 0x102fd2
+Chelan at 0x41201180
+Farm 0 cursor 0x41201100
+FYI: Current farm is 0x41201080
+FYI:  cursor 0x41201100
+FYI:  cursor-&gt;describe 0x10300e
+Colt at 0x41201100
+Tear down farm (index 0) at 0x41201080
+</code></pre>
+<h3><a class="header" href="#source-code" id="source-code">Source code</a></h3>
+<p><strong>temporal-mission.c</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause
+ * Copyright (c) 2020 Microsoft, Inc.
+ */
+#include &lt;assert.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#include &lt;sys/queue.h&gt;
+
+#if defined(__CHERI_PURE_CAPABILITY__)
+#include &lt;sys/caprevoke.h&gt;
+static void __attribute__((used)) *check_caprevoke = caprevoke;
+extern void malloc_revoke(void);
+static void __attribute__((used)) *check_malloc_revoke = malloc_revoke;
+#endif
+
+struct farm;
+struct crop;
+
+static void
+success(struct farm *f)
+{
+	fprintf(stderr, &quot;Exploit successful: computer bought the farm!\n&quot;);
+	exit(42);
+}
+
+TAILQ_HEAD(cropq, crop);
+
+struct farm {
+	struct cropq	cropq;
+	struct crop	*cursor;
+};
+
+struct crop {
+	void			(*describe)(struct crop *);
+	TAILQ_ENTRY(crop)	farm_cropq;
+};
+
+_Static_assert(sizeof(struct crop) == sizeof(struct farm),
+    &quot;Structure size mismatch&quot;);
+
+union ufo {
+	void	*ptrA;
+	char	buf[sizeof(struct crop)];
+};
+
+_Static_assert(sizeof(struct crop) == sizeof(union ufo),
+    &quot;Structure size mismatch&quot;);
+
+static void
+descr_1(struct crop *c)
+{
+	fprintf(stderr, &quot;Chelan at %p\n&quot;, c); /* Pacific Northwest */
+}
+
+static void
+descr_2(struct crop *c)
+{
+	fprintf(stderr, &quot;Colt at %p\n&quot;, c); /* United Kingdom */
+}
+
+static unsigned int cid;
+static union ufo *ufo;
+
+static const size_t nfarm = 4;
+struct farm *farmp[nfarm];
+
+static void
+rm_farm(int fix)
+{
+	struct farm *f = farmp[fix];
+
+	farmp[fix] = NULL;
+	if (f != NULL) {
+		struct crop *c, *tc;
+
+		TAILQ_FOREACH_SAFE(c, &amp;f-&gt;cropq, farm_cropq, tc) {
+			TAILQ_REMOVE(&amp;f-&gt;cropq, c, farm_cropq);
+			free(c);
+		}
+
+		fprintf(stderr, &quot;Tear down farm (index %d) at %p\n&quot;, fix, f);
+		free(f);
+	}
+}
+
+static struct farm *
+mk_farm(int fix)
+{
+	struct farm *f;
+
+	rm_farm(fix);
+
+	f = malloc(sizeof(struct farm));
+	assert(f != NULL); /* Surely infinite memory */
+
+	TAILQ_INIT(&amp;f-&gt;cropq);
+	f-&gt;cursor = NULL;
+
+	farmp[fix] = f;
+
+	fprintf(stderr, &quot;New farm (index %d) at %p\n&quot;, fix, f);
+	return f;
+}
+
+static void
+rm_crop(struct farm *f, struct crop *c)
+{
+	fprintf(stderr, &quot;Del crop at %p\n&quot;, c);
+	TAILQ_REMOVE(&amp;f-&gt;cropq, c, farm_cropq);
+	free(c);
+}
+
+static struct crop *
+mk_crop(struct farm *f)
+{
+	struct crop *c;
+
+	c = malloc(sizeof(struct crop));
+	assert(c != NULL);
+
+	if (f-&gt;cursor != NULL) {
+		/* Inherit description of current cursor */
+		c-&gt;describe = f-&gt;cursor-&gt;describe;
+	} else {
+		c-&gt;describe = (cid &amp; 1) ? descr_1 : descr_2 ;
+	}
+	cid++;
+
+	TAILQ_INSERT_HEAD(&amp;f-&gt;cropq, c, farm_cropq);
+
+	fprintf(stderr, &quot;New crop at %p\n&quot;, c);
+
+	return c;
+}
+
+static void
+rm_ufo(void)
+{
+	if (ufo != NULL) {
+		fprintf(stderr, &quot;Del UFO at %p\n&quot;, ufo);
+		free(ufo);
+	}
+}
+
+int
+main(void)
+{
+	int c;
+	size_t fix = 0;
+
+#if defined(__CHERI_PURE_CAPABILITY__)
+	if (getenv(&quot;MALLOC_DISABLE_REVOCATION&quot;) == NULL) {
+		fprintf(stderr, &quot;Ready (CHERI-RISC-V)\n&quot;);
+	} else {
+		fprintf(stderr, &quot;Ready (CHERI-RISC-V, reduced heap safety)\n&quot;);
+	}
+#else
+	fprintf(stderr, &quot;Ready (RISC-V)\n&quot;);
+#endif
+
+	while ((c = getchar()) != EOF) {
+		if (isspace(c))
+			continue;
+
+		if (('0' &lt;= c) &amp;&amp; (c &lt; '0' + nfarm)) {
+			fix = c - '0';
+			fprintf(stderr, &quot;Selected farm %zu (%p)\n&quot;, fix,
+			    farmp[fix]);
+			continue;
+		}
+
+		struct farm *f = farmp[fix];
+		switch (c) {
+		case '!':
+#if defined(__CHERI_PURE_CAPABILITY__)
+			malloc_revoke();
+#else
+			fprintf(stderr, &quot;No revocation without CHERI!\n&quot;);
+#endif
+			break;
+
+		/* Crop management */
+		case 'C':
+			if (f != NULL)
+				mk_crop(f);
+			break;
+		case 'c':
+			if ((f != NULL) &amp;&amp; (f-&gt;cursor != NULL))
+				rm_crop(f, f-&gt;cursor);
+			break;
+		case 'D':
+			fprintf(stderr, &quot;FYI: Current farm is %p\n&quot;, f);
+			if ((f != NULL) &amp;&amp; (f-&gt;cursor != NULL)) {
+				fprintf(stderr, &quot;FYI:  cursor %p\n&quot;, f-&gt;cursor);
+				fprintf(stderr, &quot;FYI:  cursor-&gt;describe %p\n&quot;,
+				    f-&gt;cursor-&gt;describe);
+				f-&gt;cursor-&gt;describe(f-&gt;cursor);
+			}
+			break;
+
+		/* Farm management */
+		case 'F':
+			mk_farm(fix);
+			break;
+		case 'f':
+			rm_farm(fix);
+			break;
+
+		/* Cursor control */
+		case 'L':
+			if (f != NULL) {
+				if (f-&gt;cursor != NULL) {
+					f-&gt;cursor = TAILQ_PREV(f-&gt;cursor, cropq,
+					    farm_cropq);
+				} else {
+					f-&gt;cursor = TAILQ_LAST(&amp;f-&gt;cropq,
+					    cropq);
+				}
+			}
+			fprintf(stderr, &quot;Farm %zu cursor %p\n&quot;, fix, f-&gt;cursor);
+			break;
+		case 'R':
+			if (f != NULL) {
+				if (f-&gt;cursor != NULL) {
+					f-&gt;cursor = TAILQ_NEXT(f-&gt;cursor,
+					    farm_cropq);
+				} else {
+					f-&gt;cursor = TAILQ_FIRST(&amp;f-&gt;cropq);
+				}
+			}
+			fprintf(stderr, &quot;Farm %zu cursor %p\n&quot;, fix, f-&gt;cursor);
+			break;
+		case 'Z':
+			if (f != NULL)
+				f-&gt;cursor = NULL;
+			break;
+
+		/* UFO control sequences */
+		case 'A':
+			if ((ufo != NULL) &amp;&amp; (f != NULL)) {
+				fprintf(stderr, &quot;UFO abduct %p\n&quot;, f-&gt;cursor);
+				ufo-&gt;ptrA = f-&gt;cursor;
+			}
+			break;
+		case 'S':
+			if (f != NULL) {
+				/* Jess's Organic Farm-to-Vtable Capability */
+				fprintf(stderr, &quot;Crop sign at farm %p\n&quot;, f);
+				f-&gt;cursor = (void *)success;
+			}
+			break;
+		case 's':
+			if ((f != NULL) &amp;&amp; (f-&gt;cursor != NULL)) {
+				char buf[sizeof(void *)];
+				for (size_t i = 0; i &lt; sizeof buf; i++) {
+					buf[i] = getchar();
+				}
+				fprintf(stderr, &quot;Signing crop %p\n&quot;, f-&gt;cursor);
+				memmove((char *)f-&gt;cursor, buf, sizeof(buf));
+			}
+			break;
+		case 'U':
+			rm_ufo();
+			ufo = malloc(sizeof(union ufo));
+			assert(ufo != NULL);
+			fprintf(stderr, &quot;UFO at %p\n&quot;, ufo);
+			break;
+		case 'u':
+			rm_ufo();
+			break;
+
+		default:
+			fprintf(stderr, &quot;Did not understand %x; bail!\n&quot;, c);
+			return 1;
+		}
+	}
+
+	return 0;
+}
+</code></pre>
 
                     </main>
 
