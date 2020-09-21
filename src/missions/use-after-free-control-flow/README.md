@@ -1,9 +1,9 @@
 # Exploiting heap use-after-free to manipulate control flow
 
 **This mission requires a CheriBSD sysroot and image with temporal safety!**
-The executable can be built for RISC-V and CHERI-RISC-V (and exploring both may
-be worthwhile), but the mission is for CHERI-RISC-V with heap temporal safety
-enforcement in place.
+The executable can be built for both RISC-V and CHERI-RISC-V (and exploring
+both may be worthwhile), but the mission is for CHERI-RISC-V with heap temporal
+safety enforcement in place.
 
 This mission is a potted exercise inspired by real-world vulnerabilities where
 an active adversary can influence the contents of a server's heap and, often
