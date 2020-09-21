@@ -1,7 +1,7 @@
 # Exploiting heap use-after-free to manipulate control flow
 
-**This mission applies only on CHERI-RISC-V builds with temporal safety!** The
-executable runs on RISC-V and CHERI-RISC-V (and exploring on both may be
+**This mission requires a CheriBSD sysroot and image with temporal safety!**
+The executable runs on RISC-V and CHERI-RISC-V (and exploring on both may be
 worthwhile), but the mission is on CHERI-RISC-V with heap temporal safety
 enforcement in place.
 
