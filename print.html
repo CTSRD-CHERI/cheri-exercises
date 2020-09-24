@@ -1758,7 +1758,158 @@ main_asserts(void *buf, void *fptr)
 }
 </code></pre>
 <h1><a class="header" href="#exploiting-an-uninitialized-stack-frame-to-manipulate-control-flow" id="exploiting-an-uninitialized-stack-frame-to-manipulate-control-flow">Exploiting an uninitialized stack frame to manipulate control flow</a></h1>
-<p><em>This section remains under implementation.</em></p>
+<p>The objective of this mission is to demonstrate arbitrary code
+execution through the use of uninitialized variables on the stack,
+despite CHERI protections.  You will attack three different versions
+of the program:</p>
+<ol>
+<li>
+<p>A baseline RISC-V compilation, to establish that the vulnerability is
+exploitable without any CHERI protections.</p>
+</li>
+<li>
+<p>A hardened CHERI-RISC-V compilation with stack clearing, which
+should be non-exploitable.</p>
+</li>
+<li>
+<p>A baseline CHERI-RISC-V compilation with no stack clearing, which
+should be non-exploitable due to pointer tagging.</p>
+</li>
+</ol>
+<p>The success condition for an exploit, given attacker-provided input
+overriding an on-stack buffer, is to modify control flow in the program
+such that the <code>success</code> function is executed.</p>
+<h3><a class="header" href="#program-overview" id="program-overview">Program overview</a></h3>
+<p>Cookie monster is always hungry for more cookies.  You can sate the
+monster's hunger by providing cookies as standard input.  Cookies are
+provided as a pair of hexadecimal characters (case is ignored).  Each
+cookie is stored at successive bytes in an on-stack character array.
+The character array aliases an uninitialized function pointer used in
+a subsequent function.  A minus character ('-') can be used to skip
+over a character in the array without providing a new cookie.  An
+equals sign ('=') can be used to skip over the number of characters in
+a pointer without providing any new cookies.  Whitespace is ignored in
+the input line.  Input is terminated either by a newline or end of
+file (EOF).</p>
+<h3><a class="header" href="#building-and-running" id="building-and-running">Building and running</a></h3>
+<p>The hardened CHERI-RISC-V version with stack clearing is built by
+adding <code>-ftrivial-auto-var-init=zero -enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang</code>
+to the compiler command line.</p>
+<h3><a class="header" href="#source-code" id="source-code">Source code</a></h3>
+<p><em><strong>stack-mission.c</strong></em></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2020 SRI International
+ */
+
+#include &lt;assert.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;err.h&gt;
+#include &lt;stdalign.h&gt;
+#include &lt;stddef.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void
+success(void)
+{
+	fprintf(stderr, &quot;Exploit successful, yum!\n&quot;);
+	exit(42);
+}
+
+void
+no_cookies(void)
+{
+	fprintf(stderr, &quot;No cookies??\n&quot;);
+	exit(1);
+}
+
+#pragma weak init_pointer
+void
+init_pointer(void *p)
+{
+}
+
+static void __attribute__((noinline))
+init_cookie_pointer(void)
+{
+	void *pointers[12];
+	void (* volatile cookie_fn)(void);
+
+	for (size_t i = 0; i &lt; sizeof(pointers) / sizeof(pointers[0]); i++)
+		init_pointer(&amp;pointers[i]);
+	cookie_fn = no_cookies;
+}
+
+static void __attribute__((noinline))
+get_cookies(void)
+{
+	alignas(void *) char cookies[sizeof(void *) * 32];
+	char *cookiep;
+	int ch, cookie;
+
+	printf(&quot;Cookie monster is hungry, provide some cookies!\n&quot;);
+	printf(&quot;'=' skips the next %zu bytes\n&quot;, sizeof(void *));
+	printf(&quot;'-' skips to the next character\n&quot;);
+	printf(&quot;XX as two hex digits stores a single cookie\n&quot;);
+	printf(&quot;&gt; &quot;);
+
+	cookiep = cookies;
+	for (;;) {
+		ch = getchar();
+
+		if (ch == '\n' || ch == EOF)
+			break;
+
+		if (isspace(ch))
+			continue;
+
+		if (ch == '-') {
+			cookiep++;
+			continue;
+		}
+
+		if (ch == '=') {
+			cookiep += sizeof(void *);
+			continue;
+		}
+
+		if (isxdigit(ch)) {
+			cookie = digittoint(ch) &lt;&lt; 4;
+			ch = getchar();
+			if (ch == EOF)
+				errx(1, &quot;Half-eaten cookie, yuck!&quot;);
+			if (!isxdigit(ch))
+				errx(1, &quot;Malformed cookie&quot;);
+			cookie |= digittoint(ch);
+			*cookiep++ = cookie;
+			continue;
+		}
+
+		errx(1, &quot;Malformed cookie&quot;);
+	}
+}
+
+static void __attribute__((noinline))
+eat_cookies(void)
+{
+	void *pointers[12];
+	void (* volatile cookie_fn)(void);
+
+	for (size_t i = 0; i &lt; sizeof(pointers) / sizeof(pointers[0]); i++)
+		init_pointer(&amp;pointers[i]);
+	cookie_fn();
+}
+
+int
+main(void)
+{
+	init_cookie_pointer();
+	get_cookies();
+	eat_cookies();
+	return (0);
+}
+</code></pre>
 <h1><a class="header" href="#exploiting-heap-use-after-free-to-manipulate-control-flow" id="exploiting-heap-use-after-free-to-manipulate-control-flow">Exploiting heap use-after-free to manipulate control flow</a></h1>
 <p><strong>This mission requires a CheriBSD sysroot and image with temporal safety!</strong>
 The executable can be built for both RISC-V and CHERI-RISC-V (and exploring
@@ -1776,7 +1927,7 @@ this is the only case in which the program source claims to exit with a code of
 <code>42</code>. Ordinary termination is signaled with <code>0</code> and invalid input results in
 the program terminating with <code>1</code>. While the source does not overtly claim any
 other outcome, if control flow can be redirected, almost anything goes.</p>
-<h3><a class="header" href="#program-overview" id="program-overview">Program Overview</a></h3>
+<h3><a class="header" href="#program-overview-1" id="program-overview-1">Program Overview</a></h3>
 <p>This is a (very) minimal simulation of a program that manages multiple
 sessions, objects within each session, and limited information flow between
 those sessions. Rather than network sockets, each session is represented by a
@@ -1799,7 +1950,7 @@ ensure that any use of them is either overwritten by subsequent program
 operations before the gadgets' effects influence control flow or will cause the
 program to fail-stop with a default-fatal signal (e.g., <code>SIGSEGV</code> or
 <code>SIGPROT</code>).</p>
-<h3><a class="header" href="#building-and-running" id="building-and-running">Building and running</a></h3>
+<h3><a class="header" href="#building-and-running-1" id="building-and-running-1">Building and running</a></h3>
 <p>We suggest using the <code>ccc</code> tool provided with this book, building for
 <code>riscv64-purecap</code>. For experimentation, this program also builds for
 <code>riscv64</code>, without CHERI. On <code>riscv64-purecap</code> builds, heap temporal safety
@@ -1895,7 +2046,7 @@ FYI:  cursor-&gt;describe 0x10300e
 Colt at 0x41201100
 Tear down farm (index 0) at 0x41201080
 </code></pre>
-<h3><a class="header" href="#source-code" id="source-code">Source code</a></h3>
+<h3><a class="header" href="#source-code-1" id="source-code-1">Source code</a></h3>
 <p><strong>temporal-mission.c</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause
