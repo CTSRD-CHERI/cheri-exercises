@@ -1,6 +1,6 @@
 # Exploit vulnerability FreeBSD-SA-18:13.nfs: out-of-bounds access
 
-This mission depends on the pure-capability CheriBSD FETT kernel included in FETT CHERI-RISC-V Mission 2 (kernel spatial memory safety).
+This mission depends on the pure-capability CheriBSD FETT kernel included in FETT CHERI-RISC-V Release 2 (kernel spatial memory safety).
 
 The objective of this mission is to demonstrate arbitrary code execution in a pure-capability kernel.
 This must be achieved via a reintroduced past FreeBSD security vulnerability, [FreeBSD-SA-18:13.nfs](FreeBSD-SA-18:13.nfs).
