@@ -1,6 +1,6 @@
 # Exploit vulnerability FreeBSD-SA-09:06.ktimer: kernel buffer overflow
 
-This mission depends on the pure-capability CheriBSD FETT kernel included in FETT CHERI-RISC-V Mission 2 (kernel spatial memory safety).
+This mission depends on the pure-capability CheriBSD FETT kernel included in FETT CHERI-RISC-V Release 2 (kernel spatial memory safety).
 
 The objective of this mission is to demonstrate arbitrary code execution in a pure-capability kernel.
 This must be achieved via a reintroduced past FreeBSD security vulnerability, [FreeBSD-SA-09:06.ktimer](https://www.freebsd.org/security/advisories/FreeBSD-SA-09:06.ktimer.asc).
