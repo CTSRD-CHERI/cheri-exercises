@@ -19,7 +19,7 @@ usage()
 $name <arch> [...]
 
 Supported architectures:
-	riscv64		- conventional riscv64
+	riscv64		- conventional RISC-V 64-bit
 	riscv64-hybrid	- RISC-V 64-bit supporting CHERI
 	riscv64-purecap	- RISC-V 64-bit pure-capability
 EOF
