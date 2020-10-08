@@ -123,8 +123,8 @@ debug "debug_flags: $debug_flags"
 opt_flags="-O2"
 debug "opt_flags: $opt_flags"
 
-base_flags="--sysroot='$SYSROOT'"
-debug "base_flags: $base_flags"
+sysroot_flags="--sysroot='$SYSROOT'"
+debug "sysroot_flags: $sysroot_flags"
 
 linker_flags="-fuse-ld=lld"
 debug "linker_flags: $linker_flags"
@@ -132,7 +132,7 @@ debug "linker_flags: $linker_flags"
 diag_flags="-Wall -Wcheri"
 debug "diag_flags: $diag_flags"
 
-all_flags="$debug_flags $opt_flags $base_flags $linker_flags $arch_flags $diag_flags"
+all_flags="$arch_flags $sysroot_flags $debug_flags $opt_flags $linker_flags $diag_flags"
 
 all_flags_rev=
 eval 'for flag in '$all_flags'; do
