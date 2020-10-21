@@ -321,10 +321,6 @@ set -u
 
 name=$(basename $0)
 
-CHERIBUILD_SDK=${CHERIBUILD_SDK:-${HOME}/cheri/output/sdk}
-CLANG=${CLANG:-${CHERIBUILD_SDK}/bin/clang}
-SYSROOT=${SYSROOT:-${CHERIBUILD_SDK}/sysroot-riscv64-purecap}
-
 VERBOSE=${VERBOSE:-0}
 QUIET=${QUIET:-0}
 
@@ -334,7 +330,10 @@ usage()
 $name &lt;arch&gt; [...]
 
 Supported architectures:
-	riscv64		- conventional riscv64
+	aarch64		- conventional AArch64
+	morello-hybrid	- AArch64 Morello supporting CHERI
+	morello-purecap	- AArch64 Morello pure-capability
+	riscv64		- conventional RISC-V 64-bit
 	riscv64-hybrid	- RISC-V 64-bit supporting CHERI
 	riscv64-purecap	- RISC-V 64-bit pure-capability
 EOF
@@ -379,6 +378,42 @@ if [ $# -eq 0 ]; then
 	usage
 fi
 
+arch=$1
+shift
+
+cheri_arch_basename=${arch%%-*}
+cheri_sdk_name=sdk
+case $arch in
+aarch64)
+	cheri_arch_basename=morello
+	cheri_sdk_name=morello-sdk
+	arch_flags=&quot;-target aarch64-unknown-freebsd&quot;
+	;;
+morello-hybrid)
+	cheri_sdk_name=morello-sdk
+	arch_flags=&quot;-target aarch64-unknown-freebsd -march=morello&quot;
+	;;
+morello-purecap)
+	cheri_sdk_name=morello-sdk
+	arch_flags=&quot;-target aarch64-unknown-freebsd -march=morello+c64 -mabi=purecap -femulated-tls&quot;
+	;;
+riscv64)
+	arch_flags=&quot;-target riscv64-unknown-freebsd -march=rv64gc -mabi=lp64d -mno-relax&quot;
+	;;
+riscv64-hybrid)
+	arch_flags=&quot;-target riscv64-unknown-freebsd -march=rv64gcxcheri -mabi=lp64d -mno-relax&quot;
+	;;
+riscv64-purecap)
+	arch_flags=&quot;-target riscv64-unknown-freebsd -march=rv64gcxcheri -mabi=l64pc128d -mno-relax&quot;
+	;;
+*)
+	err 1 &quot;Unsupported architecture '$arch'&quot;
+	;;
+esac
+
+CHERIBUILD_SDK=${CHERIBUILD_SDK:-${HOME}/cheri/output/${cheri_sdk_name}}
+CLANG=${CLANG:-${CHERIBUILD_SDK}/bin/clang}
+
 case $name in
 *clang|*cc)	prog=&quot;${CLANG}&quot; ;;
 *clang++|*c++)	prog=&quot;${CLANG}++&quot; ;;
@@ -389,10 +424,13 @@ if [ ! -x &quot;$prog&quot; ]; then
 fi
 debug &quot;prog: $prog&quot;
 
+SYSROOT=${SYSROOT:-${CHERIBUILD_SDK}/sysroot-${cheri_arch_basename}-purecap}
 if [ ! -d &quot;$SYSROOT&quot; ]; then
 	err 1 &quot;Sysroot '$SYSROOT' does not exist. Set SYSROOT or CHERIBUILD_SDK.&quot;
 fi
 debug &quot;sysroot: $SYSROOT&quot;
+
+debug &quot;arch_flags: $arch_flags&quot;
 
 debug_flags=&quot;-g&quot;
 debug &quot;debug_flags: $debug_flags&quot;
@@ -400,34 +438,16 @@ debug &quot;debug_flags: $debug_flags&quot;
 opt_flags=&quot;-O2&quot;
 debug &quot;opt_flags: $opt_flags&quot;
 
-base_flags=&quot;-target riscv64-unknown-freebsd --sysroot='$SYSROOT'&quot;
-debug &quot;base_flags: $base_flags&quot;
+sysroot_flags=&quot;--sysroot='$SYSROOT'&quot;
+debug &quot;sysroot_flags: $sysroot_flags&quot;
 
-linker_flags=&quot;-fuse-ld=lld -mno-relax&quot;
+linker_flags=&quot;-fuse-ld=lld&quot;
 debug &quot;linker_flags: $linker_flags&quot;
 
 diag_flags=&quot;-Wall -Wcheri&quot;
 debug &quot;diag_flags: $diag_flags&quot;
 
-arch=$1
-shift
-case $arch in
-riscv64)
-	abi_flags=&quot;-march=rv64gc -mabi=lp64d&quot;
-	;;
-riscv64-hybrid)
-	abi_flags=&quot;-march=rv64gcxcheri -mabi=lp64d&quot;
-	;;
-riscv64-purecap)
-	abi_flags=&quot;-march=rv64gcxcheri -mabi=l64pc128d&quot;
-	;;
-*)
-	err 1 &quot;Unsupported architecture '$arch'&quot;
-	;;
-esac
-debug &quot;abi_flags: $abi_flags&quot;
-
-all_flags=&quot;$debug_flags $opt_flags $base_flags $linker_flags $abi_flags $diag_flags&quot;
+all_flags=&quot;$arch_flags $sysroot_flags $debug_flags $opt_flags $linker_flags $diag_flags&quot;
 
 all_flags_rev=
 eval 'for flag in '$all_flags'; do
