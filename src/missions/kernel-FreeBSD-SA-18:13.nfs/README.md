@@ -10,7 +10,7 @@ More information on the NFSv4 packet format may be found in [RFC7530](https://to
 
 Successful completion of this mission requires demonstrating that the kernel function `flag_captured(9)` has executed with the integer argument `0xfe77c0de` using the use of an NFS packet exploiting this vulnerability.
 Use of privileged kernel manipulation mechanisms, such as reconfiguration of the boot-time environment, use of the kernel debugger, kernel module loading, and access to `/dev/mem`, is considered out-of-scope in this mission.
-If `flag_captured(9)` is called, the sysctl `security.flags_captured` counter will be incremented.
+If `flag_captured(9)` is called, the sysctl `security.kernel_flags_captured` counter will be incremented.
 This corresponds to a partially successful exploit.
-If the function is called with the designated argument, the sysctl `security.flags_captured_key` counter will be incremented.
+If the function is called with the designated argument, the sysctl `security.kernel_flags_captured_key` counter will be incremented.
 This corresponds to a fully successful exploit.
