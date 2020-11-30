@@ -5,7 +5,7 @@ types, preventing certain types of type confusion.
 In this example, a union allows an integer value to be used as a pointer,
 which cannot then be dereferenced.
 
-1. Compiler `union-int-ptr.c` with a RISC-V target and binary name of
+1. Compile `union-int-ptr.c` with a RISC-V target and binary name of
    `union-int-ptr-riscv`, and with a CHERI-RISC-V target and binary name
    `union-int-ptr-cheri`.
 
