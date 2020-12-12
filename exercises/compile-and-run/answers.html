@@ -185,30 +185,8 @@ size of address: 8
 <li>Expected output:</li>
 </ol>
 <pre><code># ./print-capability
-cap length: 4
-</code></pre>
-<ol start="7">
-<li>Possible solution:</li>
-</ol>
-<pre><code class="language-diff">--- print-capability.c.orig
-+++ print-capability.c
-@@ -4,8 +4,8 @@
- int
- main(void)
- {
--       int i;
--       void *cap = &amp;i;
-+       char *c;
-+       void *cap = &amp;c;
- 
-        printf(&quot;cap length: %lu\n&quot;, cheri_length_get(cap));
- 
-</code></pre>
-<ol start="8">
-<li>Expected output:</li>
-</ol>
-<pre><code># ./print-capability
-cap length: 16
+cap to int length: 4
+cap to cap length: 16
 </code></pre>
 
                     </main>

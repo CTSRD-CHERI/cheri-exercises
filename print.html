@@ -540,18 +540,19 @@ int
 main(void)
 {
 	int i;
-	void *cap = &amp;i;
+	char *c;
+	void *cap_to_int = &amp;i;
+	void *cap_to_cap = &amp;c;
 
-	printf(&quot;cap length: %lu\n&quot;, cheri_length_get(cap));
+	printf(&quot;cap to int length: %lu\n&quot;, cheri_length_get(cap_to_int));
+	printf(&quot;cap to cap length: %lu\n&quot;, cheri_length_get(cap_to_cap));
 
 	return (0);
 }
 </code></pre>
 <ol start="6">
-<li>Run the binary.</li>
-<li>Modify <code>print-capability.c</code> to point the capability at a pointer instead
-of an integer, and recompile.</li>
-<li>Run the binary.</li>
+<li>Run the binary: note how the length of the capability depends on the size of
+the type it points to.</li>
 </ol>
 <h1><a class="header" href="#answers---compile-and-run-risc-v-and-cheri-risc-v-programs" id="answers---compile-and-run-risc-v-and-cheri-risc-v-programs">Answers - Compile and run RISC-V and CHERI-RISC-V programs</a></h1>
 <p>This exercise explores the difference in size between addresses and
@@ -575,30 +576,8 @@ size of address: 8
 <li>Expected output:</li>
 </ol>
 <pre><code># ./print-capability
-cap length: 4
-</code></pre>
-<ol start="7">
-<li>Possible solution:</li>
-</ol>
-<pre><code class="language-diff">--- print-capability.c.orig
-+++ print-capability.c
-@@ -4,8 +4,8 @@
- int
- main(void)
- {
--       int i;
--       void *cap = &amp;i;
-+       char *c;
-+       void *cap = &amp;c;
- 
-        printf(&quot;cap length: %lu\n&quot;, cheri_length_get(cap));
- 
-</code></pre>
-<ol start="8">
-<li>Expected output:</li>
-</ol>
-<pre><code># ./print-capability
-cap length: 16
+cap to int length: 4
+cap to cap length: 16
 </code></pre>
 <h1><a class="header" href="#disassemble-and-debug-risc-v-and-cheri-risc-v-programs" id="disassemble-and-debug-risc-v-and-cheri-risc-v-programs">Disassemble and debug RISC-V and CHERI-RISC-V programs</a></h1>
 <p>This exercise steps you through disassembling and debugging

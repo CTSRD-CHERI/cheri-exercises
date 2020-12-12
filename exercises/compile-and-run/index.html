@@ -212,18 +212,19 @@ int
 main(void)
 {
 	int i;
-	void *cap = &amp;i;
+	char *c;
+	void *cap_to_int = &amp;i;
+	void *cap_to_cap = &amp;c;
 
-	printf(&quot;cap length: %lu\n&quot;, cheri_length_get(cap));
+	printf(&quot;cap to int length: %lu\n&quot;, cheri_length_get(cap_to_int));
+	printf(&quot;cap to cap length: %lu\n&quot;, cheri_length_get(cap_to_cap));
 
 	return (0);
 }
 </code></pre>
 <ol start="6">
-<li>Run the binary.</li>
-<li>Modify <code>print-capability.c</code> to point the capability at a pointer instead
-of an integer, and recompile.</li>
-<li>Run the binary.</li>
+<li>Run the binary: note how the length of the capability depends on the size of
+the type it points to.</li>
 </ol>
 
                     </main>
