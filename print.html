@@ -322,7 +322,7 @@ Supported architectures:
 set -e
 set -u
 
-name=$(basename $0)
+name=$(basename &quot;$0&quot;)
 
 VERBOSE=${VERBOSE:-0}
 QUIET=${QUIET:-0}
@@ -348,7 +348,7 @@ err()
 	ret=$1
 	shift
 	echo &quot;$@&quot; 2&gt;&amp;1
-	exit $ret
+	exit &quot;$ret&quot;
 }
 
 warn()
@@ -358,14 +358,14 @@ warn()
 
 debug()
 {
-	if [ $VERBOSE -ne 0 ]; then
+	if [ &quot;$VERBOSE&quot; -ne 0 ]; then
 		echo &quot;$@&quot;
 	fi
 }
 
 info()
 {
-	if [ $QUIET -eq 0 ]; then
+	if [ &quot;$QUIET&quot; -eq 0 ]; then
 		echo &quot;$@&quot;
 	fi
 }
@@ -373,7 +373,7 @@ info()
 run()
 {
 	debug	# add space before normal multiline output
-	info &quot;Running: $@&quot;
+	info &quot;Running:&quot; &quot;$@&quot;
 	&quot;$@&quot;
 }
 
@@ -453,10 +453,12 @@ debug &quot;diag_flags: $diag_flags&quot;
 all_flags=&quot;$arch_flags $sysroot_flags $debug_flags $opt_flags $linker_flags $diag_flags&quot;
 
 all_flags_rev=
+# shellcheck disable=SC2086 # intentional
 eval 'for flag in '$all_flags'; do
 	all_flags_rev=&quot;'&quot;'&quot;'$flag'&quot;'&quot;'${all_flags_rev:+ $all_flags_rev}&quot;
 done'
 
+# shellcheck disable=SC2086 # intentional
 eval 'for flag in '$all_flags_rev'; do
 	set -- &quot;$flag&quot; &quot;$@&quot;
 done'
