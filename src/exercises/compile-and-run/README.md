@@ -26,7 +26,5 @@ The second test program is written in CHERI C:
 ```C
 {{#include print-capability.c}}
 ```
-6. Run the binary.
-7. Modify `print-capability.c` to point the capability at a pointer instead
-   of an integer, and recompile.
-8. Run the binary.
+6. Run the binary: note how the length of the capability depends on the size of
+   the type it points to.

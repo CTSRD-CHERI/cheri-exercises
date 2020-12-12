@@ -9,9 +9,12 @@ int
 main(void)
 {
 	int i;
-	void *cap = &i;
+	char *c;
+	void *cap_to_int = &i;
+	void *cap_to_cap = &c;
 
-	printf("cap length: %lu\n", cheri_length_get(cap));
+	printf("cap to int length: %lu\n", cheri_length_get(cap_to_int));
+	printf("cap to cap length: %lu\n", cheri_length_get(cap_to_cap));
 
 	return (0);
 }
