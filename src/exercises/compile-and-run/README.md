@@ -21,7 +21,7 @@ to RISC-V or CHERI-RISC-V targets:
 
 The second test program is written in CHERI C:
 
-5. Compile print-capability.c with a CHERI-RISC-V target and a binary name
+5. Compile `print-capability.c` with a CHERI-RISC-V target and a binary name
    of `print-capability`.
 ```C
 {{#include print-capability.c}}
