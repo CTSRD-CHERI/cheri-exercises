@@ -526,7 +526,7 @@ of <code>8</code>.</li>
 </ol>
 <p>The second test program is written in CHERI C:</p>
 <ol start="5">
-<li>Compile print-capability.c with a CHERI-RISC-V target and a binary name
+<li>Compile <code>print-capability.c</code> with a CHERI-RISC-V target and a binary name
 of <code>print-capability</code>.</li>
 </ol>
 <pre><code class="language-C">/*
@@ -836,7 +836,7 @@ main(void)
 <ol start="2">
 <li>Run both programs and observe the output.</li>
 <li>Using GDB on the core dump: Why has the CHERI program failed?</li>
-<li>Modify buffer-overflow.c to increase the buffer size from 128 bytes to
+<li>Modify <code>buffer-overflow.c</code> to increase the buffer size from 128 bytes to
 1Mbyte + 1 byte.</li>
 <li>Recompile and re-run <code>buffer-overflow-cheri</code>. Why does it no longer
 crash, even though the buffer overflow exists in the source code? Is
@@ -1282,13 +1282,13 @@ main(void)
 }
 </code></pre>
 <ol start="2">
-<li>Run the two binaries, which both send long integers over IPC, and print
-the sent and received values.</li>
-<li>Modify the program source to create <code>ptr-over-pipe.c</code> which sends
-pointers instead, and then to dereference the received copy of the
-pointer (e.g. send a pointer to a string and print it).</li>
-<li>Compile and run as <code>ptr-over-pipe-riscv</code> and <code>ptr-over-pipe-cheri</code>.
-What happens?</li>
+<li>Run the two binaries, which both send long integers over pipe IPC, and
+print the sent and received values.</li>
+<li>Compile <code>ptr-over-pipe.c</code> with a RISC-V target and a binary name of
+<code>ptr-over-pipe-riscv</code>, and with a CHERI-RISC-V target and a binary name of
+<code>ptr-over-pipe-cheri</code>.</li>
+<li>Run the two binaries, which both send pointers over pipe IPC, and then
+dereference the received copy to print a string.</li>
 <li>Why does dereferencing the received pointer in a CHERI binary fail?</li>
 </ol>
 <h1><a class="header" href="#answers" id="answers">Answers</a></h1>
