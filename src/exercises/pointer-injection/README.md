@@ -11,11 +11,11 @@ dereferenced.
 ```C
 {{#include long-over-pipe.c}}
 ```
-2. Run the two binaries, which both send long integers over IPC, and print
-   the sent and received values.
-3. Modify the program source to create `ptr-over-pipe.c` which sends
-   pointers instead, and then to dereference the received copy of the
-   pointer (e.g. send a pointer to a string and print it).
-4. Compile and run as `ptr-over-pipe-riscv` and `ptr-over-pipe-cheri`.
-   What happens?
+2. Run the two binaries, which both send long integers over pipe IPC, and
+   print the sent and received values.
+3. Compile `ptr-over-pipe.c` with a RISC-V target and a binary name of
+  `ptr-over-pipe-riscv`, and with a CHERI-RISC-V target and a binary name of
+  `ptr-over-pipe-cheri`.
+4. Run the two binaries, which both send pointers over pipe IPC, and then
+   dereference the received copy to print a string.
 5. Why does dereferencing the received pointer in a CHERI binary fail?
