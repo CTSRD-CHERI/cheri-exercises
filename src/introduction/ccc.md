@@ -22,3 +22,5 @@ If you have built a compiler and sysroot using `cheribuild` in the default locat
 ```
 
 If you were provided a docker image along with these instructions (e.g. as part of a training exercise or bug-bounty), it should be configured such that `ccc` works without setting environment variables.
+
+Although not used by these exercises, the tool will instead function as a C++ compiler if invoked via the name `cc++`, and a `tools/cc++` symlink exists to facilitate this.
