@@ -168,9 +168,12 @@
 <pre><code>ccc &lt;arch&gt; [...]
 
 Supported architectures:
-	riscv64		- conventional riscv64
-	riscv64-hybrid	- RISC-V 64-bit supporting CHERI
-	riscv64-purecap	- RISC-V 64-bit pure-capability
+	aarch64         - conventional AArch64
+	morello-hybrid  - AArch64 Morello supporting CHERI
+	morello-purecap - AArch64 Morello pure-capability
+	riscv64         - conventional RISC-V 64-bit
+	riscv64-hybrid  - RISC-V 64-bit supporting CHERI
+	riscv64-purecap - RISC-V 64-bit pure-capability
 </code></pre>
 <p>and it can be used in place of your compiler.</p>
 <p>For the exercises in this book you will use the <code>riscv64</code> and <code>riscv64-purecap</code> architectures.  The <code>riscv64-hybrid</code> architecture instantiates appropriately annotated pointers as capabilities leaving the rest as conventional integer addresses, but is not used here.</p>
@@ -192,12 +195,12 @@ usage()
 $name &lt;arch&gt; [...]
 
 Supported architectures:
-	aarch64		- conventional AArch64
-	morello-hybrid	- AArch64 Morello supporting CHERI
-	morello-purecap	- AArch64 Morello pure-capability
-	riscv64		- conventional RISC-V 64-bit
-	riscv64-hybrid	- RISC-V 64-bit supporting CHERI
-	riscv64-purecap	- RISC-V 64-bit pure-capability
+	aarch64         - conventional AArch64
+	morello-hybrid  - AArch64 Morello supporting CHERI
+	morello-purecap - AArch64 Morello pure-capability
+	riscv64         - conventional RISC-V 64-bit
+	riscv64-hybrid  - RISC-V 64-bit supporting CHERI
+	riscv64-purecap - RISC-V 64-bit pure-capability
 EOF
 	exit 1
 }
@@ -323,6 +326,7 @@ done'
 run &quot;$prog&quot; &quot;$@&quot;
 </code></pre>
 <p>If you were provided a docker image along with these instructions (e.g. as part of a training exercise or bug-bounty), it should be configured such that <code>ccc</code> works without setting environment variables.</p>
+<p>Although not used by these exercises, the tool will instead function as a C++ compiler if invoked via the name <code>cc++</code>, and a <code>tools/cc++</code> symlink exists to facilitate this.</p>
 
                     </main>
 
