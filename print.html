@@ -1336,43 +1336,6 @@ received 42
 # ./long-over-pipe-cheri
 received 42
 </code></pre>
-<ol start="3">
-<li>Possible solution:</li>
-</ol>
-<pre><code class="language-C">/*
- * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
- * Copyright (c) 2020 SRI International
- */
-#include &lt;err.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;unistd.h&gt;
-
-const char hello[] = &quot;Hello world!&quot;;
-
-int
-main(void)
-{
-	int fds[2];
-	pid_t pid;
-	const char *ptr;
-
-	if (pipe(fds) == -1)
-		err(1, &quot;pipe&quot;);
-	if ((pid = fork()) == -1)
-		err(1, &quot;fork&quot;);
-	if (pid == 0) {
-		ptr = hello;
-		if (write(fds[0], &amp;ptr, sizeof(ptr)) != sizeof(ptr))
-			err(1, &quot;write&quot;);
-	} else {
-		if (read(fds[1], &amp;ptr, sizeof(ptr)) != sizeof(ptr))
-			err(1, &quot;read&quot;);
-		printf(&quot;received %s\n&quot;, ptr);
-	}
-
-	return 0;
-}
-</code></pre>
 <ol start="4">
 <li>Expected output:</li>
 </ol>
