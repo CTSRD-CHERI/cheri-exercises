@@ -5,9 +5,12 @@ Because the command line required to compile exercises is quite unwieldy, we've 
 ccc <arch> [...]
 
 Supported architectures:
-	riscv64		- conventional riscv64
-	riscv64-hybrid	- RISC-V 64-bit supporting CHERI
-	riscv64-purecap	- RISC-V 64-bit pure-capability
+	aarch64         - conventional AArch64
+	morello-hybrid  - AArch64 Morello supporting CHERI
+	morello-purecap - AArch64 Morello pure-capability
+	riscv64         - conventional RISC-V 64-bit
+	riscv64-hybrid  - RISC-V 64-bit supporting CHERI
+	riscv64-purecap - RISC-V 64-bit pure-capability
 ```
 and it can be used in place of your compiler.
 
