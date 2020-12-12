@@ -76,7 +76,7 @@ aarch64)
 	;;
 morello-hybrid)
 	cheri_sdk_name=morello-sdk
-	arch_flags="-target aarch64-unknown-freebsd -march=morello"
+	arch_flags="-target aarch64-unknown-freebsd -march=morello+a64c"
 	;;
 morello-purecap)
 	cheri_sdk_name=morello-sdk
