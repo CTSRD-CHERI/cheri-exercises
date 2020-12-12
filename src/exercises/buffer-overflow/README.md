@@ -16,7 +16,7 @@ bounds enforcement.  It also asks you to use GDB for debugging purposes.
 ```
 2. Run both programs and observe the output.
 3. Using GDB on the core dump: Why has the CHERI program failed?
-4. Modify buffer-overflow.c to increase the buffer size from 128 bytes to
+4. Modify `buffer-overflow.c` to increase the buffer size from 128 bytes to
    1Mbyte + 1 byte.
 5. Recompile and re-run `buffer-overflow-cheri`. Why does it no longer
    crash, even though the buffer overflow exists in the source code? Is
