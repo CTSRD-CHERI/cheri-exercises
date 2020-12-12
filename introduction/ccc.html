@@ -252,11 +252,11 @@ case $arch in
 aarch64)
 	cheri_arch_basename=morello
 	cheri_sdk_name=morello-sdk
-	arch_flags=&quot;-target aarch64-unknown-freebsd&quot;
+	arch_flags=&quot;-target aarch64-unknown-freebsd -march=morello+noa64c&quot;
 	;;
 morello-hybrid)
 	cheri_sdk_name=morello-sdk
-	arch_flags=&quot;-target aarch64-unknown-freebsd -march=morello&quot;
+	arch_flags=&quot;-target aarch64-unknown-freebsd -march=morello+a64c&quot;
 	;;
 morello-purecap)
 	cheri_sdk_name=morello-sdk
