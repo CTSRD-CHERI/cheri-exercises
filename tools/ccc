@@ -4,7 +4,7 @@
 set -e
 set -u
 
-name=$(basename $0)
+name=$(basename "$0")
 
 VERBOSE=${VERBOSE:-0}
 QUIET=${QUIET:-0}
@@ -30,7 +30,7 @@ err()
 	ret=$1
 	shift
 	echo "$@" 2>&1
-	exit $ret
+	exit "$ret"
 }
 
 warn()
@@ -40,14 +40,14 @@ warn()
 
 debug()
 {
-	if [ $VERBOSE -ne 0 ]; then
+	if [ "$VERBOSE" -ne 0 ]; then
 		echo "$@"
 	fi
 }
 
 info()
 {
-	if [ $QUIET -eq 0 ]; then
+	if [ "$QUIET" -eq 0 ]; then
 		echo "$@"
 	fi
 }
@@ -55,7 +55,7 @@ info()
 run()
 {
 	debug	# add space before normal multiline output
-	info "Running: $@"
+	info "Running:" "$@"
 	"$@"
 }
 
@@ -135,10 +135,12 @@ debug "diag_flags: $diag_flags"
 all_flags="$arch_flags $sysroot_flags $debug_flags $opt_flags $linker_flags $diag_flags"
 
 all_flags_rev=
+# shellcheck disable=SC2086 # intentional
 eval 'for flag in '$all_flags'; do
 	all_flags_rev="'"'"'$flag'"'"'${all_flags_rev:+ $all_flags_rev}"
 done'
 
+# shellcheck disable=SC2086 # intentional
 eval 'for flag in '$all_flags_rev'; do
 	set -- "$flag" "$@"
 done'
