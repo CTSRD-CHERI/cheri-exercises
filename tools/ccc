@@ -15,12 +15,12 @@ usage()
 $name <arch> [...]
 
 Supported architectures:
-	aarch64		- conventional AArch64
-	morello-hybrid	- AArch64 Morello supporting CHERI
-	morello-purecap	- AArch64 Morello pure-capability
-	riscv64		- conventional RISC-V 64-bit
-	riscv64-hybrid	- RISC-V 64-bit supporting CHERI
-	riscv64-purecap	- RISC-V 64-bit pure-capability
+	aarch64         - conventional AArch64
+	morello-hybrid  - AArch64 Morello supporting CHERI
+	morello-purecap - AArch64 Morello pure-capability
+	riscv64         - conventional RISC-V 64-bit
+	riscv64-hybrid  - RISC-V 64-bit supporting CHERI
+	riscv64-purecap - RISC-V 64-bit pure-capability
 EOF
 	exit 1
 }
