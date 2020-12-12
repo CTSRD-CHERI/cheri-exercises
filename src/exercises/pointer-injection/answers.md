@@ -7,10 +7,6 @@ received 42
 # ./long-over-pipe-cheri
 received 42
 ```
-3. Possible solution:
-```C
-{{#include ptr-over-pipe.c}}
-```
 4. Expected output:
 ```
 # ./ptr-over-pipe-riscv
