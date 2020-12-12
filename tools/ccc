@@ -72,7 +72,7 @@ case $arch in
 aarch64)
 	cheri_arch_basename=morello
 	cheri_sdk_name=morello-sdk
-	arch_flags="-target aarch64-unknown-freebsd"
+	arch_flags="-target aarch64-unknown-freebsd -march=morello+noa64c"
 	;;
 morello-hybrid)
 	cheri_sdk_name=morello-sdk
