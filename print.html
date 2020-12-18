@@ -183,10 +183,12 @@ code and an issue tracker.</em></p>
 <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
 <p>This set of exercises and adversarial missions is intended to:</p>
 <ul>
-<li>Build a baseline skillset with RISC-V and CHERI-RISC-V, as well as awareness
+<li>Build a baseline skill set with unmodified instruction set
+architectures (ISAs) such as ARMv8 and RISC-V and the same
+baseline ISAs with CHERI extensions, as well as awareness
 of some of the dynamics of CHERI-enabled software, through skills development
 exercises.</li>
-<li>Develop adversarial experience with CHERI-RISC-V performing basic
+<li>Develop adversarial experience with CHERI enabled ISAs performing basic
 investigation around gradations of CHERI feature deployment through focused
 adversarial missions.</li>
 </ul>
@@ -195,40 +197,40 @@ with reverse engineering and exploitation on conventional architectures
 and software stacks.</p>
 <h2><a class="header" href="#skills-development-exercises" id="skills-development-exercises">Skills development exercises</a></h2>
 <p><strong>Skills development exercises</strong> are intended to take 1-2 hours each,
-and ask you to build and perform minor modifications to simple
-RISC-V and CHERI-RISC-V C/C++ programs. These exercises
-facilitate building skills such as compiling, executing,
-and debugging RISC-V and CHERI-RISC-V programs, as well as to build basic
-understanding of CHERI C/C++ properties. We highlight some key edge
-cases in CHERI, including the effects of bounds imprecision, subobject
-bounds, weaker temporal safety, and C type confusion.</p>
+and ask you to build and perform minor modifications to simple C/C++
+programs. These exercises facilitate building skills such as
+compiling, executing, and debugging programs with both CHERI enabled
+and default ISAs, as well as to build basic understanding of CHERI
+C/C++ properties. We highlight some key edge cases in CHERI, including
+the effects of bounds imprecision, subobject bounds, weaker temporal
+safety, and C type confusion.</p>
 <p>These exercises take for granted a strong existing understanding of:</p>
 <ul>
 <li>The C/C++ languages</li>
 <li>UNIX program compilation, execution, and debugging</li>
-<li>RISC ISAs and binary structures/reverse engineering (e.g., on MIPS or ARMv8)</li>
+<li>ARMv8 and/or RISC ISAs as well as binary structures/reverse engineering</li>
 </ul>
 <h2><a class="header" href="#focused-adversarial-missions" id="focused-adversarial-missions">Focused adversarial missions</a></h2>
 <p><strong>Focused adversarial missions</strong> are intended to take
-1-3 days, and ask you to exploit, first on RISC-V, and
-then on CHERI-RISC-V, documented vulnerabilities in simple &quot;potted&quot;
-C/C++-language programs provided by the CHERI-RISC-V team. These missions
-engage you more specifically in RISC-V exploitation, and CHERI's
+1-3 days, and ask you to exploit, first on an unmodified ISA, and
+then on a CHERI-enabled ISA, documented vulnerabilities in simple &quot;potted&quot;
+C/C++-language programs provided by the CHERI team. These missions
+engage you more specifically in exploitation, and CHERI's
 security objectives and mechanisms.</p>
 <p><strong>These take for granted good existing experience with
 memory-safety-related attack techniques, such as buffer overflows,
 integer-pointer type confusion, Return-Oriented Programming (ROP), and
 Jump-Oriented Programming (JOP).</strong></p>
-<p>Successful exploitation of RISC-V variants depends only upon
-widely published understanding and techniques (e.g., buffer overflows
-combined with ROP). For those familiar with conventional low-level
-attack techniques, this will also act as a warm-up exercise on the
-baseline RISC-V architecture and expand experience with RISC-V reverse
+<p>Successful exploitation of non CHERI enabled variants depends only
+upon widely published understanding and techniques (e.g., buffer
+overflows combined with ROP). For those familiar with conventional
+low-level attack techniques, this will also act as a warm-up exercise
+on the baseline architecture and expand experience with reverse
 engineering and exploitation.</p>
-<p>The CHERI-RISC-V team has confirmed exploitability for the RISC-V binary
-in advance.  We strongly recommend exploiting the RISC-V version of the code
-first, as a starting point for understanding potential CHERI-RISC-V
-exploitability.</p>
+<p>The CHERI team has confirmed exploitability for the non CHERI enabled
+binaries in advance.  We strongly recommend exploiting the non CHERI
+enabled version of the code first, as a starting point for
+understanding potential exploitability of the CHERI version.</p>
 <h1><a class="header" href="#background-reading" id="background-reading">Background reading</a></h1>
 <p>To perform these exercises most effectively, we recommend first building a
 working knowledge of CHERI.  The most critical references will be the
