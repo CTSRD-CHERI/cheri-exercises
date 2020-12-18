@@ -34,7 +34,7 @@ These exercises take for granted a strong existing understanding of:
 ## Focused adversarial missions
 **Focused adversarial missions** are intended to take
 1-3 days, and ask you to exploit, first on an unmodified ISA, and
-then on a CHERI enabled ISA, documented vulnerabilities in simple "potted"
+then on a CHERI-enabled ISA, documented vulnerabilities in simple "potted"
 C/C++-language programs provided by the CHERI team. These missions
 engage you more specifically in exploitation, and CHERI's
 security objectives and mechanisms.
