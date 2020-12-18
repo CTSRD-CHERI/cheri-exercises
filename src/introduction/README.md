@@ -54,4 +54,4 @@ engineering and exploitation.
 The CHERI team has confirmed exploitability for the non CHERI enabled
 binaries in advance.  We strongly recommend exploiting the non CHERI
 enabled version of the code first, as a starting point for
-understanding potential CHERI-RISC-V exploitability.
+understanding potential exploitability of the CHERI version.
