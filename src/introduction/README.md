@@ -3,7 +3,7 @@
 This set of exercises and adversarial missions is intended to:
 
 - Build a baseline skill set with unmodified instruction set
-  architectures (ISAs) such as ARMv8 and RISC-V as well as the same
+  architectures (ISAs) such as ARMv8 and RISC-V and the same
   baseline ISAs with CHERI extensions, as well as awareness
   of some of the dynamics of CHERI-enabled software, through skills development
   exercises.
