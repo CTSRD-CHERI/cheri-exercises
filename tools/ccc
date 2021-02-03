@@ -29,26 +29,26 @@ err()
 {
 	ret=$1
 	shift
-	echo "$@" 2>&1
+	echo >&2 "$@"
 	exit "$ret"
 }
 
 warn()
 {
-	echo "$@" 2>&1
+	echo >&2 "$@"
 }
 
 debug()
 {
 	if [ "$VERBOSE" -ne 0 ]; then
-		echo "$@"
+		echo >&2 "$@"
 	fi
 }
 
 info()
 {
 	if [ "$QUIET" -eq 0 ]; then
-		echo "$@"
+		echo >&2 "$@"
 	fi
 }
 
