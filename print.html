@@ -347,26 +347,26 @@ err()
 {
 	ret=$1
 	shift
-	echo &quot;$@&quot; 2&gt;&amp;1
+	echo &gt;&amp;2 &quot;$@&quot;
 	exit &quot;$ret&quot;
 }
 
 warn()
 {
-	echo &quot;$@&quot; 2&gt;&amp;1
+	echo &gt;&amp;2 &quot;$@&quot;
 }
 
 debug()
 {
 	if [ &quot;$VERBOSE&quot; -ne 0 ]; then
-		echo &quot;$@&quot;
+		echo &gt;&amp;2 &quot;$@&quot;
 	fi
 }
 
 info()
 {
 	if [ &quot;$QUIET&quot; -eq 0 ]; then
-		echo &quot;$@&quot;
+		echo &gt;&amp;2 &quot;$@&quot;
 	fi
 }
 
