@@ -7,7 +7,7 @@ This set of exercises and adversarial missions is intended to:
   baseline ISAs with CHERI extensions, as well as awareness
   of some of the dynamics of CHERI-enabled software, through skills development
   exercises.
-- Develop adversarial experience with CHERI enabled ISAs performing basic
+- Develop adversarial experience with CHERI-enabled ISAs performing basic
   investigation around gradations of CHERI feature deployment through focused
   adversarial missions.
 
