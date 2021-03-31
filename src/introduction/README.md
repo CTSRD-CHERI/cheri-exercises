@@ -29,7 +29,7 @@ safety, and C type confusion.
 These exercises take for granted a strong existing understanding of:
 - The C/C++ languages
 - UNIX program compilation, execution, and debugging
-- ARMv8 and/or RISC ISAs as well as binary structures/reverse engineering
+- RISC ISAs (e.g. Armv8-A or RISC-V) as well as binary structures/reverse engineering
 
 ## Focused adversarial missions
 **Focused adversarial missions** are intended to take
