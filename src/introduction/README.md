@@ -64,6 +64,6 @@ on the baseline architecture and expand experience with reverse
 engineering and exploitation.
 
 The CHERI team has confirmed exploitability for the non-CHERI-enabled
-binaries in advance.  We strongly recommend exploiting the non CHERI
-enabled version of the code first, as a starting point for
+binaries in advance.  We strongly recommend exploiting the non-CHERI-enabled
+version of the code first, as a starting point for
 understanding potential exploitability of the CHERI version.
