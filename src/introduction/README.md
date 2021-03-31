@@ -44,7 +44,7 @@ memory-safety-related attack techniques, such as buffer overflows,
 integer-pointer type confusion, Return-Oriented Programming (ROP), and
 Jump-Oriented Programming (JOP).**
 
-Successful exploitation of non CHERI enabled variants depends only
+Successful exploitation of non-CHERI-enabled variants depends only
 upon widely published understanding and techniques (e.g., buffer
 overflows combined with ROP). For those familiar with conventional
 low-level attack techniques, this will also act as a warm-up exercise
