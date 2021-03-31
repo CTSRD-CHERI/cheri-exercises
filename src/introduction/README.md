@@ -32,7 +32,7 @@ to build the CHERI-RISC-V SDK, CheriBSD, and QEMU on macOS, FreeBSD, and Linux.
 **Skills development exercises** are intended to take 1-2 hours each,
 and ask you to build and perform minor modifications to simple C/C++
 programs. These exercises facilitate building skills such as
-compiling, executing, and debugging programs with both CHERI enabled
+compiling, executing, and debugging programs with both CHERI-enabled
 and default ISAs, as well as to build basic understanding of CHERI
 C/C++ properties. We highlight some key edge cases in CHERI, including
 the effects of bounds imprecision, subobject bounds, weaker temporal
