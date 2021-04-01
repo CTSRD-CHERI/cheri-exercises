@@ -6,13 +6,15 @@ ccc <arch> [...]
 
 Supported architectures:
 	aarch64         - conventional AArch64
+	morello-hybrid  - AArch64 Morello supporting CHERI
 	morello-purecap - AArch64 Morello pure-capability
 	riscv64         - conventional RISC-V 64-bit
+	riscv64-hybrid  - RISC-V 64-bit supporting CHERI
 	riscv64-purecap - RISC-V 64-bit pure-capability
 ```
 and it can be used in place of your compiler.
 
-For the exercises in this book you will use either the `riscv64` and `riscv64-purecap` architectures or the `aarch64` and `morello-purecap` architectures.
+For the exercises in this book you will use either the `riscv64` and `riscv64-purecap` architectures or the `morello` and `morello-purecap` architectures.  Do not use hybrid architectures (`-hybrid`) for these exercises.
 
 If you have built a compiler and sysroot using `cheribuild` in the default location (`~/cheri`) then it should work out of the box.  If you've configured a different location you must set the `CHERIBUILD_SDK` environment variable to point to to the location of your SDK.  Alternatively, you can set the `CLANG` and `SYSROOT` variables to point to the respective locations or your pre-built compiler and sysroot.
 ```sh
