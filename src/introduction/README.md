@@ -2,9 +2,9 @@
 
 This set of exercises and adversarial missions is intended to:
 
-- Build a baseline skill set with unmodified instruction set
+- Build a skill set with baseline instruction set
   architectures (ISAs) such as ARMv8 and RISC-V and the same
-  baseline ISAs with CHERI extensions, as well as awareness
+  ISAs with CHERI extensions, as well as awareness
   of some of the dynamics of CHERI-enabled software, through skills development
   exercises.
 - Develop adversarial experience with CHERI-enabled ISAs performing basic
@@ -33,7 +33,7 @@ to build the CHERI-RISC-V SDK, CheriBSD, and QEMU on macOS, FreeBSD, and Linux.
 and ask you to build and perform minor modifications to simple C/C++
 programs. These exercises facilitate building skills such as
 compiling, executing, and debugging programs with both CHERI-enabled
-and default ISAs, as well as to build basic understanding of CHERI
+and baseline ISAs, as well as to build basic understanding of CHERI
 C/C++ properties. We highlight some key edge cases in CHERI, including
 the effects of bounds imprecision, subobject bounds, weaker temporal
 safety, and C type confusion.
@@ -45,7 +45,7 @@ These exercises take for granted a strong existing understanding of:
 
 ## Focused adversarial missions
 **Focused adversarial missions** are intended to take
-1-3 days, and ask you to exploit, first on an unmodified ISA, and
+1-3 days, and ask you to exploit, first on a baseline ISA, and
 then on a CHERI-enabled ISA, documented vulnerabilities in simple "potted"
 C/C++-language programs provided by the CHERI team. These missions
 engage you more specifically in exploitation, and CHERI's
