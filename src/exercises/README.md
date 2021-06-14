@@ -25,4 +25,4 @@ successfully completing these exercises will be able to:
 Each exercise includes:
 - Sample source code and build instructions
 - A short document describing what the program does and the objectives
-- Where the are exercise questions, sample answers
+- Where to find the exercise questions and sample answers
