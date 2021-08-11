@@ -12,8 +12,8 @@
 #include <sys/queue.h>
 
 #if defined(__CHERI_PURE_CAPABILITY__)
-#include <sys/caprevoke.h>
-static void __attribute__((used)) *check_caprevoke = caprevoke;
+#include <cheri/revoke.h>
+static void __attribute__((used)) *check_cheri_revoke = cheri_revoke;
 extern void malloc_revoke(void);
 static void __attribute__((used)) *check_malloc_revoke = malloc_revoke;
 #endif
