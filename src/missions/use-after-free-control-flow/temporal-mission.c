@@ -66,8 +66,8 @@ descr_2(struct crop *c)
 static unsigned int cid;
 static union ufo *ufo;
 
-static const size_t nfarm = 4;
-struct farm *farmp[nfarm];
+#define NFARM 4
+struct farm *farmp[NFARM];
 
 static void
 rm_farm(int fix)
@@ -167,7 +167,7 @@ main(void)
 		if (isspace(c))
 			continue;
 
-		if (('0' <= c) && (c < '0' + nfarm)) {
+		if (('0' <= c) && (c < '0' + NFARM)) {
 			fix = c - '0';
 			fprintf(stderr, "Selected farm %zu (%p)\n", fix,
 			    farmp[fix]);
