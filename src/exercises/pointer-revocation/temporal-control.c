@@ -45,7 +45,7 @@ struct obj {
 int
 main(void)
 {
-	struct obj *obj1 = calloc(1, sizeof(*obj1));
+	struct obj * volatile obj1 = calloc(1, sizeof(*obj1));
 
 	fprintf(stderr, "Installing function pointer in obj1 at %#p\n", obj1);
 	obj1->fn = fn1;
@@ -61,7 +61,7 @@ main(void)
 	malloc_revoke();
 #endif
 
-	struct obj *obj2 = malloc(sizeof(*obj2));
+	struct obj * volatile obj2 = malloc(sizeof(*obj2));
 #ifdef CAPREVOKE
 	assert(obj1 == obj2);
 #endif
