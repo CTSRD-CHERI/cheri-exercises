@@ -315,8 +315,8 @@ Tear down farm (index 0) at 0x41201080
 #include &lt;sys/queue.h&gt;
 
 #if defined(__CHERI_PURE_CAPABILITY__)
-#include &lt;sys/caprevoke.h&gt;
-static void __attribute__((used)) *check_caprevoke = caprevoke;
+#include &lt;cheri/revoke.h&gt;
+static void __attribute__((used)) *check_cheri_revoke = cheri_revoke;
 extern void malloc_revoke(void);
 static void __attribute__((used)) *check_malloc_revoke = malloc_revoke;
 #endif
@@ -369,8 +369,8 @@ descr_2(struct crop *c)
 static unsigned int cid;
 static union ufo *ufo;
 
-static const size_t nfarm = 4;
-struct farm *farmp[nfarm];
+#define NFARM 4
+struct farm *farmp[NFARM];
 
 static void
 rm_farm(int fix)
@@ -470,7 +470,7 @@ main(void)
 		if (isspace(c))
 			continue;
 
-		if (('0' &lt;= c) &amp;&amp; (c &lt; '0' + nfarm)) {
+		if (('0' &lt;= c) &amp;&amp; (c &lt; '0' + NFARM)) {
 			fix = c - '0';
 			fprintf(stderr, &quot;Selected farm %zu (%p)\n&quot;, fix,
 			    farmp[fix]);

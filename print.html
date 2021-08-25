@@ -1367,9 +1367,9 @@ merged to mainline CheriBSD.</p>
 
 /* Ensure we're being run on a temporal-safety-aware system */
 #ifdef __CHERI_PURE_CAPABILITY__
-#include &lt;sys/caprevoke.h&gt;
+#include &lt;cheri/revoke.h&gt;
 __attribute__((used))
-static void *check_caprevoke = caprevoke;
+static void *check_cheri_revoke = cheri_revoke;
 
 extern void malloc_revoke(void);
 __attribute__((used))
@@ -1403,7 +1403,7 @@ struct obj {
 int
 main(void)
 {
-	struct obj *obj1 = calloc(1, sizeof(*obj1));
+	struct obj * volatile obj1 = calloc(1, sizeof(*obj1));
 
 	fprintf(stderr, &quot;Installing function pointer in obj1 at %#p\n&quot;, obj1);
 	obj1-&gt;fn = fn1;
@@ -1419,7 +1419,7 @@ main(void)
 	malloc_revoke();
 #endif
 
-	struct obj *obj2 = malloc(sizeof(*obj2));
+	struct obj * volatile obj2 = malloc(sizeof(*obj2));
 #ifdef CAPREVOKE
 	assert(obj1 == obj2);
 #endif
@@ -2076,8 +2076,8 @@ Tear down farm (index 0) at 0x41201080
 #include &lt;sys/queue.h&gt;
 
 #if defined(__CHERI_PURE_CAPABILITY__)
-#include &lt;sys/caprevoke.h&gt;
-static void __attribute__((used)) *check_caprevoke = caprevoke;
+#include &lt;cheri/revoke.h&gt;
+static void __attribute__((used)) *check_cheri_revoke = cheri_revoke;
 extern void malloc_revoke(void);
 static void __attribute__((used)) *check_malloc_revoke = malloc_revoke;
 #endif
@@ -2130,8 +2130,8 @@ descr_2(struct crop *c)
 static unsigned int cid;
 static union ufo *ufo;
 
-static const size_t nfarm = 4;
-struct farm *farmp[nfarm];
+#define NFARM 4
+struct farm *farmp[NFARM];
 
 static void
 rm_farm(int fix)
@@ -2231,7 +2231,7 @@ main(void)
 		if (isspace(c))
 			continue;
 
-		if (('0' &lt;= c) &amp;&amp; (c &lt; '0' + nfarm)) {
+		if (('0' &lt;= c) &amp;&amp; (c &lt; '0' + NFARM)) {
 			fix = c - '0';
 			fprintf(stderr, &quot;Selected farm %zu (%p)\n&quot;, fix,
 			    farmp[fix]);
