@@ -5,8 +5,10 @@ RISC-V and CHERI-RISC-V programs. It draws attention to differences in
 program structure and code generation, particularly relating to control
 flow, between the two compilation targets.
 
-First, use `llvm-objdump` to disassemble and explore the two binaries
-from the previous exercise:
+First, use `llvm-objdump` on the host (which you can find at
+`~/cheri/output/sdk/bin/llvm-objdump`, unless you have altered `cheribuild`'s
+default paths) to disassemble and explore the two binaries from the previous
+exercise:
 
 1. Using `llvm-objdump -dS`, disassemble the `print-pointer-riscv` and
    `print-pointer-cheri` binaries.
