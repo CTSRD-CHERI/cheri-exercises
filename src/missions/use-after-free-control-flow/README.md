@@ -4,6 +4,9 @@
 The executable can be built for both RISC-V and CHERI-RISC-V (and exploring
 both may be worthwhile), but the mission is for CHERI-RISC-V with heap temporal
 safety enforcement in place.
+Please see
+https://github.com/CTSRD-CHERI/cheripedia/wiki/HOWTO:-Build-and-run-with-heap-temporal-safety-(%22Cornucopia%22)
+for build instructions.
 
 This mission is a potted exercise inspired by real-world vulnerabilities where
 an active adversary can influence the contents of a server's heap and, often

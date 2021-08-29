@@ -5,7 +5,9 @@ by the system `malloc`. It asks you to contrast the same program,
 `temporal-control.c`, built and run in three slightly different environments.
 It must be run on a **heap-temporal-safety enabled** version of CheriBSD; at the
 time of writing, heap temporal safety remains an experimental feature not yet
-merged to mainline CheriBSD.
+merged to mainline CheriBSD.  Please see
+https://github.com/CTSRD-CHERI/cheripedia/wiki/HOWTO:-Build-and-run-with-heap-temporal-safety-(%22Cornucopia%22)
+for build instructions.
 
 1. Compile `temporal-control.c` with a RISC-V target and a binary name of
 `temporal-control-riscv`.
