@@ -600,8 +600,10 @@ cap to cap length: 16
 RISC-V and CHERI-RISC-V programs. It draws attention to differences in
 program structure and code generation, particularly relating to control
 flow, between the two compilation targets.</p>
-<p>First, use <code>llvm-objdump</code> to disassemble and explore the two binaries
-from the previous exercise:</p>
+<p>First, use <code>llvm-objdump</code> on the host (which you can find at
+<code>~/cheri/output/sdk/bin/llvm-objdump</code>, unless you have altered <code>cheribuild</code>'s
+default paths) to disassemble and explore the two binaries from the previous
+exercise:</p>
 <ol>
 <li>Using <code>llvm-objdump -dS</code>, disassemble the <code>print-pointer-riscv</code> and
 <code>print-pointer-cheri</code> binaries.</li>
