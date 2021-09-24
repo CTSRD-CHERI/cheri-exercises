@@ -3,6 +3,7 @@
 [Adversarial CHERI Exercises and Missions](cover/README.md)
 - [Introduction](introduction/README.md)
     - [Background reading](introduction/background.md)
+	- [Using the CHERI Software Release](introduction/release.md)
     - [Cross compilation and execution](introduction/cross-compilation-execution.md)
         - [Helper script](introduction/ccc.md)
 - [Skills Development Exercises](exercises/README.md)
