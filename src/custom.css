@@ -1,0 +1,24 @@
+/* We speak in a lot of command lines, and 750px is just not doing it */
+:root {
+  --content-max-width: 1000px;
+}
+
+.content .ctsrd-large {
+  font-size: 2em;
+}
+
+.content .ctsrd-frame {
+  border: 3px;
+  border-style: solid;
+  padding: 1em;
+}
+
+.content .ctsrd-standout {
+  /*
+   * I am not thrilled with these, but in terms of things that exist in the
+   * minimal lexicon of mdBook themes and are guaranteed to stand out...
+   */
+  border-color: var(--sidebar-active);
+  background-color: var(--searchbar-bg);
+  color: var(--searchbar-fg);
+}

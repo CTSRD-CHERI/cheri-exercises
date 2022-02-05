@@ -6,5 +6,6 @@ src = "src"
 title = "Adversarial CHERI Exercises and Missions"
 
 [output.html]
+additional-css = ["src/custom.css"]
 git-repository-url = "https://github.com/CTSRD-CHERI/cheri-exercises"
 site-url = "/cheri-exercises/"

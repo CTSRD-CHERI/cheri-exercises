@@ -1,10 +1,10 @@
 # Compile and run baseline and CHERI-enabled programs
 
 This exercise steps you through getting up and running with code compilation
-and execution for baseline and CHERI-enabled programs.
+and execution of baseline and CHERI-enabled programs.
 
-The first test program is written in conventional C, and can be compiled
-to RISC-V, ARMv8, CHERI-RISC-V or Morello targets:
+The first test program is written in conventional C and can be compiled on both
+baseline and CHERI-enabled targets:
 
 1. Compile `print-pointer.c` with either a RISC-V target and a binary
 name of `print-pointer-riscv` or an ARMv8 target and name of
@@ -20,7 +20,8 @@ name of `print-pointer-riscv` or an ARMv8 target and name of
 4. Run the binary: it should print a pointer size of `16` and address size
    of `8`.
 
-The second test program is written in CHERI C:
+The second test program is written in CHERI C, and so must be built for, and run
+on, CHERI targets:
 
 5. Compile `print-capability.c` with a CHERI-RISC-V or Morello target and a binary name
    of `print-capability`.
