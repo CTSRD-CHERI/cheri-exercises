@@ -96,24 +96,53 @@ riscv64-purecap)
 	;;
 esac
 
-CHERIBUILD_SDK=${CHERIBUILD_SDK:-${HOME}/cheri/output/${cheri_sdk_name}}
-CLANG=${CLANG:-${CHERIBUILD_SDK}/bin/clang}
+# Find our SDK, using the first of these that expands only defined variables:
+#  ${CHERIBUILD_SDK_${cheri_sdk_name}} (if that syntax worked)
+#  ${CHERIBUILD_SDK}
+#  ${CHERIBUILD_OUTPUT}/${cheri_sdk_name}
+#  ${CHERIBUILD_SOURCE}/output/${cheri_sdk_name}
+#  ~/cheri/output/${cheri_sdk_name}
+
+SDKDIR_SOURCE=${CHERIBUILD_SOURCE:-${HOME}/cheri}
+SDKDIR_OUTPUT=${CHERIBUILD_OUTPUT:-${SDKDIR_SOURCE}/output}
+SDKDIR_SDK=${CHERIBUILD_SDK:-${SDKDIR_OUTPUT}/${cheri_sdk_name}}
+SDKDIR=$(eval echo \${CHERIBUILD_SDK_"${cheri_arch_basename}":-})
+SDKDIR=${SDKDIR:-${SDKDIR_SDK}}
+
+enverr()
+{
+	echo >&2 $1
+	echo "Perhaps set or adjust one of the following environment variables:"
+	for v in SOURCE OUTPUT SDK; do
+		echo " " CHERIBUILD_$v \(currently: \
+		  $(eval echo \${CHERIBUILD_$v:-unset, tried \$SDKDIR_$v})\)
+	done
+
+	A="CHERIBUILD_SDK_${cheri_arch_basename}"
+	echo " " "$A" \(currently: $(eval echo \${$A:-unset, tried \$SDKDIR})\)
+
+	echo " " "$2" \(currently: $(eval echo \${$2:-unset, tried \$SDK_$2})\)
+
+	err 1 "Please check your build environment"
+}
+
+SDK_CLANG=${CLANG:-${SDKDIR}/bin/clang}
 
 case $name in
-*clang|*cc)	prog="${CLANG}" ;;
-*clang++|*c++)	prog="${CLANG}++" ;;
+*clang|*cc)	prog="${SDK_CLANG}" ;;
+*clang++|*c++)	prog="${SDK_CLANG}++" ;;
 *)	err 1 "Unsupported program name '$name'" ;;
 esac
 if [ ! -x "$prog" ]; then
-	err 1 "Target program '$prog' not found. Set CLANG or CHERIBUILD_SDK."
+	enverr "Target compiler '$prog' not found." "CLANG"
 fi
 debug "prog: $prog"
 
-SYSROOT=${SYSROOT:-${CHERIBUILD_SDK}/sysroot-${cheri_arch_basename}-purecap}
-if [ ! -d "$SYSROOT" ]; then
-	err 1 "Sysroot '$SYSROOT' does not exist. Set SYSROOT or CHERIBUILD_SDK."
+SDK_SYSROOT=${SYSROOT:-${SDKDIR}/sysroot-${cheri_arch_basename}-purecap}
+if [ ! -d "$SDK_SYSROOT" ]; then
+	enverr "Sysroot '$SDK_SYSROOT' does not exist." "SYSROOT"
 fi
-debug "sysroot: $SYSROOT"
+debug "sysroot: $SDK_SYSROOT"
 
 debug "arch_flags: $arch_flags"
 
@@ -123,7 +152,7 @@ debug "debug_flags: $debug_flags"
 opt_flags="-O2"
 debug "opt_flags: $opt_flags"
 
-sysroot_flags="--sysroot='$SYSROOT'"
+sysroot_flags="--sysroot='$SDK_SYSROOT'"
 debug "sysroot_flags: $sysroot_flags"
 
 linker_flags="-fuse-ld=lld"
