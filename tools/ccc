@@ -96,7 +96,8 @@ riscv64-purecap)
 	;;
 esac
 
-CHERIBUILD_SDK=${CHERIBUILD_SDK:-${HOME}/cheri/output/${cheri_sdk_name}}
+CHERIBUILD_OUTPUT=${CHERIBUILD_OUTPUT:-${HOME}/cheri/output}
+CHERIBUILD_SDK=${CHERIBUILD_SDK:-${CHERIBUILD_OUTPUT}/${cheri_sdk_name}}
 CLANG=${CLANG:-${CHERIBUILD_SDK}/bin/clang}
 
 case $name in
