@@ -3,13 +3,13 @@
  * Copyright (c) 2020 SRI International
  */
 #include <stdio.h>
+#include <stddef.h>
 
 int
 main(void)
 {
 	printf("size of pointer: %zu\n", sizeof(void *));
-	/* XXX: ideally we'd use ptraddr_t below */
-	printf("size of address: %zu\n", sizeof(size_t));
+	printf("size of address: %zu\n", sizeof(ptraddr_t));
 
 	return (0);
 }

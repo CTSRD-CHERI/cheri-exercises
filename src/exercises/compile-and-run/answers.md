@@ -2,27 +2,16 @@
 
 This exercise explores the difference in size between addresses and
 pointers, drawing attention to the pointer-focused nature of CHERI memory
-protection.  Note that whenever a binary name changes based on the underlying
-ISA the output for each ISA is shown.
+protection.
 
 2. Expected output:
 
-Baseline RISC-V binary:
+Baseline binary:
 ```
-# ./print-pointer-riscv
+# ./print-pointer-baseline
 size of pointer: 8
 size of address: 8
 ```
-
-Baseline ARMv8 binary:
-```
-# ./print-pointer-morello-aarch64
-size of pointer: 8
-size of address: 8
-```
-
-The output for each of the following answers is the same irrespective
-of the the CHERI-enabled ISA being used.
 
 4. Expected output:
 ```
@@ -30,6 +19,7 @@ of the the CHERI-enabled ISA being used.
 size of pointer: 16
 size of address: 8
 ```
+
 6. Expected output:
 ```
 # ./print-capability
