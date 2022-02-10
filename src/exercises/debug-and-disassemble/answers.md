@@ -1,4 +1,4 @@
-# Answers - Disassemble and debug RISC-V and CHERI-RISC-V programs
+# Answers - Disassemble and debug baseline and CHERI-enabled programs
 
 2. `jalr`. The target address is a pc-relative address in the `.plt`
    section addressed by a sequence like:
@@ -21,7 +21,7 @@ Breakpoint 1 at 0x11914
 5. Example session:
 ```
 (gdb) r
-Starting program: /root/print-pointer-riscv 
+Starting program: /root/print-pointer-baseline
 
 Breakpoint 1, printf (fmt=<optimized out>)
     at /Volumes/CheriBSD/cheribsd/lib/libc/stdio/printf.c:56
@@ -36,9 +36,9 @@ process 764
 Mapped address spaces:
 
           Start Addr           End Addr       Size     Offset   Flags   File
-             0x10000            0x11000     0x1000        0x0  r-- CN-- /root/print-pointer-riscv
-             0x11000            0x12000     0x1000        0x0  r-x C--- /root/print-pointer-riscv
-             0x12000            0x13000     0x1000        0x0  r-- C--- /root/print-pointer-riscv
+             0x10000            0x11000     0x1000        0x0  r-- CN-- /root/print-pointer-baseline
+             0x11000            0x12000     0x1000        0x0  r-x C--- /root/print-pointer-baseline
+             0x12000            0x13000     0x1000        0x0  r-- C--- /root/print-pointer-baseline
              0x13000            0x14000     0x1000        0x0  rw- ---- 
           0x40013000         0x40018000     0x5000        0x0  r-- CN-- /libexec/ld-elf64.so.1
           0x40018000         0x4002a000    0x12000     0x4000  r-x C--- /libexec/ld-elf64.so.1
