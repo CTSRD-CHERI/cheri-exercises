@@ -1,11 +1,11 @@
-# Answers - Exercise an inter-object buffer overflow
+# Answers - Exercise an inter-global-object buffer overflow
 
 2. Expected output:
 ```
-# ./buffer-overflow-riscv
+# ./buffer-overflow-global-baseline
 c = c
 c = b
-# ./buffer-overflow-cheri
+# ./buffer-overflow-global-cheri
 c = c
 In-address space security exception (core dumped)
 ```
@@ -15,8 +15,8 @@ Program received signal SIGPROT, CHERI protection violation
 Capability bounds fault caused by register ca4.
 fill_buf (
     buf=0x104060 <buffer> [rwRW,0x104060-0x1040e0] 'b' <repeats 128 times>,
-    len=128) at src/exercises/buffer-overflow/buffer-overflow.c:11
-11      in src/exercises/buffer-overflow/buffer-overflow.c
+    len=128) at src/exercises/buffer-overflow-global/buffer-overflow-global.c:11
+11      in src/exercises/buffer-overflow-global/buffer-overflow-global.c
 (gdb) info reg ca4
 ca4            0xf17d00000439806400000000001040e0       0x1040e0 <c> [rwRW,0x104060-0x1040e0]
 (gdb) x/i $pcc
@@ -31,20 +31,20 @@ instruction incorrectly decodes as `sb` rather than correctly as:
 ```
 5. Expected output:
 ```
-# ./buffer-overflow-cheri
+# ./buffer-overflow-global-cheri
 c = c
 c = c
 ```
 To see why this occurs, examine the bounds of the buffer in `fill_buf`.
 ```
 (gdb) b fill_buf
-Breakpoint 1 at 0x1cc2: file src/exercises/buffer-overflow/buffer-overflow.c, line 11.
+Breakpoint 1 at 0x1cc2: file src/exercises/buffer-overflow-global/buffer-overflow-global.c, line 11.
 (gdb) r
-Starting program: /root/buffer-overflow-cheri
+Starting program: /root/buffer-overflow-global-cheri
 
 Breakpoint 1, fill_buf (buf=0x105000 <buffer> [rwRW,0x105000-0x205800] "",
-    len=1048577) at src/exercises/buffer-overflow/buffer-overflow.c:11
-11      src/exercises/buffer-overflow/buffer-overflow.c: No such file or directory.
+    len=1048577) at src/exercises/buffer-overflow-global/buffer-overflow-global.c:11
+11      src/exercises/buffer-overflow-global/buffer-overflow-global.c: No such file or directory.
 ```
 This indicates that buffer has been allocated (1024 * 1026) bytes. This
 is due to the padding required to ensure that the bounds of `buffer`
@@ -53,8 +53,8 @@ the end of the C-language object that is nonetheless in bounds.
 
 6. Solution:
 ```diff
---- buffer-overflow.c
-+++ buffer-overflow.c
+--- buffer-overflow-global.c
++++ buffer-overflow-global.c
 @@ -6,7 +6,7 @@ char c;
  void
  fill_buf(char *buf, size_t len)
@@ -66,7 +66,7 @@ the end of the C-language object that is nonetheless in bounds.
 ```
 7. Expected output:
 ```
-# ./buffer-overflow-cheri
+# ./buffer-overflow-global-cheri
 c = c
 c = c
 ```
