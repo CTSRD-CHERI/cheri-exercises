@@ -24,6 +24,8 @@
         - [Answers](exercises/compile-and-run/answers.md)
     - [Disassemble and debug baseline and CHERI-enabled programs](exercises/debug-and-disassemble/README.md)
         - [Answers](exercises/debug-and-disassemble/answers.md)
+    - [Exercise an inter-stack-object buffer overflow](exercises/buffer-overflow-stack/README.md)
+        - [Answers](exercises/buffer-overflow-stack/answers.md)
     - [Exercise an inter-global-object buffer overflow](exercises/buffer-overflow-global/README.md)
         - [Answers](exercises/buffer-overflow-global/answers.md)
     - [Exercise a subobject buffer overflow](exercises/buffer-overflow-subobject/README.md)
