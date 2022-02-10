@@ -17,7 +17,7 @@ and, other than the mandatory target architecture argument, it can be used as if
 For the exercises in this book you will use either
 * the `riscv64` (baseline) and `riscv64-purecap` (CHERI-enabled) architectures or
 * the `aarch64` (baseline) and `morello-purecap` (CHERI-enabled) architectures.
-Do not use hybrid architectures (`-hybrid`) for these exercises.
+Do not use the hybrid compilation targets (`-hybrid`) for these exercises.
 
 If you...
 * are using the CHERI Software Release, there are [targeted instructions](./cross-ccc-release.md) for preparing `ccc`.

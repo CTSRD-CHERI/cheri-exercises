@@ -2,7 +2,8 @@
 
 While we cannot offer the Morello FVP in source form, `cheribuild` can
 nevertheless download and run the binaries from Arm, assuming you have a
-compatible host machine (generally, Linux of some flavor on x86\_64 hardware).
+compatible machine (generally, Linux of some flavor on x86\_64, either as the
+host OS or within a container or hypervised environment such as Docker for Mac).
 
 Review the license agreement for the FVP and install it with
 ```
@@ -10,7 +11,7 @@ Review the license agreement for the FVP and install it with
 ```
 Thereafter, you will be able to run the Morello purecap system disk images built by `cheribuild` using
 ```
-~/cheri/cheribuild/cheribuild.py run-fvp-morello-purecap --run/ssh-forwarding-port=12345
+~/cheri/cheribuild/cheribuild.py run-fvp-morello-purecap --run-fvp/ssh-forwarding-port=12345
 ```
 
 The simplest way to transfer programs to the FVP to be run is to use `ssh`.

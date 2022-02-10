@@ -2,12 +2,10 @@
 
 This set of exercises and adversarial missions is intended to:
 
-- Build a skill set with baseline instruction set
-  architectures (ISAs) such as ARMv8 and RISC-V and the same
-  ISAs with CHERI extensions, as well as awareness
-  of some of the dynamics of CHERI-enabled software, through skills development
-  exercises.
-- Develop adversarial experience with CHERI-enabled ISAs performing basic
+- Build a skill set with CHERI C software atop CHERI-enabled Instruction Set
+  Architectures (ISAs) such as CHERI-RISC-V and Morello, through skills
+  development exercises.
+- Develop adversarial experience with CHERI-enabled software performing basic
   investigation around gradations of CHERI feature deployment through focused
   adversarial missions.
 
@@ -29,16 +27,18 @@ to build the CHERI-RISC-V SDK, CheriBSD, and QEMU on macOS, FreeBSD, and Linux.
 
 ## Skills development exercises
 
+<!-- If they're really intended for that, am I doing the right thing with the
+*half hour* slots for ASPLOS?? -->
 **Skills development exercises** are intended to take 1-2 hours each,
 and ask you to build and perform minor modifications to simple C/C++
 programs. These exercises facilitate building skills such as
-compiling, executing, and debugging programs with both CHERI-enabled
-and baseline ISAs, as well as to build basic understanding of CHERI
+compiling, executing, and debugging programs compiled both for CHERI-enabled
+and for baseline ISAs, as well as to build basic understanding of CHERI
 C/C++ properties. We highlight some key edge cases in CHERI, including
-the effects of bounds imprecision, subobject bounds, weaker temporal
+the effects of bounds imprecision, subobject bounds, limited temporal
 safety, and C type confusion.
 
-These exercises take for granted a strong existing understanding of:
+These exercises take for granted a working familiarity with:
 - The C/C++ languages
 - UNIX program compilation, execution, and debugging
 - RISC ISAs (e.g. Armv8-A or RISC-V) as well as binary structures/reverse engineering

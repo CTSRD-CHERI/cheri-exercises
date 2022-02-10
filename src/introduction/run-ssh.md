@@ -1,4 +1,4 @@
-# Setting up SSH Keys
+# Using SSH With The Emulated System
 
 The CheriBSD system permits root login over ssh using ssh keys, but it does not
 ship with keys installed out of the box.
@@ -36,6 +36,17 @@ from the unpacked tarball).  It therefore suffices to create
 To check that this worked, have cheribuild [rebuild the disk
 image](./build-disk.md), run the system however you like, and verify that
 `~root/.ssh/authorized_keys` exists.
+
+## Running the Simulator with SSH Port Forwarding
+
+The CHERI emulators, both [qemu](./run-qemu.md) and [Arm's FVP](./run-fvp.md)
+can expose TCP ports on the host that forward to ports on the emulated guest
+network.  `cheribuild` provides convenient shortcuts for TCP/22 (`ssh`).  For
+`run-${arch}-*` targets, add `--run/ssh-forwarding-port=12345` to specify the
+listening port number; for `run-fvp-*` targets, use
+`--run-fvp/ssh-forwarding-port=12345` intead.  If these are not given,
+`cheribuild` will attempt to guess a suitable default port and will announce it
+during the `run-*` (or `run-fvp-*`) target's startup.
 
 ## Logging In Over SSH
 

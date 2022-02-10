@@ -6,6 +6,11 @@ We assume that you have followed the [prior instructions](./get.md) to obtain a
 CHERI software stack and are, therefore, in possession of file paths to both the
 `clang` compiler and a `sysroot` for your desired architecture.
 
+⚠ At the moment this section provides instructions only for (CHERI-)RISC-V
+targets.  Enthusiastic readers eager for DIY compilation on Morello can likely
+study `tools/ccc` and extract what they are after in the interim.  We apologize
+for the inconvenience. ⚠
+
 ## Compiler command line
 In this set of exercises we cross compile in two basic modes.
 Conventional RISC-V ABI and the CheriABI pure-capability ABI.
@@ -28,7 +33,7 @@ Putting it all together:
 ```
 $CLANG -g -O2 -target riscv64-unknown-freebsd --sysroot="$SYSROOT" -fuse-ld=lld -mno-relax -march=rv64gc -mabi=lp64d -Wall -Wcheri
 ```
-### CheriABI
+### RISC-V CheriABI
 For CheriABI, the architecture and ABI flags are:
 `-march=rv64gcxcheri -mabi=l64pc128d`.
 Putting it all together:
@@ -38,7 +43,10 @@ $CLANG -g -O2 -target riscv64-unknown-freebsd --sysroot="$SYSROOT" -fuse-ld=lld 
 
 ## Verifying Output ABI
 
-CheriBSD supports running RISC-V and CHERI-RISC-V side-by-side on the same instance, so provided the instance has all features available for the exercise or mission in question, you should be able to complete it on a single CheriBSD instance.
+CheriBSD supports running baseline and CHERI-enabled programs side-by-side on the same instance, so provided the instance has all features available for the exercise or mission in question, you should be able to complete it on a single CheriBSD instance.
+
+
+### RISC-V
 
 CheriBSD's `file(1)` has been extended to distinguish RISC-V binaries from CHERI-RISC-V (CheriABI) binaries. For example, on a CheriBSD instance:
 ```
