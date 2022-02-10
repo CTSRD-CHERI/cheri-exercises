@@ -1,8 +1,13 @@
 # Exercise an inter-global-object buffer overflow
 
-This exercise demonstrates an inter-object buffer overflow on RISC-V and
-CHERI-RISC-V, and asks you to characterize and fix the bug detected by CHERI
-bounds enforcement.  It also asks you to use GDB for debugging purposes.
+This exercise demonstrates an inter-object buffer overflow on baseline and
+CHERI-enabled architectures, and asks you to characterize and fix the bug
+detected by CHERI bounds enforcement.  It also asks you to use GDB for
+debugging purposes.
+
+By contrast to [the stack-based example](../buffer-overflow-stack), this
+example uses two *global* objects (in `.data`) to demonstrate the overflow.
+It is worth pondering how the bounds for pointers to globals come to be set!
 
 1. Compile `buffer-overflow-global.c` for the baseline architecture to
    the binary `buffer-overflow-global-baseline` and for the CHERI-aware
@@ -14,7 +19,8 @@ bounds enforcement.  It also asks you to use GDB for debugging purposes.
 
 2. Run both programs and observe the output.
 
-3. Using GDB on the core dump: Why has the CHERI program failed?
+3. Using GDB on the core dump (or run the CHERI program under `gdb`):
+   Why has the CHERI program failed?
 
 4. Modify `buffer-overflow-global.c` to increase the buffer size from 128 bytes
    to 1Mbyte + 1 byte.
@@ -30,7 +36,7 @@ bounds enforcement.  It also asks you to use GDB for debugging purposes.
 7. Recompile and run `buffer-overflow-global-cheri` to demonstrate that the
    program is now able to continue.
 
-## Source
+## Source Files
 
 **buffer-overflow-global.c**
 ```C
