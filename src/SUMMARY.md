@@ -40,6 +40,8 @@
         - [Answers](exercises/pointer-injection/answers.md)
     - [Adapt a C Program to CHERI C](exercises/adapt-c/README.md)
         - [Answers](exercises/adapt-c/answers.md)
+    - [Adapt a simple Heap Allocator to CHERI](exercises/adapt-malloc/README.md)
+        - [Answers](exercises/adapt-malloc/answers.md)
     - [Demonstrate pointer revocation](exercises/pointer-revocation/README.md)
         - [Answers](exercises/pointer-revocation/answers.md)
 - [Focused Adversarial Missions](missions/README.md)
