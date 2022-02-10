@@ -38,6 +38,8 @@
         - [Answers](exercises/type-confusion/answers.md)
     - [Demonstrate pointer injection](exercises/pointer-injection/README.md)
         - [Answers](exercises/pointer-injection/answers.md)
+    - [Adapt a C Program to CHERI C](exercises/adapt-c/README.md)
+        - [Answers](exercises/adapt-c/answers.md)
     - [Demonstrate pointer revocation](exercises/pointer-revocation/README.md)
         - [Answers](exercises/pointer-revocation/answers.md)
 - [Focused Adversarial Missions](missions/README.md)
