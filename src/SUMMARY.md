@@ -27,6 +27,8 @@
         - [Answers](exercises/type-confusion/answers.md)
     - [Demonstrate pointer injection](exercises/pointer-injection/README.md)
         - [Answers](exercises/pointer-injection/answers.md)
+    - [CheriABI Showcase](exercises/cheriabi/README.md)
+        - [Answers](exercises/cheriabi/answers.md)
     - [Demonstrate pointer revocation](exercises/pointer-revocation/README.md)
         - [Answers](exercises/pointer-revocation/answers.md)
 - [Focused Adversarial Missions](missions/README.md)
