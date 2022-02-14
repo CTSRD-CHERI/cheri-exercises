@@ -1,5 +1,5 @@
 [book]
-authors = ["John Baldwin", "Jessica Clarke", "Brooks Davis", "Wes Filardo", "Robert N. M. Watson"]
+authors = ["John Baldwin", "Jessica Clarke", "Brooks Davis", "Nathaniel Wesley Filardo", "Robert N. M. Watson"]
 language = "en"
 multilingual = false
 src = "src"

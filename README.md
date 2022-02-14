@@ -2,9 +2,11 @@
 
 # Adversarial CHERI Exercises and Missions
 
-Robert N. M. Watson (University of Cambridge), Brooks Davis (SRI
-International), Wes Filardo (Microsoft Research), Jessica Clarke (University of
-Cambridge) and John Baldwin (Ararat River Consulting).
+Robert N. M. Watson (University of Cambridge),
+Brooks Davis (SRI International),
+Nathaniel Wesley Filardo (Microsoft Research),
+Jessica Clarke (University of Cambridge) and
+John Baldwin (Ararat River Consulting).
 
 This repository contains a series of skills development and adversarial
 exercises for [CHERI](http://cheri-cpu.org), specifically aimed at the
