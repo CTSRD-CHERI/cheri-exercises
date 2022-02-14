@@ -1,6 +1,6 @@
 <!-- ANCHOR: cover -->
 
-# Adversarial CHERI Exercises and Missions
+# CHERI Exercises and Missions
 
 Robert N. M. Watson (University of Cambridge),
 Brooks Davis (SRI International),
@@ -8,9 +8,10 @@ Nathaniel Wesley Filardo (Microsoft Research),
 Jessica Clarke (University of Cambridge) and
 John Baldwin (Ararat River Consulting).
 
-This repository contains a series of skills development and adversarial
-exercises for [CHERI](http://cheri-cpu.org), specifically aimed at the
-CHERI-RISC-V implementation.
+This repository contains a series of skills development exercises for
+[CHERI](http://cheri-cpu.org), aimed at familiarizing C/C++ programmers with the
+nuances of CHERI C.  Thereafter, it contains more open-ended *adversarial*
+missions, specifically intended to be of interest to *red teams*.
 
 ## Acknowledgements
 

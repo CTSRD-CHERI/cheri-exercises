@@ -3,7 +3,7 @@ authors = ["John Baldwin", "Jessica Clarke", "Brooks Davis", "Nathaniel Wesley F
 language = "en"
 multilingual = false
 src = "src"
-title = "Adversarial CHERI Exercises and Missions"
+title = "CHERI Exercises and Missions"
 
 [output.html]
 additional-css = ["src/custom.css"]

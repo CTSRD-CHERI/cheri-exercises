@@ -1,6 +1,6 @@
 # Summary
 
-[Adversarial CHERI Exercises and Missions](cover/README.md)
+[CHERI Exercises and Missions](cover/README.md)
 - [Introduction](introduction/README.md)
     - [Background reading](introduction/background.md)
     - [Obtaining CHERI Compilers and Simulators](introduction/get.md)
