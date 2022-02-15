@@ -3,7 +3,7 @@
 2. Example session:
 ```
 (gdb) r
-Starting program: /root/buffer-overflow-fnptr-riscv 
+Starting program: /root/buffer-overflow-fnptr-baseline
 
 Program received signal SIGSEGV, Segmentation fault.
 0x00000000aaaaaaaa in ?? ()
@@ -26,4 +26,5 @@ ca1            0xd11720000801800600000000aaaaaaaa       0xaaaaaaaa [rxR,0xaaaa00
 (gdb) x/i $pcc
 => 0x101c5e <main+58>:      cjalr   cra,ca1
 ```
+
 The program attempted to load an instruction via an untagged capability `ca1`.
