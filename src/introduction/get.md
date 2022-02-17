@@ -3,13 +3,13 @@
 <!-- Name is known in-book -->
 ## Using the CHERI Software Release
 
-The [CheriBSD Software Release](https://cheri-dist.cl.cam.ac.uk/) available from the
-University of Cambridge includes a docker environment and pre-built compilers
-and emulators for both CHERI-RISC-V and Morello, as well as [pre-built exercise
-binaries](./run-release.md) that can be run out of the box without first needing
-to cross-compile.  Follow the instructions in the release notes and then proceed
-to [check out the exercises](./get-us.md) and then to [cross
-compilation](./cross-ccc-release.md).
+The [CheriBSD Software Release](https://cheri-dist.cl.cam.ac.uk/) available from
+the University of Cambridge includes a docker environment and pre-built
+compilers and emulators for both CHERI-RISC-V and Morello<!-- XXX as well as
+[pre-built exercise binaries](./run-release.md) that can be run out of the box
+without first needing to cross-compile-->.  Follow the instructions in the
+release notes and then proceed to [check out the exercises](./get-us.md) and
+then to [cross compilation](./cross-ccc-release.md).
 
 <!-- Name is known in-book -->
 ## From Source
@@ -19,7 +19,7 @@ compilation](./cross-ccc-release.md).
 
 <span class="ctsrd-large">⚠</span> This procedure takes *a while* as it involves
 building a full LLVM and CheriBSD.  If you are in a hurry and can, you are
-encouraged to go use the CHERI Sofwtare Release above.
+encouraged to go use the CHERI Software Release above.
 
 </div>
 

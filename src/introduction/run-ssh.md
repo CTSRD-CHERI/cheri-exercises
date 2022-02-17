@@ -1,5 +1,14 @@
 # Using SSH With The Emulated System
 
+<!-- Do not tidy the blank lines.  I am so sorry -->
+<div class="ctsrd-frame ctsrd-standout">
+
+This section is optional, unless you are using [the Arm Morello
+FVP](./run-fvp.md)!  If you are using [qemu](./run-qemu.md), we suggest [using
+SMB](./run-qemu-smb.md) to work with host files.
+
+</div>
+
 The CheriBSD system permits root login over ssh using ssh keys, but it does not
 ship with keys installed out of the box.
 
@@ -34,7 +43,7 @@ from the unpacked tarball).  It therefore suffices to create
 `~/cheri/extra-files/root/.ssh/authorized_keys` with your SSH public key.
 
 To check that this worked, have cheribuild [rebuild the disk
-image](./build-disk.md), run the system however you like, and verify that
+image](./run-build-disk.md), run the system however you like, and verify that
 `~root/.ssh/authorized_keys` exists.
 
 ## Running the Simulator with SSH Port Forwarding

@@ -15,11 +15,16 @@ baseline and CHERI-enabled targets:
    binary name of `print-pointer-baseline`.  For example, for the ARMv8
    baseline, from the root directory of this book,
 ```
-./tools/ccc aarch64 -o ~/cheri/build/print-pointer-baseline ./exercises/compile-and-run/print-pointer.c
+./tools/ccc riscv64 -o ~/cheri/build/print-pointer-baseline ./src/exercises/compile-and-run/print-pointer.c
 ```
-   (Recall that you may have to vary the `-o` target, especially if you are
+
+   ⚠ Recall that you may have to vary the `-o` target, especially if you are
    [cross-compiling with the CheriBSD Software
-   Release](../../introduction/cross-ccc-release.md).)
+   Release](../../introduction/cross-ccc-release.md).  In that case, may we
+   suggest something like
+```
+./tools/ccc riscv64 -o /build/print-pointer-baseline ./src/exercises/compile-and-run/print-pointer.c
+```
 
    The C type `ptraddr_t` in the above is likely unfamiliar.  It is provided by
    CHERI C environments and is an integral type whose size is size of an
@@ -39,8 +44,9 @@ baseline and CHERI-enabled targets:
 
 Now repeat this exercise while building for a CHERI-enabled target:
 
-4. Compile `print-pointer.c` with a CHERI-enabled target (such as `morello`) and
-   a binary name of `print-pointer-cheri`.
+4. Compile `print-pointer.c` with a CHERI-enabled target (such as
+   `riscv64-purecap` or `morello-purecap`) and a binary name of
+   `print-pointer-cheri`.
 
 5. Run the binary: it should print a pointer size of `16` and address size
    of `8`.

@@ -6,7 +6,7 @@ In general, we use `samba` to bring parts of the host filesystem into the guest.
 
 For the purposes of this book, it is sufficient to bring just the build root in:
 ```
-mount_smbfs -I 10.0.2.4 -N //10.0.2.4/build_root /mnt
+mkdir -p /buildroot && mount_smbfs -I 10.0.2.4 -N //10.0.2.4/build_root /buildroot
 ```
 
 Programs can be executed directly over the smb mount, but core dumping over smb
@@ -29,4 +29,9 @@ Providing /output/rootfs-riscv64-purecap over SMB to the guest. Use `mkdir -p /r
 ```
 
 Feel free to run any of these commands, or your preferred variations, to access
-more of the host system.
+more of the host system.  Most likely, mounting the source and/or build roots
+will be the most useful as we continue:
+```
+mkdir -p /srcroot && mount_smbfs -I 10.0.2.4 -N //10.0.2.4/source_root /srcroot
+mkdir -p /buildroot && mount_smbfs -I 10.0.2.4 -N //10.0.2.4/build_root /buildroot
+```
