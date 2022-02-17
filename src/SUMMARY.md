@@ -28,6 +28,8 @@
         - [Answers](exercises/buffer-overflow-stack/answers.md)
     - [Exercise an inter-global-object buffer overflow](exercises/buffer-overflow-global/README.md)
         - [Answers](exercises/buffer-overflow-global/answers.md)
+    - [Demonstrate CHERI Tag Protection](exercises/cheri-tags/README.md)
+        - [Answers](exercises/cheri-tags/answers.md)
     - [Exercise a subobject buffer overflow](exercises/buffer-overflow-subobject/README.md)
         - [Answers](exercises/buffer-overflow-subobject/answers.md)
     - [Corrupt a control-flow pointer using a subobject buffer overflow](exercises/control-flow-pointer/README.md)
