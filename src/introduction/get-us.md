@@ -10,7 +10,7 @@ build](./get.md#from-source), you should check out a copy of the exercises
 themselves into that source directory.  In the root of the unpacked release or
 in `~/cheri` as appropriate, run
 ```
-git clone https://github.com/CTSRD-CHERI/cheri-exercises.git
+git clone https://github.com/nwf/cheri-exercises.git
 ```
 If you have already checked out the repository, you may instead simply move it
 into place.
