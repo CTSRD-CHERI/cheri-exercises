@@ -6,25 +6,35 @@ CheriBSD [running in your preferred emulation
 environment](../../introduction/run.md).
 
 For this exercise, we will use the contents of `src/exercises/compile-and-run`;
-the salient files are also printed [below](#src).
+the salient files are also printed [below](#source-files).
 
 The first test program is written in conventional C and can be compiled on both
 baseline and CHERI-enabled targets:
 
 1. Compile `print-pointer.c`, below, with either a *baseline* target and a
-   binary name of `print-pointer-baseline`.  For example, for the ARMv8
-   baseline, from the root directory of this book,
-```
-./tools/ccc riscv64 -o ~/cheri/build/print-pointer-baseline ./src/exercises/compile-and-run/print-pointer.c
-```
+   binary name of `print-pointer-baseline`.  For example, use one of these,
+   from the root directory of this book, to compile the baseline program:
 
-   ⚠ Recall that you may have to vary the `-o` target, especially if you are
-   [cross-compiling with the CheriBSD Software
+   ```
+   ./tools/ccc aarch64 -o ~/cheri/build/print-pointer-baseline ./src/exercises/compile-and-run/print-pointer.c
+   ```
+
+   ```
+   ./tools/ccc riscv64 -o ~/cheri/build/print-pointer-baseline ./src/exercises/compile-and-run/print-pointer.c
+   ```
+
+   <!-- Do not tidy the blank lines.  I am so sorry -->
+   <div class="ctsrd-frame ctsrd-standout">
+
+   <span class="ctsrd-large">⚠</span> Recall that you may have to vary the `-o`
+   target, especially if you are [cross-compiling with the CheriBSD Software
    Release](../../introduction/cross-ccc-release.md).  In that case, may we
    suggest something like
-```
-./tools/ccc riscv64 -o /build/print-pointer-baseline ./src/exercises/compile-and-run/print-pointer.c
-```
+   ```
+   ./tools/ccc riscv64 -o /build/print-pointer-baseline ./src/exercises/compile-and-run/print-pointer.c
+   ```
+
+   </div>
 
    The C type `ptraddr_t` in the above is likely unfamiliar.  It is provided by
    CHERI C environments and is an integral type whose size is size of an
@@ -61,7 +71,8 @@ on, CHERI-enabled targets:
    the size of the type it points to.  We defer investigation of *how* this
    comes to be to [a later exercise](../debug-and-disassemble).
 
-## <a id="src">Source Files
+<!-- Name is known above -->
+## Source Files
 
 **print-pointer.c:**
 ```C
