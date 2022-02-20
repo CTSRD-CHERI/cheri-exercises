@@ -13,6 +13,22 @@ This repository contains a series of skills development exercises for
 nuances of CHERI C.  Thereafter, it contains more open-ended *adversarial*
 missions, specifically intended to be of interest to *red teams*.
 
+## Workshop at ASPLOS 2020
+
+The chapters of the book have been specifically reviewed and prepared for the
+[CHERI Workshop at ASPLOS 2022](https://www.cl.cam.ac.uk/research/security/ctsrd/cheri/workshops/2022asplos/).
+If you are participating in the workshop, you should consider chapters
+highlighted with the icon 🍒 to prepare yourself for the workshop:
+* **Before the workshop**, you should read subsections from the
+[Introduction](introduction/README.md) chapter. We recommend to use the CHERI
+Software Release with Docker if it is your first experience with CHERI.
+Make sure to follow instructions for **CHERI-RISC-V**, not Morello.
+* During the workshop, we will work with subsections from the
+[ASPLOS'22 Exercises](#) chapter.
+
+The rest of the chapters are included in this book to provide you additional
+content to study CHERI and customise your environment, as your time permits.
+
 ## Acknowledgements
 
 The authors gratefully acknowledge Reuben Broadfoot, Lawrence Esswood, Brett
