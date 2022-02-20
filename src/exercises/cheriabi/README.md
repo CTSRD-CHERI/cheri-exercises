@@ -27,13 +27,15 @@ permission when delegating access to address space.
 1. Compile `perm-vmem.c` for both the baseline (`perm-vmem-baseline`) and
    CHERI-enabled (`perm-vmem-cheri`) architectures.
 
-2. Run these programs and observe their outputs.
+2. Run these programs and observe their outputs.  The `printf` format strings
+   for capabilities, `%p` and `%#p`, elide some usually-excessive details, and
+   `CHERI_PERM_SW_VMEM` is generally regarded as one such.  `gdb`'s
+   pretty-printing, similarly.  However, we can programmatically extract the
+   permissions field and display it.
 
-3. The `printf` format strings for capabilities, `%p` and `%#p`, elide some
-   usually-excessive details, and `CHERI_PERM_SW_VMEM` is generally regarded as
-   one such.  `gdb`'s pretty-printing, similarly.
-
-...
+3. Modify `perm-vmem.c` to verify that `madvise(MADV_FREE)` and
+   `mmap(MAP_FIXED)` also are permitted for the capability returned directly
+   from `mmap` but are not permitted for the heap-derived pointer.
 
 ## The Kernel as a Potentially Confused Deputy
 
@@ -58,7 +60,7 @@ intent.
    exercise](../buffer-overflow-stack), contrast the behaviors of the two
    CHERI-enabled programs.
 
-## Initial Process Construction
+## (Extra Credit!) Initial Process Construction
 
 We have largely focused on program behavior *after* it has been loaded and is
 running.  Let us look in a little more detail at some aspects of the initial
@@ -67,20 +69,33 @@ document, and is perhaps best summarized as "here be dragons", we can
 nevertheless take a quick glance at some interesting features of CheriABI
 startup.
 
-1. Launch `gdb ...` and have it start the program and stop before running any
-   instructions, with `starti`.  Where do we find ourselves?
+1. Compile `print-more.c` for both the baseline (`print-more-baseline`) and the
+   CHERI-enabled (`print-more-cheri`) architectures.
 
-2. Use `info inferiors` to obtain the child process identifier (PID) and
+2. Run both these programs and observe their outputs.  As might be predicted,
+   the CHERI version reports a wide variety of capabilities to different parts
+   of the address space.  Run both programs several times; what do you observe?
+
+   Let us examine several interesting aspects of the reported capabilities.
+
+3. Launch `gdb ./print-more-cheri` and have it start the program and stop before
+   running any instructions, with `starti`.  Where do we find ourselves?
+
+4. Use `info inferiors` to obtain the child process identifier (PID) and
    `!procstat vm NNN` (replacing `NNN` with the child PID) to show the initial
    address space arranged by the kernel.
 
-3. Just because the page mapping exist, however, CHERI programs need to have
+   Which of these initial mappings are targeted by the values reported for
+   `&rodata_const`, `&relro_ptr`, `&rw_ptr` and `printf` in step 2?  What are
+   the permissions for these mappings?
+
+5. Just because the page mapping exist, however, CHERI programs need to have
    capabilities installed to access them.  Here at the very beginning of a
    process's life, we are in a good position to see the *root capabilities*
    that the kernel makes available.  Use `info registers` to see the initial
    contents of the register file.
 
-4. Let's begin our tour with `csp`, the capability stack pointer register.
+6. Let's begin our tour with `csp`, the capability stack pointer register.
 
    First, what may strike you as surprising (and why) about the stack pointer
    being replaced by a capability?
@@ -94,7 +109,10 @@ startup.
    explain how the two aspects above work in tandem to mitigate this class of
    vulnerability.
 
-5. Having access to the stack is all well and good, but surely there is more to
+   Third, contrast the relative order of `&argv[0]` and `&stack_local` as
+   reported on the two different architectures in step 2 above.
+
+7. Having access to the stack is all well and good, but surely there is more to
    a process than that.  At the beginning of a CheriABI process's life, the
    capability in `ca0` (the first "argument register") points to the "auxiliary
    vector", an array of `Elf_Auxinfo` structures constructed by the kernel.
@@ -112,8 +130,48 @@ startup.
    ```
    Use the more human-friendly `info auxv` to interpret the `a_type` values.
 
-...
+   In addition to the `AT_ARGV` value we have already (indirectly) seen above,
+   there are many other capabilities to nearby parts of the address space,
+   including the initial environment vector (`AT_ENVV`) and the executable path
+   (`AT_EXECPATH`).
 
+   More usefully, however,
+
+   - `AT_PHDR` supplies a read/write capability to the loaded executable.
+
+   - `AT_ENTRY` supplies a read/execute capability to the loaded executable,
+     pointed at its entrypoint.
+
+   - `AT_BASE` supplies a full read/write/execute capability to the program's
+     "interpreter" (dynamic loader).  The elevated permissions here allow the
+     loader to (relatively) easily relocate *itself* early in execution.
+
+   From which of these capabilities are the displayed values of `&rodata_const`,
+   `&relro_ptr`, and `&rw_ptr` from step 2 sourced?  What permissions have been
+   shed in the derivation?  How do these permissions differ from those of the
+   underlying page mappings?
+
+8. The displayed value for `printf` is tagged as being a `(sentry)`.
+   Modify the program to attempt to display the result of computing either
+
+   - `*(char *)(printf)` or
+   - `(void*)((uintptr_t)printf + 1)`.
+
+   Compile and run this modified version (or both).  What happens?
+
+   Sentry (short for "Sealed Entry") capabilities are a special form of
+   capabilities: they are *immutable* and *inert*, conveying to the bearer no
+   authority to the target, until they become the program counter, at which
+   point they are unsealed into being an ordinary capability.  Thus, we can
+   neither read through nor mutate our handle to `printf`, yet we can jump to
+   it.
+
+   If you are familiar with [Return Oriented
+   Programming](https://hovav.net/ucsd/dist/geometry.pdf) and [Jump Oriented
+   Programming](https://www.csc2.ncsu.edu/faculty/xjiang4/pubs/ASIACCS11.pdf),
+   you may wish to consider the cumulative challenge added by CHERI's
+   architectural provenance requirement combined with pervasive use of sentry
+   capabilities for dynamically resolved symbols.
 
 ## Source
 
@@ -125,4 +183,9 @@ startup.
 **kern-read-over.c**
 ```C
 {{#include kern-read-over.c}}
+```
+
+**print-more.c**
+```C
+{{#include print-more.c}}
 ```
