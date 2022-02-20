@@ -3,7 +3,7 @@ authors = ["John Baldwin", "Jessica Clarke", "Brooks Davis", "Nathaniel Wesley F
 language = "en"
 multilingual = false
 src = "src"
-title = "CHERI Exercises and Missions"
+title = "CHERI Exercises and Missions (ASPLOS'22 Edition)"
 
 [output.html]
 additional-css = ["src/custom.css"]
