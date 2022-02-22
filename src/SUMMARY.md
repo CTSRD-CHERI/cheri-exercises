@@ -19,6 +19,7 @@
     - [Inspecting CHERI Programs](introduction/inspect.md)
         - [Disassembly](introduction/inspect-disassemble.md)
         - [Debugging](introduction/inspect-debug.md)
+    - [Cheatsheet for the CHERI Software Release](introduction/cheatsheet-release.md)
 - [ASPLOS'22 Exercises]()
     - [Compile and run baseline and CHERI-enabled programs](exercises/compile-and-run/README.md)
         - [Answers](exercises/compile-and-run/answers.md)
