@@ -45,4 +45,7 @@ Release](./get.md#using-the-cheri-software-release) did not ship with all the
 requisite tooling to make disk images.  There should be an erratum notice and a
 suitable additional tarball to download, which will provide the requisite
 tooling.  However, if there is not, it suffices to ask `cheribuild` to run
-`cheribsd-${arch}-purecap --freebsd-host-tools-only` before 
+`cheribsd-${arch}-purecap --freebsd-host-tools-only` before
+`disk-image-${arch}-purecap`.  The use of `--freebsd-host-tools-only` will
+significantly save time and disk space, not rebuilding all of CheriBSD and the
+root filesystems already shipped with the release.
