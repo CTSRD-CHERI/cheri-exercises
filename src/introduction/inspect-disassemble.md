@@ -25,10 +25,15 @@ two different ways to generate human-readable listings of instructions:
   LLVM targets, adding `-emit-llvm` to the compiler arguments will show,
   instead, the LLVM Intermediate Representation (IR).
 
+- And, last, a CHERI-aware `gdb`, either inside the CheriBSD world or outside on
+  the host, offers a `disassemble` command that will generally work.  (We
+  generally prefer `LLVM`-based tools for deeper investigations as they are
+  implicitly in synchrony with the compiler.)
+
 <!-- Name is known in-book -->
 ## With llvm-objdump
 
- `llvm-objdump` on the *host* (that is, outside the CHERI
+`llvm-objdump` on the *host* (that is, outside the CHERI
 emulation).  The location of the appropriate version of this tool depends on
 your choice of target.  If you are using `aarch64` and `morello` targets,
 then...
