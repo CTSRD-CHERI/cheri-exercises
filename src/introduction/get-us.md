@@ -8,7 +8,8 @@ Once you have a CHERI source directory, either by unpacking the [CHERI Software
 Stack](https://cheri-dist.cl.cam.ac.uk/) or by performing a [source
 build](./get.md#from-source), you should check out a copy of the exercises
 themselves into that source directory.  In the root of the unpacked release or
-in `~/cheri` as appropriate, run
+in `~/cheri` as appropriate, make sure a `cheri-exercises/` directory does not
+exist. If it exists (e.g., it was shipped with a release), remove it and run:
 ```
 git clone https://github.com/nwf/cheri-exercises.git
 ```

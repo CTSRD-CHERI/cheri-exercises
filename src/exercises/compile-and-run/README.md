@@ -28,8 +28,8 @@ baseline and CHERI-enabled targets:
 
    <span class="ctsrd-large">⚠</span> Recall that you may have to vary the `-o`
    target, especially if you are [cross-compiling with the CheriBSD Software
-   Release](../../introduction/cross-ccc-release.md).  In that case, may we
-   suggest something like
+   Release](../../introduction/cross-ccc-release.md) within a Docker container.
+   In that case, may we suggest something like
    ```
    ./tools/ccc riscv64 -o /build/print-pointer-baseline ./src/exercises/compile-and-run/print-pointer.c
    ```

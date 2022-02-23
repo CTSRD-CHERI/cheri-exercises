@@ -7,7 +7,8 @@ using them in an ad hoc manner as we will do here is possible, but may take
 some getting used to.
 
 Begin by getting a shell in the docker container.  `cheribuild` can do this for
-you.  From the root of the unpacked release, run:
+you.  From the root directory of the unpacked release (`cheri/` by default),
+run:
 ```
 ./cheribuild/docker-cheribuild.py sdk-shell
 ```
