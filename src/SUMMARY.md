@@ -37,8 +37,10 @@
         - [Answers](exercises/adapt-c/answers.md)
     - [CheriABI Showcase](exercises/cheriabi/README.md)
         - [Answers](exercises/cheriabi/answers.md)
+<!--
     - [Adapt a simple Heap Allocator to CHERI](exercises/adapt-malloc/README.md)
         - [Answers](exercises/adapt-malloc/answers.md)
+-->
 - [Additional Development Exercises](exercises/README.md)
     - [Disassemble and debug baseline and CHERI-enabled programs](exercises/debug-and-disassemble/README.md)
         - [Answers](exercises/debug-and-disassemble/answers.md)
