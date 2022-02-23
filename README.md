@@ -13,7 +13,7 @@ This repository contains a series of skills development exercises for
 nuances of CHERI C.  Thereafter, it contains more open-ended *adversarial*
 missions, specifically intended to be of interest to *red teams*.
 
-## Workshop at ASPLOS 2020
+## Workshop at ASPLOS 2022
 
 The chapters of the book have been specifically reviewed and prepared for the
 [CHERI Workshop at ASPLOS 2022](https://www.cl.cam.ac.uk/research/security/ctsrd/cheri/workshops/2022asplos/).
