@@ -37,6 +37,6 @@ to sit among the exercise source files.  Because the docker environment binds
 outside of `/source` when cross-compiling, by using `-o /build/foo`, for
 example, in the compiler invocations.  (Many of the examples will use relative
 paths to reach the build directory, but these will need to be altered as just
-described.  We apologize for the inconveniencea.)  Bear this in mind and
+described.  We apologize for the inconvenience.)  Bear this in mind and
 proceed to read about the [cross-compiler wrapper](./cross-ccc.md) we will use
 for the exercises in this book.
