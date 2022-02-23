@@ -10,7 +10,9 @@ things!
 
 2. Run both programs and observe the output.
 
-3. Examine the disassembly of the construction of `q`,
+3. Examine the disassembly, using any of [the techniques given
+   earlier](../../introduction/inspect-disassemble.md) of the construction of
+   `q`,
    ```
    uint8_t *q = (uint8_t*)(((uintptr_t)p.ptr) & ~0xFF) + 5;
    ```
