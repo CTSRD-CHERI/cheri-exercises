@@ -24,7 +24,7 @@ highlighted with the icon 🍒 to prepare yourself for the workshop:
 Software Release with Docker if it is your first experience with CHERI.
 Make sure to follow instructions for **CHERI-RISC-V**, not Morello.
 * During the workshop, we will work with subsections from the
-[ASPLOS'22 Exercises](#) chapter.
+[ASPLOS'22 Exercises](../exercises/asplos22.md) chapter.
 
 The rest of the chapters are included in this book to provide you additional
 content to study CHERI and customise your environment, as your time permits.
