@@ -8,9 +8,10 @@ the University of Cambridge includes a docker environment and pre-built
 compilers and emulators for both CHERI-RISC-V and Morello<!-- XXX as well as
 [pre-built exercise binaries](./run-release.md) that can be run out of the box
 without first needing to cross-compile-->.  Follow the instructions in the
-[release notes](https://cheri-dist.cl.cam.ac.uk/) and make sure you unpack
-a release in your home directory. As a result, a `cheri/` directory should exist
-in your home directory. After that, proceed to
+[release notes](https://cheri-dist.cl.cam.ac.uk/).  This book assumes that you
+have unpacked the release in your home directory, resulting in a `~/cheri`
+directory.  (You are welcome to do otherwise, but you will need to occasionally
+adjust the examples throughout the book to match.)  After that, proceed to
 [check out the exercises](./get-us.md) and then to
 [cross compilation](./cross-ccc-release.md).
 

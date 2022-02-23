@@ -20,7 +20,7 @@ The chapters of the book have been specifically reviewed and prepared for the
 If you are participating in the workshop, you should consider chapters
 highlighted with the icon 🍒 to prepare yourself for the workshop:
 * **Before the workshop**, you should read subsections from the
-[Introduction](introduction/README.md) chapter. We recommend to use the CHERI
+[Introduction](../introduction) chapter. We recommend to use the CHERI
 Software Release with Docker if it is your first experience with CHERI.
 Make sure to follow instructions for **CHERI-RISC-V**, not Morello.
 * During the workshop, we will work with subsections from the
