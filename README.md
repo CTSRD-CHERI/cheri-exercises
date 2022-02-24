@@ -5,8 +5,9 @@
 Robert N. M. Watson (University of Cambridge),
 Brooks Davis (SRI International),
 Nathaniel Wesley Filardo (Microsoft Research),
-Jessica Clarke (University of Cambridge) and
-John Baldwin (Ararat River Consulting).
+Jessica Clarke (University of Cambridge),
+John Baldwin (Ararat River Consulting) and
+Konrad Witaszczyk (University of Cambridge).
 
 This repository contains a series of skills development exercises for
 [CHERI](http://cheri-cpu.org), aimed at familiarizing C/C++ programmers with the
