@@ -38,7 +38,7 @@
    ca4            0xd17d00000409b00400000000407c7020       0x407c7020 [rwRW,0x407c7000-0x407c7020]
    ```
 
-   The capability in ca4 is, as expected, a reference to the first allocation
+   The capability in `ca4` is, as expected, a reference to the first allocation
    (`b1`).  The bounds on this capability must have been imposed *by malloc*.
 
 4. Example output:
