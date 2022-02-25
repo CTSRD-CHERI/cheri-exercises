@@ -38,10 +38,10 @@ main(void)
 		char upper[bsz] = { 0 };
 		char lower[bsz] = { 0 };
 
+		waitpid(pid, NULL, 0);
+
 		printf("lower=%p upper=%p\n", lower, upper);
 		assert((ptraddr_t)upper == (ptraddr_t)&lower[sizeof(lower)]);
-
-		waitpid(pid, NULL, 0);
 
 		res = read(fds[1], lower, sizeof(lower) + sizeof(upper));
 		assert(res != 0);

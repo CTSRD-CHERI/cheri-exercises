@@ -37,8 +37,8 @@
 
    And from a CHERI-enabled architecture:
    ```
-   lower=0x3fffdfff28 upper=0x3fffdfff38
    Write OK
+   lower=0x3fffdfff28 upper=0x3fffdfff38
    Bad read (Bad address); lower[0]=0x10 upper[0]=0x0
    ```
 

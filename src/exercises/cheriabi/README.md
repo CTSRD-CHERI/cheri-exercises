@@ -5,6 +5,29 @@ CheriBSD processes are constructed, how function calls are made, how a process
 interacts with the kernel through system calls, and other such foundational
 details.
 
+## The Kernel Voluntarily Honors Capability Bounds
+
+`kern-read-over.c` demonstrates a (potential) loss of spatial safety when
+pointers are passed from userspace to the kernel.  The kernel, by convention,
+has full access to all of userspace memory.  Even when CheriBSD is running
+CheriABI programs, this is true: the kernel holds a capability with full RWX
+access to all userspace addresses.  Therefore, the kernel can act as a
+*confused deputy*, accessing memory with its legitimate authority but without
+intent.
+
+1. Compile `kern-read-over.c` for both the baseline (`kern-read-over-baseline`)
+   and CHERI-enabled (`kern-read-over-cheri`) architectures.
+
+2. Run these programs and observe their outputs.
+
+3. Focusing on the `read()` system call, what happens in the two versions of the
+   program.  When, in particular, does it look like the CHERI version notices
+   something is amiss?
+
+4. If you have done the [inter-stack-object buffer overflow
+   exercise](../buffer-overflow-stack), contrast the behaviors of the two
+   CHERI-enabled programs.
+
 ## The Process Memory Map
 
 In most UNIX programs, the rights to manipulate the virtual memory map are
@@ -36,29 +59,6 @@ permission when delegating access to address space.
 3. Modify `perm-vmem.c` to verify that `madvise(MADV_FREE)` and
    `mmap(MAP_FIXED)` also are permitted for the capability returned directly
    from `mmap` but are not permitted for the heap-derived pointer.
-
-## The Kernel as a Potentially Confused Deputy
-
-`kern-read-over.c` demonstrates a (potential) loss of spatial safety when
-pointers are passed from userspace to the kernel.  The kernel, by convention,
-has full access to all of userspace memory.  Even when CheriBSD is running
-CheriABI programs, this is true: the kernel holds a capability with full RWX
-access to all userspace addresses.  Therefore, the kernel can act as a
-*confused deputy*, accessing memory with its legitimate authority but without
-intent.
-
-1. Compile `kern-read-over.c` for both the baseline (`kern-read-over-baseline`)
-   and CHERI-enabled (`kern-read-over-cheri`) architectures.
-
-2. Run these programs and observe their outputs.
-
-3. Focusing on the `read()` system call, what happens in the two versions of the
-   program.  When, in particular, does it look like the CHERI version notices
-   something is amiss?
-
-4. If you have done the [inter-stack-object buffer overflow
-   exercise](../buffer-overflow-stack), contrast the behaviors of the two
-   CHERI-enabled programs.
 
 ## (Extra Credit!) Initial Process Construction
 
@@ -175,14 +175,14 @@ startup.
 
 ## Source
 
-**perm-vmem.c**
-```C
-{{#include perm-vmem.c}}
-```
-
 **kern-read-over.c**
 ```C
 {{#include kern-read-over.c}}
+```
+
+**perm-vmem.c**
+```C
+{{#include perm-vmem.c}}
 ```
 
 **print-more.c**
