@@ -59,16 +59,16 @@ __FBSDID("$FreeBSD$");
 
 typedef uintptr_t ptroff_t;
 
+extern int bflag, eflag, lflag, nflag, sflag, tflag, vflag;
+extern int rval;
+extern const char *filename;
+
 static ssize_t
 write_off(int fildes, const void *buf, ptroff_t off, size_t nbyte)
 {
 
 	return (write(fildes, (const void *)(off + (uintptr_t)buf), nbyte));
 }
-
-extern int bflag, eflag, lflag, nflag, sflag, tflag, vflag;
-extern int rval;
-extern const char *filename;
 
 static void
 verbose_cat(long file)
