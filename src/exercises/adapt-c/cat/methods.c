@@ -199,7 +199,7 @@ raw_cat(long file)
 	while ((nr = read(rfd, buf, bsize)) > 0)
 		for (off = 0; nr; nr -= nw, off += nw)
 			if ((nw = write_off(wfd, buf, off, (size_t)nr)) < 0)
-				err(1, "stdout");
+				err(1, "write(2) failed");
 	if (nr < 0) {
 		warn("%s", filename);
 		rval = 1;
