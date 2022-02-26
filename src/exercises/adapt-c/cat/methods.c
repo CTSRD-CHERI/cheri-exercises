@@ -57,6 +57,15 @@ __FBSDID("$FreeBSD$");
 
 #include "cat.h"
 
+typedef uintptr_t ptroff_t;
+
+ssize_t
+write_pos(int fildes, const void *buf, ptroff_t pos, size_t nbyte)
+{
+
+	return (write(fildes, (const void *)(pos + (uintptr_t)buf), nbyte));
+}
+
 extern int bflag, eflag, lflag, nflag, sflag, tflag, vflag;
 extern int rval;
 extern const char *filename;
@@ -189,7 +198,7 @@ raw_cat(long file)
 	}
 	while ((nr = read(rfd, buf, bsize)) > 0)
 		for (off = 0; nr; nr -= nw, off += nw)
-			if ((nw = write(wfd, buf + off, (size_t)nr)) < 0)
+			if ((nw = write_pos(wfd, buf, off, (size_t)nr)) < 0)
 				err(1, "stdout");
 	if (nr < 0) {
 		warn("%s", filename);
