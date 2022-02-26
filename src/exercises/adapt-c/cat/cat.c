@@ -166,10 +166,10 @@ scanfiles(char *argv[], int cooked __unused)
 			rval = 1;
 		} else if (cooked) {
 			if (fd == STDIN_FILENO)
-				cook_cat(stdin);
+				verbose_cat(stdin);
 			else {
 				fp = fdopen(fd, "r");
-				cook_cat(fp);
+				verbose_cat(fp);
 				fclose(fp);
 			}
 		} else {

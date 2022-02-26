@@ -62,7 +62,7 @@ extern int rval;
 extern const char *filename;
 
 void
-cook_cat(FILE *fp)
+verbose_cat(FILE *fp)
 {
 	int ch, gobble, line, prev;
 	wint_t wch;
