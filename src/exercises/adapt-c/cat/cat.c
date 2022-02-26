@@ -74,14 +74,8 @@ static const char *filename;
 
 static void usage(void) __dead2;
 static void scanfiles(char *argv[], int cooked);
-#ifndef BOOTSTRAP_CAT
 static void cook_cat(FILE *);
-#endif
 static void raw_cat(int);
-
-#ifndef NO_UDOM_SUPPORT
-static int udom_open(const char *path, int flags);
-#endif
 
 /*
  * Memory strategy threshold, in pages: if physmem is larger than this,
@@ -98,19 +92,7 @@ static int udom_open(const char *path, int flags);
  */
 #define	BUFSIZE_SMALL (MAXPHYS)
 
-
-/*
- * For the bootstrapped cat binary (needed for locked appending to METALOG), we
- * disable all flags except -l and -u to avoid non-portable function calls.
- * In the future we may instead want to write a small portable bootstrap tool
- * that locks the output file before writing to it. However, for now
- * bootstrapping cat without multibyte support is the simpler solution.
- */
-#ifdef BOOTSTRAP_CAT
-#define SUPPORTED_FLAGS "lu"
-#else
 #define SUPPORTED_FLAGS "belnstuv"
-#endif
 
 int
 main(int argc, char *argv[])
@@ -184,9 +166,7 @@ scanfiles(char *argv[], int cooked __unused)
 {
 	int fd, i;
 	char *path;
-#ifndef BOOTSTRAP_CAT
 	FILE *fp;
-#endif
 
 	i = 0;
 	fd = -1;
@@ -197,15 +177,10 @@ scanfiles(char *argv[], int cooked __unused)
 		} else {
 			filename = path;
 			fd = open(path, O_RDONLY);
-#ifndef NO_UDOM_SUPPORT
-			if (fd < 0 && errno == EOPNOTSUPP)
-				fd = udom_open(path, O_RDONLY);
-#endif
 		}
 		if (fd < 0) {
 			warn("%s", path);
 			rval = 1;
-#ifndef BOOTSTRAP_CAT
 		} else if (cooked) {
 			if (fd == STDIN_FILENO)
 				cook_cat(stdin);
@@ -214,7 +189,6 @@ scanfiles(char *argv[], int cooked __unused)
 				cook_cat(fp);
 				fclose(fp);
 			}
-#endif
 		} else {
 			raw_cat(fd);
 			if (fd != STDIN_FILENO)
@@ -226,7 +200,6 @@ scanfiles(char *argv[], int cooked __unused)
 	}
 }
 
-#ifndef BOOTSTRAP_CAT
 static void
 cook_cat(FILE *fp)
 {
@@ -318,7 +291,6 @@ ilseq:
 	if (ferror(stdout))
 		err(1, "stdout");
 }
-#endif /* BOOTSTRAP_CAT */
 
 static void
 raw_cat(int rfd)
@@ -358,65 +330,3 @@ raw_cat(int rfd)
 		rval = 1;
 	}
 }
-
-#ifndef NO_UDOM_SUPPORT
-
-static int
-udom_open(const char *path, int flags)
-{
-	struct addrinfo hints, *res, *res0;
-	char rpath[PATH_MAX];
-	int fd = -1;
-	int error;
-
-	/*
-	 * Construct the unix domain socket address and attempt to connect.
-	 */
-	bzero(&hints, sizeof(hints));
-	hints.ai_family = AF_LOCAL;
-	if (realpath(path, rpath) == NULL)
-		return (-1);
-	error = getaddrinfo(rpath, NULL, &hints, &res0);
-	if (error) {
-		warn("%s", gai_strerror(error));
-		errno = EINVAL;
-		return (-1);
-	}
-	for (res = res0; res != NULL; res = res->ai_next) {
-		fd = socket(res->ai_family, res->ai_socktype,
-		    res->ai_protocol);
-		if (fd < 0) {
-			freeaddrinfo(res0);
-			return (-1);
-		}
-		error = connect(fd, res->ai_addr, res->ai_addrlen);
-		if (error == 0)
-			break;
-		else {
-			close(fd);
-			fd = -1;
-		}
-	}
-	freeaddrinfo(res0);
-
-	/*
-	 * handle the open flags by shutting down appropriate directions
-	 */
-	if (fd >= 0) {
-		switch(flags & O_ACCMODE) {
-		case O_RDONLY:
-			if (shutdown(fd, SHUT_WR) == -1)
-				warn(NULL);
-			break;
-		case O_WRONLY:
-			if (shutdown(fd, SHUT_RD) == -1)
-				warn(NULL);
-			break;
-		default:
-			break;
-		}
-	}
-	return (fd);
-}
-
-#endif
