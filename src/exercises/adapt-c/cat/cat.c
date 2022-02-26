@@ -68,31 +68,14 @@ __FBSDID("$FreeBSD$");
 #include <wchar.h>
 #include <wctype.h>
 
-static int bflag, eflag, lflag, nflag, sflag, tflag, vflag;
-static int rval;
-static const char *filename;
+#include "cat.h"
+
+int bflag, eflag, lflag, nflag, sflag, tflag, vflag;
+int rval;
+const char *filename;
 
 static void usage(void) __dead2;
 static void scanfiles(char *argv[], int cooked);
-static void cook_cat(FILE *);
-static void raw_cat(int);
-
-/*
- * Memory strategy threshold, in pages: if physmem is larger than this,
- * use a large buffer.
- */
-#define	PHYSPAGES_THRESHOLD (32 * 1024)
-
-/* Maximum buffer size in bytes - do not allow it to grow larger than this. */
-#define	BUFSIZE_MAX (2 * 1024 * 1024)
-
-/*
- * Small (default) buffer size in bytes. It's inefficient for this to be
- * smaller than MAXPHYS.
- */
-#define	BUFSIZE_SMALL (MAXPHYS)
-
-#define SUPPORTED_FLAGS "belnstuv"
 
 int
 main(int argc, char *argv[])
@@ -197,136 +180,5 @@ scanfiles(char *argv[], int cooked __unused)
 		if (path == NULL)
 			break;
 		++i;
-	}
-}
-
-static void
-cook_cat(FILE *fp)
-{
-	int ch, gobble, line, prev;
-	wint_t wch;
-
-	/* Reset EOF condition on stdin. */
-	if (fp == stdin && feof(stdin))
-		clearerr(stdin);
-
-	line = gobble = 0;
-	for (prev = '\n'; (ch = getc(fp)) != EOF; prev = ch) {
-		if (prev == '\n') {
-			if (sflag) {
-				if (ch == '\n') {
-					if (gobble)
-						continue;
-					gobble = 1;
-				} else
-					gobble = 0;
-			}
-			if (nflag) {
-				if (!bflag || ch != '\n') {
-					(void)fprintf(stdout, "%6d\t", ++line);
-					if (ferror(stdout))
-						break;
-				} else if (eflag) {
-					(void)fprintf(stdout, "%6s\t", "");
-					if (ferror(stdout))
-						break;
-				}
-			}
-		}
-		if (ch == '\n') {
-			if (eflag && putchar('$') == EOF)
-				break;
-		} else if (ch == '\t') {
-			if (tflag) {
-				if (putchar('^') == EOF || putchar('I') == EOF)
-					break;
-				continue;
-			}
-		} else if (vflag) {
-			(void)ungetc(ch, fp);
-			/*
-			 * Our getwc(3) doesn't change file position
-			 * on error.
-			 */
-			if ((wch = getwc(fp)) == WEOF) {
-				if (ferror(fp) && errno == EILSEQ) {
-					clearerr(fp);
-					/* Resync attempt. */
-#ifdef __FreeBSD__
-					memset(&fp->_mbstate, 0, sizeof(mbstate_t));
-#endif
-					if ((ch = getc(fp)) == EOF)
-						break;
-					wch = ch;
-					goto ilseq;
-				} else
-					break;
-			}
-			if (!iswascii(wch) && !iswprint(wch)) {
-ilseq:
-				if (putchar('M') == EOF || putchar('-') == EOF)
-					break;
-				wch = toascii(wch);
-			}
-			if (iswcntrl(wch)) {
-				ch = toascii(wch);
-				ch = (ch == '\177') ? '?' : (ch | 0100);
-				if (putchar('^') == EOF || putchar(ch) == EOF)
-					break;
-				continue;
-			}
-			if (putwchar(wch) == WEOF)
-				break;
-			ch = -1;
-			continue;
-		}
-		if (putchar(ch) == EOF)
-			break;
-	}
-	if (ferror(fp)) {
-		warn("%s", filename);
-		rval = 1;
-		clearerr(fp);
-	}
-	if (ferror(stdout))
-		err(1, "stdout");
-}
-
-static void
-raw_cat(int rfd)
-{
-	long pagesize;
-	int off, wfd;
-	ssize_t nr, nw;
-	static size_t bsize;
-	static char *buf = NULL;
-	struct stat sbuf;
-
-	wfd = fileno(stdout);
-	if (buf == NULL) {
-		if (fstat(wfd, &sbuf))
-			err(1, "stdout");
-		if (S_ISREG(sbuf.st_mode)) {
-			/* If there's plenty of RAM, use a large copy buffer */
-			if (sysconf(_SC_PHYS_PAGES) > PHYSPAGES_THRESHOLD)
-				bsize = MIN(BUFSIZE_MAX, MAXPHYS * 8);
-			else
-				bsize = BUFSIZE_SMALL;
-		} else {
-			bsize = sbuf.st_blksize;
-			pagesize = sysconf(_SC_PAGESIZE);
-			if (pagesize > 0)
-				bsize = MAX(bsize, (size_t)pagesize);
-		}
-		if ((buf = malloc(bsize)) == NULL)
-			err(1, "malloc() failure of IO buffer");
-	}
-	while ((nr = read(rfd, buf, bsize)) > 0)
-		for (off = 0; nr; nr -= nw, off += nw)
-			if ((nw = write(wfd, buf + off, (size_t)nr)) < 0)
-				err(1, "stdout");
-	if (nr < 0) {
-		warn("%s", filename);
-		rval = 1;
 	}
 }
