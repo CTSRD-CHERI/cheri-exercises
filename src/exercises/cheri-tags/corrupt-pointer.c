@@ -3,7 +3,6 @@
  * Copyright (c) 2022 Microsoft Corporation
  */
 #include <assert.h>
-#include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -16,11 +15,11 @@
 int
 main(void)
 {
-	uint8_t buf[0x1FF];
+	char buf[0x1FF];
 
-	union {
-		uint8_t *ptr;
-		uint8_t bytes[sizeof(char*)];
+	volatile union {
+		char *ptr;
+		char bytes[sizeof(char*)];
 	} p;
 
 	for (size_t i = 0; i < sizeof(buf); i++) {
@@ -33,14 +32,14 @@ main(void)
 	    p.ptr, p.ptr - buf, *p.ptr);
 
 	/* One way to align the address down */
-	uint8_t *q = (uint8_t*)(((uintptr_t)p.ptr) & ~0xFF);
+	char *q = (char*)(((uintptr_t)p.ptr) & ~0xFF);
 	printf("q=%" PRINTF_PTR " (0x%zx into buf)\n", q, q - buf);
 
 	printf("*q=%02x\n", *q);
 
 	/* Maybe another, assuming a little-endian machine. */
 	p.bytes[0] = 0;
-	uint8_t *r = p.ptr;
+	char *r = p.ptr;
 
 	printf("r=%" PRINTF_PTR " (0x%zx)\n", r, r - buf);
 	printf("*r=%02x\n", *r);
