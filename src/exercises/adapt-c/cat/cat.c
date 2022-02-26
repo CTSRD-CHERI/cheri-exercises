@@ -75,7 +75,7 @@ int rval;
 const char *filename;
 
 static void usage(void) __dead2;
-static void scanfiles(char *argv[], int cooked);
+static void scanfiles(char *argv[], int verbose);
 
 int
 main(int argc, char *argv[])
