@@ -10,7 +10,17 @@ things!
 
 2. Run both programs and observe the output.
 
-3. Examine the disassembly, using any of [the techniques given
+3. Use `gdb` to inspect the `SIGPROT` thrown to the CHERI program.  (It may be
+   helpful to refer to our [notes on running
+   gdb](../../introduction/inspect-debug.md#running-gdb).)
+
+   Print out the pseudoregister `$_siginfo`.  `si_signo` `34` is `SIGPROT`, a
+   new signal introduced for conveying CHERI traps to user programs.  The
+   `si_code` values for `SIGPROT` signals are defined as the various
+   `PROT_CHERI_*` values in `<sys/signal.h>` (which can be found in
+   `/usr/include` in a CheriBSD system).
+
+4. Examine the disassembly, using any of [the techniques given
    earlier](../../introduction/inspect-disassemble.md) of the construction of
    `q`,
    ```
@@ -25,7 +35,7 @@ things!
 
    What stands out?
 
-4. Given that `q` and `r` appear to have identical byte representation in
+5. Given that `q` and `r` appear to have identical byte representation in
    memory, why does the CHERI version crash when dereferencing `q`?
 
 ## Source
