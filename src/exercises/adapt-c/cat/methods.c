@@ -61,11 +61,14 @@ extern int bflag, eflag, lflag, nflag, sflag, tflag, vflag;
 extern int rval;
 extern const char *filename;
 
-void
-verbose_cat(FILE *fp)
+static void
+verbose_cat(long file)
 {
+	FILE *fp;
 	int ch, gobble, line, prev;
 	wint_t wch;
+
+	fp = (FILE *)file;
 
 	/* Reset EOF condition on stdin. */
 	if (fp == stdin && feof(stdin))
@@ -153,15 +156,17 @@ ilseq:
 		err(1, "stdout");
 }
 
-void
-raw_cat(int rfd)
+static void
+raw_cat(long file)
 {
 	long pagesize;
-	int off, wfd;
+	int off, rfd, wfd;
 	ssize_t nr, nw;
 	static size_t bsize;
 	static char *buf = NULL;
 	struct stat sbuf;
+
+	rfd = file;
 
 	wfd = fileno(stdout);
 	if (buf == NULL) {
@@ -189,5 +194,16 @@ raw_cat(int rfd)
 	if (nr < 0) {
 		warn("%s", filename);
 		rval = 1;
+	}
+}
+
+void
+do_cat(long file, int verbose)
+{
+
+	if (verbose) {
+		verbose_cat(file);
+	} else {
+		raw_cat(file);
 	}
 }

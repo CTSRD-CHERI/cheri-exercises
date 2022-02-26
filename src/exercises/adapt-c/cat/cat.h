@@ -51,7 +51,6 @@
 
 #define SUPPORTED_FLAGS "belnstuv"
 
-void verbose_cat(FILE *);
-void raw_cat(int);
+void do_cat(long file, int verbose);
 
 #endif /* !_CAT_H_ */

@@ -145,7 +145,7 @@ usage(void)
 }
 
 static void
-scanfiles(char *argv[], int cooked __unused)
+scanfiles(char *argv[], int verbose)
 {
 	int fd, i;
 	char *path;
@@ -164,16 +164,16 @@ scanfiles(char *argv[], int cooked __unused)
 		if (fd < 0) {
 			warn("%s", path);
 			rval = 1;
-		} else if (cooked) {
+		} else if (verbose) {
 			if (fd == STDIN_FILENO)
-				verbose_cat(stdin);
+				do_cat((long)stdin, verbose);
 			else {
 				fp = fdopen(fd, "r");
-				verbose_cat(fp);
+				do_cat((long)fp, verbose);
 				fclose(fp);
 			}
 		} else {
-			raw_cat(fd);
+			do_cat(fd, verbose);
 			if (fd != STDIN_FILENO)
 				close(fd);
 		}
