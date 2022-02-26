@@ -175,7 +175,7 @@ raw_cat(long file)
 	static char *buf = NULL;
 	struct stat sbuf;
 
-	rfd = file;
+	rfd = (int)file;
 
 	wfd = fileno(stdout);
 	if (buf == NULL) {
