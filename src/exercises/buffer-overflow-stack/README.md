@@ -17,7 +17,8 @@ capability used for the buffer pointer we pass around.
 2. Run both programs and observe their outputs.
 
 3. Using GDB on the core dump (or run the CHERI program under `gdb`):
-   Why has the CHERI program failed?
+   Why has the CHERI program failed?  (It may also be helpful to refer to our
+   [notes on running gdb](../../introduction/inspect-debug.md#running-gdb).)
 
 4. Compare and contrast the disassembly of the baseline and CHERI programs.
    In particular, focus on the `write_buf` function and `main`'s call to it
