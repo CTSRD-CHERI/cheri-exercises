@@ -93,7 +93,8 @@
    (gdb) 
    ```
    `write()` jumped to `_write()`, a system call wrapper written in assembly,
-   that makes a trap. Let's see what is a result of the system call:
+   that uses the `ecall` instruction to make a system call. Let's see what is
+   its result:
    ```
    (gdb) ni 2
    4       in _write.S
@@ -102,8 +103,9 @@
    (gdb) 
    ```
    The `write()` system call returned `0xe`. Looking at `errno(2)` and
-   `write(2)`, we can conclude that we passed an incorrect address to the buffer
-   which should be tagged.
+   `write(2)`, we can conclude that we passed an incorrect address to the
+   buffer.  It is likely here because the capability is just the address,
+   without a tag.
 
 
 5. When compiling `cat-cheri`, the compiler printed:
@@ -198,9 +200,10 @@
    first combining them with another pointer value – e.g., by using them as an
    array offset.
    
-   In our case, `long` is cast to a pointer type which results in an invalid
-   capability.  We can fix this bug by using a data type that can hold both
-   integer values and pointers - `uintptr_t`:
+   In our case, `long` is cast to a pointer type which results in a NULL-derived
+   capability without a tag, with an address set to an integer value, and which
+   cannot be dereferenced.  We can fix this bug by using a data type that can
+   hold both integer values and pointers - `uintptr_t`:
    ```
    diff --git a/src/exercises/adapt-c/cat/cat.c b/src/exercises/adapt-c/cat/cat.c
    index 344e505..54cc864 100644
