@@ -29,11 +29,24 @@
 
    Thread 1 (LWP 100057 of process 1231):
    #0  main () at ./src/exercises/cheri-tags/corrupt-pointer.c:45
+   ```
+
+   We can ask `gdb` to print out the faulting instruction:
+   ```
+   (gdb) x/i $pcc
+   => 0x101d7c <main+244>:     lbu     a0,0(s1)
+   ```
+
+   *Note:* due to deficiencies in the current GDB implementation, the faulting
+   instruction incorrectly decodes as `lbu` with integer operands rather than
+   correctly as `clbu a0, 0(cs1)`.
+
+   We can also ask `gdb` for more information about the signal we received:
+   ```
    (gdb) p $_siginfo
    $1 = {si_signo = 34, si_errno = 0, si_code = 2, si_pid = 0, si_uid = 0, si_status = 0, si_addr = 0x101d7c <main+244>, si_value = {sival_int = 0, sival_ptr = 0x0}, _reason = {_fault = {si_trapno = 28, si_capreg = 9}, _timer = {si_timerid = 28, si_overrun = 9}, _mesgq = {si_mqd = 28}, _poll = {si_band = 38654705692}, __spare__ = {__spare1__ = 38654705692, __spare2__ = {0, 0, 0, 0, 0, 0, 0}}}}
 
    ```
-
    As said, `si_signo = 34` is `SIGPROT`, for which `si_code = 2` is
    `PROT_CHERI_TAG`, indicating a missing (clear) tag as an input to a
    capability instruction.  `gdb` in fact does this decoding for you, in the
