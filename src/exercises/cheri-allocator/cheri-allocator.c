@@ -84,11 +84,7 @@ alloc_allocate(void)
 	alloc->a_next = NULL;
 
 	/* Return pointer to allocated memory. */
-#ifdef __CHERI_PURE_CAPABILITY__
-	return (cheri_bounds_set(alloc->a_bytes, ALLOC_SIZE));
-#else
 	return (alloc->a_bytes);
-#endif
 };
 
 /*
@@ -100,14 +96,6 @@ static void
 alloc_free(void *ptr)
 {
 	struct alloc_storage *alloc;
-
-#ifdef __CHERI_PURE_CAPABILITY__
-	/*
-	 * Generate a new pointer to the allocation that is derived from the
-	 * one passed by the consumer.
-	 */
-	ptr = cheri_address_set(alloc_array, cheri_address_get(ptr));
-#endif
 
 	/* Convert pointer to allocated memory into pointer to metadata. */
 	alloc = __containerof(ptr, struct alloc_storage, a_bytes);
