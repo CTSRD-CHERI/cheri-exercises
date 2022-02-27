@@ -31,6 +31,8 @@
         - [Answers](exercises/adapt-c/answers.md)
     - [CheriABI Showcase](exercises/cheriabi/README.md)
         - [Answers](exercises/cheriabi/answers.md)
+    - [Extending Heap Allocators for CHERI](exercises/cheri-allocator/README.md)
+        - [Answers](exercises/cheri-allocator/answers.md)
     - [Demonstrate pointer revocation](exercises/pointer-revocation/README.md)
         - [Answers](exercises/pointer-revocation/answers.md)
 - [Focused Adversarial Missions](missions/README.md)
