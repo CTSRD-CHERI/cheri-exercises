@@ -98,14 +98,15 @@
    ```
    (gdb) ni 2
    4       in _write.S
-   (gdb) info register ca0
+   (gdb) info registers ca0 ct0
    ca0            0xe      0xe
+   ct0            0x1      0x1
    (gdb) 
    ```
-   The `write()` system call returned `0xe`. Looking at `errno(2)` and
-   `write(2)`, we can conclude that we passed an incorrect address to the
-   buffer.  It is likely here because the capability is just the address,
-   without a tag.
+   The `write()` system call failed as the kernel set `ct0` to `0x1` and
+   returned errno `0xe` in `ca0`. Looking at `errno(2)` and `write(2)`, we can
+   conclude that we passed an incorrect address to the buffer.  It is likely
+   here because the capability is just the address, without a tag.
 
 
 5. When compiling `cat-cheri`, the compiler printed:
