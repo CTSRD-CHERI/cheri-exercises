@@ -87,6 +87,7 @@ Capability bounds fault caused by register ca3.
          * one passed by the consumer.
          */
         ptr = cheri_address_set(alloc_array, cheri_address_get(ptr));
+#endif
 ```
 
    Note that this is not a complete solution to providing spatial safety here:
