@@ -10,6 +10,8 @@
         - [Answers](exercises/compile-and-run/answers.md)
     - [Disassemble and debug RISC-V and CHERI-RISC-V programs](exercises/debug-and-disassemble/README.md)
         - [Answers](exercises/debug-and-disassemble/answers.md)
+    - [Exercise an inter-object stack buffer overflow](exercises/buffer-overflow-stack/README.md)
+        - [Answers](exercises/buffer-overflow-stack/answers.md)
     - [Exercise an inter-object global buffer overflow](exercises/buffer-overflow-global/README.md)
         - [Answers](exercises/buffer-overflow-global/answers.md)
     - [Exercise a subobject buffer overflow](exercises/buffer-overflow-subobject/README.md)
