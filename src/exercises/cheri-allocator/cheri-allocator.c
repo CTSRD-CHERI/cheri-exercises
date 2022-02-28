@@ -123,9 +123,9 @@ main(void)
 	 * Run off the end of the memory allocation, corrupting the next
 	 * allocation's metadata.  Free when done.
 	 */
-	// printf("Preparing to overflow %p\n", ptr1);
-	// memset(ptr1 + ALLOC_SIZE, 'A', sizeof(void *));
-	// printf("Overflowed allocation %p\n", ptr1);
+	printf("Preparing to overflow %p\n", ptr1);
+	memset(ptr1 + ALLOC_SIZE, 'A', sizeof(void *));
+	printf("Overflowed allocation %p\n", ptr1);
 
 	printf("Freeing allocation %p\n", ptr1);
 	alloc_free(ptr1);
