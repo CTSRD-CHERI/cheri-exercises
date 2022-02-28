@@ -86,3 +86,7 @@ which we will use to explore the behavior of CHERI C here.
 ```C
 {{#include subobject-list.c}}
 ```
+
+## Courseware
+
+This exercise has [presentation materials](./subobject-bounds.pptx) available.
