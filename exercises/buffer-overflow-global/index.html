@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Exercise an inter-object buffer overflow - Adversarial CHERI Exercises and Missions</title>
+        <title>Exercise an inter-object global buffer overflow - Adversarial CHERI Exercises and Missions</title>
         
         
 
@@ -93,7 +93,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../cover/index.html">Adversarial CHERI Exercises and Missions</a></li><li class="chapter-item expanded "><a href="../../introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/background.html"><strong aria-hidden="true">1.1.</strong> Background reading</a></li><li class="chapter-item expanded "><a href="../../introduction/cross-compilation-execution.html"><strong aria-hidden="true">1.2.</strong> Cross compilation and execution</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/ccc.html"><strong aria-hidden="true">1.2.1.</strong> Helper script</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/index.html"><strong aria-hidden="true">2.</strong> Skills Development Exercises</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/index.html"><strong aria-hidden="true">2.1.</strong> Compile and run RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/answers.html"><strong aria-hidden="true">2.1.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/index.html"><strong aria-hidden="true">2.2.</strong> Disassemble and debug RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/answers.html"><strong aria-hidden="true">2.2.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow/index.html" class="active"><strong aria-hidden="true">2.3.</strong> Exercise an inter-object buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow/answers.html"><strong aria-hidden="true">2.3.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-subobject/index.html"><strong aria-hidden="true">2.4.</strong> Exercise a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-subobject/answers.html"><strong aria-hidden="true">2.4.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/index.html"><strong aria-hidden="true">2.5.</strong> Corrupt a control-flow pointer using a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/answers.html"><strong aria-hidden="true">2.5.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/type-confusion/index.html"><strong aria-hidden="true">2.6.</strong> Exercise integer-pointer type confusion bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/type-confusion/answers.html"><strong aria-hidden="true">2.6.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/index.html"><strong aria-hidden="true">2.7.</strong> Demonstrate pointer injection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/answers.html"><strong aria-hidden="true">2.7.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/index.html"><strong aria-hidden="true">2.8.</strong> Demonstrate pointer revocation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/answers.html"><strong aria-hidden="true">2.8.1.</strong> Answers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../missions/index.html"><strong aria-hidden="true">3.</strong> Focused Adversarial Missions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../missions/buffer-overflow-control-flow/index.html"><strong aria-hidden="true">3.1.</strong> Exploiting a buffer overflow to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/uninitialized-stack-frame-control-flow/index.html"><strong aria-hidden="true">3.2.</strong> Exploiting an uninitialized stack frame to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/use-after-free-control-flow/index.html"><strong aria-hidden="true">3.3.</strong> Exploiting heap use-after-free to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-09-06.ktimer/index.html"><strong aria-hidden="true">3.4.</strong> Exploiting kernel system-call vulnerability to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-18-13.nfs/index.html"><strong aria-hidden="true">3.5.</strong> Exploiting kernel NFS-server vulnerability to manipulate control flow</a></li></ol></li><li class="chapter-item expanded "><a href="../../appendix/index.html"><strong aria-hidden="true">4.</strong> Appendix</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../cover/index.html">Adversarial CHERI Exercises and Missions</a></li><li class="chapter-item expanded "><a href="../../introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/background.html"><strong aria-hidden="true">1.1.</strong> Background reading</a></li><li class="chapter-item expanded "><a href="../../introduction/cross-compilation-execution.html"><strong aria-hidden="true">1.2.</strong> Cross compilation and execution</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/ccc.html"><strong aria-hidden="true">1.2.1.</strong> Helper script</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/index.html"><strong aria-hidden="true">2.</strong> Skills Development Exercises</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/index.html"><strong aria-hidden="true">2.1.</strong> Compile and run RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/answers.html"><strong aria-hidden="true">2.1.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/index.html"><strong aria-hidden="true">2.2.</strong> Disassemble and debug RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/answers.html"><strong aria-hidden="true">2.2.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/index.html"><strong aria-hidden="true">2.3.</strong> Demonstrate CHERI Tag Protection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/answers.html"><strong aria-hidden="true">2.3.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/index.html"><strong aria-hidden="true">2.4.</strong> Exercise an inter-object stack buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/answers.html"><strong aria-hidden="true">2.4.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/index.html" class="active"><strong aria-hidden="true">2.5.</strong> Exercise an inter-object global buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/answers.html"><strong aria-hidden="true">2.5.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/index.html"><strong aria-hidden="true">2.6.</strong> Explore subobject bounds</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/answers.html"><strong aria-hidden="true">2.6.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/index.html"><strong aria-hidden="true">2.7.</strong> Corrupt a control-flow pointer using a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/answers.html"><strong aria-hidden="true">2.7.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/index.html"><strong aria-hidden="true">2.8.</strong> Exercise heap overflows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/answers.html"><strong aria-hidden="true">2.8.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/type-confusion/index.html"><strong aria-hidden="true">2.9.</strong> Exercise integer-pointer type confusion bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/type-confusion/answers.html"><strong aria-hidden="true">2.9.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/index.html"><strong aria-hidden="true">2.10.</strong> Demonstrate pointer injection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/answers.html"><strong aria-hidden="true">2.10.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/adapt-c/index.html"><strong aria-hidden="true">2.11.</strong> Adapt a C Program to CHERI C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/adapt-c/answers.html"><strong aria-hidden="true">2.11.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheriabi/index.html"><strong aria-hidden="true">2.12.</strong> CheriABI Showcase</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheriabi/answers.html"><strong aria-hidden="true">2.12.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/index.html"><strong aria-hidden="true">2.13.</strong> Extending Heap Allocators for CHERI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/answers.html"><strong aria-hidden="true">2.13.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/index.html"><strong aria-hidden="true">2.14.</strong> Demonstrate pointer revocation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/answers.html"><strong aria-hidden="true">2.14.1.</strong> Answers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../missions/index.html"><strong aria-hidden="true">3.</strong> Focused Adversarial Missions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../missions/buffer-overflow-control-flow/index.html"><strong aria-hidden="true">3.1.</strong> Exploiting a buffer overflow to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/uninitialized-stack-frame-control-flow/index.html"><strong aria-hidden="true">3.2.</strong> Exploiting an uninitialized stack frame to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/use-after-free-control-flow/index.html"><strong aria-hidden="true">3.3.</strong> Exploiting heap use-after-free to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-09-06.ktimer/index.html"><strong aria-hidden="true">3.4.</strong> Exploiting kernel system-call vulnerability to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-18-13.nfs/index.html"><strong aria-hidden="true">3.5.</strong> Exploiting kernel NFS-server vulnerability to manipulate control flow</a></li></ol></li><li class="chapter-item expanded "><a href="../../appendix/index.html"><strong aria-hidden="true">4.</strong> Appendix</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,18 +163,50 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#exercise-an-inter-object-buffer-overflow" id="exercise-an-inter-object-buffer-overflow">Exercise an inter-object buffer overflow</a></h1>
-<p>This exercise demonstrates an inter-object buffer overflow on RISC-V and
-CHERI-RISC-V, and asks you to characterize and fix the bug detected by CHERI
-bounds enforcement.  It also asks you to use GDB for debugging purposes.</p>
+                        <h1><a class="header" href="#exercise-an-inter-global-object-buffer-overflow" id="exercise-an-inter-global-object-buffer-overflow">Exercise an inter-global-object buffer overflow</a></h1>
+<p>This exercise demonstrates an inter-object buffer overflow on baseline and
+CHERI-enabled architectures, and asks you to characterize and fix the bug
+detected by CHERI bounds enforcement.  It also asks you to use GDB for
+debugging purposes.</p>
+<p>This example uses two <em>global</em> objects (in <code>.data</code>) to demonstrate an overflow.
+It is worth pondering how the bounds for pointers to globals come to be set!</p>
 <ol>
-<li>Compile <code>buffer-overflow.c</code> with a RISC-V target and binary name of
-<code>buffer-overflow-riscv</code>, and with a CHERI-RISC-V target and binary
-name of <code>buffer-overflow-cheri</code>. <strong>For this exercise, add <code>-G0</code> to your
+<li>
+<p>Compile <code>buffer-overflow-global.c</code> for the baseline architecture to
+the binary <code>buffer-overflow-global-baseline</code> and for the CHERI-aware
+architecture to <code>buffer-overflow-global-cheri</code>.</p>
+<p><strong>For this exercise, add <code>-G0</code> to your
 compiler flags</strong> (this ensures <code>c</code> is not placed in the small data section
-away from <code>buffer</code>).</li>
+away from <code>buffer</code>).</p>
+</li>
+<li>
+<p>Run both programs and observe the output.</p>
+</li>
+<li>
+<p>Using GDB on the core dump (or run the CHERI program under <code>gdb</code>):
+Why has the CHERI program failed?</p>
+</li>
+<li>
+<p>Modify <code>buffer-overflow-global.c</code> to increase the buffer size from 128 bytes
+to 1Mbyte + 1 byte.</p>
+</li>
+<li>
+<p>Recompile and re-run <code>buffer-overflow-global-cheri</code>. Why does it no longer
+crash, even though the buffer overflow exists in the source code? Is
+the adjacent field still corrupted (i.e., has spatial safety been
+violated between allocations)?</p>
+</li>
+<li>
+<p>Modify <code>buffer-overflow-global.c</code> to restore the original buffer size of 128
+bytes, and fix the bug by correcting accesses to the allocated array.</p>
+</li>
+<li>
+<p>Recompile and run <code>buffer-overflow-global-cheri</code> to demonstrate that the
+program is now able to continue.</p>
+</li>
 </ol>
-<p><strong>buffer-overflow.c</strong></p>
+<h2><a class="header" href="#source-files" id="source-files">Source Files</a></h2>
+<p><strong>buffer-overflow-global.c</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
  * Copyright (c) 2020 SRI International
@@ -210,21 +242,7 @@ main(void)
 	return 0;
 }
 </code></pre>
-<ol start="2">
-<li>Run both programs and observe the output.</li>
-<li>Using GDB on the core dump: Why has the CHERI program failed?</li>
-<li>Modify <code>buffer-overflow.c</code> to increase the buffer size from 128 bytes to
-1Mbyte + 1 byte.</li>
-<li>Recompile and re-run <code>buffer-overflow-cheri</code>. Why does it no longer
-crash, even though the buffer overflow exists in the source code? Is
-the adjacent field still corrupted (i.e., has spatial safety been
-violated between allocations)?</li>
-<li>Modify <code>buffer-overflow.c</code> to restore the original buffer size of 128
-bytes, and fix the bug by correcting accesses to the allocated array.</li>
-<li>Recompile and run <code>buffer-overflow-cheri</code> to demonstrate that the
-program is now able to continue.</li>
-</ol>
-<h2><a class="header" href="#support-code" id="support-code">Support code</a></h2>
+<h3><a class="header" href="#support-code" id="support-code">Support code</a></h3>
 <p><strong>main-asserts.inc</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
@@ -261,13 +279,13 @@ main_asserts(void)
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../../exercises/debug-and-disassemble/answers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../exercises/buffer-overflow-stack/answers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../../exercises/buffer-overflow/answers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../../exercises/buffer-overflow-global/answers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -279,13 +297,13 @@ main_asserts(void)
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="../../exercises/debug-and-disassemble/answers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../exercises/buffer-overflow-stack/answers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="../../exercises/buffer-overflow/answers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../../exercises/buffer-overflow-global/answers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

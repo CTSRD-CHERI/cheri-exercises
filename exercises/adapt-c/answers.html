@@ -1,0 +1,505 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Answers - Adversarial CHERI Exercises and Missions</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../../favicon.png">
+        
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../cover/index.html">Adversarial CHERI Exercises and Missions</a></li><li class="chapter-item expanded "><a href="../../introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/background.html"><strong aria-hidden="true">1.1.</strong> Background reading</a></li><li class="chapter-item expanded "><a href="../../introduction/cross-compilation-execution.html"><strong aria-hidden="true">1.2.</strong> Cross compilation and execution</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/ccc.html"><strong aria-hidden="true">1.2.1.</strong> Helper script</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/index.html"><strong aria-hidden="true">2.</strong> Skills Development Exercises</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/index.html"><strong aria-hidden="true">2.1.</strong> Compile and run RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/answers.html"><strong aria-hidden="true">2.1.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/index.html"><strong aria-hidden="true">2.2.</strong> Disassemble and debug RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/answers.html"><strong aria-hidden="true">2.2.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/index.html"><strong aria-hidden="true">2.3.</strong> Demonstrate CHERI Tag Protection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/answers.html"><strong aria-hidden="true">2.3.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/index.html"><strong aria-hidden="true">2.4.</strong> Exercise an inter-object stack buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/answers.html"><strong aria-hidden="true">2.4.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/index.html"><strong aria-hidden="true">2.5.</strong> Exercise an inter-object global buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/answers.html"><strong aria-hidden="true">2.5.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/index.html"><strong aria-hidden="true">2.6.</strong> Explore subobject bounds</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/answers.html"><strong aria-hidden="true">2.6.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/index.html"><strong aria-hidden="true">2.7.</strong> Corrupt a control-flow pointer using a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/answers.html"><strong aria-hidden="true">2.7.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/index.html"><strong aria-hidden="true">2.8.</strong> Exercise heap overflows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/answers.html"><strong aria-hidden="true">2.8.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/type-confusion/index.html"><strong aria-hidden="true">2.9.</strong> Exercise integer-pointer type confusion bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/type-confusion/answers.html"><strong aria-hidden="true">2.9.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/index.html"><strong aria-hidden="true">2.10.</strong> Demonstrate pointer injection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/answers.html"><strong aria-hidden="true">2.10.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/adapt-c/index.html"><strong aria-hidden="true">2.11.</strong> Adapt a C Program to CHERI C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/adapt-c/answers.html" class="active"><strong aria-hidden="true">2.11.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheriabi/index.html"><strong aria-hidden="true">2.12.</strong> CheriABI Showcase</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheriabi/answers.html"><strong aria-hidden="true">2.12.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/index.html"><strong aria-hidden="true">2.13.</strong> Extending Heap Allocators for CHERI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/answers.html"><strong aria-hidden="true">2.13.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/index.html"><strong aria-hidden="true">2.14.</strong> Demonstrate pointer revocation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/answers.html"><strong aria-hidden="true">2.14.1.</strong> Answers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../missions/index.html"><strong aria-hidden="true">3.</strong> Focused Adversarial Missions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../missions/buffer-overflow-control-flow/index.html"><strong aria-hidden="true">3.1.</strong> Exploiting a buffer overflow to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/uninitialized-stack-frame-control-flow/index.html"><strong aria-hidden="true">3.2.</strong> Exploiting an uninitialized stack frame to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/use-after-free-control-flow/index.html"><strong aria-hidden="true">3.3.</strong> Exploiting heap use-after-free to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-09-06.ktimer/index.html"><strong aria-hidden="true">3.4.</strong> Exploiting kernel system-call vulnerability to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-18-13.nfs/index.html"><strong aria-hidden="true">3.5.</strong> Exploiting kernel NFS-server vulnerability to manipulate control flow</a></li></ol></li><li class="chapter-item expanded "><a href="../../appendix/index.html"><strong aria-hidden="true">4.</strong> Appendix</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Adversarial CHERI Exercises and Missions</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        <a href="https://github.com/CTSRD-CHERI/cheri-exercises" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#answers---adapt-a-c-program-to-cheri-c" id="answers---adapt-a-c-program-to-cheri-c">Answers - Adapt a C Program to CHERI C</a></h1>
+<ol start="2">
+<li>
+<p>Example output:</p>
+<pre><code># ./tools/ccc riscv64 -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
+Running: /output/sdk/bin/clang -target riscv64-unknown-freebsd -march=rv64gc -mabi=lp64d -mno-relax --sysroot=/output/sdk/sysroot-riscv64-purecap -g -O2 -fuse-ld=lld -Wall -Wcheri -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
+# ./tools/ccc riscv64-purecap -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
+Running: /output/sdk/bin/clang -target riscv64-unknown-freebsd -march=rv64gcxcheri -mabi=l64pc128d -mno-relax --sysroot=/output/sdk/sysroot-riscv64-purecap -g -O2 -fuse-ld=lld -Wall -Wcheri -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
+./src/exercises/adapt-c/cat/methods.c:70:43: warning: binary expression on capability types 'ptroff_t' (aka 'unsigned __intcap') and 'uintptr_t' (aka 'unsigned __intcap'); it is not clear which should be used as the source of provenance; currently provenance is inherited from the left-hand side [-Wcheri-provenance]
+        return (write(fildes, (const void *)(off + (uintptr_t)buf), nbyte));
+                                             ~~~ ^ ~~~~~~~~~~~~~~
+./src/exercises/adapt-c/cat/methods.c:80:7: warning: cast from provenance-free integer type to pointer type will give pointer that can not be dereferenced [-Wcheri-capability-misuse]
+        fp = (FILE *)file;
+             ^
+2 warnings generated.
+</code></pre>
+</li>
+<li>
+<p>Example output:</p>
+<pre><code># ./cat-baseline /etc/hostid
+bb5fbb47-10ab-11ec-a609-f5a47707c223
+# ./cat-baseline -n /etc/hostid
+     1  bb5fbb47-10ab-11ec-a609-f5a47707c223
+# ./cat-cheri /etc/hostid
+cat-cheri: write(2) failed: Bad address
+# ./cat-cheri -n /etc/hostid
+In-address space security exception (core dumped)
+#
+</code></pre>
+</li>
+<li>
+<p>When run without <code>gdb</code>, <code>cat-cheri</code> prints:</p>
+<pre><code># ./cat-cheri /etc/hostid
+cat-cheri: write(2) failed: Bad address
+</code></pre>
+<p>Looking at the source code, we can see there is only one call to write(2):</p>
+<pre><code># grep -R write src/exercises/adapt-c/cat
+src/exercises/adapt-c/cat/methods.c:write_off(int fildes, const void *buf, ptroff_t off, size_t nbyte)
+src/exercises/adapt-c/cat/methods.c:    return (write(fildes, (const void *)(off + (uintptr_t)buf), nbyte));
+src/exercises/adapt-c/cat/methods.c:                    if ((nw = write_off(wfd, buf, off, (size_t)nr)) &lt; 0)
+src/exercises/adapt-c/cat/methods.c:                            err(1, &quot;write(2) failed&quot;);
+</code></pre>
+<p>The call is in the <code>write_off()</code> function and the message with the error is
+printed in case the call fails. Let's see what are arguments and result
+values for the system call by setting a breakpoint for <code>write()</code> in <code>gdb</code>:</p>
+<pre><code># gdb ./cat-cheri
+(...)
+(gdb) b write
+Function &quot;write&quot; not defined.
+Make breakpoint pending on future shared library load? (y or [n]) y
+Breakpoint 1 (write) pending.
+(gdb) r /etc/hostid
+Starting program: /buildroot/cat-cheri /etc/hostid
+
+Breakpoint 1, write (fd=1, buf=0x40810000, nbytes=37) at /source/cheribsd/lib/libc/sys/write.c:49
+49      /source/cheribsd/lib/libc/sys/write.c: No such file or directory.
+(gdb) info register ca0 ca1 ca2
+ca0            0x1      0x1
+ca1            0x40810000       0x40810000
+ca2            0x25     0x25
+(gdb) 
+(gdb) disassemble 
+Dump of assembler code for function write:
+=&gt; 0x0000000040295dc4 &lt;+0&gt;:       auipc   a3,0xc2
+   0x0000000040295dc8 &lt;+4&gt;:       lc      ca3,1532(a3) # 0x403583c0 &lt;_CHERI_CAPABILITY_TABLE_+2464&gt;
+   0x0000000040295dcc &lt;+8&gt;:       lc      ca5,496(a3)
+   0x0000000040295dd0 &lt;+12&gt;:      cjr     ca5
+End of assembler dump.
+(gdb) 
+</code></pre>
+<p>We can see that <code>write()</code> was called to write to <code>stdout</code> (<code>ca0</code>) 37 bytes
+(<code>ca2</code>) from a buffer with an untagged capability (<code>ca1</code>). The <code>write()</code> libc
+function does not include a trapping instruction but it jumps with <code>cjr</code>.
+Let's see where it jumps to:</p>
+<pre><code>(gdb) ni 4
+_write () at _write.S:4
+4       _write.S: No such file or directory.
+(gdb) disassemble 
+Dump of assembler code for function _write:
+=&gt; 0x0000000040299130 &lt;+0&gt;:       li      t0,4
+   0x0000000040299132 &lt;+2&gt;:       ecall
+   0x0000000040299136 &lt;+6&gt;:       bnez    t0,0x4029913e &lt;_write+14&gt;
+   0x000000004029913a &lt;+10&gt;:      cret
+   0x000000004029913e &lt;+14&gt;:      auipc   t1,0xffffd
+   0x0000000040299142 &lt;+18&gt;:      cincoffset      ct1,ct1,-846
+   0x0000000040299146 &lt;+22&gt;:      cjr     ct1
+End of assembler dump.
+(gdb) 
+</code></pre>
+<p><code>write()</code> jumped to <code>_write()</code>, a system call wrapper written in assembly,
+that uses the <code>ecall</code> instruction to make a system call. Let's see what is
+its result:</p>
+<pre><code>(gdb) ni 2
+4       in _write.S
+(gdb) info registers ca0 ct0
+ca0            0xe      0xe
+ct0            0x1      0x1
+(gdb) 
+</code></pre>
+<p>The <code>write()</code> system call failed as the kernel set <code>ct0</code> to <code>0x1</code> and
+returned errno <code>0xe</code> in <code>ca0</code>. Looking at <code>errno(2)</code> and <code>write(2)</code>, we can
+conclude that we passed an incorrect address to the buffer.  It is likely
+here because the capability is just the address, without a tag.</p>
+</li>
+<li>
+<p>When compiling <code>cat-cheri</code>, the compiler printed:</p>
+<pre><code>./src/exercises/adapt-c/cat/methods.c:70:43: warning: binary expression on capability types 'ptroff_t' (aka 'unsigned __intcap') and 'uintptr_t' (aka 'unsigned __intcap'); it is not clear which should be used as the source of provenance; currently provenance is inherited from the left-hand side [-Wcheri-provenance]
+        return (write(fildes, (const void *)(off + (uintptr_t)buf), nbyte));
+                                             ~~~ ^ ~~~~~~~~~~~~~~
+</code></pre>
+<p>As the <a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-947.pdf">CHERI C/C++ Programming Guide</a>
+says in Section 4.2.3:</p>
+<blockquote>
+<p>In the CHERI memory protection model, capabilities are derived from
+a single other capability.</p>
+</blockquote>
+<p>In our case, <code>off + (uintptr_t)buf</code> resulted in an untagged capability
+because <code>off</code> holds an integer value in an untagged capability and, as the
+compiler warns, it is used to create a resulting capability.
+In order to create a capability using the correct source capability, we can
+tell the compiler that <code>off</code> does not hold a valid address with a cast:</p>
+<pre><code>diff --git a/src/exercises/adapt-c/cat/methods.c b/src/exercises/adapt-c/cat/methods.c
+index bb78a75..6520735 100644
+--- a/src/exercises/adapt-c/cat/methods.c
++++ b/src/exercises/adapt-c/cat/methods.c
+@@ -67,7 +67,7 @@ static ssize_t
+ write_off(int fildes, const void *buf, ptroff_t off, size_t nbyte)
+ {
+ 
+-       return (write(fildes, (const void *)(off + (uintptr_t)buf), nbyte));
++       return (write(fildes, (const void *)((size_t)off + (uintptr_t)buf), nbyte));
+ }
+ 
+ static void
+</code></pre>
+</li>
+<li>
+<p>Example output:</p>
+<pre><code># gdb-run.sh ./cat-cheri -n /etc/hostid
+(...)
+Starting program: /buildroot/cat-cheri -n /etc/hostid
+
+Program received signal SIGPROT, CHERI protection violation
+Capability tag fault caused by register cs2.
+verbose_cat (file=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/methods.c:87
+87      ./src/exercises/adapt-c/cat/methods.c: No such file or directory.
+
+Thread 1 (LWP 100043 of process 808):
+#0  verbose_cat (file=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/methods.c:87
+#1  do_cat (file=&lt;optimized out&gt;, verbose=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/methods.c:214
+#2  0x0000000000102f1a in scanfiles (argv=&lt;optimized out&gt;, verbose=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/cat.c:172
+#3  0x0000000000102d8c in main (argc=&lt;optimized out&gt;, argv=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/cat.c:128
+(gdb) 
+</code></pre>
+<p><code>gdb</code> says that <code>cs2</code> triggered a CHERI exception:</p>
+<pre><code>(gdb) info register cs2
+cs2            0x4037a400       0x4037a400
+(gdb) 
+</code></pre>
+<p><code>cs2</code> holds an untagged capability and the program tries to load a word using
+<code>cs2</code> which violates CHERI restrictions:</p>
+<pre><code>(gdb) disassemble $pcc,+4
+Dump of assembler code from 0x103094 to 0x103098:
+=&gt; 0x0000000000103094 &lt;do_cat+228&gt;: lw      a0,16(s2)
+End of assembler dump.
+(gdb) 
+</code></pre>
+<p>Looking at the above backtrace, we can correlate this output with the source
+code and see that <code>cs2</code> holds a value of
+the <code>fp</code> variable:</p>
+<pre><code>(gdb) p fp
+$1 = (FILE *) 0x4037a400
+</code></pre>
+<p>It means that for some reason <code>fp</code> became an invalid capability.</p>
+</li>
+<li>
+<p>When compiling <code>cat-cheri</code>, the compiler printed:</p>
+<pre><code>./src/exercises/adapt-c/cat/methods.c:80:7: warning: cast from provenance-free integer type to pointer type will give pointer that can not be dereferenced [-Wcheri-capability-misuse]
+        fp = (FILE *)file;
+             ^
+</code></pre>
+<p>As the <a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-947.pdf">CHERI C/C++ Programming Guide</a>
+says in Section 4.2:</p>
+<blockquote>
+<p>(...) only pointers implemented using valid capabilities can be dereferenced.</p>
+</blockquote>
+<p>and in Section 4.2.1:</p>
+<blockquote>
+<p><code>int</code>,<code>int32_t</code>,<code>long</code>,<code>int64_t</code>,... These pure integer types should be
+used to hold integer values that will never be cast to a pointer type without
+first combining them with another pointer value – e.g., by using them as an
+array offset.</p>
+</blockquote>
+<p>In our case, <code>long</code> is cast to a pointer type which results in a NULL-derived
+capability without a tag, with an address set to an integer value, and which
+cannot be dereferenced.  We can fix this bug by using a data type that can
+hold both integer values and pointers - <code>uintptr_t</code>:</p>
+<pre><code>diff --git a/src/exercises/adapt-c/cat/cat.c b/src/exercises/adapt-c/cat/cat.c
+index 344e505..54cc864 100644
+--- a/src/exercises/adapt-c/cat/cat.c
++++ b/src/exercises/adapt-c/cat/cat.c
+@@ -166,10 +166,10 @@ scanfiles(char *argv[], int verbose)
+                        rval = 1;
+                } else if (verbose) {
+                        if (fd == STDIN_FILENO)
+-                               do_cat((long)stdin, verbose);
++                               do_cat((uintptr_t)stdin, verbose);
+                        else {
+                                fp = fdopen(fd, &quot;r&quot;);
+-                               do_cat((long)fp, verbose);
++                               do_cat((uintptr_t)fp, verbose);
+                                fclose(fp);
+                        }
+                } else {
+diff --git a/src/exercises/adapt-c/cat/cat.h b/src/exercises/adapt-c/cat/cat.h
+index c88f930..047c0b7 100644
+--- a/src/exercises/adapt-c/cat/cat.h
++++ b/src/exercises/adapt-c/cat/cat.h
+@@ -51,6 +51,6 @@
+ 
+ #define SUPPORTED_FLAGS &quot;belnstuv&quot;
+ 
+-void do_cat(long file, int verbose);
++void do_cat(uintptr_t file, int verbose);
+ 
+ #endif /* !_CAT_H_ */
+diff --git a/src/exercises/adapt-c/cat/methods.c b/src/exercises/adapt-c/cat/methods.c
+index bb78a75..afe29d3 100644
+--- a/src/exercises/adapt-c/cat/methods.c
++++ b/src/exercises/adapt-c/cat/methods.c
+@@ -71,7 +71,7 @@ write_off(int fildes, const void *buf, ptroff_t off, size_t nbyte)
+ }
+ 
+ static void
+-verbose_cat(long file)
++verbose_cat(uintptr_t file)
+ {
+        FILE *fp;
+        int ch, gobble, line, prev;
+@@ -166,7 +166,7 @@ ilseq:
+ }
+ 
+ static void
+-raw_cat(long file)
++raw_cat(uintptr_t file)
+ {
+        long pagesize;
+        int off, rfd, wfd;
+@@ -207,7 +207,7 @@ raw_cat(long file)
+ }
+ 
+ void
+-do_cat(long file, int verbose)
++do_cat(uintptr_t file, int verbose)
+ {
+ 
+        if (verbose) {
+</code></pre>
+</li>
+<li>
+<p>The first bug resulted in a system call error because there was no capability
+operation on an invalid capability. An operating system could not copy memory
+from the user address space because it checked if a user process passed an
+invalid capability and returned an error.</p>
+<p>The second bug resulted in a CHERI exception because an invalid capability
+was used to load a word from memory.</p>
+</li>
+</ol>
+<p>For more information on the C/C++ programming languages, CHERI compiler warnings
+and errors, we recommend to read the
+<a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-947.pdf">CHERI C/C++ Programming Guide</a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../exercises/adapt-c/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../exercises/cheriabi/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../../exercises/adapt-c/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../../exercises/cheriabi/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

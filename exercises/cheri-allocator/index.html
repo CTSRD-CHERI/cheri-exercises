@@ -1,0 +1,508 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Extending Heap Allocators for CHERI - Adversarial CHERI Exercises and Missions</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../../favicon.png">
+        
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../cover/index.html">Adversarial CHERI Exercises and Missions</a></li><li class="chapter-item expanded "><a href="../../introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/background.html"><strong aria-hidden="true">1.1.</strong> Background reading</a></li><li class="chapter-item expanded "><a href="../../introduction/cross-compilation-execution.html"><strong aria-hidden="true">1.2.</strong> Cross compilation and execution</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/ccc.html"><strong aria-hidden="true">1.2.1.</strong> Helper script</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/index.html"><strong aria-hidden="true">2.</strong> Skills Development Exercises</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/index.html"><strong aria-hidden="true">2.1.</strong> Compile and run RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/answers.html"><strong aria-hidden="true">2.1.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/index.html"><strong aria-hidden="true">2.2.</strong> Disassemble and debug RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/answers.html"><strong aria-hidden="true">2.2.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/index.html"><strong aria-hidden="true">2.3.</strong> Demonstrate CHERI Tag Protection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/answers.html"><strong aria-hidden="true">2.3.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/index.html"><strong aria-hidden="true">2.4.</strong> Exercise an inter-object stack buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/answers.html"><strong aria-hidden="true">2.4.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/index.html"><strong aria-hidden="true">2.5.</strong> Exercise an inter-object global buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/answers.html"><strong aria-hidden="true">2.5.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/index.html"><strong aria-hidden="true">2.6.</strong> Explore subobject bounds</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/answers.html"><strong aria-hidden="true">2.6.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/index.html"><strong aria-hidden="true">2.7.</strong> Corrupt a control-flow pointer using a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/answers.html"><strong aria-hidden="true">2.7.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/index.html"><strong aria-hidden="true">2.8.</strong> Exercise heap overflows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/answers.html"><strong aria-hidden="true">2.8.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/type-confusion/index.html"><strong aria-hidden="true">2.9.</strong> Exercise integer-pointer type confusion bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/type-confusion/answers.html"><strong aria-hidden="true">2.9.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/index.html"><strong aria-hidden="true">2.10.</strong> Demonstrate pointer injection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/answers.html"><strong aria-hidden="true">2.10.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/adapt-c/index.html"><strong aria-hidden="true">2.11.</strong> Adapt a C Program to CHERI C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/adapt-c/answers.html"><strong aria-hidden="true">2.11.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheriabi/index.html"><strong aria-hidden="true">2.12.</strong> CheriABI Showcase</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheriabi/answers.html"><strong aria-hidden="true">2.12.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/index.html" class="active"><strong aria-hidden="true">2.13.</strong> Extending Heap Allocators for CHERI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/answers.html"><strong aria-hidden="true">2.13.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/index.html"><strong aria-hidden="true">2.14.</strong> Demonstrate pointer revocation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/answers.html"><strong aria-hidden="true">2.14.1.</strong> Answers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../missions/index.html"><strong aria-hidden="true">3.</strong> Focused Adversarial Missions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../missions/buffer-overflow-control-flow/index.html"><strong aria-hidden="true">3.1.</strong> Exploiting a buffer overflow to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/uninitialized-stack-frame-control-flow/index.html"><strong aria-hidden="true">3.2.</strong> Exploiting an uninitialized stack frame to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/use-after-free-control-flow/index.html"><strong aria-hidden="true">3.3.</strong> Exploiting heap use-after-free to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-09-06.ktimer/index.html"><strong aria-hidden="true">3.4.</strong> Exploiting kernel system-call vulnerability to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-18-13.nfs/index.html"><strong aria-hidden="true">3.5.</strong> Exploiting kernel NFS-server vulnerability to manipulate control flow</a></li></ol></li><li class="chapter-item expanded "><a href="../../appendix/index.html"><strong aria-hidden="true">4.</strong> Appendix</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Adversarial CHERI Exercises and Missions</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        <a href="https://github.com/CTSRD-CHERI/cheri-exercises" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#extending-heap-allocators-for-cheri" id="extending-heap-allocators-for-cheri">Extending heap allocators for CHERI</a></h1>
+<p>CHERI's architectural protection is driven by software -- the compiler,
+linker, OS kernel, run-time linker, run-time libraries, and so on all manage
+capabilities as part of their program execution.  Heap allocators, which are
+integrally tied into our notions of spatial and temporal safety, are typically
+extended to use CHERI in five ways:</p>
+<ol>
+<li>
+<p>To implement spatial safety, bounds and permissions are set on returned
+pointers.
+<em>(In this exercise.)</em></p>
+</li>
+<li>
+<p>To prevent bounds overlap on larger allocations from arising due to
+imprecise bounds caused by capability compression, large allocations are
+aligned and padded more strongly.
+<em>(Not in this exercise.)</em></p>
+</li>
+<li>
+<p>If the allocator's <code>free()</code> implementation relies on reaching allocator
+metadata via its pointer argument (e.g., by looking immediately before or
+after to reach free-list poointers), then the implementation must be
+changed as access will otherwise be prevented by CHERI bounds and
+monotonicity.
+<em>(In this exercise.)</em></p>
+</li>
+<li>
+<p>To implement temporal safety, allocated memory is registered with a
+temporal-safety run-time library when allocated, to implement
+kernel-assisted revocation.
+On free, the memory is is held in quarantine until revocation has been
+performed.
+<em>(Not in this exercise.)</em></p>
+</li>
+<li>
+<p>To handle a further set of classes of misuse and pointer corruption, it is
+also important to perform validation of arguments to <code>free()</code>, such as by
+checking that the pointer is to the first byte of a valid allocation.
+<em>(Not in this exercise.)</em></p>
+</li>
+</ol>
+<p>This exercise asks you to extend a simplified memory allocator with CHERI
+focusing only on (1) and (3) above.
+It supports only small fixed-size allocations that will not require further
+alignment or padding, and we will not consider temporal safety in this
+exercise.</p>
+<p>The complete exercise is embodied in <code>cheri-allocator.c</code>, including the
+simplified allocator and also a <code>main()</code> routine that initializes and uses the
+allocator.
+<code>main()</code> allocates memory, and then overflows the allocation to corrupt
+internal allocator metadata, leading to a crash.
+Heap metadata corruption is a powerful exploitation tool; CHERI assists with
+mitigating it through pointer integrity features, but it is preferable to
+deterministically close vulnlerabilities (e.g., via spatial safety).</p>
+<ol>
+<li>
+<p>Compile <code>cheri-allocator.c</code> with a CHERI-enabled target.
+Run the binary, which will crash.</p>
+</li>
+<li>
+<p>Use GDB to demonstrate to yourself that the overflow has corrupted
+allocator metadata, leading to an eventual crash during a later call to
+<code>alloc_allocate()</code>.</p>
+</li>
+<li>
+<p>Modify the allocator to use the <code>cheri_bounds_set()</code> API to set suitable
+bounds on the pointer returned by <code>alloc_allocate()</code>.
+Recompile <code>cheri-allocator.c</code> with a CHERI-enabled target.</p>
+</li>
+<li>
+<p>Use GDB to demonstrate to yourself that the overflow operation now causes
+an immediate crash as a result of attempting to store out of bounds, rather
+than triggering a later crash due to heap metadata corruption.</p>
+</li>
+<li>
+<p>Remove the overflow (performed with <code>memset()</code>) from the program.
+Recompile <code>cheri-allocator.c</code> with a CHERI-enabled target.</p>
+</li>
+<li>
+<p>Use GDB to explore why the program now crashes in <code>alloc_free()</code>: How did
+adding bounds during allocation break later freeing of that memory?</p>
+</li>
+<li>
+<p>Correct the bug through the use of the <code>cheri_address_get()</code> and
+<code>cheri_address_set()</code> APIs, which allow transfering an address from one
+capability (with one set of bounds) to another (with a different set of
+bounds).
+What capability should we be using to provide the new bounds?
+Recompile <code>cheri-allocator.c</code> with a CHERI-enabled target.</p>
+</li>
+<li>
+<p>Demonstrate that the program now runs successfully to completion.</p>
+</li>
+</ol>
+<p>The resulting allocator is now substantially safer with respect to spatial
+safety, preventing underflows and overflows from corrupting allocator metadata
+or the contents of other allocations.
+However, to continue hardening the allocator against various attacks, further
+work would be required, including better validating the argument of the
+<code>free()</code> function.
+This would ideally test that the pointer being freed points to memory managed
+by the allocator, that the pointer is in bounds, and that it points to the
+start of a current allocation.
+Further temporal safety also requires quarantining freed memory until all
+pointers to it have been revoked.</p>
+<h2><a class="header" href="#source-files" id="source-files">Source Files</a></h2>
+<p><strong>cheri-allocator.c</strong></p>
+<pre><code class="language-C">/*
+ * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
+ * Copyright (c) 2022 Robert N. M. Watson
+ */
+
+#include &lt;sys/cdefs.h&gt;
+
+#include &lt;assert.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;sysexits.h&gt;
+
+#ifdef __CHERI_PURE_CAPABILITY__
+#include &lt;cheriintrin.h&gt;
+#endif
+
+/*
+ * Implement a very simple allocator for a fixed-size data type, with inline
+ * metadata.  Calls to alloc_allocate() return a pointer to a fixed-size byte
+ * array.  Calls to alloc_free() return it to the allocator for reuse.
+ *
+ * The implementation is simplistic, and is designed to support an exercise
+ * relating to: (a) bounds setting; and (b) monotonicty and rederivation.
+ * Each allocation is described by 'struct allocation', which consists of
+ * free-list pointers and an array of bytes that make up the allocation
+ * itself.  Those allocations are stored as a sequential array in a global
+ * variable initialised by BSS:
+ *
+ *  /--------- index 0 ----------\ /--------- index 1 ----------\ /--...
+ *
+ * +--------+-----------------...-+--------+-----------------...-+---...
+ * | a_next | a_bytes[ALLOC_SIZE] | a_next | a_bytes[ALLOC_SIZE] |
+ * +--------+-----------------...-+--------+-----------------...-+---...
+ *
+ *                                ^                              ^
+ *      \_________________________/    \_________________________/
+ *        If unallocated, pointer        If unallocated, pointer
+ *        to next free allocation.       to next free allocation.
+ *
+ * Allocation storage is sized below the threshold requiring extra alignment
+ * or padding to account for capability bounds compression.
+ */
+#define	ALLOC_SIZE		128		/* Allocation data size. */
+struct alloc_storage {
+	struct alloc_storage	*a_next;		/* Free list. */
+	uint8_t			 a_bytes[ALLOC_SIZE];	/* Allocated memory. */
+};
+
+#define	ALLOC_MAX	16			/* Availaable allocations. */
+struct alloc_storage alloc_array[ALLOC_MAX];	/* Underlying storage. */
+struct alloc_storage *alloc_nextfree;		/* Next available memory. */
+
+/*
+ * Initialise the free list, pointing alloc_nextfree at the array, and then
+ * chaining array entries into the list.
+ */
+static void
+alloc_init(void)
+{
+	int i;
+
+	alloc_nextfree = &amp;alloc_array[0];
+	for (i = 0; i &lt; ALLOC_MAX - 1; i++)
+		alloc_array[i].a_next = &amp;alloc_array[i + 1];
+	alloc_array[ALLOC_MAX - 1].a_next = NULL;
+	assert(alloc_array[ALLOC_MAX - 1].a_next == NULL);
+}
+
+/*
+ * Allocate memory, pulling it off the free list and updating pointers as
+ * needed.
+ */
+static void *
+alloc_allocate(void)
+{
+	struct alloc_storage *alloc;
+
+	if (alloc_nextfree == NULL)
+		return (NULL);
+	alloc = alloc_nextfree;
+	alloc_nextfree = alloc-&gt;a_next;
+	alloc-&gt;a_next = NULL;
+
+	/* Return pointer to allocated memory. */
+	return (alloc-&gt;a_bytes);
+};
+
+/*
+ * Free memory, inserting it back into the free list.  Note use of
+ * __containerof() to convert pointer to a_bytes back into the container
+ * struct pointer.
+ */
+static void
+alloc_free(void *ptr)
+{
+	struct alloc_storage *alloc;
+
+	/* Convert pointer to allocated memory into pointer to metadata. */
+	alloc = __containerof(ptr, struct alloc_storage, a_bytes);
+	alloc-&gt;a_next = alloc_nextfree;
+	alloc_nextfree = alloc;
+}
+
+int
+main(void)
+{
+	void *ptr1, *ptr2, *ptr3;
+
+	/* Initialise allocator. */
+	alloc_init();
+	printf(&quot;Allocator initialised\n&quot;);
+
+	/*
+	 * Allocate some memory.
+	 */
+	printf(&quot;Allocating memory\n&quot;);
+	ptr1 = alloc_allocate();
+	printf(&quot;Allocation returned %p\n&quot;, ptr1);
+
+	/*
+	 * Run off the end of the memory allocation, corrupting the next
+	 * allocation's metadata.  Free when done.
+	 */
+	printf(&quot;Preparing to overflow %p\n&quot;, ptr1);
+	memset(ptr1 + ALLOC_SIZE, 'A', sizeof(void *));
+	printf(&quot;Overflowed allocation %p\n&quot;, ptr1);
+
+	printf(&quot;Freeing allocation %p\n&quot;, ptr1);
+	alloc_free(ptr1);
+	printf(&quot;Allocation %p freed\n&quot;, ptr1);
+
+	/*
+	 * Perform three sequential allocations to cause the allocator to
+	 * dereference the corrupted pointer, performing a store.
+	 */
+	printf(&quot;Allocating memory\n&quot;);
+	ptr1 = alloc_allocate();
+	printf(&quot;Allocation returned %p\n&quot;, ptr1);
+
+	printf(&quot;Allocating memory\n&quot;);
+	ptr2 = alloc_allocate();
+	printf(&quot;Allocation returned %p\n&quot;, ptr2);
+
+	printf(&quot;Allocating memory\n&quot;);
+	ptr3 = alloc_allocate();
+	printf(&quot;Allocation returned %p\n&quot;, ptr3);
+
+	/*
+	 * Clear up the mess.
+	 */
+	printf(&quot;Freeing allocation %p\n&quot;, ptr3);
+	alloc_free(ptr3);
+	printf(&quot;Allocation %p freed\n&quot;, ptr3);
+
+	printf(&quot;Freeing allocation %p\n&quot;, ptr2);
+	alloc_free(ptr2);
+	printf(&quot;Allocation %p freed\n&quot;, ptr2);
+
+	printf(&quot;Freeing allocation %p\n&quot;, ptr1);
+	alloc_free(ptr1);
+	printf(&quot;Allocation %p freed\n&quot;, ptr1);
+
+	exit(EX_OK);
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../exercises/cheriabi/answers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../exercises/cheri-allocator/answers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../../exercises/cheriabi/answers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../../exercises/cheri-allocator/answers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

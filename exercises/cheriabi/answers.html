@@ -1,0 +1,492 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Answers - Adversarial CHERI Exercises and Missions</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../../favicon.png">
+        
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../cover/index.html">Adversarial CHERI Exercises and Missions</a></li><li class="chapter-item expanded "><a href="../../introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/background.html"><strong aria-hidden="true">1.1.</strong> Background reading</a></li><li class="chapter-item expanded "><a href="../../introduction/cross-compilation-execution.html"><strong aria-hidden="true">1.2.</strong> Cross compilation and execution</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/ccc.html"><strong aria-hidden="true">1.2.1.</strong> Helper script</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/index.html"><strong aria-hidden="true">2.</strong> Skills Development Exercises</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/index.html"><strong aria-hidden="true">2.1.</strong> Compile and run RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/answers.html"><strong aria-hidden="true">2.1.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/index.html"><strong aria-hidden="true">2.2.</strong> Disassemble and debug RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/answers.html"><strong aria-hidden="true">2.2.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/index.html"><strong aria-hidden="true">2.3.</strong> Demonstrate CHERI Tag Protection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/answers.html"><strong aria-hidden="true">2.3.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/index.html"><strong aria-hidden="true">2.4.</strong> Exercise an inter-object stack buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/answers.html"><strong aria-hidden="true">2.4.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/index.html"><strong aria-hidden="true">2.5.</strong> Exercise an inter-object global buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/answers.html"><strong aria-hidden="true">2.5.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/index.html"><strong aria-hidden="true">2.6.</strong> Explore subobject bounds</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/answers.html"><strong aria-hidden="true">2.6.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/index.html"><strong aria-hidden="true">2.7.</strong> Corrupt a control-flow pointer using a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/answers.html"><strong aria-hidden="true">2.7.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/index.html"><strong aria-hidden="true">2.8.</strong> Exercise heap overflows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/answers.html"><strong aria-hidden="true">2.8.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/type-confusion/index.html"><strong aria-hidden="true">2.9.</strong> Exercise integer-pointer type confusion bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/type-confusion/answers.html"><strong aria-hidden="true">2.9.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/index.html"><strong aria-hidden="true">2.10.</strong> Demonstrate pointer injection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/answers.html"><strong aria-hidden="true">2.10.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/adapt-c/index.html"><strong aria-hidden="true">2.11.</strong> Adapt a C Program to CHERI C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/adapt-c/answers.html"><strong aria-hidden="true">2.11.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheriabi/index.html"><strong aria-hidden="true">2.12.</strong> CheriABI Showcase</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheriabi/answers.html" class="active"><strong aria-hidden="true">2.12.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/index.html"><strong aria-hidden="true">2.13.</strong> Extending Heap Allocators for CHERI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/answers.html"><strong aria-hidden="true">2.13.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/index.html"><strong aria-hidden="true">2.14.</strong> Demonstrate pointer revocation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/answers.html"><strong aria-hidden="true">2.14.1.</strong> Answers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../missions/index.html"><strong aria-hidden="true">3.</strong> Focused Adversarial Missions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../missions/buffer-overflow-control-flow/index.html"><strong aria-hidden="true">3.1.</strong> Exploiting a buffer overflow to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/uninitialized-stack-frame-control-flow/index.html"><strong aria-hidden="true">3.2.</strong> Exploiting an uninitialized stack frame to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/use-after-free-control-flow/index.html"><strong aria-hidden="true">3.3.</strong> Exploiting heap use-after-free to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-09-06.ktimer/index.html"><strong aria-hidden="true">3.4.</strong> Exploiting kernel system-call vulnerability to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-18-13.nfs/index.html"><strong aria-hidden="true">3.5.</strong> Exploiting kernel NFS-server vulnerability to manipulate control flow</a></li></ol></li><li class="chapter-item expanded "><a href="../../appendix/index.html"><strong aria-hidden="true">4.</strong> Appendix</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Adversarial CHERI Exercises and Missions</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        <a href="https://github.com/CTSRD-CHERI/cheri-exercises" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#answers" id="answers">Answers</a></h1>
+<h2><a class="header" href="#the-process-memory-map" id="the-process-memory-map">The Process Memory Map</a></h2>
+<ol start="2">
+<li>
+<p>Example output from a baseline architecture:</p>
+<pre><code>Directly mapped page at p=0x84dc0000
+Punching hole in the heap at p=0x83b48000
+Done
+</code></pre>
+<p>And from a CHERI-enabled architecture:</p>
+<pre><code>Directly mapped page at p=0x40139000 [rwRW,0x40139000-0x4013a000]
+ p.perms=0x7817d
+Punching hole in the heap at p=0x407d1000 [rwRW,0x407d1000-0x407d3000]
+ p.perms=0x6817d
+munmap failed: Memory protection violation
+Done
+</code></pre>
+</li>
+<li>
+<p>This amounts to adding calls to <code>madvise(p, 4096, MADV_FREE)</code> and
+<code>mmap(p, 4096, PROT_READ|PROT_WRITE, MAP_FIXED|MAP_PRIVATE|MAP_ANON, -1, 0)</code>
+in the right places and verifying that the operations return appropriately.
+Additionally, you may wish to check <code>errno</code> in failure cases and the
+<em>contents</em> of memory after <code>mmap</code> to ensure that it has, indeed, behaved as
+expected in both cases.</p>
+</li>
+</ol>
+<h2><a class="header" href="#the-kernel-as-a-potentially-confused-deputy" id="the-kernel-as-a-potentially-confused-deputy">The Kernel as a Potentially Confused Deputy</a></h2>
+<ol start="2">
+<li>
+<p>Example output from a baseline architecture:</p>
+<pre><code>Write OK
+lower=0x80922400 upper=0x80922410
+Read 0x20 OK; lower[0]=0x10 upper[0]=0x20
+</code></pre>
+<p>And from a CHERI-enabled architecture:</p>
+<pre><code>Write OK
+lower=0x3fffdfff28 upper=0x3fffdfff38
+Bad read (Bad address); lower[0]=0x10 upper[0]=0x0
+</code></pre>
+</li>
+<li>
+<p>On the baseline architecture, the kernel dutifully writes 0x20 bytes to the
+target address, regardless of the C object model.  On the CHERI architecture,
+the kernel acts <em>intentionally</em> with the capability provided by userspace and
+so encounters a trap when copying bytes out to userspace.  Because the kernel
+updates <code>lower[0]</code>, we can conjecture that the kernel is not performing
+explicit bounds checks but is rather operating under a trust-but-validate
+model, handling the architectural trap when it uses <code>copyout()</code> to copy bytes
+from its internal pipe buffer to the indicated userspace buffer.</p>
+</li>
+<li>
+<p>Not all capability faults are fatal!  While the <a href="../buffer-overflow-stack">inter-stack-object overflow
+exercise</a> let the program die of the <code>SIGPROT</code>
+thrown its way, here, the kernel maps the architectural trap to a <em>failure
+return</em> rather than a fatal signal.</p>
+</li>
+</ol>
+<h2><a class="header" href="#extra-credit-initial-process-construction" id="extra-credit-initial-process-construction">(Extra Credit!) Initial Process Construction</a></h2>
+<ol start="2">
+<li>
+<p>Example output from a baseline architecture:</p>
+<pre><code>&amp;argv[0]=0x806e0d08
+ argv[0]=0x806e0fd0
+&amp;stack_local=0x806e0c94
+&amp;rodata_const=0x105c0
+&amp;relro_ptr=0x105c8
+&amp;rw_ptr=0x13e18
+printf=0x11c60
+</code></pre>
+<p>And from a CHERI-enabled architecture:</p>
+<pre><code>&amp;argv[0]=0x3fbfdff8d0 [rwRW,0x3fbfdff8d0-0x3fbfdff8f0]
+ argv[0]=0x3fbfdffe30 [rwRW,0x3fbfdffe30-0x3fbfdffe4a]
+&amp;stack_local=0x3fffdfff6c [rwRW,0x3fffdfff6c-0x3fffdfff70]
+&amp;rodata_const=0x1005c8 [rR,0x1005c8-0x1005cc]
+&amp;relro_ptr=0x102f00 [rR,0x102f00-0x102f10]
+&amp;rw_ptr=0x104070 [rwRW,0x104070-0x104080]
+printf=0x402608d8 [rxR,0x4013a000-0x40782000] (sentry)
+</code></pre>
+<p>Running the baseline version multiple times should produce different output
+thanks to Address Space Layout Randomization (ASLR), a popular probabilistic
+countermeasure against pointer forgery.  Because CHERI offers deterministic
+protection against pointer forgery by its very nature, ASLR for CheriABI
+programs is turned off.</p>
+</li>
+<li>
+<p>Example session:</p>
+<pre><code>(gdb) starti
+Starting program: /buildroot/print-more-cheri 
+
+Program stopped.
+rtld_start () at /cheri/source/mainline/cheribsd/libexec/rtld-elf/riscv/rtld_start.S:62
+62      /cheri/source/mainline/cheribsd/libexec/rtld-elf/riscv/rtld_start.S: No such file or directory.
+</code></pre>
+<p>We find ourselves nowhere within <code>print-more-cheri</code> but, rather, at the very
+beginning of the <em>dynamic loader</em> (<code>rtld</code>).</p>
+</li>
+<li>
+<p>Example session for CHERI:</p>
+<pre><code>(gdb) info inferiors
+  Num  Description       Executable        
+* 1    process 1013      /buildroot/print-more-cheri 
+(gdb) !procstat vm 1013
+  PID              START                END PRT    RES PRES REF SHD FLAG  TP PATH
+ 1013           0x100000           0x101000 r--R-    1    3   3   0 CN--- vn /buildroot/print-more-cheri
+ 1013           0x101000           0x102000 r-xR-    1    3   3   0 CN--- vn /buildroot/print-more-cheri
+ 1013           0x102000           0x104000 rw-RW    2    3   3   0 CN--- vn /buildroot/print-more-cheri
+ 1013           0x104000           0x105000 rw-RW    1    1   1   0 ----- df 
+ 1013         0x40104000         0x4010f000 r--R-   11  344  32   0 CN--- vn /libexec/ld-elf.so.1
+ 1013         0x4010f000         0x4012a000 r-xR-   27    0   1   0 C---- vn /libexec/ld-elf.so.1
+ 1013         0x4012a000         0x4012b000 rw-RW    1  344  32   0 CN--- vn /libexec/ld-elf.so.1
+ 1013         0x4012b000         0x4012d000 rw-RW    2  344  32   0 CN--- vn /libexec/ld-elf.so.1
+ 1013         0x4012d000         0x4012f000 rw-RW    1    1   1   0 ----- df 
+ 1013       0x3fbfd80000       0x3fbfe00000 rw-RW    1    1   1   0 ----- df 
+ 1013       0x3fbfe00000       0x3fffde0000 -----    0    0   0   0 G---- gd 
+ 1013       0x3fffde0000       0x3fffe00000 rw-RW    0    0   0   0 ---D- -- 
+ 1013       0x3ffffff000       0x4000000000 r-x--    1    1  13   0 ----- ph 
+</code></pre>
+<table><thead><tr><th>pointer</th><th>mapping</th><th>permissions</th></tr></thead><tbody>
+<tr><td><code>&amp;argv[0]</code></td><td><code>0x3fbfd80000</code></td><td><code>rw-RW</code></td></tr>
+<tr><td><code>argv</code></td><td>&quot;</td><td>&quot;</td></tr>
+<tr><td><code>stack_local</code></td><td><code>0x3fffde0000</code></td><td><code>rw-RW</code></td></tr>
+<tr><td><code>rodata_const</code></td><td><code>0x100000</code></td><td><code>r--R-</code></td></tr>
+<tr><td><code>relro_ptr</code></td><td><code>0x102000</code></td><td><code>rw-RW</code></td></tr>
+<tr><td><code>rw_ptr</code></td><td><code>0x104000</code></td><td><code>rw-RW</code></td></tr>
+<tr><td><code>printf</code></td><td>not initially mapped</td><td>n/a</td></tr>
+</tbody></table>
+</li>
+<li>
+<p>Abridged output:</p>
+<pre><code>cra            0xd117200009e18201000000004010f040       0x4010f040 &lt;rtld_start&gt; [rxR,0x40104000-0x4012f000] (sentry)
+csp            0xd17d000003ff2ffe0000003fffe00000       0x3fffe00000 [rwRW,0x3fbfe00000-0x3fffe00000]
+ca0            0xd17d00000785b9b40000003fbfdff9b0       0x3fbfdff9b0 [rwRW,0x3fbfdff9b0-0x3fbfdffe10]
+pcc            0x4010f040       0x4010f040 &lt;rtld_start&gt;
+ddc            0x0      0x0
+cap_valid      0x80800003       2155872259
+</code></pre>
+</li>
+<li>
+<p>In baseline programs, the stack is bounded only by operating system measures
+-- the kernel will refuse to grow what it considers to be &quot;the stack&quot; beyond
+some limit.  However, architecturally, there is no <em>a priori</em> limit to stack
+growth.  In CHERI, by contrast, the stack is accessed via a capability, which
+must be constructed up front.</p>
+<p>For the CHERI program, the kernel has backed the entirety of stack memory
+with page mappings:</p>
+<pre><code> 1013       0x3fbfe00000       0x3fffde0000 -----    0    0   0   0 G---- gd 
+ 1013       0x3fffde0000       0x3fffe00000 rw-RW    0    0   0   0 ---D- -- 
+</code></pre>
+<p>The latter of these is marked as &quot;growing down&quot; (the <code>D</code> in the penultimate
+field) while the former is considered a &quot;guard&quot; mapping (the <code>G</code> flag and
+<code>gd</code> type), serving to prevent any other claimant to the address space.</p>
+<p>The initial bounds on the stack capability prevent half of Stack Clash: the
+stack capability cannot authorize access to a heap region, even if, say,
+indexing an on-stack array goes very far out of bounds.  The primordial guard
+entry serves to prevent the second half: the heap cannot grow into the stack,
+because the kernel will not use that address space to satisfy <code>mmap</code> requests
+(and, moreover, no capability held by userspace, including the one in <code>csp</code>,
+bears <code>CHERI_PERM_SW_VMEM</code>, so the stack or its guard cannot be torn down).</p>
+<p>Traditionally, <code>argv</code> and its contents (as well as the <code>environ</code>ment vector
+and indeed the entire auxiliary vector) is placed above the initial stack
+pointer, so <code>&amp;argv[0]</code> is above <code>&amp;stack_local</code>.  However, here we can see
+that CheriBSD chooses to locate all this initial data <em>below</em> the stack
+reservation, meaning that <code>&amp;stack_local</code> is further up the address space than
+<code>&amp;argv[0]</code>.  This allows the kernel to ensure that parts of this initial
+state are immutable or that there exists exactly one capability to parts of
+the structure (allowing for easier reasoning about capability flow in
+userspace); these would not be true if this initial data were also reachable
+through the stack capability.</p>
+</li>
+<li>
+<p>Example session:</p>
+<pre><code>(gdb) info auxv
+3    AT_PHDR              Program headers for program    0x100040
+4    AT_PHENT             Size of program header entry   56
+5    AT_PHNUM             Number of program headers      11
+6    AT_PAGESZ            System page size               4096
+8    AT_FLAGS             Flags                          0x0
+9    AT_ENTRY             Entry point of program         0x101a30
+7    AT_BASE              Base address of interpreter    0x40104000
+24   AT_EHDRFLAGS         ELF header e_flags             0x30005
+15   AT_EXECPATH          Executable path                0x3fbfdfffa0 &quot;/mnt/tmp/print-more-cheri&quot;
+18   AT_OSRELDATE         OSRELDATE                      1400051
+16   AT_CANARY            Canary for SSP                 0x3fbfdfff60
+17   AT_CANARYLEN         Length of the SSP canary       64
+19   AT_NCPUS             Number of CPUs                 1
+20   AT_PAGESIZES         Pagesizes                      0x3fbfdfff40
+21   AT_PAGESIZESLEN      Number of pagesizes            24
+22   AT_TIMEKEEP          Pointer to timehands           0x3ffffff020
+23   AT_STACKPROT         Initial stack protection       0x3
+25   AT_HWCAP             Machine-dependent CPU capability hints 0x112d
+27   AT_BSDFLAGS          ELF BSD flags                  0x0
+28   AT_ARGC              Argument count                 1
+29   AT_ARGV              Argument vector                0x3fbfdff880
+30   AT_ENVC              Environment count              16
+31   AT_ENVV              Environment vector             0x3fbfdff8a0
+32   AT_PS_STRINGS        Process strings                0x3fbfdfffc0
+0    AT_NULL              End of vector                  0x0
+(gdb)    set $i = 0
+(gdb)    while(((Elf_Auxinfo *)$ca0)[$i].a_type != 0)
+ &gt;   p ((Elf_Auxinfo *)$ca0)[$i]
+ &gt;   set $i = $i + 1
+ &gt;   end
+$1 = {a_type = 3, a_un = {a_val = 1048640, a_ptr = 0x100040 [rwRW,0x100000-0x104260], a_fcn = 0x100040 [rwRW,0x100000-0x104260]}}
+$2 = {a_type = 4, a_un = {a_val = 56, a_ptr = 0x38, a_fcn = 0x38}}
+$3 = {a_type = 5, a_un = {a_val = 11, a_ptr = 0xb, a_fcn = 0xb}}
+$4 = {a_type = 6, a_un = {a_val = 4096, a_ptr = 0x1000, a_fcn = 0x1000}}
+$5 = {a_type = 8, a_un = {a_val = 0, a_ptr = 0x0, a_fcn = 0x0}}
+$6 = {a_type = 9, a_un = {a_val = 1055280, a_ptr = 0x101a30 &lt;_start&gt; [rxR,0x100000-0x104260], a_fcn = 0x101a30 &lt;_start&gt; [rxR,0x100000-0x104260]}}
+$7 = {a_type = 7, a_un = {a_val = 1074806784, a_ptr = 0x40104000 [rwxRW,0x40104000-0x4012f000], a_fcn = 0x40104000 [rwxRW,0x40104000-0x4012f000]}}
+$8 = {a_type = 24, a_un = {a_val = 196613, a_ptr = 0x30005, a_fcn = 0x30005}}
+$9 = {a_type = 15, a_un = {a_val = 273802067872, a_ptr = 0x3fbfdfffa0 [rwRW,0x3fbfdfffa0-0x3fbfdfffba], a_fcn = 0x3fbfdfffa0 [rwRW,0x3fbfdfffa0-0x3fbfdfffba]}}
+$10 = {a_type = 18, a_un = {a_val = 1400051, a_ptr = 0x155cf3, a_fcn = 0x155cf3}}
+$11 = {a_type = 16, a_un = {a_val = 273802067808, a_ptr = 0x3fbfdfff60 [rwRW,0x3fbfdfff60-0x3fbfdfffa0], a_fcn = 0x3fbfdfff60 [rwRW,0x3fbfdfff60-0x3fbfdfffa0]}}
+$12 = {a_type = 17, a_un = {a_val = 64, a_ptr = 0x40, a_fcn = 0x40}}
+$13 = {a_type = 19, a_un = {a_val = 1, a_ptr = 0x1, a_fcn = 0x1}}
+$14 = {a_type = 20, a_un = {a_val = 273802067776, a_ptr = 0x3fbfdfff40 [rwRW,0x3fbfdfff40-0x3fbfdfff58], a_fcn = 0x3fbfdfff40 [rwRW,0x3fbfdfff40-0x3fbfdfff58]}}
+$15 = {a_type = 21, a_un = {a_val = 24, a_ptr = 0x18, a_fcn = 0x18}}
+$16 = {a_type = 22, a_un = {a_val = 274877902880, a_ptr = 0x3ffffff020 [rwRW,0x3ffffff020-0x3ffffff190], a_fcn = 0x3ffffff020 [rwRW,0x3ffffff020-0x3ffffff190]}}
+$17 = {a_type = 23, a_un = {a_val = 3, a_ptr = 0x3, a_fcn = 0x3}}
+$18 = {a_type = 25, a_un = {a_val = 4397, a_ptr = 0x112d, a_fcn = 0x112d}}
+$19 = {a_type = 27, a_un = {a_val = 0, a_ptr = 0x0, a_fcn = 0x0}}
+$20 = {a_type = 28, a_un = {a_val = 1, a_ptr = 0x1, a_fcn = 0x1}}
+$21 = {a_type = 29, a_un = {a_val = 273802066048, a_ptr = 0x3fbfdff880 [rwRW,0x3fbfdff880-0x3fbfdff8a0], a_fcn = 0x3fbfdff880 [rwRW,0x3fbfdff880-0x3fbfdff8a0]}}
+$22 = {a_type = 30, a_un = {a_val = 16, a_ptr = 0x10, a_fcn = 0x10}}
+$23 = {a_type = 31, a_un = {a_val = 273802066080, a_ptr = 0x3fbfdff8a0 [rwRW,0x3fbfdff8a0-0x3fbfdff9b0], a_fcn = 0x3fbfdff8a0 [rwRW,0x3fbfdff8a0-0x3fbfdff9b0]}}
+$24 = {a_type = 32, a_un = {a_val = 273802067904, a_ptr = 0x3fbfdfffc0 [rwRW,0x3fbfdfffc0-0x3fbfe00000], a_fcn = 0x3fbfdfffc0 [rwRW,0x3fbfdfffc0-0x3fbfe00000]}}
+</code></pre>
+<p><code>rodata_const</code> and <code>relro_ptr</code> could each be derived from either <code>AT_PHDR</code>
+(shedding write permission) or <code>AT_BASE</code> (shedding execute); despite that the
+pages are mapped read-write, the capability permissions will enforce that
+they cannot be used to modify the values here.  If these are the only
+(non-TCB) capabilities to those locations, then the values must, indeed, be
+constant (outside bugs in the TCB).</p>
+<p><code>rw_ptr</code> must, on the other hand, have come from <code>AT_PHDR</code>.</p>
+</li>
+<li>
+<p>In either case, the program will trap and abort (<code>In-address space security exception</code>).</p>
+<p>Sentries are believed to complicate would-be ROP or JOP attacks without
+excessively complicating the architecture or system software.  Without, it
+would be possible to locate and invoke gadgets within resolvable functions in
+any loaded object, as the function must have execute permission to its entire
+body, and so the capability used to reference the function would need to
+(transitively) confer such rights.  Sentries let us refer to some code
+without the rights to jump to any part of it except the intended entry point.
+At the time of this writing, CHERI-RISC-V always, and Morello optionally,
+automatically constructs sentry capabilities when executing linked control
+transfers.</p>
+<p>At present, the default linkage model of CHERI means that PCC has bounds of
+an entire loaded <code>.text</code> segment (the executable or one of its loaded
+libraries), so ensuring the use of sentries when crossing segments restricts
+the ability to source gadgets to any that may exist within the segment
+vulnerable to ROP or JOP injection.</p>
+<p>The curious reader should seek out additional information about CHERI's
+&quot;object type&quot; mechanism and sealed capabilities, of which sentries are just
+one example.</p>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../exercises/cheriabi/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../exercises/cheri-allocator/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../../exercises/cheriabi/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../../exercises/cheri-allocator/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

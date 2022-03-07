@@ -1,0 +1,317 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Answers - Adversarial CHERI Exercises and Missions</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../../favicon.png">
+        
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../cover/index.html">Adversarial CHERI Exercises and Missions</a></li><li class="chapter-item expanded "><a href="../../introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/background.html"><strong aria-hidden="true">1.1.</strong> Background reading</a></li><li class="chapter-item expanded "><a href="../../introduction/cross-compilation-execution.html"><strong aria-hidden="true">1.2.</strong> Cross compilation and execution</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/ccc.html"><strong aria-hidden="true">1.2.1.</strong> Helper script</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/index.html"><strong aria-hidden="true">2.</strong> Skills Development Exercises</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/index.html"><strong aria-hidden="true">2.1.</strong> Compile and run RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/answers.html"><strong aria-hidden="true">2.1.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/index.html"><strong aria-hidden="true">2.2.</strong> Disassemble and debug RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/answers.html"><strong aria-hidden="true">2.2.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/index.html"><strong aria-hidden="true">2.3.</strong> Demonstrate CHERI Tag Protection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/answers.html" class="active"><strong aria-hidden="true">2.3.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/index.html"><strong aria-hidden="true">2.4.</strong> Exercise an inter-object stack buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/answers.html"><strong aria-hidden="true">2.4.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/index.html"><strong aria-hidden="true">2.5.</strong> Exercise an inter-object global buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/answers.html"><strong aria-hidden="true">2.5.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/index.html"><strong aria-hidden="true">2.6.</strong> Explore subobject bounds</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/answers.html"><strong aria-hidden="true">2.6.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/index.html"><strong aria-hidden="true">2.7.</strong> Corrupt a control-flow pointer using a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/answers.html"><strong aria-hidden="true">2.7.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/index.html"><strong aria-hidden="true">2.8.</strong> Exercise heap overflows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/answers.html"><strong aria-hidden="true">2.8.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/type-confusion/index.html"><strong aria-hidden="true">2.9.</strong> Exercise integer-pointer type confusion bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/type-confusion/answers.html"><strong aria-hidden="true">2.9.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/index.html"><strong aria-hidden="true">2.10.</strong> Demonstrate pointer injection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/answers.html"><strong aria-hidden="true">2.10.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/adapt-c/index.html"><strong aria-hidden="true">2.11.</strong> Adapt a C Program to CHERI C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/adapt-c/answers.html"><strong aria-hidden="true">2.11.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheriabi/index.html"><strong aria-hidden="true">2.12.</strong> CheriABI Showcase</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheriabi/answers.html"><strong aria-hidden="true">2.12.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/index.html"><strong aria-hidden="true">2.13.</strong> Extending Heap Allocators for CHERI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/answers.html"><strong aria-hidden="true">2.13.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/index.html"><strong aria-hidden="true">2.14.</strong> Demonstrate pointer revocation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/answers.html"><strong aria-hidden="true">2.14.1.</strong> Answers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../missions/index.html"><strong aria-hidden="true">3.</strong> Focused Adversarial Missions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../missions/buffer-overflow-control-flow/index.html"><strong aria-hidden="true">3.1.</strong> Exploiting a buffer overflow to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/uninitialized-stack-frame-control-flow/index.html"><strong aria-hidden="true">3.2.</strong> Exploiting an uninitialized stack frame to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/use-after-free-control-flow/index.html"><strong aria-hidden="true">3.3.</strong> Exploiting heap use-after-free to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-09-06.ktimer/index.html"><strong aria-hidden="true">3.4.</strong> Exploiting kernel system-call vulnerability to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-18-13.nfs/index.html"><strong aria-hidden="true">3.5.</strong> Exploiting kernel NFS-server vulnerability to manipulate control flow</a></li></ol></li><li class="chapter-item expanded "><a href="../../appendix/index.html"><strong aria-hidden="true">4.</strong> Appendix</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Adversarial CHERI Exercises and Missions</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        <a href="https://github.com/CTSRD-CHERI/cheri-exercises" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#answers" id="answers">Answers</a></h1>
+<ol start="2">
+<li>
+<p>Example output for the baseline program:</p>
+<pre><code>buf=0x8085ba59 &amp;p=0x8085ba50
+p.ptr=0x8085bb68 (0x10f into buf) *p.ptr=0f
+q=0x8085bb00 (0xa7 into buf)
+*q=a7
+r=0x8085bb00 (0xa7)
+*r=a7
+</code></pre>
+<p>And for the CHERI-enabled program:</p>
+<pre><code>buf=0x3fffdffd71 [rwRW,0x3fffdffd71-0x3fffdfff70] &amp;p=0x3fffdffd60 [rwRW,0x3fffdffd60-0x3fffdffd70]
+p.ptr=0x3fffdffe80 [rwRW,0x3fffdffd71-0x3fffdfff70] (0x10f into buf) *p.ptr=0f
+q=0x3fffdffe00 [rwRW,0x3fffdffd71-0x3fffdfff70] (0x8f into buf)
+*q=8f
+r=0x3fffdffe00 [rwRW,0x3fffdffd71-0x3fffdfff70] (invalid) (0x8f)
+In-address space security exception
+</code></pre>
+</li>
+<li>
+<p><code>gdb</code> should report something like</p>
+<pre><code>Program received signal SIGPROT, CHERI protection violation
+Capability tag fault caused by register cs1.
+main () at ./src/exercises/cheri-tags/corrupt-pointer.c:45
+45      ./src/exercises/cheri-tags/corrupt-pointer.c: No such file or directory.
+
+Thread 1 (LWP 100057 of process 1231):
+#0  main () at ./src/exercises/cheri-tags/corrupt-pointer.c:45
+</code></pre>
+<p>We can ask <code>gdb</code> to print out the faulting instruction:</p>
+<pre><code>(gdb) x/i $pcc
+=&gt; 0x101d7c &lt;main+244&gt;:     lbu     a0,0(s1)
+</code></pre>
+<p><em>Note:</em> due to deficiencies in the current GDB implementation, the faulting
+instruction incorrectly decodes as <code>lbu</code> with integer operands rather than
+correctly as <code>clbu a0, 0(cs1)</code>.</p>
+<p>We can also ask <code>gdb</code> for more information about the signal we received:</p>
+<pre><code>(gdb) p $_siginfo
+$1 = {si_signo = 34, si_errno = 0, si_code = 2, si_pid = 0, si_uid = 0, si_status = 0, si_addr = 0x101d7c &lt;main+244&gt;, si_value = {sival_int = 0, sival_ptr = 0x0}, _reason = {_fault = {si_trapno = 28, si_capreg = 9}, _timer = {si_timerid = 28, si_overrun = 9}, _mesgq = {si_mqd = 28}, _poll = {si_band = 38654705692}, __spare__ = {__spare1__ = 38654705692, __spare2__ = {0, 0, 0, 0, 0, 0, 0}}}}
+
+</code></pre>
+<p>As said, <code>si_signo = 34</code> is <code>SIGPROT</code>, for which <code>si_code = 2</code> is
+<code>PROT_CHERI_TAG</code>, indicating a missing (clear) tag as an input to a
+capability instruction.  <code>gdb</code> in fact does this decoding for you, in the
+reported line <code>Capability tag fault caused by register cs1</code>.  It will be
+helpful to look for similar reports associated with <code>SIGPROT</code>s throughout
+this book.</p>
+</li>
+<li>
+<p>Constructing <code>r</code> is very similar on the two targets, differing only by the
+use of integer- or capability-based memory instructions:</p>
+<table><thead><tr><th></th><th align="left">Baseline</th><th align="left">CHERI</th></tr></thead><tbody>
+<tr><td>Store</td><td align="left"><code>sb zero, 0(sp)</code></td><td align="left"><code>csb zero, 32(csp)</code></td></tr>
+<tr><td>Load</td><td align="left"><code>ld s0, 0(sp)</code></td><td align="left"><code>clc cs1, 32(csp)</code></td></tr>
+</tbody></table>
+<p>The significant difference is in the construction of <code>q</code>.  On the baseline
+architecture, it is a direct bitwise <code>and</code> of a pointer loaded from memory:</p>
+<pre><code>ld   a0, 0(sp)
+andi s0, a0, -256
+</code></pre>
+<p>On CHERI, on the other hand, the program makes explicit use of capability
+manipulation instructions to...</p>
+<table><thead><tr><th>Instruction</th><th>Action</th></tr></thead><tbody>
+<tr><td><code>clc       ca0, 32(csp)</code></td><td>Load the capability from memory</td></tr>
+<tr><td><code>cgetaddr  a1, ca0</code></td><td>Extract its address field to a register</td></tr>
+<tr><td><code>andi      a1, a1, -256</code></td><td>Perform the mask operation</td></tr>
+<tr><td><code>csetaddr  cs1, ca0, a1</code></td><td>Update the address field</td></tr>
+</tbody></table>
+<p>This longer instruction sequence serves to prove to the processor that the
+resulting capability (in <code>cs1</code>) was constructed using valid transformations.
+In particular, the <code>csetaddr</code> allows the processor to check that the
+combination of the old capability (in <code>ca0</code>) and the new address (in <code>a1</code>)
+remains <em>representable</em>.</p>
+</li>
+<li>
+<p>While the in-memory, byte representation of <code>q</code> and <code>r</code> are identical, <code>q</code>
+has been manipulated as <em>bytes</em> rather than as a <em>capability</em> and so has had
+its tag zeroed.  (Specifically, the <code>csb zero, 32(csp)</code> instruction cleared
+the tag associated with the 16-byte granule pointed to by <code>32(csp)</code>; the
+subsequent <code>clc</code> transferred this zero tag to <code>cs1</code>.)</p>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../exercises/cheri-tags/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../exercises/buffer-overflow-stack/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../../exercises/cheri-tags/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../../exercises/buffer-overflow-stack/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

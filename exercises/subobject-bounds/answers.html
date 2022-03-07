@@ -1,0 +1,405 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Answers - Adversarial CHERI Exercises and Missions</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../../favicon.png">
+        
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../cover/index.html">Adversarial CHERI Exercises and Missions</a></li><li class="chapter-item expanded "><a href="../../introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/background.html"><strong aria-hidden="true">1.1.</strong> Background reading</a></li><li class="chapter-item expanded "><a href="../../introduction/cross-compilation-execution.html"><strong aria-hidden="true">1.2.</strong> Cross compilation and execution</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/ccc.html"><strong aria-hidden="true">1.2.1.</strong> Helper script</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/index.html"><strong aria-hidden="true">2.</strong> Skills Development Exercises</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/index.html"><strong aria-hidden="true">2.1.</strong> Compile and run RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/answers.html"><strong aria-hidden="true">2.1.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/index.html"><strong aria-hidden="true">2.2.</strong> Disassemble and debug RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/answers.html"><strong aria-hidden="true">2.2.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/index.html"><strong aria-hidden="true">2.3.</strong> Demonstrate CHERI Tag Protection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/answers.html"><strong aria-hidden="true">2.3.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/index.html"><strong aria-hidden="true">2.4.</strong> Exercise an inter-object stack buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/answers.html"><strong aria-hidden="true">2.4.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/index.html"><strong aria-hidden="true">2.5.</strong> Exercise an inter-object global buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/answers.html"><strong aria-hidden="true">2.5.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/index.html"><strong aria-hidden="true">2.6.</strong> Explore subobject bounds</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/answers.html" class="active"><strong aria-hidden="true">2.6.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/index.html"><strong aria-hidden="true">2.7.</strong> Corrupt a control-flow pointer using a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/answers.html"><strong aria-hidden="true">2.7.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/index.html"><strong aria-hidden="true">2.8.</strong> Exercise heap overflows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/answers.html"><strong aria-hidden="true">2.8.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/type-confusion/index.html"><strong aria-hidden="true">2.9.</strong> Exercise integer-pointer type confusion bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/type-confusion/answers.html"><strong aria-hidden="true">2.9.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/index.html"><strong aria-hidden="true">2.10.</strong> Demonstrate pointer injection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/answers.html"><strong aria-hidden="true">2.10.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/adapt-c/index.html"><strong aria-hidden="true">2.11.</strong> Adapt a C Program to CHERI C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/adapt-c/answers.html"><strong aria-hidden="true">2.11.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheriabi/index.html"><strong aria-hidden="true">2.12.</strong> CheriABI Showcase</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheriabi/answers.html"><strong aria-hidden="true">2.12.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/index.html"><strong aria-hidden="true">2.13.</strong> Extending Heap Allocators for CHERI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/answers.html"><strong aria-hidden="true">2.13.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/index.html"><strong aria-hidden="true">2.14.</strong> Demonstrate pointer revocation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/answers.html"><strong aria-hidden="true">2.14.1.</strong> Answers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../missions/index.html"><strong aria-hidden="true">3.</strong> Focused Adversarial Missions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../missions/buffer-overflow-control-flow/index.html"><strong aria-hidden="true">3.1.</strong> Exploiting a buffer overflow to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/uninitialized-stack-frame-control-flow/index.html"><strong aria-hidden="true">3.2.</strong> Exploiting an uninitialized stack frame to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/use-after-free-control-flow/index.html"><strong aria-hidden="true">3.3.</strong> Exploiting heap use-after-free to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-09-06.ktimer/index.html"><strong aria-hidden="true">3.4.</strong> Exploiting kernel system-call vulnerability to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-18-13.nfs/index.html"><strong aria-hidden="true">3.5.</strong> Exploiting kernel NFS-server vulnerability to manipulate control flow</a></li></ol></li><li class="chapter-item expanded "><a href="../../appendix/index.html"><strong aria-hidden="true">4.</strong> Appendix</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Adversarial CHERI Exercises and Missions</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        <a href="https://github.com/CTSRD-CHERI/cheri-exercises" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#answers---explore-subobject-bounds" id="answers---explore-subobject-bounds">Answers - Explore Subobject Bounds</a></h1>
+<h2><a class="header" href="#exercise-a-subobject-buffer-overflow" id="exercise-a-subobject-buffer-overflow">Exercise a subobject buffer overflow</a></h2>
+<p>This exercise demonstrates how subobject bounds can correct and array in a
+structure.</p>
+<ol start="2">
+<li>
+<p>Expected output:</p>
+<pre><code># ./buffer-overflow-subobject-riscv
+b.i = c
+b.i = b
+# ./buffer-overflow-subobject-cheri
+b.i = c
+b.i = b
+</code></pre>
+</li>
+<li>
+<p>Example session:</p>
+<pre><code>(gdb) f fill_buf
+No registers.
+(gdb) b fill_buf
+Breakpoint 1 at 0x1b3a: file src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c, line 13.
+(gdb) r
+Starting program: /root/buffer-overflow-subobject-cheri
+
+Breakpoint 1, fill_buf (buf=0x103e50 &lt;b&gt; [rwRW,0x103e50-0x103ed4] &quot;&quot;, len=128)
+    at src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c:13
+13      src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c: No such file or directory.
+</code></pre>
+<p>The bounds are <code>132</code> bytes corresponding to the size of the underlying object.</p>
+</li>
+<li>
+<p>Expected output:</p>
+<pre><code># ./buffer-overflow-subobject-cheri
+b.i = c
+In-address space security exception (core dumped)
+</code></pre>
+</li>
+<li>
+<p>Example session:</p>
+<pre><code>(gdb) b fill_buf
+Breakpoint 1 at 0x1b3a: file src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c, line 13.
+(gdb) r
+Starting program: /root/buffer-overflow-subobject-cheri-subobject
+
+Breakpoint 1, fill_buf (buf=0x103e50 &lt;b&gt; [rwRW,0x103e50-0x103ed0] &quot;&quot;, len=128)
+    at src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c:13
+13      src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c: No such file or directory.
+</code></pre>
+<p>The pointer to the buffer is now bounded to the array rather than the object.</p>
+<p>Investigating further will reveal that the compiler has inserted a
+bounds-setting instruction prior to the call to <code>fill_buf</code> in <code>main</code>, that
+is, when the pointer to <code>b.buffer</code> is materialized.</p>
+</li>
+</ol>
+<h2><a class="header" href="#deliberately-using-larger-bounds" id="deliberately-using-larger-bounds">Deliberately Using Larger Bounds</a></h2>
+<ol>
+<li>
+<p>Example output:</p>
+<pre><code>Traversing list=0x104320 [rwRW,0x104320-0x104340] first=0x1040e0 [rwRW,0x1040d0-0x104100] lastnp=0x104150 [rwRW,0x104130-0x104160]
+ Ilist cursor=0x1040e0 [rwRW,0x1040d0-0x104100]
+  next=0x104140 [rwRW,0x104130-0x104160]
+  prevnp=0x104330 [rwRW,0x104320-0x104340]
+  val field at 0x1040d0 [rwRW,0x1040d0-0x104100]
+ Ilist cursor=0x104140 [rwRW,0x104130-0x104160]
+  next=0x104320 [rwRW,0x104320-0x104340]
+  prevnp=0x1040f0 [rwRW,0x1040d0-0x104100]
+  val field at 0x104130 [rwRW,0x104130-0x104160]
+Traversing list again, accessing superobject field...
+ Ilist cursor=0x1040e0 [rwRW,0x1040d0-0x104100] value=1 (at 0x1040d0 [rwRW,0x1040d0-0x104100])
+ Ilist cursor=0x104140 [rwRW,0x104130-0x104160] value=3 (at 0x104130 [rwRW,0x104130-0x104160])
+</code></pre>
+</li>
+<li>
+<p>In turn:</p>
+<ul>
+<li>
+<p>All capabilities referencing the sentinel or its fields (including
+<code>&amp;l-&gt;ile_next</code>) have length <code>0x20</code>, corresponding to <code>sizeof(struct ilist_elem</code>).</p>
+</li>
+<li>
+<p>The next pointers in the sentinel, <code>0x1040d0 [rwRW,0x1040c0-0x1040f0]</code>, and
+in the first list element, <code>0x104130 [rwRW,0x104120-0x104150]</code>, have legth
+<code>0x30</code>, corresponding to <code>sizeof(struct obj)</code>.</p>
+</li>
+<li>
+<p>The previous-next pointers in the sentinel, <code>0x104140 [rwRW,0x104120-0x104150]</code> and in the last list element, <code>0x1040e0 [rwRW,0x1040c0-0x1040f0]</code> also have length <code>0x30</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Example output:</p>
+<pre><code>Traversing list=0x104350 [rwRW,0x104350-0x104370] first=0x104120 [rwRW,0x104120-0x104140] lastnp=0x104190 [rwRW,0x104190-0x1041a0]
+ Ilist cursor=0x104120 [rwRW,0x104120-0x104140]
+  next=0x104180 [rwRW,0x104180-0x1041a0]
+  prevnp=0x104360 [rwRW,0x104360-0x104370]
+  val field at 0x104110 [rwRW,0x104120-0x104140]
+ Ilist cursor=0x104180 [rwRW,0x104180-0x1041a0]
+  next=0x104350 [rwRW,0x104350-0x104370]
+  prevnp=0x104130 [rwRW,0x104130-0x104140]
+  val field at 0x104170 [rwRW,0x104180-0x1041a0]
+Traversing list again, accessing superobject field...
+In-address space security exception
+</code></pre>
+<p>Notice the line <code>val field at 0x104110 [rwRW,0x104120-0x104140]</code>.  This is
+out of bounds!</p>
+<p>The compiler has taken our use of <code>&amp;obj1.ilist</code> as an argument to
+<code>ilist_insert_after</code> as license to <em>narrow</em> the bounds to just the subobject.
+Indeed, the length of all <code>ile_next</code> pointers is now <code>0x20</code>.  Further, all
+<code>ile_lastnp</code> pointers now have length <code>0x10</code>, the size of just the capability
+they point to!</p>
+</li>
+<li>
+<p>The compiler will emit a pair of warnings about the uses of
+<code>ILIST_CONTAINER</code>:</p>
+<pre><code>./subobject-list.c:75:20: error: static_assert failed due to requirement '__builtin_marked_no_subobject_bounds(struct obj) || __builtin_marked_no_subobject_bounds(struct ilist_elem)' &quot;this type is unsafe for use in containerof() with sub-objectbounds. Please mark the member/type with __subobject_use_container_bounds&quot;
+</code></pre>
+</li>
+<li>
+<p>We can take the compiler's advice in at least two ways:</p>
+<ol>
+<li>
+<p>We could mark the <code>struct ilist_elem</code> type itself:</p>
+<pre><code>struct ilist_elem {
+  struct ilist_elem **ile_prevnp;
+  struct ilist_elem *ile_next;
+} __subobject_use_container_bounds;
+</code></pre>
+<p>When we run the program now, we will find that we are largely back in the
+case where no sub-object bounds were applied: pointers to the sentinel
+have length <code>0x20</code> and pointers to list elements have length <code>0x30</code>.
+However, the <code>&amp;co-&gt;val</code> pointers are still bounded:</p>
+<pre><code>Traversing list=0x104300 [rwRW,0x104300-0x104320] first=0x1040d0 [rwRW,0x1040c0-0x1040f0] lastnp=0x104140 [rwRW,0x104120-0x104150]
+ Ilist cursor=0x1040d0 [rwRW,0x1040c0-0x1040f0]
+  next=0x104130 [rwRW,0x104120-0x104150]
+  prevnp=0x104310 [rwRW,0x104300-0x104320]
+  val field at 0x1040c0 [rwRW,0x1040c0-0x1040f0]
+ Ilist cursor=0x104130 [rwRW,0x104120-0x104150]
+  next=0x104300 [rwRW,0x104300-0x104320]
+  prevnp=0x1040e0 [rwRW,0x1040c0-0x1040f0]
+  val field at 0x104120 [rwRW,0x104120-0x104150]
+Traversing list again, accessing superobject field...
+ Ilist cursor=0x1040d0 [rwRW,0x1040c0-0x1040f0] value=1 (at 0x1040c0 [rwRW,0x1040c0-0x1040c4])
+ Ilist cursor=0x104130 [rwRW,0x104120-0x104150] value=3 (at 0x104120 [rwRW,0x104120-0x104124])
+</code></pre>
+</li>
+<li>
+<p>We can mark the <code>ilist</code> field of <code>struct obj</code>:</p>
+<pre><code>struct obj {
+  int val;
+  struct ilist_elem ilist __subobject_use_container_bounds;
+};
+</code></pre>
+<p>In this case, we find that the <code>ile_next</code> pointers are offset and not
+bounded, while the <code>ile_prevnp</code> pointers are tightly bounded:</p>
+<pre><code>Traversing list=0x104340 [rwRW,0x104340-0x104360] first=0x104110 [rwRW,0x104100-0x104130] lastnp=0x104180 [rwRW,0x104180-0x104190]
+ Ilist cursor=0x104110 [rwRW,0x104100-0x104130]
+  next=0x104170 [rwRW,0x104160-0x104190]
+  prevnp=0x104350 [rwRW,0x104350-0x104360]
+  val field at 0x104100 [rwRW,0x104100-0x104130]
+ Ilist cursor=0x104170 [rwRW,0x104160-0x104190]
+  next=0x104340 [rwRW,0x104340-0x104360]
+  prevnp=0x104120 [rwRW,0x104120-0x104130]
+  val field at 0x104160 [rwRW,0x104160-0x104190]
+Traversing list again, accessing superobject field...
+ Ilist cursor=0x104110 [rwRW,0x104100-0x104130] value=1 (at 0x104100 [rwRW,0x104100-0x104104])
+ Ilist cursor=0x104170 [rwRW,0x104160-0x104190] value=3 (at 0x104160 [rwRW,0x104160-0x104164])
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../exercises/subobject-bounds/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../exercises/control-flow-pointer/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../../exercises/subobject-bounds/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../../exercises/control-flow-pointer/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
