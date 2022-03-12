@@ -1,9 +1,9 @@
 # Exercise an inter-stack-object buffer overflow
 
-This exercise demonstrates an inter-object buffer overflow on baseline and
-CHERI-enabled architectures, and asks you to characterize and fix the bug
-detected by CHERI bounds enforcement.  It also asks you to use GDB for
-debugging purposes.
+This exercise uses two stack allocations to demonstrate an inter-object buffer
+overflow on baseline and CHERI-enabled architectures, and asks you to
+characterize and fix the bug detected by CHERI bounds enforcement.  It also asks
+you to use GDB for debugging purposes.
 
 By contrast to [the globals-based example](../buffer-overflow-global), this
 example uses two *stack* objects to demonstrate the overflow.  We will be able

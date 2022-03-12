@@ -1,4 +1,4 @@
-# Demonstrate CHERI Tag Protection
+# Demonstrate CHERI pointer integrity protection
 
 This exercise demonstrates CHERI's *capability provenance tags*, in particular
 by showing that capabilities and their constituent bytes are subtly different

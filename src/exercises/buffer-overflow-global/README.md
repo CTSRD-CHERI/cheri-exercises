@@ -1,9 +1,9 @@
 # Exercise an inter-global-object buffer overflow
 
-This exercise demonstrates an inter-object buffer overflow on baseline and
-CHERI-enabled architectures, and asks you to characterize and fix the bug
-detected by CHERI bounds enforcement.  It also asks you to use GDB for
-debugging purposes.
+This exercise uses two global objects to demonstrate an inter-object buffer
+overflow on baseline and CHERI-enabled architectures, and asks you to
+characterize and fix the bug detected by CHERI bounds enforcement.  It also asks
+you to use GDB for debugging purposes.
 
 This example uses two *global* objects (in `.data`) to demonstrate an overflow.
 It is worth pondering how the bounds for pointers to globals come to be set!

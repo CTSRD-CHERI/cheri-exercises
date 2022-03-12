@@ -1,6 +1,6 @@
 # Explore Subobject Bounds
 
-In the CheriABI run-time environment, bounds are typically associated with
+In CHERI C/C++, bounds are typically associated with
 memory allocations rather than C types.
 For example, if a heap memory allocation is made for 1024 bytes, and the
 structure within it is 768 bytes, then the bounds associated with a pointer

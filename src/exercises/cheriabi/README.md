@@ -37,9 +37,23 @@ associated with a page, `munmap` pages, or even request a replacement mapping
 evasion of CHERI capabilities' protection properties, as CHERI capabilities are
 interpreted in combination with the virtual memory map.
 
-Therefore, the CheriBSD kernel avails itself of a *software permission* bit in
-CHERI capabilities.  Such permissions are not architecturally interpreted but
-are still subject to architectural protection (and so, for example, a zero
+However, in CheriBSD, the kernel can return memory mappings (from `mmap`) using
+a bounded capability.  Moreover, it can demand that references to memory
+mappings passed to other system calls (such as `munmap`, `madvise`, or even
+`mmap` itself) be made using capabilities.  This reduces ambient authority
+significantly: software must have a capability to a part of the memory map
+rather than merely the relevant address.
+
+And yet, that may not be sufficient.  It implies that any capability to a part
+of the address space (or, at least, whole pages thereof) implicitly carries the
+authority to arbitrarily manipulate that part of the address space.  This is
+likely undesirable; for example, we likely do not mean or expect *clients* of
+`malloc` to be able to, for example, *unmap* or *alias* parts of the heap!
+
+To capture the distinction between *control* and *use* of address space, the
+CheriBSD kernel avails itself of a *software permission* bit in CHERI
+capabilities.  Such permissions are not architecturally interpreted but are
+still subject to architectural protection (and so, for example, a zero
 permission bit may not be set to one without simultaneously clearing the
 capability tag).  In particular, CheriBSD defines `CHERI_PERM_SW_VMEM`, sets
 this permission bit when returning pointers to *new* allocations of address
