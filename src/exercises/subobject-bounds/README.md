@@ -5,6 +5,9 @@ memory allocations rather than C types.
 For example, if a heap memory allocation is made for 1024 bytes, and the
 structure within it is 768 bytes, then the bounds associated with a pointer
 will be for the allocation size rather than the structure size.
+In idiomatic C++, the use of `new` more tightly couples types and allocations;
+however, the distinction remains and, in particular, the examples in this
+exercise continue to apply.
 
 ## Subobject Overflows
 

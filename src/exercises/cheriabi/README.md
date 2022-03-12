@@ -38,24 +38,29 @@ evasion of CHERI capabilities' protection properties, as CHERI capabilities are
 interpreted in combination with the virtual memory map.
 
 However, in CheriBSD, the kernel can return memory mappings (from `mmap`) using
-a bounded capability.  Moreover, it can demand that references to memory
-mappings passed to other system calls (such as `munmap`, `madvise`, or even
-`mmap` itself) be made using capabilities.  This reduces ambient authority
-significantly: software must have a capability to a part of the memory map
-rather than merely the relevant address.
+a bounded capability.  Moreover, it demands that references to established
+memory mappings passed to other system calls (such as `munmap`, `madvise`, or
+even `mmap` itself) be made using capabilities.  This reduces ambient authority
+significantly: software must provide a capability to a part of the memory map
+rather than simply passing its integer address.  (For backwards-compatibility
+with software that explicitly lays out its address space, the kernel will honor
+requests to `mmap` that *establish* a mapping at a given address and range
+without holding a capability, so long as no existing mapping overlaps the
+requested span.)
 
 And yet, that may not be sufficient.  It implies that any capability to a part
 of the address space (or, at least, whole pages thereof) implicitly carries the
 authority to arbitrarily manipulate that part of the address space.  This is
 likely undesirable; for example, we likely do not mean or expect *clients* of
-`malloc` to be able to, for example, *unmap* or *alias* parts of the heap!
+`malloc` to be able to, for example, *unmap* or *alias* parts of the heap!  That
+is, clients of `malloc` should not have sufficient privilege to manipulate the
+definition of the address space being used to back the heap.
 
 To capture the distinction between *control* and *use* of address space, the
 CheriBSD kernel avails itself of a *software permission* bit in CHERI
 capabilities.  Such permissions are not architecturally interpreted but are
-still subject to architectural protection (and so, for example, a zero
-permission bit may not be set to one without simultaneously clearing the
-capability tag).  In particular, CheriBSD defines `CHERI_PERM_SW_VMEM`, sets
+still subject to architectural monotonicity and integrity protection.
+In particular, CheriBSD defines `CHERI_PERM_SW_VMEM`, sets
 this permission bit when returning pointers to *new* allocations of address
 space, and requires that capabilities passed to address-space-manipulating
 functions bear this permission.  Userspace components are free to clear this
