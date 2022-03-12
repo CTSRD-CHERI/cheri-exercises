@@ -10,6 +10,10 @@ example uses two *stack* objects to demonstrate the overflow.  We will be able
 to see the CHERI C compiler generate code to apply spatial bounds on the
 capability used for the buffer pointer we pass around.
 
+Because the stack as a data structure is largely maintained by the compiler,
+this example applies generally to CHERI C/C++, even to programs executing in
+evironments other than CheriABI.
+
 1. Compile `buffer-overflow-stack.c` for the baseline architecture to
    the binary `buffer-overflow-stack-baseline` and for the CHERI-aware
    architecture to `buffer-overflow-stack-cheri`.
