@@ -7,6 +7,11 @@ you to use GDB for debugging purposes.
 
 This example uses two *global* objects (in `.data`) to demonstrate an overflow.
 It is worth pondering how the bounds for pointers to globals come to be set!
+(While we anticipate that most CHERI C/C++ runtimes will behave as per this
+exercise, globals and the details of access thereto are, in some sense, ABI
+considerations, cross-cutting between compilation and runtime environment, and,
+so, it is possible that CHERI C/C++ outside of CheriABI could behave
+differently.)
 
 1. Compile `buffer-overflow-global.c` for the baseline architecture to
    the binary `buffer-overflow-global-baseline` and for the CHERI-aware
