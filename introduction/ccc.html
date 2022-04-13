@@ -276,24 +276,53 @@ riscv64-purecap)
 	;;
 esac
 
-CHERIBUILD_SDK=${CHERIBUILD_SDK:-${HOME}/cheri/output/${cheri_sdk_name}}
-CLANG=${CLANG:-${CHERIBUILD_SDK}/bin/clang}
+# Find our SDK, using the first of these that expands only defined variables:
+#  ${CHERIBUILD_SDK_${cheri_sdk_name}} (if that syntax worked)
+#  ${CHERIBUILD_SDK}
+#  ${CHERIBUILD_OUTPUT}/${cheri_sdk_name}
+#  ${CHERIBUILD_SOURCE}/output/${cheri_sdk_name}
+#  ~/cheri/output/${cheri_sdk_name}
+
+SDKDIR_SOURCE=${CHERIBUILD_SOURCE:-${HOME}/cheri}
+SDKDIR_OUTPUT=${CHERIBUILD_OUTPUT:-${SDKDIR_SOURCE}/output}
+SDKDIR_SDK=${CHERIBUILD_SDK:-${SDKDIR_OUTPUT}/${cheri_sdk_name}}
+SDKDIR=$(eval echo \${CHERIBUILD_SDK_&quot;${cheri_arch_basename}&quot;:-})
+SDKDIR=${SDKDIR:-${SDKDIR_SDK}}
+
+enverr()
+{
+	echo &gt;&amp;2 $1
+	echo &quot;Perhaps set or adjust one of the following environment variables:&quot;
+	for v in SOURCE OUTPUT SDK; do
+		echo &quot; &quot; CHERIBUILD_$v \(currently: \
+		  $(eval echo \${CHERIBUILD_$v:-unset, tried \$SDKDIR_$v})\)
+	done
+
+	A=&quot;CHERIBUILD_SDK_${cheri_arch_basename}&quot;
+	echo &quot; &quot; &quot;$A&quot; \(currently: $(eval echo \${$A:-unset, tried \$SDKDIR})\)
+
+	echo &quot; &quot; &quot;$2&quot; \(currently: $(eval echo \${$2:-unset, tried \$SDK_$2})\)
+
+	err 1 &quot;Please check your build environment&quot;
+}
+
+SDK_CLANG=${CLANG:-${SDKDIR}/bin/clang}
 
 case $name in
-*clang|*cc)	prog=&quot;${CLANG}&quot; ;;
-*clang++|*c++)	prog=&quot;${CLANG}++&quot; ;;
+*clang|*cc)	prog=&quot;${SDK_CLANG}&quot; ;;
+*clang++|*c++)	prog=&quot;${SDK_CLANG}++&quot; ;;
 *)	err 1 &quot;Unsupported program name '$name'&quot; ;;
 esac
 if [ ! -x &quot;$prog&quot; ]; then
-	err 1 &quot;Target program '$prog' not found. Set CLANG or CHERIBUILD_SDK.&quot;
+	enverr &quot;Target compiler '$prog' not found.&quot; &quot;CLANG&quot;
 fi
 debug &quot;prog: $prog&quot;
 
-SYSROOT=${SYSROOT:-${CHERIBUILD_SDK}/sysroot-${cheri_arch_basename}-purecap}
-if [ ! -d &quot;$SYSROOT&quot; ]; then
-	err 1 &quot;Sysroot '$SYSROOT' does not exist. Set SYSROOT or CHERIBUILD_SDK.&quot;
+SDK_SYSROOT=${SYSROOT:-${SDKDIR}/sysroot-${cheri_arch_basename}-purecap}
+if [ ! -d &quot;$SDK_SYSROOT&quot; ]; then
+	enverr &quot;Sysroot '$SDK_SYSROOT' does not exist.&quot; &quot;SYSROOT&quot;
 fi
-debug &quot;sysroot: $SYSROOT&quot;
+debug &quot;sysroot: $SDK_SYSROOT&quot;
 
 debug &quot;arch_flags: $arch_flags&quot;
 
@@ -303,7 +332,7 @@ debug &quot;debug_flags: $debug_flags&quot;
 opt_flags=&quot;-O2&quot;
 debug &quot;opt_flags: $opt_flags&quot;
 
-sysroot_flags=&quot;--sysroot='$SYSROOT'&quot;
+sysroot_flags=&quot;--sysroot='$SDK_SYSROOT'&quot;
 debug &quot;sysroot_flags: $sysroot_flags&quot;
 
 linker_flags=&quot;-fuse-ld=lld&quot;
