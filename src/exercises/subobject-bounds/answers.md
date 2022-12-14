@@ -17,16 +17,15 @@ structure.
 
 3. Example session:
    ```
-   (gdb) f fill_buf
-   No registers.
    (gdb) b fill_buf
-   Breakpoint 1 at 0x1b3a: file src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c, line 13.
+   Breakpoint 1 at 0x1bae: file buffer-overflow-subobject.c, line 17.
    (gdb) r
    Starting program: /root/buffer-overflow-subobject-cheri
+   b.i = c
 
-   Breakpoint 1, fill_buf (buf=0x103e50 <b> [rwRW,0x103e50-0x103ed4] "", len=128)
-       at src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c:13
-   13      src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c: No such file or directory.
+   Breakpoint 1, fill_buf (buf=0x103f50 <b> [rwRW,0x103f50-0x103fd4] "", len=128)
+       at buffer-overflow-subobject.c:17
+   17                      buf[i] = 'b';
    ```
    The bounds are `132` bytes corresponding to the size of the underlying object.
 
@@ -40,19 +39,33 @@ structure.
 6. Example session:
    ```
    (gdb) b fill_buf
-   Breakpoint 1 at 0x1b3a: file src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c, line 13.
+   Breakpoint 1 at 0x1bae: file buffer-overflow-subobject.c, line 17.
    (gdb) r
-   Starting program: /root/buffer-overflow-subobject-cheri-subobject
+   Starting program: /root/buffer-overflow-subobject-cheri
+   b.i = c
 
-   Breakpoint 1, fill_buf (buf=0x103e50 <b> [rwRW,0x103e50-0x103ed0] "", len=128)
-       at src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c:13
-   13      src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c: No such file or directory.
+   Breakpoint 1, fill_buf (buf=0x103f50 <b> [rwRW,0x103f50-0x103fd0] "", len=128) at buffer-overflow-subobject.c:17
+   17                      buf[i] = 'b';
    ```
    The pointer to the buffer is now bounded to the array rather than the object.
 
    Investigating further will reveal that the compiler has inserted a
    bounds-setting instruction prior to the call to `fill_buf` in `main`, that
    is, when the pointer to `b.buffer` is materialized.
+   ```
+   (gdb) up
+   #1  0x0000000000101c0c in main () at buffer-overflow-subobject.c:26
+   26              fill_buf(b.buffer, sizeof(b.buffer));
+   (gdb) disassemble
+   Dump of assembler code for function main:
+      0x0000000000101bc0 <+0>:     cincoffset      csp,csp,-64
+   ...
+      0x0000000000101bfc <+60>:    csetbounds      ca0,cs1,128
+      0x0000000000101c00 <+64>:    li      a1,128
+      0x0000000000101c04 <+68>:    auipcc  cra,0x0
+      0x0000000000101c08 <+72>:    cjalr   -92(cra)
+   => 0x0000000000101c0c <+76>:    clw     a0,128(cs1)
+   ```
 
 ## Deliberately Using Larger Bounds
 

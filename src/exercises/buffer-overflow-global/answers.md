@@ -14,22 +14,15 @@
    ```
    Program received signal SIGPROT, CHERI protection violation
    Capability bounds fault caused by register ca4.
-   fill_buf (
-       buf=0x104060 <buffer> [rwRW,0x104060-0x1040e0] 'b' <repeats 128 times>,
-       len=128) at src/exercises/buffer-overflow-global/buffer-overflow-global.c:11
-   11      in src/exercises/buffer-overflow-global/buffer-overflow-global.c
+   fill_buf (buf=0x104160 <buffer> [rwRW,0x104160-0x1041e0] 'b' <repeats 128 times>, "c", len=128) at buffer-overflow-global.c:15
+   15                      buf[i] = 'b';
    (gdb) info reg ca4
-   ca4            0xf17d00000439806400000000001040e0       0x1040e0 <c> [rwRW,0x104060-0x1040e0]
+   ca4            0xf17d00000479816400000000001041e0       0x1041e0 <c> [rwRW,0x104160-0x1041e0]
    (gdb) x/i $pcc
-   => 0x101cc8 <fill_buf+12>:  sb      a3,0(a4)
+   => 0x101d2c <fill_buf+12>:      csb     a3,0(ca4)
    ```
    The array has been incremented beyond the end of the allocation as out
    of bounds store has been attempted (`Capability bounds fault`).
-   *Note:* due to deficiencies in the current GDB implementation, the
-   instruction incorrectly decodes as `sb` rather than correctly as:
-   ```
-       1cc8: 23 00 d7 00   csb     a3, 0(ca4)
-   ```
 
 5. Expected output:
    ```
@@ -40,13 +33,13 @@
    To see why this occurs, examine the bounds of the buffer in `fill_buf`.
    ```
    (gdb) b fill_buf
-   Breakpoint 1 at 0x1cc2: file src/exercises/buffer-overflow-global/buffer-overflow-global.c, line 11.
+   Breakpoint 1 at 0x101d26: file buffer-overflow-global.c, line 15.
    (gdb) r
    Starting program: /root/buffer-overflow-global-cheri
+   c = c
 
-   Breakpoint 1, fill_buf (buf=0x105000 <buffer> [rwRW,0x105000-0x205800] "",
-       len=1048577) at src/exercises/buffer-overflow-global/buffer-overflow-global.c:11
-   11      src/exercises/buffer-overflow-global/buffer-overflow-global.c: No such file or directory.
+   Breakpoint 1, fill_buf (buf=0x105000 <buffer> [rwRW,0x105000-0x205800] "", len=1048577) at buffer-overflow-global.c:15
+   15                      buf[i] = 'b';
    ```
    This indicates that buffer has been allocated (1024 * 1026) bytes. This
    is due to the padding required to ensure that the bounds of `buffer`
