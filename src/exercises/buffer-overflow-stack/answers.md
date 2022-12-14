@@ -21,24 +21,22 @@
 
    Program received signal SIGPROT, CHERI protection violation
    Capability bounds fault caused by register ca0.
-   0x0000000000101ce8 in write_buf (buf=<optimized out>, ix=<optimized out>) at ./buffer-overflow-stack.c:13
+   0x0000000000101cf0 in write_buf (buf=<optimized out>, ix=<optimized out>) at buffer-overflow-stack.c:13
    13              buf[ix] = 'b';
 
-   Thread 1 (LWP 100044 of process 838):
-   #0  0x0000000000101ce8 in write_buf (buf=<optimized out>, ix=<optimized out>) at ./buffer-overflow-stack.c:13
-   #1  0x0000000000101d72 in main () at ./buffer-overflow-stack.c:31
+   Thread 1 (LWP 100055 of process 829):
+   #0  0x0000000000101cf0 in write_buf (buf=<optimized out>, ix=<optimized out>) at buffer-overflow-stack.c:13
+   #1  0x0000000000101d7a in main () at buffer-overflow-stack.c:31
    (gdb) disass
    Dump of assembler code for function write_buf:
-      0x0000000000101ce0 <+0>:       cincoffset      ca0,ca0,a1
-      0x0000000000101ce4 <+4>:       li      a1,98
-   => 0x0000000000101ce8 <+8>:       sb      a1,0(a0)
-      0x0000000000101cec <+12>:      ret
+      0x0000000000101ce8 <+0>:     cincoffset      ca0,ca0,a1
+      0x0000000000101cec <+4>:     li      a1,98
+   => 0x0000000000101cf0 <+8>:     csb     a1,0(ca0)
+      0x0000000000101cf4 <+12>:    cret
    End of assembler dump.
    ```
 
-   *Note:* due to deficiencies in the current GDB implementation, the faulting
-   instruction incorrectly decodes as `sb` rather than correctly as `csb a1,
-   0(ca0)`.  Asking `gdb` about the registers with `info registers` and focusing
+   Asking `gdb` about the registers with `info registers` and focusing
    on the ones involved here, we see
    ```
    a0             0x3fffdfff50     274875809616
@@ -55,20 +53,20 @@
    `disass`embling, we see (eliding irrelevant instructions):
    ```
    (gdb) up
-   #1  0x0000000000101d72 in main () at ./buffer-overflow-stack.c:31
+   #1  0x0000000000101d7a in main () at buffer-overflow-stack.c:31
    31              write_buf(lower, sizeof(lower));
    (gdb) disass
    Dump of assembler code for function main:
-      0x0000000000101cf0 <+0>:       cincoffset      csp,csp,-144
+      0x0000000000101cf8 <+0>:     cincoffset      csp,csp,-144
 
-      0x0000000000101d0c <+28>:      cincoffset      ca0,csp,48
-      0x0000000000101d10 <+32>:      csetbounds      cs0,ca0,16
+      0x0000000000101d14 <+28>:    cincoffset      ca0,csp,48
+      0x0000000000101d18 <+32>:    csetbounds      cs0,ca0,16
 
-      0x0000000000101d64 <+116>:     li      a1,16
-      0x0000000000101d66 <+118>:     cmove   ca0,cs0
-      0x0000000000101d6a <+122>:     auipc   ra,0x0
-      0x0000000000101d6e <+126>:     jalr    -138(ra) # 0x101ce0 <write_buf>
-   => 0x0000000000101d72 <+130>:     lbu     a0,0(s1)
+      0x0000000000101d6c <+116>:   li      a1,16
+      0x0000000000101d6e <+118>:   cmove   ca0,cs0
+      0x0000000000101d72 <+122>:   auipcc  cra,0x0
+      0x0000000000101d76 <+126>:   cjalr   -138(cra)
+   => 0x0000000000101d7a <+130>:   clbu    a0,0(cs1)
    ```
    The compiler has arranged for `main` to allocate 144 bytes on the stack by
    decrementing the *capability stack pointer* register (`csp`) by 144 bytes.

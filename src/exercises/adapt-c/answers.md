@@ -2,7 +2,7 @@
 
 2. Example output:
    ```
-   # ./tools/ccc riscv64 -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
+   # ./tools/ccc riscv64 -o /build/cat-baseline ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
    Running: /output/sdk/bin/clang -target riscv64-unknown-freebsd -march=rv64gc -mabi=lp64d -mno-relax --sysroot=/output/sdk/sysroot-riscv64-purecap -g -O2 -fuse-ld=lld -Wall -Wcheri -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
    # ./tools/ccc riscv64-purecap -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
    Running: /output/sdk/bin/clang -target riscv64-unknown-freebsd -march=rv64gcxcheri -mabi=l64pc128d -mno-relax --sysroot=/output/sdk/sysroot-riscv64-purecap -g -O2 -fuse-ld=lld -Wall -Wcheri -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
@@ -54,23 +54,26 @@
    Make breakpoint pending on future shared library load? (y or [n]) y
    Breakpoint 1 (write) pending.
    (gdb) r /etc/hostid
-   Starting program: /buildroot/cat-cheri /etc/hostid
-   
-   Breakpoint 1, write (fd=1, buf=0x40810000, nbytes=37) at /source/cheribsd/lib/libc/sys/write.c:49
-   49      /source/cheribsd/lib/libc/sys/write.c: No such file or directory.
-   (gdb) info register ca0 ca1 ca2
+   Starting program: /root/cat-cheri /etc/hostid
+
+   Breakpoint 1, write (fd=<optimized out>, buf=<optimized out>, nbytes=<optimized out>) at /usr/home/john/work/cheri/git/cheribsd/lib/libc/sys/write.c:48
+   48                  __libc_interposing[INTERPOS_write])(fd, buf, nbytes));
+   ```
+   Even though the debugger believes that the function arguments are
+   optimized out, from the CHERI-RISC-V calling conventions we know that
+   the arguments are in the ca0, ca1, and ca2 registers:
+   ```
+   (gdb) info registers ca0 ca1 ca2
    ca0            0x1      0x1
-   ca1            0x40810000       0x40810000
+   ca1            0x40802000       0x40802000
    ca2            0x25     0x25
-   (gdb) 
    (gdb) disassemble 
    Dump of assembler code for function write:
-   => 0x0000000040295dc4 <+0>:       auipc   a3,0xc2
-      0x0000000040295dc8 <+4>:       lc      ca3,1532(a3) # 0x403583c0 <_CHERI_CAPABILITY_TABLE_+2464>
-      0x0000000040295dcc <+8>:       lc      ca5,496(a3)
-      0x0000000040295dd0 <+12>:      cjr     ca5
+   => 0x000000004027fa98 <+0>:     auipcc  ca3,0xb7
+      0x000000004027fa9c <+4>:     clc     ca3,-424(ca3)
+      0x000000004027faa0 <+8>:     clc     ca5,496(ca3)
+      0x000000004027faa4 <+12>:    cjr     ca5
    End of assembler dump.
-   (gdb) 
    ```
    We can see that `write()` was called to write to `stdout` (`ca0`) 37 bytes
    (`ca2`) from a buffer with an untagged capability (`ca1`). The `write()` libc
@@ -82,15 +85,14 @@
    4       _write.S: No such file or directory.
    (gdb) disassemble 
    Dump of assembler code for function _write:
-   => 0x0000000040299130 <+0>:       li      t0,4
-      0x0000000040299132 <+2>:       ecall
-      0x0000000040299136 <+6>:       bnez    t0,0x4029913e <_write+14>
-      0x000000004029913a <+10>:      cret
-      0x000000004029913e <+14>:      auipc   t1,0xffffd
-      0x0000000040299142 <+18>:      cincoffset      ct1,ct1,-846
-      0x0000000040299146 <+22>:      cjr     ct1
+   => 0x0000000040282f40 <+0>:     li      t0,4
+      0x0000000040282f42 <+2>:     ecall
+      0x0000000040282f46 <+6>:     bnez    t0,0x40282f4e <_write+14>
+      0x0000000040282f4a <+10>:    cret
+      0x0000000040282f4e <+14>:    auipcc  ct1,0xffffd
+      0x0000000040282f52 <+18>:    cincoffset      ct1,ct1,-1166
+      0x0000000040282f56 <+22>:    cjr     ct1
    End of assembler dump.
-   (gdb) 
    ```
    `write()` jumped to `_write()`, a system call wrapper written in assembly,
    that uses the `ecall` instruction to make a system call. Let's see what is
@@ -145,43 +147,45 @@
    ```
    # gdb-run.sh ./cat-cheri -n /etc/hostid
    (...)
-   Starting program: /buildroot/cat-cheri -n /etc/hostid
-   
-   Program received signal SIGPROT, CHERI protection violation
-   Capability tag fault caused by register cs2.
-   verbose_cat (file=<optimized out>) at ./src/exercises/adapt-c/cat/methods.c:87
-   87      ./src/exercises/adapt-c/cat/methods.c: No such file or directory.
-   
-   Thread 1 (LWP 100043 of process 808):
-   #0  verbose_cat (file=<optimized out>) at ./src/exercises/adapt-c/cat/methods.c:87
-   #1  do_cat (file=<optimized out>, verbose=<optimized out>) at ./src/exercises/adapt-c/cat/methods.c:214
-   #2  0x0000000000102f1a in scanfiles (argv=<optimized out>, verbose=<optimized out>) at ./src/exercises/adapt-c/cat/cat.c:172
-   #3  0x0000000000102d8c in main (argc=<optimized out>, argv=<optimized out>) at ./src/exercises/adapt-c/cat/cat.c:128
-   (gdb) 
+   Starting program: /root/cat-cheri -n /etc/hostid
+
+   Program received signal SIGPROT, CHERI protection violation.
+   Capability tag fault caused by register cs4.
+   verbose_cat (file=<optimized out>) at cat/methods.c:87
+   87              for (prev = '\n'; (ch = getc(fp)) != EOF; prev = ch) {
+
+   Thread 1 (LWP 100061 of process 2694):
+   #0  verbose_cat (file=<optimized out>) at cat/methods.c:87
+   #1  do_cat (file=<optimized out>, verbose=<optimized out>) at cat/methods.c:214
+   #2  0x0000000000102dca in scanfiles (argv=0x3fbfdff7c0 [rwRW,0x3fbfdff7a0-0x3fbfdff7e0], verbose=<optimized out>) at cat/cat.c:172
+   #3  0x0000000000102c52 in main (argc=3, argv=0x0) at cat/cat.c:128
    ```
-   `gdb` says that `cs2` triggered a CHERI exception:
+   `gdb` says that `cs4` triggered a CHERI exception:
    ```
-   (gdb) info register cs2
-   cs2            0x4037a400       0x4037a400
-   (gdb) 
+   (gdb) info register cs4
+   cs4            0x403545d0       0x403545d0
    ```
-   `cs2` holds an untagged capability and the program tries to load a word using
-   `cs2` which violates CHERI restrictions:
+   `cs4` holds an untagged capability and the program tries to load a word using
+   `cs4` which violates CHERI restrictions:
    ```
    (gdb) disassemble $pcc,+4
-   Dump of assembler code from 0x103094 to 0x103098:
-   => 0x0000000000103094 <do_cat+228>: lw      a0,16(s2)
+   Dump of assembler code from 0x102f7e to 0x102f82:
+   => 0x0000000000102f7e <do_cat+294>:     clw     a0,16(cs4)
    End of assembler dump.
-   (gdb) 
    ```
-   Looking at the above backtrace, we can correlate this output with the source
-   code and see that `cs2` holds a value of
-   the `fp` variable:
+   Looking at the values of local variables, we can see that `cs4` holds the
+   value of the `fp` variable:
    ```
-   (gdb) p fp
-   $1 = (FILE *) 0x4037a400
+   (gdb) info locals
+   fp = 0x403545d0
+   gobble = 0
+   line = 0
+   prev = 10
+   ch = <optimized out>
+   wch = <optimized out>
    ```
-   It means that for some reason `fp` became an invalid capability.
+   It means that for some reason `fp` holds an invalid (NULL-derived)
+   capability.
 
 
 7. When compiling `cat-cheri`, the compiler printed:
