@@ -138,7 +138,6 @@
    ca0            0xd17d00000785b9b40000003fbfdff9b0       0x3fbfdff9b0 [rwRW,0x3fbfdff9b0-0x3fbfdffe10]
    pcc            0x4010f040       0x4010f040 <rtld_start>
    ddc            0x0      0x0
-   cap_valid      0x80800003       2155872259
    ```
 
 6. In baseline programs, the stack is bounded only by operating system measures
