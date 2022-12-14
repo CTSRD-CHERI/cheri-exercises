@@ -89,7 +89,7 @@ startup.
    `&rodata_const`, `&relro_ptr`, `&rw_ptr` and `printf` in step 2?  What are
    the permissions for these mappings?
 
-5. Just because the page mapping exist, however, CHERI programs need to have
+5. Just because the page mappings exist, however, CHERI programs need to have
    capabilities installed to access them.  Here at the very beginning of a
    process's life, we are in a good position to see the *root capabilities*
    that the kernel makes available.  Use `info registers` to see the initial
