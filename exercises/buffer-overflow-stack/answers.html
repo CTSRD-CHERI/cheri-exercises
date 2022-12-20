@@ -186,22 +186,21 @@ upper[0] = a
 
 Program received signal SIGPROT, CHERI protection violation
 Capability bounds fault caused by register ca0.
-0x0000000000101ce8 in write_buf (buf=&lt;optimized out&gt;, ix=&lt;optimized out&gt;) at ./buffer-overflow-stack.c:13
+0x0000000000101cf0 in write_buf (buf=&lt;optimized out&gt;, ix=&lt;optimized out&gt;) at buffer-overflow-stack.c:13
 13              buf[ix] = 'b';
 
-Thread 1 (LWP 100044 of process 838):
-#0  0x0000000000101ce8 in write_buf (buf=&lt;optimized out&gt;, ix=&lt;optimized out&gt;) at ./buffer-overflow-stack.c:13
-#1  0x0000000000101d72 in main () at ./buffer-overflow-stack.c:31
+Thread 1 (LWP 100055 of process 829):
+#0  0x0000000000101cf0 in write_buf (buf=&lt;optimized out&gt;, ix=&lt;optimized out&gt;) at buffer-overflow-stack.c:13
+#1  0x0000000000101d7a in main () at buffer-overflow-stack.c:31
 (gdb) disass
 Dump of assembler code for function write_buf:
-   0x0000000000101ce0 &lt;+0&gt;:       cincoffset      ca0,ca0,a1
-   0x0000000000101ce4 &lt;+4&gt;:       li      a1,98
-=&gt; 0x0000000000101ce8 &lt;+8&gt;:       sb      a1,0(a0)
-   0x0000000000101cec &lt;+12&gt;:      ret
+   0x0000000000101ce8 &lt;+0&gt;:     cincoffset      ca0,ca0,a1
+   0x0000000000101cec &lt;+4&gt;:     li      a1,98
+=&gt; 0x0000000000101cf0 &lt;+8&gt;:     csb     a1,0(ca0)
+   0x0000000000101cf4 &lt;+12&gt;:    cret
 End of assembler dump.
 </code></pre>
-<p><em>Note:</em> due to deficiencies in the current GDB implementation, the faulting
-instruction incorrectly decodes as <code>sb</code> rather than correctly as <code>csb a1, 0(ca0)</code>.  Asking <code>gdb</code> about the registers with <code>info registers</code> and focusing
+<p>Asking <code>gdb</code> about the registers with <code>info registers</code> and focusing
 on the ones involved here, we see</p>
 <pre><code>a0             0x3fffdfff50     274875809616
 a1             0x62     98
@@ -215,20 +214,20 @@ attempted (<code>Capability bounds fault</code>).</p>
 <p>But where did those bounds originate?  Heading <code>up</code> a stack frame and
 <code>disass</code>embling, we see (eliding irrelevant instructions):</p>
 <pre><code>(gdb) up
-#1  0x0000000000101d72 in main () at ./buffer-overflow-stack.c:31
+#1  0x0000000000101d7a in main () at buffer-overflow-stack.c:31
 31              write_buf(lower, sizeof(lower));
 (gdb) disass
 Dump of assembler code for function main:
-   0x0000000000101cf0 &lt;+0&gt;:       cincoffset      csp,csp,-144
+   0x0000000000101cf8 &lt;+0&gt;:     cincoffset      csp,csp,-144
 
-   0x0000000000101d0c &lt;+28&gt;:      cincoffset      ca0,csp,48
-   0x0000000000101d10 &lt;+32&gt;:      csetbounds      cs0,ca0,16
+   0x0000000000101d14 &lt;+28&gt;:    cincoffset      ca0,csp,48
+   0x0000000000101d18 &lt;+32&gt;:    csetbounds      cs0,ca0,16
 
-   0x0000000000101d64 &lt;+116&gt;:     li      a1,16
-   0x0000000000101d66 &lt;+118&gt;:     cmove   ca0,cs0
-   0x0000000000101d6a &lt;+122&gt;:     auipc   ra,0x0
-   0x0000000000101d6e &lt;+126&gt;:     jalr    -138(ra) # 0x101ce0 &lt;write_buf&gt;
-=&gt; 0x0000000000101d72 &lt;+130&gt;:     lbu     a0,0(s1)
+   0x0000000000101d6c &lt;+116&gt;:   li      a1,16
+   0x0000000000101d6e &lt;+118&gt;:   cmove   ca0,cs0
+   0x0000000000101d72 &lt;+122&gt;:   auipcc  cra,0x0
+   0x0000000000101d76 &lt;+126&gt;:   cjalr   -138(cra)
+=&gt; 0x0000000000101d7a &lt;+130&gt;:   clbu    a0,0(cs1)
 </code></pre>
 <p>The compiler has arranged for <code>main</code> to allocate 144 bytes on the stack by
 decrementing the <em>capability stack pointer</em> register (<code>csp</code>) by 144 bytes.

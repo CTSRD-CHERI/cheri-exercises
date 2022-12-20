@@ -184,7 +184,7 @@ aligned and padded more strongly.
 <li>
 <p>If the allocator's <code>free()</code> implementation relies on reaching allocator
 metadata via its pointer argument (e.g., by looking immediately before or
-after to reach free-list poointers), then the implementation must be
+after to reach free-list pointers), then the implementation must be
 changed as access will otherwise be prevented by CHERI bounds and
 monotonicity.
 <em>(In this exercise.)</em></p>
@@ -216,7 +216,7 @@ allocator.
 internal allocator metadata, leading to a crash.
 Heap metadata corruption is a powerful exploitation tool; CHERI assists with
 mitigating it through pointer integrity features, but it is preferable to
-deterministically close vulnlerabilities (e.g., via spatial safety).</p>
+deterministically close vulnerabilities (e.g., via spatial safety).</p>
 <ol>
 <li>
 <p>Compile <code>cheri-allocator.c</code> with a CHERI-enabled target.
@@ -247,7 +247,7 @@ adding bounds during allocation break later freeing of that memory?</p>
 </li>
 <li>
 <p>Correct the bug through the use of the <code>cheri_address_get()</code> and
-<code>cheri_address_set()</code> APIs, which allow transfering an address from one
+<code>cheri_address_set()</code> APIs, which allow transferring an address from one
 capability (with one set of bounds) to another (with a different set of
 bounds).
 What capability should we be using to provide the new bounds?

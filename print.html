@@ -934,15 +934,17 @@ Thread 1 (LWP 100057 of process 1231):
 </code></pre>
 <p>We can ask <code>gdb</code> to print out the faulting instruction:</p>
 <pre><code>(gdb) x/i $pcc
-=&gt; 0x101d7c &lt;main+244&gt;:     lbu     a0,0(s1)
+=&gt; 0x101d84 &lt;main+244&gt;: clbu    a1,0(cs1)
 </code></pre>
-<p><em>Note:</em> due to deficiencies in the current GDB implementation, the faulting
-instruction incorrectly decodes as <code>lbu</code> with integer operands rather than
-correctly as <code>clbu a0, 0(cs1)</code>.</p>
 <p>We can also ask <code>gdb</code> for more information about the signal we received:</p>
 <pre><code>(gdb) p $_siginfo
-$1 = {si_signo = 34, si_errno = 0, si_code = 2, si_pid = 0, si_uid = 0, si_status = 0, si_addr = 0x101d7c &lt;main+244&gt;, si_value = {sival_int = 0, sival_ptr = 0x0}, _reason = {_fault = {si_trapno = 28, si_capreg = 9}, _timer = {si_timerid = 28, si_overrun = 9}, _mesgq = {si_mqd = 28}, _poll = {si_band = 38654705692}, __spare__ = {__spare1__ = 38654705692, __spare2__ = {0, 0, 0, 0, 0, 0, 0}}}}
-
+$1 = {si_signo = 34, si_errno = 0, si_code = 2, si_pid = 0, si_uid = 0,
+ si_status = 0,
+ si_addr = 0x101d84 &lt;main+244&gt; [rxR,0x100000-0x104120] (invalid), si_value = {
+   sival_int = 0, sival_ptr = 0x0}, _reason = {_fault = {si_trapno = 28,
+     si_capreg = 9}, _timer = {si_timerid = 28, si_overrun = 9}, _mesgq = {
+     si_mqd = 28}, _poll = {si_band = 38654705692}, __spare__ = {
+     __spare1__ = 38654705692, __spare2__ = {0, 0, 0, 0, 0, 0, 0}}}}
 </code></pre>
 <p>As said, <code>si_signo = 34</code> is <code>SIGPROT</code>, for which <code>si_code = 2</code> is
 <code>PROT_CHERI_TAG</code>, indicating a missing (clear) tag as an input to a
@@ -1078,22 +1080,21 @@ upper[0] = a
 
 Program received signal SIGPROT, CHERI protection violation
 Capability bounds fault caused by register ca0.
-0x0000000000101ce8 in write_buf (buf=&lt;optimized out&gt;, ix=&lt;optimized out&gt;) at ./buffer-overflow-stack.c:13
+0x0000000000101cf0 in write_buf (buf=&lt;optimized out&gt;, ix=&lt;optimized out&gt;) at buffer-overflow-stack.c:13
 13              buf[ix] = 'b';
 
-Thread 1 (LWP 100044 of process 838):
-#0  0x0000000000101ce8 in write_buf (buf=&lt;optimized out&gt;, ix=&lt;optimized out&gt;) at ./buffer-overflow-stack.c:13
-#1  0x0000000000101d72 in main () at ./buffer-overflow-stack.c:31
+Thread 1 (LWP 100055 of process 829):
+#0  0x0000000000101cf0 in write_buf (buf=&lt;optimized out&gt;, ix=&lt;optimized out&gt;) at buffer-overflow-stack.c:13
+#1  0x0000000000101d7a in main () at buffer-overflow-stack.c:31
 (gdb) disass
 Dump of assembler code for function write_buf:
-   0x0000000000101ce0 &lt;+0&gt;:       cincoffset      ca0,ca0,a1
-   0x0000000000101ce4 &lt;+4&gt;:       li      a1,98
-=&gt; 0x0000000000101ce8 &lt;+8&gt;:       sb      a1,0(a0)
-   0x0000000000101cec &lt;+12&gt;:      ret
+   0x0000000000101ce8 &lt;+0&gt;:     cincoffset      ca0,ca0,a1
+   0x0000000000101cec &lt;+4&gt;:     li      a1,98
+=&gt; 0x0000000000101cf0 &lt;+8&gt;:     csb     a1,0(ca0)
+   0x0000000000101cf4 &lt;+12&gt;:    cret
 End of assembler dump.
 </code></pre>
-<p><em>Note:</em> due to deficiencies in the current GDB implementation, the faulting
-instruction incorrectly decodes as <code>sb</code> rather than correctly as <code>csb a1, 0(ca0)</code>.  Asking <code>gdb</code> about the registers with <code>info registers</code> and focusing
+<p>Asking <code>gdb</code> about the registers with <code>info registers</code> and focusing
 on the ones involved here, we see</p>
 <pre><code>a0             0x3fffdfff50     274875809616
 a1             0x62     98
@@ -1107,20 +1108,20 @@ attempted (<code>Capability bounds fault</code>).</p>
 <p>But where did those bounds originate?  Heading <code>up</code> a stack frame and
 <code>disass</code>embling, we see (eliding irrelevant instructions):</p>
 <pre><code>(gdb) up
-#1  0x0000000000101d72 in main () at ./buffer-overflow-stack.c:31
+#1  0x0000000000101d7a in main () at buffer-overflow-stack.c:31
 31              write_buf(lower, sizeof(lower));
 (gdb) disass
 Dump of assembler code for function main:
-   0x0000000000101cf0 &lt;+0&gt;:       cincoffset      csp,csp,-144
+   0x0000000000101cf8 &lt;+0&gt;:     cincoffset      csp,csp,-144
 
-   0x0000000000101d0c &lt;+28&gt;:      cincoffset      ca0,csp,48
-   0x0000000000101d10 &lt;+32&gt;:      csetbounds      cs0,ca0,16
+   0x0000000000101d14 &lt;+28&gt;:    cincoffset      ca0,csp,48
+   0x0000000000101d18 &lt;+32&gt;:    csetbounds      cs0,ca0,16
 
-   0x0000000000101d64 &lt;+116&gt;:     li      a1,16
-   0x0000000000101d66 &lt;+118&gt;:     cmove   ca0,cs0
-   0x0000000000101d6a &lt;+122&gt;:     auipc   ra,0x0
-   0x0000000000101d6e &lt;+126&gt;:     jalr    -138(ra) # 0x101ce0 &lt;write_buf&gt;
-=&gt; 0x0000000000101d72 &lt;+130&gt;:     lbu     a0,0(s1)
+   0x0000000000101d6c &lt;+116&gt;:   li      a1,16
+   0x0000000000101d6e &lt;+118&gt;:   cmove   ca0,cs0
+   0x0000000000101d72 &lt;+122&gt;:   auipcc  cra,0x0
+   0x0000000000101d76 &lt;+126&gt;:   cjalr   -138(cra)
+=&gt; 0x0000000000101d7a &lt;+130&gt;:   clbu    a0,0(cs1)
 </code></pre>
 <p>The compiler has arranged for <code>main</code> to allocate 144 bytes on the stack by
 decrementing the <em>capability stack pointer</em> register (<code>csp</code>) by 144 bytes.
@@ -1300,21 +1301,15 @@ In-address space security exception (core dumped)
 <p>Example session:</p>
 <pre><code>Program received signal SIGPROT, CHERI protection violation
 Capability bounds fault caused by register ca4.
-fill_buf (
-    buf=0x104060 &lt;buffer&gt; [rwRW,0x104060-0x1040e0] 'b' &lt;repeats 128 times&gt;,
-    len=128) at src/exercises/buffer-overflow-global/buffer-overflow-global.c:11
-11      in src/exercises/buffer-overflow-global/buffer-overflow-global.c
+fill_buf (buf=0x104160 &lt;buffer&gt; [rwRW,0x104160-0x1041e0] 'b' &lt;repeats 128 times&gt;, &quot;c&quot;, len=128) at buffer-overflow-global.c:15
+15                      buf[i] = 'b';
 (gdb) info reg ca4
-ca4            0xf17d00000439806400000000001040e0       0x1040e0 &lt;c&gt; [rwRW,0x104060-0x1040e0]
+ca4            0xf17d00000479816400000000001041e0       0x1041e0 &lt;c&gt; [rwRW,0x104160-0x1041e0]
 (gdb) x/i $pcc
-=&gt; 0x101cc8 &lt;fill_buf+12&gt;:  sb      a3,0(a4)
+=&gt; 0x101d2c &lt;fill_buf+12&gt;:      csb     a3,0(ca4)
 </code></pre>
 <p>The array has been incremented beyond the end of the allocation as out
-of bounds store has been attempted (<code>Capability bounds fault</code>).
-<em>Note:</em> due to deficiencies in the current GDB implementation, the
-instruction incorrectly decodes as <code>sb</code> rather than correctly as:</p>
-<pre><code>    1cc8: 23 00 d7 00   csb     a3, 0(ca4)
-</code></pre>
+of bounds store has been attempted (<code>Capability bounds fault</code>).</p>
 </li>
 <li>
 <p>Expected output:</p>
@@ -1324,13 +1319,13 @@ c = c
 </code></pre>
 <p>To see why this occurs, examine the bounds of the buffer in <code>fill_buf</code>.</p>
 <pre><code>(gdb) b fill_buf
-Breakpoint 1 at 0x1cc2: file src/exercises/buffer-overflow-global/buffer-overflow-global.c, line 11.
+Breakpoint 1 at 0x101d26: file buffer-overflow-global.c, line 15.
 (gdb) r
 Starting program: /root/buffer-overflow-global-cheri
+c = c
 
-Breakpoint 1, fill_buf (buf=0x105000 &lt;buffer&gt; [rwRW,0x105000-0x205800] &quot;&quot;,
-    len=1048577) at src/exercises/buffer-overflow-global/buffer-overflow-global.c:11
-11      src/exercises/buffer-overflow-global/buffer-overflow-global.c: No such file or directory.
+Breakpoint 1, fill_buf (buf=0x105000 &lt;buffer&gt; [rwRW,0x105000-0x205800] &quot;&quot;, len=1048577) at buffer-overflow-global.c:15
+15                      buf[i] = 'b';
 </code></pre>
 <p>This indicates that buffer has been allocated (1024 * 1026) bytes. This
 is due to the padding required to ensure that the bounds of <code>buffer</code>
@@ -1600,16 +1595,15 @@ b.i = b
 </li>
 <li>
 <p>Example session:</p>
-<pre><code>(gdb) f fill_buf
-No registers.
-(gdb) b fill_buf
-Breakpoint 1 at 0x1b3a: file src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c, line 13.
+<pre><code>(gdb) b fill_buf
+Breakpoint 1 at 0x1bae: file buffer-overflow-subobject.c, line 17.
 (gdb) r
 Starting program: /root/buffer-overflow-subobject-cheri
+b.i = c
 
-Breakpoint 1, fill_buf (buf=0x103e50 &lt;b&gt; [rwRW,0x103e50-0x103ed4] &quot;&quot;, len=128)
-    at src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c:13
-13      src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c: No such file or directory.
+Breakpoint 1, fill_buf (buf=0x103f50 &lt;b&gt; [rwRW,0x103f50-0x103fd4] &quot;&quot;, len=128)
+    at buffer-overflow-subobject.c:17
+17                      buf[i] = 'b';
 </code></pre>
 <p>The bounds are <code>132</code> bytes corresponding to the size of the underlying object.</p>
 </li>
@@ -1623,18 +1617,31 @@ In-address space security exception (core dumped)
 <li>
 <p>Example session:</p>
 <pre><code>(gdb) b fill_buf
-Breakpoint 1 at 0x1b3a: file src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c, line 13.
+Breakpoint 1 at 0x1bae: file buffer-overflow-subobject.c, line 17.
 (gdb) r
-Starting program: /root/buffer-overflow-subobject-cheri-subobject
+Starting program: /root/buffer-overflow-subobject-cheri
+b.i = c
 
-Breakpoint 1, fill_buf (buf=0x103e50 &lt;b&gt; [rwRW,0x103e50-0x103ed0] &quot;&quot;, len=128)
-    at src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c:13
-13      src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c: No such file or directory.
+Breakpoint 1, fill_buf (buf=0x103f50 &lt;b&gt; [rwRW,0x103f50-0x103fd0] &quot;&quot;, len=128) at buffer-overflow-subobject.c:17
+17                      buf[i] = 'b';
 </code></pre>
 <p>The pointer to the buffer is now bounded to the array rather than the object.</p>
 <p>Investigating further will reveal that the compiler has inserted a
 bounds-setting instruction prior to the call to <code>fill_buf</code> in <code>main</code>, that
 is, when the pointer to <code>b.buffer</code> is materialized.</p>
+<pre><code>(gdb) up
+#1  0x0000000000101c0c in main () at buffer-overflow-subobject.c:26
+26              fill_buf(b.buffer, sizeof(b.buffer));
+(gdb) disassemble
+Dump of assembler code for function main:
+   0x0000000000101bc0 &lt;+0&gt;:     cincoffset      csp,csp,-64
+...
+   0x0000000000101bfc &lt;+60&gt;:    csetbounds      ca0,cs1,128
+   0x0000000000101c00 &lt;+64&gt;:    li      a1,128
+   0x0000000000101c04 &lt;+68&gt;:    auipcc  cra,0x0
+   0x0000000000101c08 &lt;+72&gt;:    cjalr   -92(cra)
+=&gt; 0x0000000000101c0c &lt;+76&gt;:    clw     a0,128(cs1)
+</code></pre>
 </li>
 </ol>
 <h2><a class="header" href="#deliberately-using-larger-bounds-2" id="deliberately-using-larger-bounds-2">Deliberately Using Larger Bounds</a></h2>
@@ -2748,7 +2755,7 @@ do_cat(long file, int verbose)
 <ol start="2">
 <li>
 <p>Example output:</p>
-<pre><code># ./tools/ccc riscv64 -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
+<pre><code># ./tools/ccc riscv64 -o /build/cat-baseline ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
 Running: /output/sdk/bin/clang -target riscv64-unknown-freebsd -march=rv64gc -mabi=lp64d -mno-relax --sysroot=/output/sdk/sysroot-riscv64-purecap -g -O2 -fuse-ld=lld -Wall -Wcheri -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
 # ./tools/ccc riscv64-purecap -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
 Running: /output/sdk/bin/clang -target riscv64-unknown-freebsd -march=rv64gcxcheri -mabi=l64pc128d -mno-relax --sysroot=/output/sdk/sysroot-riscv64-purecap -g -O2 -fuse-ld=lld -Wall -Wcheri -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
@@ -2796,23 +2803,25 @@ Function &quot;write&quot; not defined.
 Make breakpoint pending on future shared library load? (y or [n]) y
 Breakpoint 1 (write) pending.
 (gdb) r /etc/hostid
-Starting program: /buildroot/cat-cheri /etc/hostid
+Starting program: /root/cat-cheri /etc/hostid
 
-Breakpoint 1, write (fd=1, buf=0x40810000, nbytes=37) at /source/cheribsd/lib/libc/sys/write.c:49
-49      /source/cheribsd/lib/libc/sys/write.c: No such file or directory.
-(gdb) info register ca0 ca1 ca2
+Breakpoint 1, write (fd=&lt;optimized out&gt;, buf=&lt;optimized out&gt;, nbytes=&lt;optimized out&gt;) at /usr/home/john/work/cheri/git/cheribsd/lib/libc/sys/write.c:48
+48                  __libc_interposing[INTERPOS_write])(fd, buf, nbytes));
+</code></pre>
+<p>Even though the debugger believes that the function arguments are
+optimized out, from the CHERI-RISC-V calling conventions we know that
+the arguments are in the ca0, ca1, and ca2 registers:</p>
+<pre><code>(gdb) info registers ca0 ca1 ca2
 ca0            0x1      0x1
-ca1            0x40810000       0x40810000
+ca1            0x40802000       0x40802000
 ca2            0x25     0x25
-(gdb) 
 (gdb) disassemble 
 Dump of assembler code for function write:
-=&gt; 0x0000000040295dc4 &lt;+0&gt;:       auipc   a3,0xc2
-   0x0000000040295dc8 &lt;+4&gt;:       lc      ca3,1532(a3) # 0x403583c0 &lt;_CHERI_CAPABILITY_TABLE_+2464&gt;
-   0x0000000040295dcc &lt;+8&gt;:       lc      ca5,496(a3)
-   0x0000000040295dd0 &lt;+12&gt;:      cjr     ca5
+=&gt; 0x000000004027fa98 &lt;+0&gt;:     auipcc  ca3,0xb7
+   0x000000004027fa9c &lt;+4&gt;:     clc     ca3,-424(ca3)
+   0x000000004027faa0 &lt;+8&gt;:     clc     ca5,496(ca3)
+   0x000000004027faa4 &lt;+12&gt;:    cjr     ca5
 End of assembler dump.
-(gdb) 
 </code></pre>
 <p>We can see that <code>write()</code> was called to write to <code>stdout</code> (<code>ca0</code>) 37 bytes
 (<code>ca2</code>) from a buffer with an untagged capability (<code>ca1</code>). The <code>write()</code> libc
@@ -2823,15 +2832,14 @@ _write () at _write.S:4
 4       _write.S: No such file or directory.
 (gdb) disassemble 
 Dump of assembler code for function _write:
-=&gt; 0x0000000040299130 &lt;+0&gt;:       li      t0,4
-   0x0000000040299132 &lt;+2&gt;:       ecall
-   0x0000000040299136 &lt;+6&gt;:       bnez    t0,0x4029913e &lt;_write+14&gt;
-   0x000000004029913a &lt;+10&gt;:      cret
-   0x000000004029913e &lt;+14&gt;:      auipc   t1,0xffffd
-   0x0000000040299142 &lt;+18&gt;:      cincoffset      ct1,ct1,-846
-   0x0000000040299146 &lt;+22&gt;:      cjr     ct1
+=&gt; 0x0000000040282f40 &lt;+0&gt;:     li      t0,4
+   0x0000000040282f42 &lt;+2&gt;:     ecall
+   0x0000000040282f46 &lt;+6&gt;:     bnez    t0,0x40282f4e &lt;_write+14&gt;
+   0x0000000040282f4a &lt;+10&gt;:    cret
+   0x0000000040282f4e &lt;+14&gt;:    auipcc  ct1,0xffffd
+   0x0000000040282f52 &lt;+18&gt;:    cincoffset      ct1,ct1,-1166
+   0x0000000040282f56 &lt;+22&gt;:    cjr     ct1
 End of assembler dump.
-(gdb) 
 </code></pre>
 <p><code>write()</code> jumped to <code>_write()</code>, a system call wrapper written in assembly,
 that uses the <code>ecall</code> instruction to make a system call. Let's see what is
@@ -2884,40 +2892,42 @@ index bb78a75..6520735 100644
 <p>Example output:</p>
 <pre><code># gdb-run.sh ./cat-cheri -n /etc/hostid
 (...)
-Starting program: /buildroot/cat-cheri -n /etc/hostid
+Starting program: /root/cat-cheri -n /etc/hostid
 
-Program received signal SIGPROT, CHERI protection violation
-Capability tag fault caused by register cs2.
-verbose_cat (file=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/methods.c:87
-87      ./src/exercises/adapt-c/cat/methods.c: No such file or directory.
+Program received signal SIGPROT, CHERI protection violation.
+Capability tag fault caused by register cs4.
+verbose_cat (file=&lt;optimized out&gt;) at cat/methods.c:87
+87              for (prev = '\n'; (ch = getc(fp)) != EOF; prev = ch) {
 
-Thread 1 (LWP 100043 of process 808):
-#0  verbose_cat (file=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/methods.c:87
-#1  do_cat (file=&lt;optimized out&gt;, verbose=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/methods.c:214
-#2  0x0000000000102f1a in scanfiles (argv=&lt;optimized out&gt;, verbose=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/cat.c:172
-#3  0x0000000000102d8c in main (argc=&lt;optimized out&gt;, argv=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/cat.c:128
-(gdb) 
+Thread 1 (LWP 100061 of process 2694):
+#0  verbose_cat (file=&lt;optimized out&gt;) at cat/methods.c:87
+#1  do_cat (file=&lt;optimized out&gt;, verbose=&lt;optimized out&gt;) at cat/methods.c:214
+#2  0x0000000000102dca in scanfiles (argv=0x3fbfdff7c0 [rwRW,0x3fbfdff7a0-0x3fbfdff7e0], verbose=&lt;optimized out&gt;) at cat/cat.c:172
+#3  0x0000000000102c52 in main (argc=3, argv=0x0) at cat/cat.c:128
 </code></pre>
-<p><code>gdb</code> says that <code>cs2</code> triggered a CHERI exception:</p>
-<pre><code>(gdb) info register cs2
-cs2            0x4037a400       0x4037a400
-(gdb) 
+<p><code>gdb</code> says that <code>cs4</code> triggered a CHERI exception:</p>
+<pre><code>(gdb) info register cs4
+cs4            0x403545d0       0x403545d0
 </code></pre>
-<p><code>cs2</code> holds an untagged capability and the program tries to load a word using
-<code>cs2</code> which violates CHERI restrictions:</p>
+<p><code>cs4</code> holds an untagged capability and the program tries to load a word using
+<code>cs4</code> which violates CHERI restrictions:</p>
 <pre><code>(gdb) disassemble $pcc,+4
-Dump of assembler code from 0x103094 to 0x103098:
-=&gt; 0x0000000000103094 &lt;do_cat+228&gt;: lw      a0,16(s2)
+Dump of assembler code from 0x102f7e to 0x102f82:
+=&gt; 0x0000000000102f7e &lt;do_cat+294&gt;:     clw     a0,16(cs4)
 End of assembler dump.
-(gdb) 
 </code></pre>
-<p>Looking at the above backtrace, we can correlate this output with the source
-code and see that <code>cs2</code> holds a value of
-the <code>fp</code> variable:</p>
-<pre><code>(gdb) p fp
-$1 = (FILE *) 0x4037a400
+<p>Looking at the values of local variables, we can see that <code>cs4</code> holds the
+value of the <code>fp</code> variable:</p>
+<pre><code>(gdb) info locals
+fp = 0x403545d0
+gobble = 0
+line = 0
+prev = 10
+ch = &lt;optimized out&gt;
+wch = &lt;optimized out&gt;
 </code></pre>
-<p>It means that for some reason <code>fp</code> became an invalid capability.</p>
+<p>It means that for some reason <code>fp</code> holds an invalid (NULL-derived)
+capability.</p>
 </li>
 <li>
 <p>When compiling <code>cat-cheri</code>, the compiler printed:</p>
@@ -3112,7 +3122,7 @@ address space arranged by the kernel.</p>
 the permissions for these mappings?</p>
 </li>
 <li>
-<p>Just because the page mapping exist, however, CHERI programs need to have
+<p>Just because the page mappings exist, however, CHERI programs need to have
 capabilities installed to access them.  Here at the very beginning of a
 process's life, we are in a good position to see the <em>root capabilities</em>
 that the kernel makes available.  Use <code>info registers</code> to see the initial
@@ -3496,7 +3506,6 @@ csp            0xd17d000003ff2ffe0000003fffe00000       0x3fffe00000 [rwRW,0x3fb
 ca0            0xd17d00000785b9b40000003fbfdff9b0       0x3fbfdff9b0 [rwRW,0x3fbfdff9b0-0x3fbfdffe10]
 pcc            0x4010f040       0x4010f040 &lt;rtld_start&gt;
 ddc            0x0      0x0
-cap_valid      0x80800003       2155872259
 </code></pre>
 </li>
 <li>
@@ -3640,7 +3649,7 @@ aligned and padded more strongly.
 <li>
 <p>If the allocator's <code>free()</code> implementation relies on reaching allocator
 metadata via its pointer argument (e.g., by looking immediately before or
-after to reach free-list poointers), then the implementation must be
+after to reach free-list pointers), then the implementation must be
 changed as access will otherwise be prevented by CHERI bounds and
 monotonicity.
 <em>(In this exercise.)</em></p>
@@ -3672,7 +3681,7 @@ allocator.
 internal allocator metadata, leading to a crash.
 Heap metadata corruption is a powerful exploitation tool; CHERI assists with
 mitigating it through pointer integrity features, but it is preferable to
-deterministically close vulnlerabilities (e.g., via spatial safety).</p>
+deterministically close vulnerabilities (e.g., via spatial safety).</p>
 <ol>
 <li>
 <p>Compile <code>cheri-allocator.c</code> with a CHERI-enabled target.
@@ -3703,7 +3712,7 @@ adding bounds during allocation break later freeing of that memory?</p>
 </li>
 <li>
 <p>Correct the bug through the use of the <code>cheri_address_get()</code> and
-<code>cheri_address_set()</code> APIs, which allow transfering an address from one
+<code>cheri_address_set()</code> APIs, which allow transferring an address from one
 capability (with one set of bounds) to another (with a different set of
 bounds).
 What capability should we be using to provide the new bounds?
@@ -3900,23 +3909,26 @@ main(void)
 the <code>a_next</code> field in the second allocation entry, which is tripped over by
 a later call to <code>alloc_allocate()</code>:</li>
 </ol>
-<pre><code>Starting program: /opt/cheri-exercises/cheri-allocator-cheri 
+<pre><code>Starting program: /root/cheri-allocator
 Allocator initialised
 Allocating memory
-Allocation returned 0x104830
-Preparing to overflow 0x104830
-Overflowed allocation 0x104830
-Freeing allocation 0x104830
-Allocation 0x104830 freed
+Allocation returned 0x104550
+Preparing to overflow 0x104550
+Overflowed allocation 0x104550
+Freeing allocation 0x104550
+Allocation 0x104550 freed
 Allocating memory
-Allocation returned 0x104830
+Allocation returned 0x104550
 Allocating memory
-Allocation returned 0x1048c0
+Allocation returned 0x1045e0
 Allocating memory
 
-Program received signal SIGPROT, CHERI protection violation
-Capability tag fault caused by register ca2.
-0x0000000000102374 in alloc_allocate ()
+Program received signal SIGPROT, CHERI protection violation.
+Capability tag fault caused by register ca0.
+alloc_allocate () at cheri-allocator.c:83
+83              alloc_nextfree = alloc-&gt;a_next;
+(gdb) p alloc
+$1 = (struct alloc_storage *) 0x4141414141414141 [,0x4141402800000000-0x414142a000000000] (invalid,sealed)
 </code></pre>
 <ol start="3">
 <li>When compiling for CHERI C, use <code>cheri_bounds_set()</code> to set bounds on the
@@ -3933,34 +3945,37 @@ returned pointer:</li>
 <li>With this change, the <code>memset()</code> call in <code>main()</code> triggers a bounds
 violation exception on overflow:</li>
 </ol>
-<pre><code>Starting program: /opt/cheri-exercises/cheri-allocator-cheri 
+<pre><code>Starting program: /root/cheri-allocator
 Allocator initialised
 Allocating memory
-Allocation returned 0x104840
-Preparing to overflow 0x104840
+Allocation returned 0x104550
+Preparing to overflow 0x104550
 
-Program received signal SIGPROT, CHERI protection violation
+Program received signal SIGPROT, CHERI protection violation.
 Capability bounds fault caused by register ca3.
-memset (dst0=0x1048c0 &lt;alloc_array+144&gt; [rwRW,0x104840-0x1048c0], c0=65, 
-    length=15) at /home/rnw24/cheri/cheribsd/lib/libc/string/memset.c:94
+memset (dst0=0x1045d0 &lt;alloc_array+144&gt; [rwRW,0x104550-0x1045d0], c0=65, length=15) at /usr/home/john/work/cheri/git/cheribsd/lib/libc/string/memset.c:94
+94                              *dst++ = VAL;
 </code></pre>
 <h2><a class="header" href="#reaching-allocator-metadata" id="reaching-allocator-metadata">Reaching allocator metadata</a></h2>
 <ol start="6">
 <li>Following this change, <code>alloc_free()</code> crashes with a bounds violation,
 due to reaching outside the bounds of the passed memory allocation:</li>
 </ol>
-<pre><code>Starting program: /opt/cheri-exercises/cheri-allocator-cheri 
+<pre><code>Starting program: /root/cheri-allocator
 Allocator initialised
 Allocating memory
-Allocation returned 0x1046e0
-Freeing allocation 0x1046e0
+Allocation returned 0x104420
+Freeing allocation 0x104420
 
-Program received signal SIGPROT, CHERI protection violation
-Capability bounds fault caused by register ca3.
-0x00000000001022fe in alloc_free ()
+Program received signal SIGPROT, CHERI protection violation.
+Capability bounds fault caused by register cfp.
+alloc_free (ptr=&lt;optimized out&gt;) at cheri-allocator.c:106
+106             alloc-&gt;a_next = alloc_nextfree;
 (gdb) bt
-#0  0x00000000001022fe in alloc_free ()
-#1  0x0000000000101f52 in main ()
+#0  alloc_free (ptr=&lt;optimized out&gt;) at cheri-allocator.c:106
+#1  main () at cheri-allocator.c:137
+(gdb) p alloc
+$1 = (struct alloc_storage *) 0x104410 &lt;alloc_array&gt; [rwRW,0x104420-0x1044a0]
 </code></pre>
 <ol start="7">
 <li>We need to create a new capability, derived from <code>alloc_array</code> but with the
@@ -4166,7 +4181,7 @@ Capability permission fault caused by register ca2.
 0x0000000000102140 in main ()
 
 (gdb) x/i 0x0000000000102140
-=&gt; 0x102140 &lt;main+524&gt;:     lc      ca2,32(a2)
+=&gt; 0x102140 &lt;main+524&gt;:     clc      ca2,32(ca2)
 
 (gdb) p $ca2
 $1 = (void *) 0x41200040 [,0x41200040-0x41200080]

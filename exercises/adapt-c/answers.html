@@ -167,7 +167,7 @@
 <ol start="2">
 <li>
 <p>Example output:</p>
-<pre><code># ./tools/ccc riscv64 -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
+<pre><code># ./tools/ccc riscv64 -o /build/cat-baseline ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
 Running: /output/sdk/bin/clang -target riscv64-unknown-freebsd -march=rv64gc -mabi=lp64d -mno-relax --sysroot=/output/sdk/sysroot-riscv64-purecap -g -O2 -fuse-ld=lld -Wall -Wcheri -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
 # ./tools/ccc riscv64-purecap -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
 Running: /output/sdk/bin/clang -target riscv64-unknown-freebsd -march=rv64gcxcheri -mabi=l64pc128d -mno-relax --sysroot=/output/sdk/sysroot-riscv64-purecap -g -O2 -fuse-ld=lld -Wall -Wcheri -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
@@ -215,23 +215,25 @@ Function &quot;write&quot; not defined.
 Make breakpoint pending on future shared library load? (y or [n]) y
 Breakpoint 1 (write) pending.
 (gdb) r /etc/hostid
-Starting program: /buildroot/cat-cheri /etc/hostid
+Starting program: /root/cat-cheri /etc/hostid
 
-Breakpoint 1, write (fd=1, buf=0x40810000, nbytes=37) at /source/cheribsd/lib/libc/sys/write.c:49
-49      /source/cheribsd/lib/libc/sys/write.c: No such file or directory.
-(gdb) info register ca0 ca1 ca2
+Breakpoint 1, write (fd=&lt;optimized out&gt;, buf=&lt;optimized out&gt;, nbytes=&lt;optimized out&gt;) at /usr/home/john/work/cheri/git/cheribsd/lib/libc/sys/write.c:48
+48                  __libc_interposing[INTERPOS_write])(fd, buf, nbytes));
+</code></pre>
+<p>Even though the debugger believes that the function arguments are
+optimized out, from the CHERI-RISC-V calling conventions we know that
+the arguments are in the ca0, ca1, and ca2 registers:</p>
+<pre><code>(gdb) info registers ca0 ca1 ca2
 ca0            0x1      0x1
-ca1            0x40810000       0x40810000
+ca1            0x40802000       0x40802000
 ca2            0x25     0x25
-(gdb) 
 (gdb) disassemble 
 Dump of assembler code for function write:
-=&gt; 0x0000000040295dc4 &lt;+0&gt;:       auipc   a3,0xc2
-   0x0000000040295dc8 &lt;+4&gt;:       lc      ca3,1532(a3) # 0x403583c0 &lt;_CHERI_CAPABILITY_TABLE_+2464&gt;
-   0x0000000040295dcc &lt;+8&gt;:       lc      ca5,496(a3)
-   0x0000000040295dd0 &lt;+12&gt;:      cjr     ca5
+=&gt; 0x000000004027fa98 &lt;+0&gt;:     auipcc  ca3,0xb7
+   0x000000004027fa9c &lt;+4&gt;:     clc     ca3,-424(ca3)
+   0x000000004027faa0 &lt;+8&gt;:     clc     ca5,496(ca3)
+   0x000000004027faa4 &lt;+12&gt;:    cjr     ca5
 End of assembler dump.
-(gdb) 
 </code></pre>
 <p>We can see that <code>write()</code> was called to write to <code>stdout</code> (<code>ca0</code>) 37 bytes
 (<code>ca2</code>) from a buffer with an untagged capability (<code>ca1</code>). The <code>write()</code> libc
@@ -242,15 +244,14 @@ _write () at _write.S:4
 4       _write.S: No such file or directory.
 (gdb) disassemble 
 Dump of assembler code for function _write:
-=&gt; 0x0000000040299130 &lt;+0&gt;:       li      t0,4
-   0x0000000040299132 &lt;+2&gt;:       ecall
-   0x0000000040299136 &lt;+6&gt;:       bnez    t0,0x4029913e &lt;_write+14&gt;
-   0x000000004029913a &lt;+10&gt;:      cret
-   0x000000004029913e &lt;+14&gt;:      auipc   t1,0xffffd
-   0x0000000040299142 &lt;+18&gt;:      cincoffset      ct1,ct1,-846
-   0x0000000040299146 &lt;+22&gt;:      cjr     ct1
+=&gt; 0x0000000040282f40 &lt;+0&gt;:     li      t0,4
+   0x0000000040282f42 &lt;+2&gt;:     ecall
+   0x0000000040282f46 &lt;+6&gt;:     bnez    t0,0x40282f4e &lt;_write+14&gt;
+   0x0000000040282f4a &lt;+10&gt;:    cret
+   0x0000000040282f4e &lt;+14&gt;:    auipcc  ct1,0xffffd
+   0x0000000040282f52 &lt;+18&gt;:    cincoffset      ct1,ct1,-1166
+   0x0000000040282f56 &lt;+22&gt;:    cjr     ct1
 End of assembler dump.
-(gdb) 
 </code></pre>
 <p><code>write()</code> jumped to <code>_write()</code>, a system call wrapper written in assembly,
 that uses the <code>ecall</code> instruction to make a system call. Let's see what is
@@ -303,40 +304,42 @@ index bb78a75..6520735 100644
 <p>Example output:</p>
 <pre><code># gdb-run.sh ./cat-cheri -n /etc/hostid
 (...)
-Starting program: /buildroot/cat-cheri -n /etc/hostid
+Starting program: /root/cat-cheri -n /etc/hostid
 
-Program received signal SIGPROT, CHERI protection violation
-Capability tag fault caused by register cs2.
-verbose_cat (file=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/methods.c:87
-87      ./src/exercises/adapt-c/cat/methods.c: No such file or directory.
+Program received signal SIGPROT, CHERI protection violation.
+Capability tag fault caused by register cs4.
+verbose_cat (file=&lt;optimized out&gt;) at cat/methods.c:87
+87              for (prev = '\n'; (ch = getc(fp)) != EOF; prev = ch) {
 
-Thread 1 (LWP 100043 of process 808):
-#0  verbose_cat (file=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/methods.c:87
-#1  do_cat (file=&lt;optimized out&gt;, verbose=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/methods.c:214
-#2  0x0000000000102f1a in scanfiles (argv=&lt;optimized out&gt;, verbose=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/cat.c:172
-#3  0x0000000000102d8c in main (argc=&lt;optimized out&gt;, argv=&lt;optimized out&gt;) at ./src/exercises/adapt-c/cat/cat.c:128
-(gdb) 
+Thread 1 (LWP 100061 of process 2694):
+#0  verbose_cat (file=&lt;optimized out&gt;) at cat/methods.c:87
+#1  do_cat (file=&lt;optimized out&gt;, verbose=&lt;optimized out&gt;) at cat/methods.c:214
+#2  0x0000000000102dca in scanfiles (argv=0x3fbfdff7c0 [rwRW,0x3fbfdff7a0-0x3fbfdff7e0], verbose=&lt;optimized out&gt;) at cat/cat.c:172
+#3  0x0000000000102c52 in main (argc=3, argv=0x0) at cat/cat.c:128
 </code></pre>
-<p><code>gdb</code> says that <code>cs2</code> triggered a CHERI exception:</p>
-<pre><code>(gdb) info register cs2
-cs2            0x4037a400       0x4037a400
-(gdb) 
+<p><code>gdb</code> says that <code>cs4</code> triggered a CHERI exception:</p>
+<pre><code>(gdb) info register cs4
+cs4            0x403545d0       0x403545d0
 </code></pre>
-<p><code>cs2</code> holds an untagged capability and the program tries to load a word using
-<code>cs2</code> which violates CHERI restrictions:</p>
+<p><code>cs4</code> holds an untagged capability and the program tries to load a word using
+<code>cs4</code> which violates CHERI restrictions:</p>
 <pre><code>(gdb) disassemble $pcc,+4
-Dump of assembler code from 0x103094 to 0x103098:
-=&gt; 0x0000000000103094 &lt;do_cat+228&gt;: lw      a0,16(s2)
+Dump of assembler code from 0x102f7e to 0x102f82:
+=&gt; 0x0000000000102f7e &lt;do_cat+294&gt;:     clw     a0,16(cs4)
 End of assembler dump.
-(gdb) 
 </code></pre>
-<p>Looking at the above backtrace, we can correlate this output with the source
-code and see that <code>cs2</code> holds a value of
-the <code>fp</code> variable:</p>
-<pre><code>(gdb) p fp
-$1 = (FILE *) 0x4037a400
+<p>Looking at the values of local variables, we can see that <code>cs4</code> holds the
+value of the <code>fp</code> variable:</p>
+<pre><code>(gdb) info locals
+fp = 0x403545d0
+gobble = 0
+line = 0
+prev = 10
+ch = &lt;optimized out&gt;
+wch = &lt;optimized out&gt;
 </code></pre>
-<p>It means that for some reason <code>fp</code> became an invalid capability.</p>
+<p>It means that for some reason <code>fp</code> holds an invalid (NULL-derived)
+capability.</p>
 </li>
 <li>
 <p>When compiling <code>cat-cheri</code>, the compiler printed:</p>

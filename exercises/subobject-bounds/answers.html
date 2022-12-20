@@ -180,16 +180,15 @@ b.i = b
 </li>
 <li>
 <p>Example session:</p>
-<pre><code>(gdb) f fill_buf
-No registers.
-(gdb) b fill_buf
-Breakpoint 1 at 0x1b3a: file src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c, line 13.
+<pre><code>(gdb) b fill_buf
+Breakpoint 1 at 0x1bae: file buffer-overflow-subobject.c, line 17.
 (gdb) r
 Starting program: /root/buffer-overflow-subobject-cheri
+b.i = c
 
-Breakpoint 1, fill_buf (buf=0x103e50 &lt;b&gt; [rwRW,0x103e50-0x103ed4] &quot;&quot;, len=128)
-    at src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c:13
-13      src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c: No such file or directory.
+Breakpoint 1, fill_buf (buf=0x103f50 &lt;b&gt; [rwRW,0x103f50-0x103fd4] &quot;&quot;, len=128)
+    at buffer-overflow-subobject.c:17
+17                      buf[i] = 'b';
 </code></pre>
 <p>The bounds are <code>132</code> bytes corresponding to the size of the underlying object.</p>
 </li>
@@ -203,18 +202,31 @@ In-address space security exception (core dumped)
 <li>
 <p>Example session:</p>
 <pre><code>(gdb) b fill_buf
-Breakpoint 1 at 0x1b3a: file src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c, line 13.
+Breakpoint 1 at 0x1bae: file buffer-overflow-subobject.c, line 17.
 (gdb) r
-Starting program: /root/buffer-overflow-subobject-cheri-subobject
+Starting program: /root/buffer-overflow-subobject-cheri
+b.i = c
 
-Breakpoint 1, fill_buf (buf=0x103e50 &lt;b&gt; [rwRW,0x103e50-0x103ed0] &quot;&quot;, len=128)
-    at src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c:13
-13      src/exercises/buffer-overflow-subobject/buffer-overflow-subobject.c: No such file or directory.
+Breakpoint 1, fill_buf (buf=0x103f50 &lt;b&gt; [rwRW,0x103f50-0x103fd0] &quot;&quot;, len=128) at buffer-overflow-subobject.c:17
+17                      buf[i] = 'b';
 </code></pre>
 <p>The pointer to the buffer is now bounded to the array rather than the object.</p>
 <p>Investigating further will reveal that the compiler has inserted a
 bounds-setting instruction prior to the call to <code>fill_buf</code> in <code>main</code>, that
 is, when the pointer to <code>b.buffer</code> is materialized.</p>
+<pre><code>(gdb) up
+#1  0x0000000000101c0c in main () at buffer-overflow-subobject.c:26
+26              fill_buf(b.buffer, sizeof(b.buffer));
+(gdb) disassemble
+Dump of assembler code for function main:
+   0x0000000000101bc0 &lt;+0&gt;:     cincoffset      csp,csp,-64
+...
+   0x0000000000101bfc &lt;+60&gt;:    csetbounds      ca0,cs1,128
+   0x0000000000101c00 &lt;+64&gt;:    li      a1,128
+   0x0000000000101c04 &lt;+68&gt;:    auipcc  cra,0x0
+   0x0000000000101c08 &lt;+72&gt;:    cjalr   -92(cra)
+=&gt; 0x0000000000101c0c &lt;+76&gt;:    clw     a0,128(cs1)
+</code></pre>
 </li>
 </ol>
 <h2><a class="header" href="#deliberately-using-larger-bounds" id="deliberately-using-larger-bounds">Deliberately Using Larger Bounds</a></h2>

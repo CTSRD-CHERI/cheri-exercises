@@ -170,23 +170,26 @@
 the <code>a_next</code> field in the second allocation entry, which is tripped over by
 a later call to <code>alloc_allocate()</code>:</li>
 </ol>
-<pre><code>Starting program: /opt/cheri-exercises/cheri-allocator-cheri 
+<pre><code>Starting program: /root/cheri-allocator
 Allocator initialised
 Allocating memory
-Allocation returned 0x104830
-Preparing to overflow 0x104830
-Overflowed allocation 0x104830
-Freeing allocation 0x104830
-Allocation 0x104830 freed
+Allocation returned 0x104550
+Preparing to overflow 0x104550
+Overflowed allocation 0x104550
+Freeing allocation 0x104550
+Allocation 0x104550 freed
 Allocating memory
-Allocation returned 0x104830
+Allocation returned 0x104550
 Allocating memory
-Allocation returned 0x1048c0
+Allocation returned 0x1045e0
 Allocating memory
 
-Program received signal SIGPROT, CHERI protection violation
-Capability tag fault caused by register ca2.
-0x0000000000102374 in alloc_allocate ()
+Program received signal SIGPROT, CHERI protection violation.
+Capability tag fault caused by register ca0.
+alloc_allocate () at cheri-allocator.c:83
+83              alloc_nextfree = alloc-&gt;a_next;
+(gdb) p alloc
+$1 = (struct alloc_storage *) 0x4141414141414141 [,0x4141402800000000-0x414142a000000000] (invalid,sealed)
 </code></pre>
 <ol start="3">
 <li>When compiling for CHERI C, use <code>cheri_bounds_set()</code> to set bounds on the
@@ -203,34 +206,37 @@ returned pointer:</li>
 <li>With this change, the <code>memset()</code> call in <code>main()</code> triggers a bounds
 violation exception on overflow:</li>
 </ol>
-<pre><code>Starting program: /opt/cheri-exercises/cheri-allocator-cheri 
+<pre><code>Starting program: /root/cheri-allocator
 Allocator initialised
 Allocating memory
-Allocation returned 0x104840
-Preparing to overflow 0x104840
+Allocation returned 0x104550
+Preparing to overflow 0x104550
 
-Program received signal SIGPROT, CHERI protection violation
+Program received signal SIGPROT, CHERI protection violation.
 Capability bounds fault caused by register ca3.
-memset (dst0=0x1048c0 &lt;alloc_array+144&gt; [rwRW,0x104840-0x1048c0], c0=65, 
-    length=15) at /home/rnw24/cheri/cheribsd/lib/libc/string/memset.c:94
+memset (dst0=0x1045d0 &lt;alloc_array+144&gt; [rwRW,0x104550-0x1045d0], c0=65, length=15) at /usr/home/john/work/cheri/git/cheribsd/lib/libc/string/memset.c:94
+94                              *dst++ = VAL;
 </code></pre>
 <h2><a class="header" href="#reaching-allocator-metadata" id="reaching-allocator-metadata">Reaching allocator metadata</a></h2>
 <ol start="6">
 <li>Following this change, <code>alloc_free()</code> crashes with a bounds violation,
 due to reaching outside the bounds of the passed memory allocation:</li>
 </ol>
-<pre><code>Starting program: /opt/cheri-exercises/cheri-allocator-cheri 
+<pre><code>Starting program: /root/cheri-allocator
 Allocator initialised
 Allocating memory
-Allocation returned 0x1046e0
-Freeing allocation 0x1046e0
+Allocation returned 0x104420
+Freeing allocation 0x104420
 
-Program received signal SIGPROT, CHERI protection violation
-Capability bounds fault caused by register ca3.
-0x00000000001022fe in alloc_free ()
+Program received signal SIGPROT, CHERI protection violation.
+Capability bounds fault caused by register cfp.
+alloc_free (ptr=&lt;optimized out&gt;) at cheri-allocator.c:106
+106             alloc-&gt;a_next = alloc_nextfree;
 (gdb) bt
-#0  0x00000000001022fe in alloc_free ()
-#1  0x0000000000101f52 in main ()
+#0  alloc_free (ptr=&lt;optimized out&gt;) at cheri-allocator.c:106
+#1  main () at cheri-allocator.c:137
+(gdb) p alloc
+$1 = (struct alloc_storage *) 0x104410 &lt;alloc_array&gt; [rwRW,0x104420-0x1044a0]
 </code></pre>
 <ol start="7">
 <li>We need to create a new capability, derived from <code>alloc_array</code> but with the

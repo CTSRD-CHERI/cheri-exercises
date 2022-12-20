@@ -204,7 +204,7 @@ Capability permission fault caused by register ca2.
 0x0000000000102140 in main ()
 
 (gdb) x/i 0x0000000000102140
-=&gt; 0x102140 &lt;main+524&gt;:     lc      ca2,32(a2)
+=&gt; 0x102140 &lt;main+524&gt;:     clc      ca2,32(ca2)
 
 (gdb) p $ca2
 $1 = (void *) 0x41200040 [,0x41200040-0x41200080]

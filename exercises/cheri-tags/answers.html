@@ -195,15 +195,17 @@ Thread 1 (LWP 100057 of process 1231):
 </code></pre>
 <p>We can ask <code>gdb</code> to print out the faulting instruction:</p>
 <pre><code>(gdb) x/i $pcc
-=&gt; 0x101d7c &lt;main+244&gt;:     lbu     a0,0(s1)
+=&gt; 0x101d84 &lt;main+244&gt;: clbu    a1,0(cs1)
 </code></pre>
-<p><em>Note:</em> due to deficiencies in the current GDB implementation, the faulting
-instruction incorrectly decodes as <code>lbu</code> with integer operands rather than
-correctly as <code>clbu a0, 0(cs1)</code>.</p>
 <p>We can also ask <code>gdb</code> for more information about the signal we received:</p>
 <pre><code>(gdb) p $_siginfo
-$1 = {si_signo = 34, si_errno = 0, si_code = 2, si_pid = 0, si_uid = 0, si_status = 0, si_addr = 0x101d7c &lt;main+244&gt;, si_value = {sival_int = 0, sival_ptr = 0x0}, _reason = {_fault = {si_trapno = 28, si_capreg = 9}, _timer = {si_timerid = 28, si_overrun = 9}, _mesgq = {si_mqd = 28}, _poll = {si_band = 38654705692}, __spare__ = {__spare1__ = 38654705692, __spare2__ = {0, 0, 0, 0, 0, 0, 0}}}}
-
+$1 = {si_signo = 34, si_errno = 0, si_code = 2, si_pid = 0, si_uid = 0,
+ si_status = 0,
+ si_addr = 0x101d84 &lt;main+244&gt; [rxR,0x100000-0x104120] (invalid), si_value = {
+   sival_int = 0, sival_ptr = 0x0}, _reason = {_fault = {si_trapno = 28,
+     si_capreg = 9}, _timer = {si_timerid = 28, si_overrun = 9}, _mesgq = {
+     si_mqd = 28}, _poll = {si_band = 38654705692}, __spare__ = {
+     __spare1__ = 38654705692, __spare2__ = {0, 0, 0, 0, 0, 0, 0}}}}
 </code></pre>
 <p>As said, <code>si_signo = 34</code> is <code>SIGPROT</code>, for which <code>si_code = 2</code> is
 <code>PROT_CHERI_TAG</code>, indicating a missing (clear) tag as an input to a
