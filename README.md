@@ -1,14 +1,18 @@
 <!-- ANCHOR: cover -->
 
-# Adversarial CHERI Exercises and Missions
+__---- WARNING: Work in progress ----__ \
+__---- These tutorial exercises for SOSP 2023 are not ready yet. ----__
 
+# SOSP 2023 CHERI Exercises
+
+These exercises are based on the [Cheri Exercises](https://github.com/CTSRD-CHERI/cheri-exercises) repository. This repository contains a series of skills development and adversarial
+exercises for [CHERI](http://cheri-cpu.org), specifically aimed at the
+CHERI-RISC-V implementation.
+
+Original authors: \
 Robert N. M. Watson (University of Cambridge), Brooks Davis (SRI
 International), Wes Filardo (Microsoft Research), Jessica Clarke (University of
 Cambridge) and John Baldwin (Ararat River Consulting).
-
-This repository contains a series of skills development and adversarial
-exercises for [CHERI](http://cheri-cpu.org), specifically aimed at the
-CHERI-RISC-V implementation.
 
 ## Acknowledgements
 
@@ -23,10 +27,10 @@ code and an issue tracker.*
 
 <!-- ANCHOR_END: cover -->
 
-## Building
+<!--- ## Building
 
 Building the book from the Markdown sources requires
 [mdBook](https://github.com/rust-lang/mdBook). Once installed, `mdbook build`
 will build the static HTML files in the `book/` directory, whilst `mdbook
 serve` will build and serve them at `http://localhost:3000`. Please refer to
-the mdBook documentation for futher options.
+the mdBook documentation for futher options. --->

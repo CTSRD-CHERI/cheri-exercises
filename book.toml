@@ -3,7 +3,7 @@ authors = ["John Baldwin", "Jessica Clarke", "Brooks Davis", "Wes Filardo", "Rob
 language = "en"
 multilingual = false
 src = "src"
-title = "Adversarial CHERI Exercises and Missions"
+title = "SOSP 2023 CHERI Tutorial Exercises"
 
 [output.html]
 git-repository-url = "https://github.com/CTSRD-CHERI/cheri-exercises"

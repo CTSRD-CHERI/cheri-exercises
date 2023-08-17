@@ -1,1 +1,1 @@
-{{#include ../../README.md:cover}}
+{{#include ../../README.md}}

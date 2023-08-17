@@ -1,4 +1,4 @@
-# Background reading
+# Background Reading
 
 To perform these exercises most effectively, we recommend first building a
 working knowledge of CHERI.  The most critical references will be the
