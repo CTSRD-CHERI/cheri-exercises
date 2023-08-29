@@ -7,7 +7,7 @@ The test program is written in conventional C, and can be compiled
 to RISC-V or CHERI-RISC-V targets:
 
 1. Compile `print-pointer.c` with a RISC-V target and a binary name of
-`print-pointer-riscv`.
+`riscv-print-pointer`.
 
 **print-pointer.c:**
 ```C
@@ -15,7 +15,7 @@ to RISC-V or CHERI-RISC-V targets:
 ```
 2. Run the binary.
 3. Compile `print-pointer.c` with a CHERI-RISC-V target and a binary name
-   of `print-pointer-cheri`.
+   of `cheriabi-print-pointer`.
 4. Run the binary: it should print a pointer size of `16` and address size
    of `8`.
 
