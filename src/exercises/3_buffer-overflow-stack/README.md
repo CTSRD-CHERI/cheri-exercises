@@ -5,8 +5,7 @@ CHERI-enabled architectures, and asks you to characterize and fix the bug
 detected by CHERI bounds enforcement.  It also asks you to use GDB for
 debugging purposes.
 
-By contrast to [the globals-based example](../buffer-overflow-global), this
-example uses two *stack* objects to demonstrate the overflow.  We will be able
+This example uses two *stack* objects to demonstrate the overflow.  We will be able
 to see the CHERI C compiler generate code to apply spatial bounds on the
 capability used for the buffer pointer we pass around.
 
