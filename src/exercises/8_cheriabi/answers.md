@@ -1,31 +1,5 @@
 # Answers
 
-## The Process Memory Map
-
-2. Example output from a baseline architecture:
-   ```
-   Directly mapped page at p=0x84dc0000
-   Punching hole in the heap at p=0x83b48000
-   Done
-   ```
-
-   And from a CHERI-enabled architecture:
-   ```
-   Directly mapped page at p=0x40139000 [rwRW,0x40139000-0x4013a000]
-    p.perms=0x7817d
-   Punching hole in the heap at p=0x407d1000 [rwRW,0x407d1000-0x407d3000]
-    p.perms=0x6817d
-   munmap failed: Memory protection violation
-   Done
-   ```
-
-3. This amounts to adding calls to `madvise(p, 4096, MADV_FREE)` and
-   `mmap(p, 4096, PROT_READ|PROT_WRITE, MAP_FIXED|MAP_PRIVATE|MAP_ANON, -1, 0)`
-   in the right places and verifying that the operations return appropriately.
-   Additionally, you may wish to check `errno` in failure cases and the
-   *contents* of memory after `mmap` to ensure that it has, indeed, behaved as
-   expected in both cases.
-
 ## The Kernel as a Potentially Confused Deputy
 
 2. Example output from a baseline architecture:
@@ -55,6 +29,32 @@
    exercise](../buffer-overflow-stack) let the program die of the `SIGPROT`
    thrown its way, here, the kernel maps the architectural trap to a *failure
    return* rather than a fatal signal.
+
+## The Process Memory Map
+
+2. Example output from a baseline architecture:
+   ```
+   Directly mapped page at p=0x84dc0000
+   Punching hole in the heap at p=0x83b48000
+   Done
+   ```
+
+   And from a CHERI-enabled architecture:
+   ```
+   Directly mapped page at p=0x40139000 [rwRW,0x40139000-0x4013a000]
+    p.perms=0x7817d
+   Punching hole in the heap at p=0x407d1000 [rwRW,0x407d1000-0x407d3000]
+    p.perms=0x6817d
+   munmap failed: Memory protection violation
+   Done
+   ```
+
+3. This amounts to adding calls to `madvise(p, 4096, MADV_FREE)` and
+   `mmap(p, 4096, PROT_READ|PROT_WRITE, MAP_FIXED|MAP_PRIVATE|MAP_ANON, -1, 0)`
+   in the right places and verifying that the operations return appropriately.
+   Additionally, you may wish to check `errno` in failure cases and the
+   *contents* of memory after `mmap` to ensure that it has, indeed, behaved as
+   expected in both cases.
 
 ## (Extra Credit!) Initial Process Construction
 

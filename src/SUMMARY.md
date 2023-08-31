@@ -2,9 +2,11 @@
 
 [Adversarial CHERI Exercises and Missions](cover/README.md)
 - [Introduction](introduction/README.md)
+    - [The SOSP 2023 Tutorial VM Image](introduction/exercise_vm_image.md)
     - [Background Reading](introduction/background.md)
-    - [The VM Image for the SOSP 2023 Exercises](introduction/exercise_vm_image.md)
 - [SOSP 2023 Exercises](exercises/README.md)
+    - [Compile and run RISC-V and CHERI-RISC-V programs](exercises/1_compile-and-run/README.md)
+        - [Answers](exercises/1_compile-and-run/answers.md)
     - [Demonstrate CHERI Tag Protection](exercises/2_cheri-tags/README.md)
         - [Answers](exercises/2_cheri-tags/answers.md)
     - [Exercise an Inter-Object Stack Buffer Overflow](exercises/3_buffer-overflow-stack/README.md)
@@ -19,5 +21,4 @@
         - [Answers](exercises/7_cheri-allocator/answers.md)
     - [CheriABI Showcase](exercises/8_cheriabi/README.md)
         - [Answers](exercises/8_cheriabi/answers.md)
-    
 - [Appendix](appendix/README.md)

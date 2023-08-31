@@ -9,9 +9,7 @@ This example uses two *stack* objects to demonstrate the overflow.  We will be a
 to see the CHERI C compiler generate code to apply spatial bounds on the
 capability used for the buffer pointer we pass around.
 
-1. Compile `buffer-overflow-stack.c` for the baseline architecture to
-   the binary `buffer-overflow-stack-baseline` and for the CHERI-aware
-   architecture to `buffer-overflow-stack-cheri`.
+1. Compile `buffer-overflow-stack.c` for the baseline architecture with the `buffer-overflow-stack-baseline` make target and for the CHERI-aware architecture with the `buffer-overflow-stack-cheri` target.
 
 2. Run both programs and observe their outputs.
 

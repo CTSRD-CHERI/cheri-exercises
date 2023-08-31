@@ -2,7 +2,7 @@
 
 ## Exercise a subobject buffer overflow
 
-This exercise demonstrates how subobject bounds can correct and array in a
+This exercise demonstrates subobject bounds with an array in a
 structure.
 
 2. Expected output:
