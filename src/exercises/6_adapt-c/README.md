@@ -11,9 +11,9 @@ FreeBSD) modified to introduce the issues that we want to investigate.
    In Section 4.2.1, read only information on the following C-language types:
    `long`, `uintptr_t` and `char *,...` (pointer types).
 
-2. Compile `cat/cat.c` and `cat/methods.c` for the baseline architecture to the
-   binary `cat-baseline` and for the CHERI-aware architecture to `cat-cheri`.
-   The compiler should print some warnings when compiling `cat-cheri`.  Save the
+2. Compile `cat/cat.c` and `cat/methods.c` for the baseline architecture with the
+   `cat-baseline` make target and for the CHERI-aware architecture with the `cat-cheri` 
+   target. The compiler should print some warnings when compiling `cat-cheri`.  Save the
    output to examine the warnings later.
 
 3. Run both versions to print contents of an arbitrary file (e.g.,

@@ -4,9 +4,9 @@ This exercise demonstrates inter-object *heap* buffer overflows on baseline and
 CHERI-enabled architectures, and asks you to characterize and fix the bug
 detected by CHERI bounds enforcement.
 
-1. Compile `buffer-overflow-heap.c` for the baseline architecture to the binary
-   `buffer-overflow-heap-baseline` and for the CHERI-aware architecture to
-   `buffer-overflow-heap-cheri`.
+1. Compile `buffer-overflow-heap.c` for the baseline architecture with the
+   `buffer-overflow-heap-baseline` make target and for the CHERI-aware 
+   architecture with the `buffer-overflow-heap-cheri` target.
 
 2. Run both versions, passing `0x20` as the (sole) command line argument.
    Observe that the CHERI version crashes with "In-address space security

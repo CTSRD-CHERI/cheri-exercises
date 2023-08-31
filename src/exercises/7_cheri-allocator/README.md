@@ -49,8 +49,8 @@ Heap metadata corruption is a powerful exploitation tool; CHERI assists with
 mitigating it through pointer integrity features, but it is preferable to
 deterministically close vulnerabilities (e.g., via spatial safety).
 
-1. Compile `cheri-allocator.c` with a CHERI-enabled target.
-   Run the binary, which will crash.
+1. Compile `cheri-allocator.c` with the CHERI-enabled `allocator-cheri` make
+   target. Run the binary, which will crash.
 
 2. Use GDB to demonstrate to yourself that the overflow has corrupted
    allocator metadata, leading to an eventual crash during a later call to
@@ -65,7 +65,7 @@ deterministically close vulnerabilities (e.g., via spatial safety).
    than triggering a later crash due to heap metadata corruption.
 
 5. Remove the overflow (performed with `memset()`) from the program.
-   Recompile `cheri-allocator.c` with a CHERI-enabled target.
+   Recompile `cheri-allocator.c` with the CHERI-enabled make target.
 
 6. Use GDB to explore why the program now crashes in `alloc_free()`: How did
    adding bounds during allocation break later freeing of that memory?
@@ -75,7 +75,7 @@ deterministically close vulnerabilities (e.g., via spatial safety).
    capability (with one set of bounds) to another (with a different set of
    bounds).
    What capability should we be using to provide the new bounds?
-   Recompile `cheri-allocator.c` with a CHERI-enabled target.
+   Recompile `cheri-allocator.c` with the CHERI-enabled make target.
 
 8. Demonstrate that the program now runs successfully to completion.
 

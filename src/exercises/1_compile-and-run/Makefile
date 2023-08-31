@@ -2,10 +2,13 @@
 
 all: riscv_print_pointer cheriabi_print_pointer
 
-riscv_print_pointer: print-pointer.c
+print-pointer-baseline: print-pointer.c
 	$(CC) -o $@ ${.ALLSRC} $(CFLAGS) $(CFLAGS_RISCVABI)
 
-cheriabi_print_pointer: print-pointer.c
+print-pointer-cheri: print-pointer.c
+	$(CC) -o $@ ${.ALLSRC} $(CFLAGS) $(CFLAGS_CHERIABI)
+	
+print-capability: print-capability.c
 	$(CC) -o $@ ${.ALLSRC} $(CFLAGS) $(CFLAGS_CHERIABI)
 
 clean:

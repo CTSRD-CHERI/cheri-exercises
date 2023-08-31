@@ -4,9 +4,9 @@ This exercise demonstrates CHERI's *capability provenance tags*, in particular
 by showing that capabilities and their constituent bytes are subtly different
 things!
 
-1. Compile `corrupt-pointer.c` for the baseline architecture to the binary
-   `corrupt-pointer-baseline` and for the CHERI-aware architecture to
-   `corrupt-pointer-cheri`.
+1. Compile `corrupt-pointer.c` for the baseline architecture with the
+   `corrupt-pointer-baseline` make target and for the CHERI-aware architecture with the
+   `corrupt-pointer-cheri` target.
 
 2. Run both programs and observe the output.
 

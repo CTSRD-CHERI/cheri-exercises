@@ -15,8 +15,9 @@ access to all userspace addresses.  Therefore, the kernel can act as a
 *confused deputy*, accessing memory with its legitimate authority but without
 intent.
 
-1. Compile `kern-read-over.c` for both the baseline (`kern-read-over-baseline`)
-   and CHERI-enabled (`kern-read-over-cheri`) architectures.
+1. Compile `kern-read-over.c` for both the baseline architecture with the
+   `kern-read-over-baseline` make target and the CHERI-enabled architecture
+   with the `kern-read-over-cheri` target.
 
 2. Run these programs and observe their outputs.
 
@@ -47,8 +48,9 @@ space, and requires that capabilities passed to address-space-manipulating
 functions bear this permission.  Userspace components are free to clear this
 permission when delegating access to address space.
 
-1. Compile `perm-vmem.c` for both the baseline (`perm-vmem-baseline`) and
-   CHERI-enabled (`perm-vmem-cheri`) architectures.
+1. Compile `perm-vmem.c` for both the baseline architecture with the 
+   `perm-vmem-baseline` make target and for the CHERI-enabled architecture with 
+   the `perm-vmem-cheri` target.
 
 2. Run these programs and observe their outputs.  The `printf` format strings
    for capabilities, `%p` and `%#p`, elide some usually-excessive details, and
