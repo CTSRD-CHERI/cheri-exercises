@@ -20,11 +20,11 @@ things!
 
 4. Examine the disassembly of the construction of `q`,
    ```
-   uint8_t *q = (uint8_t*)(((uintptr_t)p.ptr) & ~0xFF) + 5;
+   uint8_t *q = (uint8_t*)(((uintptr_t)p.ptr) & ~0xFF);
    ```
    and the byte-wise mutation of `p.ptr` to construct `r`,
    ```
-   p.bytes[0] = 5;
+   p.bytes[0] = 0;
    uint8_t *r = p.ptr;
    ```
    in both baseline and CHERI-enabled programs.
@@ -32,7 +32,7 @@ things!
    What stands out?
 
 5. Given that `q` and `r` appear to have identical byte representation in
-   memory, why does the CHERI version crash when dereferencing `q`?
+   memory, why does the CHERI version crash when dereferencing `r`?
 
 ## Source
 
