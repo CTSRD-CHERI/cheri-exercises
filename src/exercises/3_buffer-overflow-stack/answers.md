@@ -12,7 +12,7 @@
    In-address space security exception
    ```
 
-3. An example session of `gdb-run.sh ./buffer-overflow-stack-cheri` on CHERI-RISC-V:
+3. An example session of `gdb -ex run ./buffer-overflow-stack-cheri` on CHERI-RISC-V:
    ```
    Reading symbols from ./buffer-overflow-stack-cheri...
    Starting program: /mnt/buffer-overflow-stack-cheri

@@ -145,7 +145,7 @@
 
 6. Example output:
    ```
-   # gdb-run.sh ./cat-cheri -n /etc/hostid
+   # gdb -ex run --args ./cat-cheri -n /etc/hostid
    (...)
    Starting program: /root/cat-cheri -n /etc/hostid
 

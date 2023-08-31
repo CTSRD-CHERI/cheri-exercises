@@ -19,7 +19,7 @@
 
 3. Example session (abridged):
    ```
-   # gdb-run.sh ./buffer-overflow-heap-cheri 0x20
+   # gdb -ex run -ex bt --args ./buffer-overflow-heap-cheri 0x20
 
    Starting program: ./buffer-overflow-heap-cheri 0x20
    sz=20, CRRL(sz)=20

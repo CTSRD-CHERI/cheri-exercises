@@ -21,14 +21,14 @@ FreeBSD) modified to introduce the issues that we want to investigate.
    flag.
 
 4. Run the CHERI version, again without any additional flags, under `gdb` and
-   examine the crash in more detail. Use `gdb` and not `gdb-run.sh` to set
-   appropriate breakpoints before your program is started.
+   examine the crash in more detail. Set appropriate breakpoints before your 
+   program is started.
 
 5. Get back to the compiler warnings and try to solve a bug that triggered the
    crash.
 
 6. Run the CHERI version, again with the `-n` flag, under `gdb` and examine the
-   crash in more detail. You can use `gdb-run.sh` this time.
+   crash in more detail.
 
 7. Get back to the compiler warnings and try to solve a bug that triggered the
    crash.
