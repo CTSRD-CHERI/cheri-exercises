@@ -5,9 +5,12 @@ __---- These tutorial exercises for SOSP 2023 are not ready yet. ----__
 
 # SOSP 2023 CHERI Exercises
 
-These exercises are based on the [Cheri Exercises](https://github.com/CTSRD-CHERI/cheri-exercises) repository. This repository contains a series of skills development and adversarial
-exercises for [CHERI](http://cheri-cpu.org), specifically aimed at the
-CHERI-RISC-V implementation.
+Presenters: Jonathan Woodruff (University of Cambridge), Paul Metzger (University of Cambridge)
+
+These exercises are based on the [Cheri Exercises](https://github.com/CTSRD-CHERI/cheri-exercises) repository.
+This repository contains a series of skills development and adversarial exercises for [CHERI](http://cheri-cpu.org),
+specifically aimed at the CHERI-RISC-V implementation. The original exercise text
+was adapted by Paul Metzger (University of Cambridge) for this tutorial.
 
 Original authors: \
 Robert N. M. Watson (University of Cambridge), Brooks Davis (SRI

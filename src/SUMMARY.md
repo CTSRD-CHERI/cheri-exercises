@@ -1,6 +1,6 @@
 # Summary
 
-[Adversarial CHERI Exercises and Missions](cover/README.md)
+[Adversarial CHERI Exercises](cover/README.md)
 - [Introduction](introduction/README.md)
     - [The SOSP 2023 Tutorial VM Image](introduction/exercise_vm_image.md)
     - [Background Reading](introduction/background.md)
