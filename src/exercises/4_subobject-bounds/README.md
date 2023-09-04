@@ -64,10 +64,10 @@ which we will use to explore the behavior of CHERI C here.
    compiler tells you. This target adds the flags `-Xclang
    -cheri-bounds=subobject-safe -DUSE_CDEFS_CONTAINEROF`.
 
-5. Make the suggested change, marking `struct ilist_elem` as `` and recompile
-   once again (with the same flags as just above).  Run the resulting program
-   and observe its output.  Which bounds have not been narrowed?  Which have?
-   Why is that OK?
+5. Make the suggested change, marking `struct ilist_elem` as `__subobject_use_container_bounds`
+   and recompile once again (with the same flags as just above).  Run the
+   resulting program and observe its output.  Which bounds have not been
+   narrowed?  Which have? Why is that OK?
 
 ## Source Files
 

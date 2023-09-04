@@ -51,8 +51,8 @@ ilist_remove(struct ilist_elem *e) {
 
 struct obj {
 	int val;
-	struct ilist_elem ilist __subobject_use_container_bounds;
-};
+	struct ilist_elem ilist; // __subobject_use_container_bounds;
+}; // __subobject_use_container_bounds;
 
 struct ilist_elem l; /* Sentinel element serves as list head */
 struct obj obj1 = {1, {}};
