@@ -2,16 +2,16 @@
 
 2. Example output:
    ```
-   # ./tools/ccc riscv64 -o /build/cat-baseline ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
-   Running: /output/sdk/bin/clang -target riscv64-unknown-freebsd -march=rv64gc -mabi=lp64d -mno-relax --sysroot=/output/sdk/sysroot-riscv64-purecap -g -O2 -fuse-ld=lld -Wall -Wcheri -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
-   # ./tools/ccc riscv64-purecap -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
-   Running: /output/sdk/bin/clang -target riscv64-unknown-freebsd -march=rv64gcxcheri -mabi=l64pc128d -mno-relax --sysroot=/output/sdk/sysroot-riscv64-purecap -g -O2 -fuse-ld=lld -Wall -Wcheri -o /build/cat-cheri ./src/exercises/adapt-c/cat/cat.c ./src/exercises/adapt-c/cat/methods.c
-   ./src/exercises/adapt-c/cat/methods.c:70:43: warning: binary expression on capability types 'ptroff_t' (aka 'unsigned __intcap') and 'uintptr_t' (aka 'unsigned __intcap'); it is not clear which should be used as the source of provenance; currently provenance is inherited from the left-hand side [-Wcheri-provenance]
-           return (write(fildes, (const void *)(off + (uintptr_t)buf), nbyte));
-                                                ~~~ ^ ~~~~~~~~~~~~~~
-   ./src/exercises/adapt-c/cat/methods.c:80:7: warning: cast from provenance-free integer type to pointer type will give pointer that can not be dereferenced [-Wcheri-capability-misuse]
-           fp = (FILE *)file;
-                ^
+   # make cat-baseline
+   clang -o cat-baseline cat.c methods.c -g -O2 -target riscv64-unknown-freebsd -mno-relax -Wall -Wcheri -march=rv64gc -mabi=lp64d
+   # make cat-cheri
+   clang -o cat-cheri cat.c methods.c -g -O2 -target riscv64-unknown-freebsd -mno-relax -Wall -Wcheri -march=rv64gcxcheri -mabi=l64pc128d
+   methods.c:70:43: warning: binary expression on capability types 'ptroff_t' (aka 'unsigned __intcap') and 'uintptr_t' (aka 'unsigned __intcap'); it is not clear which should be used as the source of provenance; currently provenance is inherited from the left-hand side [-Wcheri-provenance]
+        return (write(fildes, (const void *)(off + (uintptr_t)buf), nbyte));
+                                             ~~~ ^ ~~~~~~~~~~~~~~
+   methods.c:80:7: warning: cast from provenance-free integer type to pointer type will give pointer that can not be dereferenced [-Wcheri-capability-misuse]
+        fp = (FILE *)file;
+             ^
    2 warnings generated.
    ```
 
