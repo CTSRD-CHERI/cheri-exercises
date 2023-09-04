@@ -9,7 +9,7 @@ buffer-overflow-subobject-cheri: buffer-overflow-subobject.c
 	$(CC) -o $@ ${.ALLSRC} $(CFLAGS) $(CFLAGS_CHERIABI)
 
 buffer-overflow-subobject-cheri-subobject-safe: buffer-overflow-subobject.c
-$(CC) -o $@ ${.ALLSRC} $(CFLAGS) $(CFLAGS_CHERIABI) -Xclang -cheri-bounds=subobject-safe
+	$(CC) -o $@ ${.ALLSRC} $(CFLAGS) $(CFLAGS_CHERIABI) -Xclang -cheri-bounds=subobject-safe
         
         
 subobject-list-cheri: subobject-list.c
