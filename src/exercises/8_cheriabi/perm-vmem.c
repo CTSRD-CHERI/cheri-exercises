@@ -30,12 +30,12 @@ main(void)
 #ifdef __CHERI_PURE_CAPABILITY__
 	printf(" p.perms=0x%lx\n", __builtin_cheri_perms_get(p));
 #endif
-	res = madvise(p, 4096, MADV_FREE);
+	/*res = madvise(p, 4096, MADV_FREE);
 	assert(res == 0);
 
 	p = mmap(p, 4096, PROT_READ|PROT_WRITE, MAP_FIXED | MAP_PRIVATE | MAP_ANON,
 	    -1, 0);
-	assert(p != MAP_FAILED);
+	assert(p != MAP_FAILED);*/
 
 	res = munmap(p, 4096);
 	assert(res == 0);
@@ -48,13 +48,13 @@ main(void)
 	printf(" p.perms=0x%lx\n", __builtin_cheri_perms_get(p));
 #endif
 
-	char *q = mmap(p, 4096, PROT_READ|PROT_WRITE, MAP_FIXED | MAP_PRIVATE | MAP_ANON,
+	/*char *q = mmap(p, 4096, PROT_READ|PROT_WRITE, MAP_FIXED | MAP_PRIVATE | MAP_ANON,
 	    -1, 0);
 	assert(q != MAP_FAILED);
 
 	if (madvise(p, 4096, MADV_FREE) != 0) {
 		printf("madvise failed: %s\n", strerror(errno));
-	}
+	}*/
 
 	if (munmap(p, 4096) != 0) {
 		printf("munmap failed: %s\n", strerror(errno));
