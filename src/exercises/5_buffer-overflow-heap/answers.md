@@ -92,7 +92,7 @@
    do not alias like this, various system components must take CHERI capability
    compression into consideration:
 
-   - The compiler, for on-stack allocations and [address-taken subobjects](../subobject-bounds).
+   - The compiler, for on-stack allocations and [address-taken subobjects](../4_subobject-bounds).
    - The linker, for objects in static storage
    - The heap allocator(s), for objects in dynamic storage
 

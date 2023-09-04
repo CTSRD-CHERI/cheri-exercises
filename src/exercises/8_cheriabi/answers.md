@@ -26,7 +26,7 @@
    from its internal pipe buffer to the indicated userspace buffer.
 
 4. Not all capability faults are fatal!  While the [inter-stack-object overflow
-   exercise](../buffer-overflow-stack) let the program die of the `SIGPROT`
+   exercise](../3_buffer-overflow-stack) let the program die of the `SIGPROT`
    thrown its way, here, the kernel maps the architectural trap to a *failure
    return* rather than a fatal signal.
 

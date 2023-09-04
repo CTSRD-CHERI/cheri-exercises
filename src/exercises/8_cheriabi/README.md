@@ -26,7 +26,7 @@ intent.
    something is amiss?
 
 4. If you have done the [inter-stack-object buffer overflow
-   exercise](../buffer-overflow-stack), contrast the behaviors of the two
+   exercise](../3_buffer-overflow-stack), contrast the behaviors of the two
    CHERI-enabled programs.
 
 ## The Process Memory Map
@@ -169,8 +169,8 @@ startup.
    it.
 
    If you are familiar with [Return Oriented
-   Programming](https://hovav.net/ucsd/dist/geometry.pdf) and [Jump Oriented
-   Programming](https://www.csc2.ncsu.edu/faculty/xjiang4/pubs/ASIACCS11.pdf),
+   Programming](https://hovav.net/ucsd/dist/geometry.pdf) and Jump Oriented
+   Programming,
    you may wish to consider the cumulative challenge added by CHERI's
    architectural provenance requirement combined with pervasive use of sentry
    capabilities for dynamically resolved symbols.
