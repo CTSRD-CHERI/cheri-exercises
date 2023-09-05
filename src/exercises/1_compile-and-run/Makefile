@@ -1,6 +1,6 @@
 .include "../common.mk"
 
-all: riscv_print_pointer cheriabi_print_pointer
+all: print-pointer-baseline print-pointer-cheri print-capability
 
 print-pointer-baseline: print-pointer.c
 	$(CC) -o $@ ${.ALLSRC} $(CFLAGS) $(CFLAGS_RISCVABI)
