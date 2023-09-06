@@ -3,10 +3,10 @@
 The Summer 2021 release of the [CHERI Software
 Stack](https://cheri-dist.cl.cam.ac.uk/) contains pre-built versions
 of all of the exercises described in this course, allowing you to work
-throught the exercises without first needing to build them from
+through the exercises without first needing to build them from
 sources.
 
-With the CHERI Software Release installed, run either the CHERI-RISCV
+With the CHERI Software Release installed, run either the CHERI-RISC-V
 or Morello simulators using one of the following commands:
 
 `./docker-cheribuild run-riscv64-purecap`
@@ -38,7 +38,7 @@ At the root prompt `#` mount the `outputroot` directory:
 
 `mkdir -p /outputroot && mount_smbfs -I 10.0.2.4 -N //10.0.2.4/output_root /outputroot`
 
-The pre-built exercises for CHERI-RISCV can be found in the
+The pre-built exercises for CHERI-RISC-V can be found in the
 `/outputroot/rootfs-riscv64-purecap/opt/cheri-exercises` and for
 Morello are present in
 `/outputroot/rootfs-morello-purecap/opt/cheri-exercises`
