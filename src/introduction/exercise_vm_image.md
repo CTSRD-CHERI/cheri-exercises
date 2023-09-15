@@ -38,7 +38,7 @@ These setup steps require you to install dependencies with the Homebrew package 
 1. `cd` into the unzipped directory.
 1. Start CheriBSD with `./run-cheribsd-vm-on-arm-macos.sh`
 1. Log into CheriBSD with `root` and no password.
-1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/`.
+1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
 
 ### Run CheriQemu on a Qemu Ubuntu VM
 
@@ -82,7 +82,7 @@ These setup steps require you to install dependencies with the Homebrew package 
 1. `cd` into the unzipped directory.
 1. Start CheriBSD with `./run-cheribsd-vm-on-x86-64-macos.sh`
 1. Log into CheriBSD with `root` and no password.
-1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/`.
+1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
 
 ### Run CheriQemu on a Qemu Ubuntu VM
 
