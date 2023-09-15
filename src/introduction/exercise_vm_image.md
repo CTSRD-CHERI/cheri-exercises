@@ -10,7 +10,7 @@ Below are instructions for how to run CheriBSD and CheriQemu on [Linux](#linux),
 1. `cd` into the unzipped directory.
 1. Start CheriBSD with `./run-cheribsd-vm-on-linux.sh`
 1. Log into CheriBSD with `root` and no password.
-1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/`.
+1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
 
 The CheriQemu binary is a statically compiled binary and so doesn't need any dependencies to be installed.
 
