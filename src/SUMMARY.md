@@ -1,8 +1,9 @@
 # Summary
 
-[Adversarial CHERI Exercises](cover/README.md)
+[SOSP 2023 CHERI Exercises](cover/README.md)
 - [Introduction](introduction/README.md)
-    - [The SOSP 2023 Tutorial VM Image](introduction/exercise_vm_image.md)
+    - [The CHERI Tutorial VM Image](introduction/exercise_vm_image.md)
+    - [Vi Cheat Sheet](introduction/vi-cheat-sheet.md)
     - [Background Reading](introduction/background.md)
 - [SOSP 2023 Exercises](exercises/README.md)
     - [Compile and run RISC-V and CHERI-RISC-V programs](exercises/1_compile-and-run/README.md)

@@ -17,8 +17,8 @@ and on FPGA implementations.
 QEMU-CHERI is a convenient instruction-set-level emulator, and is usually the
 best starting point for most users (even those intending to eventually run on
 hardware).
-For the SOSP exercises, we provide pre-built [QEMU-CHERI binaries and, alternatively,
-VM images](./exercise_vm_image.md).
+For the SOSP CHERI tutorial, we provide pre-built [QEMU-CHERI binaries and, alternatively,
+VM images](./introduction/exercise_vm_image.html).
 
 ## SOSP 2023 Exercises
 
