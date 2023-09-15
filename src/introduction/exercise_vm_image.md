@@ -32,7 +32,7 @@ The CheriQemu binary is a statically compiled binary and so doesn't need any dep
 
 These setup steps require you to install dependencies with the Homebrew package manager. If you don't want to use Homebrew follow the steps for how to run the Ubuntu VM with [UTM](#run-cheriqemu-on-an-arm64-utm-ubuntu-vm).
 
-1. Install the dependencies of CheriQemu with Homebrew: `brew install libarchive glib pixman xz zstd libusb libpng gnutls libssh libnettle jpeg-turbo`. This takes about 20 minutes on our M1 Mac-Mini test machine.
+1. Install the dependencies of CheriQemu with Homebrew: `brew install libarchive glib pixman xz zstd libusb libpng gnutls libssh libnettle jpeg-turbo` This takes about 20 minutes on our M1 Mac-Mini test machine.
 1. Download this [zip](https://www.cl.cam.ac.uk/~pffm2/sosp2023_cheri_tutorial/files/sosp2023_qemu.zip) archive.
 1. Unzip it with `unzip sosp2023_qemu.zip`.
 1. `cd` into the unzipped directory.
@@ -76,7 +76,7 @@ These setup steps require you to install dependencies with the Homebrew package 
 
 These setup steps require you to install dependencies with the Homebrew package manager. If you don't want to use Homebrew follow the steps for how to run the Ubuntu VM with [UTM](#run-cheriqemu-on-a-x86-utm-ubuntu-vm).
 
-1. Install the dependencies of CheriQemu with Homebrew: `brew install libarchive glib pixman xz zstd libusb libpng gnutls libssh libnettle jpeg-turbo`.
+1. Install the dependencies of CheriQemu with Homebrew: `brew install libarchive glib pixman xz zstd libusb libpng gnutls libssh libnettle jpeg-turbo`
 1. Download this [zip](https://www.cl.cam.ac.uk/~pffm2/sosp2023_cheri_tutorial/files/sosp2023_qemu.zip) archive.
 1. Unzip it with `unzip sosp2023_qemu.zip`.
 1. `cd` into the unzipped directory.
@@ -120,7 +120,7 @@ These setup steps require you to install dependencies with the Homebrew package 
 
 We use the Windows Subsystem for Linux (WSL) to run the Linux qemu binaries. A short introduction to WSL and an installation guide can be found [here](https://learn.microsoft.com/en-us/windows/wsl/).
 
-1. Install Ubuntu WSL with `wsl --install -d Ubuntu`. Note, this will install either an Ubuntu VM or a linux compatibility layer on your machine. See [here](https://learn.microsoft.com/en-us/windows/wsl/) for more details on WSL.
+1. Install Ubuntu WSL with `wsl --install -d Ubuntu`. Note, this will install either an Ubuntu VM or a Linux compatibility layer on your machine. See [here](https://learn.microsoft.com/en-us/windows/wsl/) for more details on WSL.
 1. Setup a username and password for WSL Ubuntu during the installation process.
 1. Once the installation has finished and a shell for the WSL installation has opened, install `zip` with `sudo apt install zip`.
 1. Download this [zip](https://www.cl.cam.ac.uk/~pffm2/sosp2023_cheri_tutorial/files/sosp2023_qemu.zip) archive.
