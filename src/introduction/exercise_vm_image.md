@@ -117,6 +117,17 @@ These setup steps require you to install dependencies with the Homebrew package 
 
 
 ## Windows
-### Run CheriQemu Natively on the Windows Subsystem for Linux
 
-### Run CheriQemu on an Ubuntu VM
+We use the Windows Subsystem for Linux (WSL) to run the Linux qemu binaries. A short introduction to WSL and an installation guide can be found [here](https://learn.microsoft.com/en-us/windows/wsl/).
+
+1. Install Ubuntu WSL with `wsl --install -d Ubuntu`. Note, this will install either an Ubuntu VM or a linux compatibility layer on your machine. See [here](https://learn.microsoft.com/en-us/windows/wsl/) for more details on WSL.
+1. Setup a username and password for WSL Ubuntu during the installation process.
+1. Once the installation has finished and a shell for the WSL installation has opened, install `zip` with `sudo apt install zip`.
+1. Download this [zip](https://www.cl.cam.ac.uk/~pffm2/sosp2023_cheri_tutorial/files/sosp2023_qemu.zip) archive.
+1. Unzip it with `unzip sosp2023_qemu.zip`.
+1. `cd` into the unzipped directory.
+1. Start CheriBSD with `./run-cheribsd-vm-on-linux.sh`
+1. Log into CheriBSD with `root` and no password.
+1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/`.
+
+It doesn't matter whether your system uses WSL 1 or WSL 2. We've tested these setup steps on both versions.
