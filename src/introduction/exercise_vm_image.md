@@ -128,6 +128,6 @@ We use the Windows Subsystem for Linux (WSL) to run the Linux qemu binaries. A s
 1. `cd` into the unzipped directory.
 1. Start CheriBSD with `./run-cheribsd-vm-on-linux.sh`
 1. Log into CheriBSD with `root` and no password.
-1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/`.
+1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
 
 It doesn't matter whether your system uses WSL 1 or WSL 2. We've tested these setup steps on both versions.
