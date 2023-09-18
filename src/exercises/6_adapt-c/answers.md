@@ -274,7 +274,7 @@
 
 
 8. The first bug resulted in a system call error because there was no capability
-   operation on an invalid capability. An operating system could not copy memory
+   operation on an invalid capability. The operating system could not copy memory
    from the user address space because it checked if a user process passed an
    invalid capability and returned an error.
 

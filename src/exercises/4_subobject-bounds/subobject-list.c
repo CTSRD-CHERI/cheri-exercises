@@ -14,7 +14,7 @@
 struct ilist_elem {
 	struct ilist_elem **ile_prevnp;
 	struct ilist_elem *ile_next;
-};
+}; // __subobject_use_container_bounds;
 
 static void
 ilist_init_sentinel(struct ilist_elem *s) {
@@ -52,7 +52,7 @@ ilist_remove(struct ilist_elem *e) {
 struct obj {
 	int val;
 	struct ilist_elem ilist; // __subobject_use_container_bounds;
-}; // __subobject_use_container_bounds;
+};
 
 struct ilist_elem l; /* Sentinel element serves as list head */
 struct obj obj1 = {1, {}};
