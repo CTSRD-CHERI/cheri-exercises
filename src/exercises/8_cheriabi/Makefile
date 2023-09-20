@@ -1,6 +1,6 @@
 .include "../common.mk"
 
-all: kern-read-over-baseline kern-read-over-cheri perm-vmem-baseline perm-vmem-cheri
+all: kern-read-over-baseline kern-read-over-cheri perm-vmem-baseline perm-vmem-cheri print-more-baseline print-more-cheri
 
 kern-read-over-baseline: kern-read-over.c
 	$(CC) -o $@ ${.ALLSRC} $(CFLAGS) $(CFLAGS_RISCVABI)
@@ -22,4 +22,4 @@ print-more-cheri: print-more.c
 	$(CC) -o $@ ${.ALLSRC} $(CFLAGS) $(CFLAGS_CHERIABI)
 
 clean:
-	rm -f kern-read-over-baseline kern-read-over-cheri
+	rm kern-read-over-baseline kern-read-over-cheri perm-vmem-baseline perm-vmem-cheri print-more-baseline print-more-cheri

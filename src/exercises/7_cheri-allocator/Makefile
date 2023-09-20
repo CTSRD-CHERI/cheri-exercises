@@ -6,4 +6,4 @@ allocator-cheri: cheri-allocator.c
 	$(CC) -o $@ $^ ${.ALLSRC} $(CFLAGS) $(CFLAGS_CHERIABI)
 
 clean:
-	rm -f cheri-allocator.c
+	rm allocator-cheri

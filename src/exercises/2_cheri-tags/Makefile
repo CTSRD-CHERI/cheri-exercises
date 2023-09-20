@@ -9,4 +9,4 @@ corrupt-pointer-cheri: corrupt-pointer.c
 	$(CC) -o $@ ${.ALLSRC} $(CFLAGS) $(CFLAGS_CHERIABI)
 
 clean:
-	rm -f corrupt-pointer-baseline corrupt-pointer-cheri
+	rm corrupt-pointer-baseline corrupt-pointer-cheri

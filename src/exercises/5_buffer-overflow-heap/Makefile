@@ -9,4 +9,4 @@ buffer-overflow-heap-cheri: buffer-overflow-heap.c
 	$(CC) -o $@ ${.ALLSRC} $(CFLAGS) $(CFLAGS_CHERIABI)
 
 clean:
-	rm -f buffer-overflow-heap-baseline buffer-overflow-heap-cheri
+	rm buffer-overflow-heap-baseline buffer-overflow-heap-cheri

@@ -9,4 +9,4 @@ cat-cheri: cat.c methods.c
 	$(CC) -o $@ ${.ALLSRC} $(CFLAGS) $(CFLAGS_CHERIABI)
 
 clean:
-	rm -f cat-baseline cat-cheri
+	rm cat-baseline cat-cheri
