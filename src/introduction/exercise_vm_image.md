@@ -5,11 +5,12 @@ Below are instructions for how to run CheriBSD and CheriQemu on [Linux](#linux),
 ## SSH
 1. Boot CHER-RISC-V CheriBSD with one of the setup guides below.
 1. Set a password for root on CheriBSD.
+1. Open the config file of the SSH daemon with `vi /etc/ssh/sshd_config` and change `PermitRootLogin` from `no` to `yes`. ('x' deletes characters in vi.)
 1. Run in `service sshd onestart` in CheriBSD to start the SSH server.
 1. Wait until the SSH server has generated the SSH host keys.
 1. Run `ssh -p 10022 root@127.0.0.1` to ssh into CheriBSD.
 
-Caution: Our scripts and UTM config files set up portforwarding from port 10022 on the host to the SSH server on CheriBSD. If you don't want that delete the relevant Qemu parameters or adjust the setting of the Ubuntu VM in UTM.
+Caution: Our scripts and UTM config files set up port forwarding from port 10022 on the host to the SSH server on CheriBSD. If you don't want that delete the relevant Qemu parameters or adjust the setting of the Ubuntu VM in UTM.
 
 ## Linux
 ### Run CheriQemu Natively
@@ -76,6 +77,7 @@ These setup steps require you to install dependencies with the Homebrew package 
 1. Click on the "Play" arrow to start the Ubuntu VM.
 1. Log into the Ubuntu VM with `root` and the password `sosp2023`.
 1. Change the directory with `cd ./sosp2023_qemu`.
+1. Run `dhclient` to make sure the network interface is configured. (This is only necessary if you plan to SSH into the CheriBSD VM.)
 1. Start the CheriQemu CheriBSD VM with `./run-cheribsd-vm-on-ubuntu-vm.sh`.
 1. Log into CheriBSD with `root` and no password.
 1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
@@ -120,6 +122,7 @@ These setup steps require you to install dependencies with the Homebrew package 
 1. Click on the "Play" arrow to start the Ubuntu VM.
 1. Log into the Ubuntu VM with `root` and the password `sosp2023`.
 1. Change the directory with `cd ./sosp2023_qemu`.
+1. Run `dhclient` to make sure the network interface is configured. (This is only necessary if you plan to SSH into the CheriBSD VM.)
 1. Start the CheriQemu CheriBSD VM with `./run-cheribsd-vm-on-ubuntu-vm.sh`.
 1. Log into CheriBSD with `root` and no password.
 1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
