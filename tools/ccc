@@ -76,11 +76,11 @@ aarch64)
 	;;
 morello-hybrid)
 	cheri_sdk_name=morello-sdk
-	arch_flags="-target aarch64-unknown-freebsd -march=morello+a64c -Xclang -morello-vararg=new"
+	arch_flags="-target aarch64-unknown-freebsd -march=morello -Xclang -morello-vararg=new"
 	;;
 morello-purecap)
 	cheri_sdk_name=morello-sdk
-	arch_flags="-target aarch64-unknown-freebsd -march=morello+c64 -mabi=purecap -Xclang -morello-vararg=new"
+	arch_flags="-target aarch64-unknown-freebsd -march=morello -mabi=purecap -Xclang -morello-vararg=new"
 	;;
 riscv64)
 	arch_flags="-target riscv64-unknown-freebsd -march=rv64gc -mabi=lp64d -mno-relax"
