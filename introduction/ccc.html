@@ -256,11 +256,11 @@ aarch64)
 	;;
 morello-hybrid)
 	cheri_sdk_name=morello-sdk
-	arch_flags=&quot;-target aarch64-unknown-freebsd -march=morello+a64c -Xclang -morello-vararg=new&quot;
+	arch_flags=&quot;-target aarch64-unknown-freebsd -march=morello -Xclang -morello-vararg=new&quot;
 	;;
 morello-purecap)
 	cheri_sdk_name=morello-sdk
-	arch_flags=&quot;-target aarch64-unknown-freebsd -march=morello+c64 -mabi=purecap -Xclang -morello-vararg=new&quot;
+	arch_flags=&quot;-target aarch64-unknown-freebsd -march=morello -mabi=purecap -Xclang -morello-vararg=new&quot;
 	;;
 riscv64)
 	arch_flags=&quot;-target riscv64-unknown-freebsd -march=rv64gc -mabi=lp64d -mno-relax&quot;
