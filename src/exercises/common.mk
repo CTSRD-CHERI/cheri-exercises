@@ -1,12 +1,13 @@
-CC=clang
+CC=cc
+CFLAGS=-g -O2 -Wall -Wcheri
 
 ARCH!=uname -m
 .if ${ARCH} == "arm64"
-CFLAGS=-g -O2 -target aarch64-unknown-freebsd -Wall -Wcheri
-CFLAGS_CHERI=-march=morello+noa64c -march=morello -mabi=purecap -Xclang -morello-vararg=new
+CFLAGS_BASELINE=-march=morello+noa64c -mabi=aapcs
+CFLAGS_CHERI=-march=morello -mabi=purecap
 .else
-CFLAGS=-g -O2 -target riscv64-unknown-freebsd -Wall -Wcheri -mno-relax
-CFLAGS_CHERI=-march=rv64gcxcheri -mabi=l64pc128d 
+CFLAGS_BASELINE=-march=rv64gc -mabi=lp64d
+CFLAGS_CHERI=-march=rv64gcxcheri -mabi=l64pc128d
 .endif
 
 .for progbase in ${PROGBASES}
