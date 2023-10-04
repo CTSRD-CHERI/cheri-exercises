@@ -1,6 +1,6 @@
 .include "../common.mk"
 
-all: cheri-allocator.c
+all: allocator-cheri
 
 allocator-cheri: cheri-allocator.c
 	$(CC) -o $@ $^ ${.ALLSRC} $(CFLAGS) $(CFLAGS_CHERIABI)
