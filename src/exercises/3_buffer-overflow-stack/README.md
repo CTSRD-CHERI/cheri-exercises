@@ -29,5 +29,5 @@ capability used for the buffer pointer we pass around.
 
 ## Courseware
 
-This exercise has [presentation materials](./buffer-overflow-stack.pptx)
+This exercise has [presentation materials](./exercises/3_buffer-overflow-stack/buffer-overflow-stack.pptx)
 available.

@@ -194,4 +194,4 @@ startup.
 
 ## Courseware
 
-This exercise has [presentation materials](./cheriabi.pptx) available.
+This exercise has [presentation materials](./exercises/8_cheriabi/cheriabi.pptx) available.

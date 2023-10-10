@@ -1,8 +1,5 @@
 <!-- ANCHOR: cover -->
 
-__---- WARNING: Work in progress ----__ \
-__---- These tutorial exercises for SOSP 2023 are not ready yet. ----__
-
 # SOSP 2023 CHERI Exercises
 
 Presenters: Jonathan Woodruff (University of Cambridge), Paul Metzger (University of Cambridge)

@@ -92,4 +92,4 @@ which we will use to explore the behavior of CHERI C here.
 
 ## Courseware
 
-This exercise has [presentation materials](./subobject-bounds.pptx) available.
+This exercise has [presentation materials](./exercises/4_subobject-bounds/subobject-bounds.pptx) available.

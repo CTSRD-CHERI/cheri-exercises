@@ -55,4 +55,4 @@ FreeBSD) modified to introduce the issues that we want to investigate.
 
 ## Courseware
 
-This exercise has [presentation materials](./adapt-c.pptx) available.
+This exercise has [presentation materials](./exercises/6_adapt-c/adapt-c.pptx) available.

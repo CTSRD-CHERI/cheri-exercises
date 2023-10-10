@@ -43,4 +43,4 @@ things!
 
 ## Courseware
 
-This exercise has [presentation materials](./cheri-tags.pptx) available.
+This exercise has [presentation materials](./exercises/2_cheri-tags/cheri-tags.pptx) available.

@@ -42,5 +42,5 @@ detected by CHERI bounds enforcement.
 
 ## Courseware
 
-This exercise has [presentation materials](./buffer-overflow-heap.pptx)
+This exercise has [presentation materials](./exercises/5_buffer-overflow-heap/buffer-overflow-heap.pptx)
 available.
