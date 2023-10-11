@@ -1,6 +1,6 @@
 # The CHERI Tutorial VM Image
-For these exercises we will run CheriBSD in a CheriQemu VM. You can either run CheriQemu natively on your machine or you can run CheriQemu on one of the Ubuntu VMs that we offer. We recommed to run CheriQemu natively but we offer the Ubuntu VMs in case the binary doesn't work on some systems.
-Below are instructions for how to run CheriBSD and CheriQemu on [Linux](#linux), [ARM macOS](#arm-macos), [x86-64 macOS](x86-64-macos), and [Windows](#windows).
+For these exercises we will run CheriBSD in a CHERI-QEMU VM. You can either run CHERI-QEMU natively on your machine or you can run CHERI-QEMU on one of the Ubuntu VMs that we offer. We recommed to run CHERI-QEMU natively but we offer the Ubuntu VMs in case the binary doesn't work on some systems.
+Below are instructions for how to run CheriBSD and CHERI-QEMU on [Linux](#linux), [ARM macOS](#arm-macos), [x86-64 macOS](x86-64-macos), and [Windows](#windows).
 
 ## SSH
 1. Boot CHER-RISC-V CheriBSD with one of the setup guides below.
@@ -13,7 +13,7 @@ Below are instructions for how to run CheriBSD and CheriQemu on [Linux](#linux),
 Caution: Our scripts and UTM config files set up port forwarding from port 10022 on the host to the SSH server on CheriBSD. If you don't want that delete the relevant Qemu parameters or adjust the setting of the Ubuntu VM in UTM.
 
 ## Linux
-### Run CheriQemu Natively
+### Run CHERI-QEMU Natively
 
 1. Download this [zip](https://www.cl.cam.ac.uk/~pffm2/sosp2023_cheri_tutorial/files/sosp2023_qemu.zip) archive.
 1. Unzip it with `unzip sosp2023_qemu.zip`.
@@ -22,9 +22,9 @@ Caution: Our scripts and UTM config files set up port forwarding from port 10022
 1. Log into CheriBSD with `root` and no password.
 1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
 
-The CheriQemu binary is a statically compiled binary and so doesn't need any dependencies to be installed.
+The CHERI-QEMU binary is a statically compiled binary and so doesn't need any dependencies to be installed.
 
-### Run CheriQemu on an Ubuntu VM
+### Run CHERI-QEMU on an Ubuntu VM
 
 1. Download this [zip](https://www.cl.cam.ac.uk/~pffm2/sosp2023_cheri_tutorial/files/amd64-vm-image.zip) archive.
 1. Unzip it with `unzip amd64-vm-image.zip`.
@@ -32,17 +32,17 @@ The CheriQemu binary is a statically compiled binary and so doesn't need any dep
 1. Start the Ubuntu VM with `./run-amd64-ubuntu-vm.sh`.
 1. Log into the Ubuntu VM with `root` and the password `sosp2023`.
 1. Change the directory with `cd ./sosp2023_qemu`.
-1. Start the CheriQemu CheriBSD VM with `./run-cheribsd-vm-on-ubuntu-vm.sh`.
+1. Start the CHERI-QEMU CheriBSD VM with `./run-cheribsd-vm-on-ubuntu-vm.sh`.
 1. Log into CheriBSD with `root` and no password.
 1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
 
 
 ## ARM macOS
-### Run CheriQemu Natively
+### Run CHERI-QEMU Natively
 
-These setup steps require you to install dependencies with the Homebrew package manager. If you don't want to use Homebrew follow the steps for how to run the Ubuntu VM with [UTM](#run-cheriqemu-on-an-arm64-utm-ubuntu-vm).
+These setup steps require you to install dependencies with the Homebrew package manager. If you don't want to use Homebrew follow the steps for how to run the Ubuntu VM with [UTM](#run-CHERI-QEMU-on-an-arm64-utm-ubuntu-vm).
 
-1. Install the dependencies of CheriQemu with Homebrew: `brew install libarchive glib pixman xz zstd libusb libpng gnutls libssh libnettle jpeg-turbo` This takes about 20 minutes on our M1 Mac-Mini test machine.
+1. Install the dependencies of CHERI-QEMU with Homebrew: `brew install libarchive glib pixman xz zstd libusb libpng gnutls libssh libnettle jpeg-turbo` This takes about 20 minutes on our M1 Mac-Mini test machine.
 1. Download this [zip](https://www.cl.cam.ac.uk/~pffm2/sosp2023_cheri_tutorial/files/sosp2023_qemu.zip) archive.
 1. Unzip it with `unzip sosp2023_qemu.zip`.
 1. `cd` into the unzipped directory.
@@ -50,9 +50,9 @@ These setup steps require you to install dependencies with the Homebrew package 
 1. Log into CheriBSD with `root` and no password.
 1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
 
-### Run CheriQemu on a Qemu Ubuntu VM
+### Run CHERI-QEMU on a Qemu Ubuntu VM
 
-These setup steps require you to install dependencies with the Homebrew package manager. If you don't want to use Homebrew follow the steps for how to run the Ubuntu VM with [UTM](#run-cheriqemu-on-an-arm64-utm-ubuntu-vm).
+These setup steps require you to install dependencies with the Homebrew package manager. If you don't want to use Homebrew follow the steps for how to run the Ubuntu VM with [UTM](#run-CHERI-QEMU-on-an-arm64-utm-ubuntu-vm).
 
 1. Install Qemu with Homebrew: `brew install qemu`
 1. Download this [zip](https://www.cl.cam.ac.uk/~pffm2/sosp2023_cheri_tutorial/files/arm64-vm-image.zip) archive.
@@ -61,11 +61,11 @@ These setup steps require you to install dependencies with the Homebrew package 
 1. Start the Ubuntu VM with `./run-arm64-ubuntu-vm.sh`.
 1. Log into the Ubuntu VM with `root` and the password `sosp2023`.
 1. Change the directory with `cd ./sosp2023_qemu`.
-1. Start the CheriQemu CheriBSD VM with `./run-cheribsd-vm-on-ubuntu-vm.sh`.
+1. Start the CHERI-QEMU CheriBSD VM with `./run-cheribsd-vm-on-ubuntu-vm.sh`.
 1. Log into CheriBSD with `root` and no password.
 1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
 
-### Run CheriQemu on a ARM64 UTM Ubuntu VM
+### Run CHERI-QEMU on a ARM64 UTM Ubuntu VM
 
 1. Download this [zip](https://www.cl.cam.ac.uk/~pffm2/sosp2023_cheri_tutorial/files/arm64-utm-vm.zip) archive.
 1. Unzip it with `unzip arm64-utm-vm.zip`.
@@ -78,16 +78,16 @@ These setup steps require you to install dependencies with the Homebrew package 
 1. Log into the Ubuntu VM with `root` and the password `sosp2023`.
 1. Change the directory with `cd ./sosp2023_qemu`.
 1. Run `dhclient` to make sure the network interface is configured. (This is only necessary if you plan to SSH into the CheriBSD VM.)
-1. Start the CheriQemu CheriBSD VM with `./run-cheribsd-vm-on-ubuntu-vm.sh`.
+1. Start the CHERI-QEMU CheriBSD VM with `./run-cheribsd-vm-on-ubuntu-vm.sh`.
 1. Log into CheriBSD with `root` and no password.
 1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
 
 ## x86-64 macOS
-### Run CheriQemu Natively
+### Run CHERI-QEMU Natively
 
-These setup steps require you to install dependencies with the Homebrew package manager. If you don't want to use Homebrew follow the steps for how to run the Ubuntu VM with [UTM](#run-cheriqemu-on-a-x86-utm-ubuntu-vm).
+These setup steps require you to install dependencies with the Homebrew package manager. If you don't want to use Homebrew follow the steps for how to run the Ubuntu VM with [UTM](#run-CHERI-QEMU-on-a-x86-utm-ubuntu-vm).
 
-1. Install the dependencies of CheriQemu with Homebrew: `brew install libarchive glib pixman xz zstd libusb libpng gnutls libssh libnettle jpeg-turbo`
+1. Install the dependencies of CHERI-QEMU with Homebrew: `brew install libarchive glib pixman xz zstd libusb libpng gnutls libssh libnettle jpeg-turbo`
 1. Download this [zip](https://www.cl.cam.ac.uk/~pffm2/sosp2023_cheri_tutorial/files/sosp2023_qemu.zip) archive.
 1. Unzip it with `unzip sosp2023_qemu.zip`.
 1. `cd` into the unzipped directory.
@@ -95,9 +95,9 @@ These setup steps require you to install dependencies with the Homebrew package 
 1. Log into CheriBSD with `root` and no password.
 1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
 
-### Run CheriQemu on a Qemu Ubuntu VM
+### Run CHERI-QEMU on a Qemu Ubuntu VM
 
-These setup steps require you to install dependencies with the Homebrew package manager. If you don't want to use Homebrew follow the steps for how to run the Ubuntu VM with [UTM](#run-cheriqemu-on-a-x86-utm-ubuntu-vm).
+These setup steps require you to install dependencies with the Homebrew package manager. If you don't want to use Homebrew follow the steps for how to run the Ubuntu VM with [UTM](#run-CHERI-QEMU-on-a-x86-utm-ubuntu-vm).
 
 1. Install Qemu with Homebrew: `brew install qemu`
 1. Download this [zip](https://www.cl.cam.ac.uk/~pffm2/sosp2023_cheri_tutorial/files/amd64-vm-image.zip) archive.
@@ -106,11 +106,11 @@ These setup steps require you to install dependencies with the Homebrew package 
 1. Start the Ubuntu VM with `./run-amd64-ubuntu-vm.sh`.
 1. Log into the Ubuntu VM with `root` and the password `sosp2023`.
 1. Change the directory with `cd ./sosp2023_qemu`.
-1. Start the CheriQemu CheriBSD VM with `./run-cheribsd-vm-on-ubuntu-vm.sh`.
+1. Start the CHERI-QEMU CheriBSD VM with `./run-cheribsd-vm-on-ubuntu-vm.sh`.
 1. Log into CheriBSD with `root` and no password.
 1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
 
-### Run CheriQemu on a x86 UTM Ubuntu VM
+### Run CHERI-QEMU on a x86 UTM Ubuntu VM
 
 1. Download this [zip](https://www.cl.cam.ac.uk/~pffm2/sosp2023_cheri_tutorial/files/amd64-utm-vm.zip) archive.
 1. Unzip it with `unzip amd64-utm-vm.zip`.
@@ -123,7 +123,7 @@ These setup steps require you to install dependencies with the Homebrew package 
 1. Log into the Ubuntu VM with `root` and the password `sosp2023`.
 1. Change the directory with `cd ./sosp2023_qemu`.
 1. Run `dhclient` to make sure the network interface is configured. (This is only necessary if you plan to SSH into the CheriBSD VM.)
-1. Start the CheriQemu CheriBSD VM with `./run-cheribsd-vm-on-ubuntu-vm.sh`.
+1. Start the CHERI-QEMU CheriBSD VM with `./run-cheribsd-vm-on-ubuntu-vm.sh`.
 1. Log into CheriBSD with `root` and no password.
 1. The source code of the exercises is in `~/cheri-exercises-sosp2023_tutorial/src/exercises/` in the CheriBSD VM.
 

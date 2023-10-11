@@ -4,7 +4,7 @@
 
 Presenters: Jonathan Woodruff (University of Cambridge), Paul Metzger (University of Cambridge)
 
-These exercises are based on the [Cheri Exercises](https://github.com/CTSRD-CHERI/cheri-exercises) repository.
+These exercises are based on the [CHERI Exercises](https://github.com/CTSRD-CHERI/cheri-exercises) repository.
 This repository contains a series of skills development and adversarial exercises for [CHERI](http://cheri-cpu.org),
 specifically aimed at the CHERI-RISC-V implementation. The original exercise text
 was adapted by Paul Metzger (University of Cambridge) for this tutorial.
