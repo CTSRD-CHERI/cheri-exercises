@@ -7,7 +7,7 @@ This is optional. The VMs can be used without SSH.
 1. Boot CHERI-RISC-V CheriBSD with one of the setup guides below. If you use one of the Ubuntu VMs run `dhclient` in the Ubuntu VM before you boot CheriBSD.
 1. Set a password for root on CheriBSD.
 1. Open the config file of the SSH daemon with `vi /etc/ssh/sshd_config` and change `PermitRootLogin` from `no` to `yes`. ('x' deletes characters in vi.)
-1. Run in `service sshd onestart` in CheriBSD to start the SSH server.
+1. Run `service sshd onestart` on CheriBSD to start the SSH server.
 1. Wait until the SSH server has generated the SSH host keys.
 1. Run `ssh -p 10022 root@127.0.0.1` to ssh into CheriBSD.
 
