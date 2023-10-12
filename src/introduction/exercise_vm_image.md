@@ -131,7 +131,7 @@ These setup steps require you to install dependencies with the Homebrew package 
 
 ## Windows
 
-We use the Windows Subsystem for Linux (WSL) to run the Linux qemu binaries. A short introduction to WSL and an installation guide can be found [here](https://learn.microsoft.com/en-us/windows/wsl/).
+We use the Windows Subsystem for Linux (WSL) to run the Linux QEMU binaries. A short introduction to WSL and an installation guide can be found [here](https://learn.microsoft.com/en-us/windows/wsl/).
 
 1. Install Ubuntu WSL with `wsl --install -d Ubuntu`. Note, this will install either an Ubuntu VM or a Linux compatibility layer on your machine. See [here](https://learn.microsoft.com/en-us/windows/wsl/) for more details on WSL.
 1. Setup a username and password for WSL Ubuntu during the installation process.
