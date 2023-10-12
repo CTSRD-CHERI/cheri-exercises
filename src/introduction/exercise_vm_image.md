@@ -3,7 +3,8 @@ For these exercises we will run CheriBSD in a CHERI-QEMU VM. You can either run 
 Below are instructions for how to run CheriBSD and CHERI-QEMU on [Linux](#linux), [ARM macOS](#arm-macos), [x86-64 macOS](x86-64-macos), and [Windows](#windows).
 
 ## SSH
-1. Boot CHER-RISC-V CheriBSD with one of the setup guides below.
+This is optional. The VMs can be used without SSH.
+1. Boot CHERI-RISC-V CheriBSD with one of the setup guides below. If you use one of the Ubuntu VMs run `dhclient` in the Ubuntu VM before you boot CheriBSD.
 1. Set a password for root on CheriBSD.
 1. Open the config file of the SSH daemon with `vi /etc/ssh/sshd_config` and change `PermitRootLogin` from `no` to `yes`. ('x' deletes characters in vi.)
 1. Run in `service sshd onestart` in CheriBSD to start the SSH server.
