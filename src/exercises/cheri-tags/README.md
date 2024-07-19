@@ -32,7 +32,7 @@ things!
    What stands out?
 
 5. Given that `q` and `r` appear to have identical byte representation in
-   memory, why does the CHERI version crash when dereferencing `q`?
+   memory, why does the CHERI version crash when dereferencing `r`?
 
 ## Source
 

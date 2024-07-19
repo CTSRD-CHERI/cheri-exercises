@@ -87,7 +87,7 @@
    combination of the old capability (in `ca0`) and the new address (in `a1`)
    remains *representable*.
 
-5. While the in-memory, byte representation of `q` and `r` are identical, `q`
+5. While the in-memory, byte representation of `q` and `r` are identical, `r`
    has been manipulated as *bytes* rather than as a *capability* and so has had
    its tag zeroed.  (Specifically, the `csb zero, 32(csp)` instruction cleared
    the tag associated with the 16-byte granule pointed to by `32(csp)`; the
