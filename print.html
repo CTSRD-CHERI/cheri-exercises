@@ -846,7 +846,7 @@ uint8_t *r = p.ptr;
 </li>
 <li>
 <p>Given that <code>q</code> and <code>r</code> appear to have identical byte representation in
-memory, why does the CHERI version crash when dereferencing <code>q</code>?</p>
+memory, why does the CHERI version crash when dereferencing <code>r</code>?</p>
 </li>
 </ol>
 <h2><a class="header" href="#source" id="source">Source</a></h2>
@@ -980,7 +980,7 @@ combination of the old capability (in <code>ca0</code>) and the new address (in 
 remains <em>representable</em>.</p>
 </li>
 <li>
-<p>While the in-memory, byte representation of <code>q</code> and <code>r</code> are identical, <code>q</code>
+<p>While the in-memory, byte representation of <code>q</code> and <code>r</code> are identical, <code>r</code>
 has been manipulated as <em>bytes</em> rather than as a <em>capability</em> and so has had
 its tag zeroed.  (Specifically, the <code>csb zero, 32(csp)</code> instruction cleared
 the tag associated with the 16-byte granule pointed to by <code>32(csp)</code>; the

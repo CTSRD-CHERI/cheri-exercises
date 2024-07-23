@@ -241,7 +241,7 @@ combination of the old capability (in <code>ca0</code>) and the new address (in 
 remains <em>representable</em>.</p>
 </li>
 <li>
-<p>While the in-memory, byte representation of <code>q</code> and <code>r</code> are identical, <code>q</code>
+<p>While the in-memory, byte representation of <code>q</code> and <code>r</code> are identical, <code>r</code>
 has been manipulated as <em>bytes</em> rather than as a <em>capability</em> and so has had
 its tag zeroed.  (Specifically, the <code>csb zero, 32(csp)</code> instruction cleared
 the tag associated with the 16-byte granule pointed to by <code>32(csp)</code>; the
