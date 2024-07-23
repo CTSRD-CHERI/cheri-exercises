@@ -1,14 +1,18 @@
 # Exercise an inter-stack-object buffer overflow
 
-This exercise demonstrates an inter-object buffer overflow on baseline and
-CHERI-enabled architectures, and asks you to characterize and fix the bug
-detected by CHERI bounds enforcement.  It also asks you to use GDB for
-debugging purposes.
+This exercise uses two stack allocations to demonstrate an inter-object buffer
+overflow on baseline and CHERI-enabled architectures, and asks you to
+characterize and fix the bug detected by CHERI bounds enforcement.  It also asks
+you to use GDB for debugging purposes.
 
 By contrast to [the globals-based example](../buffer-overflow-global), this
 example uses two *stack* objects to demonstrate the overflow.  We will be able
 to see the CHERI C compiler generate code to apply spatial bounds on the
 capability used for the buffer pointer we pass around.
+
+Because the stack as a data structure is largely maintained by the compiler,
+this example applies generally to CHERI C/C++, even to programs executing in
+evironments other than CheriABI.
 
 1. Compile `buffer-overflow-stack.c` for the baseline architecture to
    the binary `buffer-overflow-stack-baseline` and for the CHERI-aware
