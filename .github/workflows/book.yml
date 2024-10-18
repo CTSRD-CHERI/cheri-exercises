@@ -19,7 +19,7 @@ jobs:
           profile: minimal
 
       - name: Install mdbook
-        run: curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.2/mdbook-v0.4.2-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=$HOME/.cargo/bin
+        run: curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.40/mdbook-v0.4.40-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=$HOME/.cargo/bin
 
       - name: Checkout source
         uses: actions/checkout@v4
