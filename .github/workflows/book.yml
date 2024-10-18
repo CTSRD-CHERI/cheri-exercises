@@ -28,7 +28,7 @@ jobs:
         run: mdbook build
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: book
           path: book
@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: book
           path: cheri-exercises-snapshot
@@ -79,7 +79,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: book
           path: cheri-exercises-${{ github.event.release.tag_name }}
@@ -104,7 +104,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: book
           path: public
