@@ -6,13 +6,29 @@ If you already have a compiler and sysroot (e.g. you have a docker image with pr
 
 ### Building a cross build environment with cheribuild
 
-First, clone the cheribuild repo:
+There are a lot of moving pieces in the CHERI ecosystem, and, unless someone
+hands you a CHERIfied build and runtime system, it can be a little daunting to
+get started.  To manage the complexity of the ecosystem, we have a build
+orchestration tool called
+[`cheribuild`](https://github.com/CTSRD-CHERI/cheribuild).
+
+First, we need some development tools; on a modern Debian or Ubuntu box, these
+can be installed with
 ```
-git clone https://github.com/CTSRD-CHERI/cheribuild.git
+apt-get install libtool pkg-config clang bison cmake ninja-build samba flex texinfo libglib2.0-dev libpixman-1-dev libarchive-dev libarchive-tools libbz2-dev libattr1-dev libcap-ng-dev
+```
+Similarly named packages should be available in other Linux distributions and
+in FreeBSD ports.
+
+With those in place, it should suffice to clone and run `cheribuild` (by
+default, all work takes place in `~/cheri`):
+```
+mkdir ~/cheri
+git clone https://github.com/CTSRD-CHERI/cheribuild.git ~/cheri/cheribuild
 ```
 The [README.md](https://github.com/CTSRD-CHERI/cheribuild/blob/master/README.md) file contains considerable information, but to get started, you'll need to bootstrap an LLVM compiler and a CheriBSD build and sysroot.  The easiest path to doing this is:
 ```
-cheribuild.py cheribsd-riscv64-purecap -d
+~/cheri/cheribuild/cheribuild.py cheribsd-riscv64-purecap -d
 ```
 This will churn away, prompting occasionally as it bootstraps assorted dependencies.  On a fast machine this will take several hours.
 <!-- XXX: Should we advocate `-f` here? -->
