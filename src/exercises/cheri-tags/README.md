@@ -1,7 +1,9 @@
-# Demonstrate CHERI Tag Protection
+# Demonstrate CHERI pointer integrity protection
 
-This exercise demonstrates CHERI's *capability provenance tags*, in particular
-by showing that capabilities and their constituent bytes are subtly different
+This exercise demonstrates CHERI's *capability provenance tags*, an
+architectural feature with ramifications in any language, including CHERI C/C++,
+that compiles to use CHERI capabilities.  In particular, this exercise
+demonstrates that capabilities and their constituent bytes are subtly different
 things!
 
 1. Compile `corrupt-pointer.c` for the baseline architecture to the binary

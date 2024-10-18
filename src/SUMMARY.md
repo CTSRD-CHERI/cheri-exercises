@@ -10,7 +10,7 @@
         - [Answers](exercises/compile-and-run/answers.md)
     - [Disassemble and debug RISC-V and CHERI-RISC-V programs](exercises/debug-and-disassemble/README.md)
         - [Answers](exercises/debug-and-disassemble/answers.md)
-    - [Demonstrate CHERI Tag Protection](exercises/cheri-tags/README.md)
+    - [Demonstrate CHERI pointer integrity protection](exercises/cheri-tags/README.md)
         - [Answers](exercises/cheri-tags/answers.md)
     - [Exercise an inter-object stack buffer overflow](exercises/buffer-overflow-stack/README.md)
         - [Answers](exercises/buffer-overflow-stack/answers.md)
