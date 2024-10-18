@@ -1,30 +1,20 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Adversarial CHERI Exercises and Missions</title>
-        
-        <meta name="robots" content="noindex" />
-        
-        
+        <meta name="robots" content="noindex">
 
 
         <!-- Custom HTML head -->
         
-
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
-        
         <link rel="icon" href="favicon.svg">
-        
-        
         <link rel="shortcut icon" href="favicon.png">
-        
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
@@ -32,9 +22,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
@@ -42,19 +30,18 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -70,61 +57,89 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
 
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 <ol class="chapter"><li class="chapter-item expanded affix "><a href="cover/index.html">Adversarial CHERI Exercises and Missions</a></li><li class="chapter-item expanded "><a href="introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="introduction/background.html"><strong aria-hidden="true">1.1.</strong> Background reading</a></li><li class="chapter-item expanded "><a href="introduction/cross-compilation-execution.html"><strong aria-hidden="true">1.2.</strong> Cross compilation and execution</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="introduction/ccc.html"><strong aria-hidden="true">1.2.1.</strong> Helper script</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="exercises/index.html"><strong aria-hidden="true">2.</strong> Skills Development Exercises</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/compile-and-run/index.html"><strong aria-hidden="true">2.1.</strong> Compile and run RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/compile-and-run/answers.html"><strong aria-hidden="true">2.1.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/debug-and-disassemble/index.html"><strong aria-hidden="true">2.2.</strong> Disassemble and debug RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/debug-and-disassemble/answers.html"><strong aria-hidden="true">2.2.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/cheri-tags/index.html"><strong aria-hidden="true">2.3.</strong> Demonstrate CHERI Tag Protection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/cheri-tags/answers.html"><strong aria-hidden="true">2.3.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/buffer-overflow-stack/index.html"><strong aria-hidden="true">2.4.</strong> Exercise an inter-object stack buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/buffer-overflow-stack/answers.html"><strong aria-hidden="true">2.4.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/buffer-overflow-global/index.html"><strong aria-hidden="true">2.5.</strong> Exercise an inter-object global buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/buffer-overflow-global/answers.html"><strong aria-hidden="true">2.5.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/subobject-bounds/index.html"><strong aria-hidden="true">2.6.</strong> Explore subobject bounds</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/subobject-bounds/answers.html"><strong aria-hidden="true">2.6.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/control-flow-pointer/index.html"><strong aria-hidden="true">2.7.</strong> Corrupt a control-flow pointer using a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/control-flow-pointer/answers.html"><strong aria-hidden="true">2.7.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/buffer-overflow-heap/index.html"><strong aria-hidden="true">2.8.</strong> Exercise heap overflows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/buffer-overflow-heap/answers.html"><strong aria-hidden="true">2.8.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/type-confusion/index.html"><strong aria-hidden="true">2.9.</strong> Exercise integer-pointer type confusion bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/type-confusion/answers.html"><strong aria-hidden="true">2.9.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/pointer-injection/index.html"><strong aria-hidden="true">2.10.</strong> Demonstrate pointer injection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/pointer-injection/answers.html"><strong aria-hidden="true">2.10.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/adapt-c/index.html"><strong aria-hidden="true">2.11.</strong> Adapt a C Program to CHERI C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/adapt-c/answers.html"><strong aria-hidden="true">2.11.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/cheriabi/index.html"><strong aria-hidden="true">2.12.</strong> CheriABI Showcase</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/cheriabi/answers.html"><strong aria-hidden="true">2.12.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/cheri-allocator/index.html"><strong aria-hidden="true">2.13.</strong> Extending Heap Allocators for CHERI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/cheri-allocator/answers.html"><strong aria-hidden="true">2.13.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="exercises/pointer-revocation/index.html"><strong aria-hidden="true">2.14.</strong> Demonstrate pointer revocation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="exercises/pointer-revocation/answers.html"><strong aria-hidden="true">2.14.1.</strong> Answers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="missions/index.html"><strong aria-hidden="true">3.</strong> Focused Adversarial Missions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="missions/buffer-overflow-control-flow/index.html"><strong aria-hidden="true">3.1.</strong> Exploiting a buffer overflow to manipulate control flow</a></li><li class="chapter-item expanded "><a href="missions/uninitialized-stack-frame-control-flow/index.html"><strong aria-hidden="true">3.2.</strong> Exploiting an uninitialized stack frame to manipulate control flow</a></li><li class="chapter-item expanded "><a href="missions/use-after-free-control-flow/index.html"><strong aria-hidden="true">3.3.</strong> Exploiting heap use-after-free to manipulate control flow</a></li><li class="chapter-item expanded "><a href="missions/kernel-FreeBSD-SA-09-06.ktimer/index.html"><strong aria-hidden="true">3.4.</strong> Exploiting kernel system-call vulnerability to manipulate control flow</a></li><li class="chapter-item expanded "><a href="missions/kernel-FreeBSD-SA-18-13.nfs/index.html"><strong aria-hidden="true">3.5.</strong> Exploiting kernel NFS-server vulnerability to manipulate control flow</a></li></ol></li><li class="chapter-item expanded "><a href="appendix/index.html"><strong aria-hidden="true">4.</strong> Appendix</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Adversarial CHERI Exercises and Missions</h1>
@@ -133,18 +148,16 @@
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
                         <a href="https://github.com/CTSRD-CHERI/cheri-exercises" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -152,10 +165,9 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -165,14 +177,14 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#adversarial-cheri-exercises-and-missions" id="adversarial-cheri-exercises-and-missions">Adversarial CHERI Exercises and Missions</a></h1>
+                        <h1 id="adversarial-cheri-exercises-and-missions"><a class="header" href="#adversarial-cheri-exercises-and-missions">Adversarial CHERI Exercises and Missions</a></h1>
 <p>Robert N. M. Watson (University of Cambridge), Brooks Davis (SRI
 International), Wes Filardo (Microsoft Research), Jessica Clarke (University of
 Cambridge) and John Baldwin (Ararat River Consulting).</p>
 <p>This repository contains a series of skills development and adversarial
 exercises for <a href="http://cheri-cpu.org">CHERI</a>, specifically aimed at the
 CHERI-RISC-V implementation.</p>
-<h2><a class="header" href="#acknowledgements" id="acknowledgements">Acknowledgements</a></h2>
+<h2 id="acknowledgements"><a class="header" href="#acknowledgements">Acknowledgements</a></h2>
 <p>The authors gratefully acknowledge Reuben Broadfoot, Lawrence Esswood, Brett
 Gutstein, Joe Kiniry, Alex Richardson, Austin Roach, and Daniel Zimmerman for
 their feedback and support in developing these exercises.</p>
@@ -180,7 +192,7 @@ their feedback and support in developing these exercises.</p>
 contributions are welcomed.  Please see our <a href="https://github.com/CTSRD-CHERI/cheri-exercises">GitHub
 Repository</a> for the source
 code and an issue tracker.</em></p>
-<h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p>This set of exercises and adversarial missions is intended to:</p>
 <ul>
 <li>Build a baseline skillset with RISC-V and CHERI-RISC-V, as well as awareness
@@ -193,7 +205,7 @@ adversarial missions.</li>
 <p>These activities supplement existing experience
 with reverse engineering and exploitation on conventional architectures
 and software stacks.</p>
-<h2><a class="header" href="#platform" id="platform">Platform</a></h2>
+<h2 id="platform"><a class="header" href="#platform">Platform</a></h2>
 <p>These exercises are designed to be run on the CheriBSD operating system in its
 pure-capability CheriABI process environment.
 They can be run on various instantiations of CHERI-RISC-V, including on QEMU
@@ -203,7 +215,7 @@ best starting point for most users (even those intending to eventually run on
 hardware).
 You can use our <a href="https://github.com/CTSRD-CHERI/cheribuild">cheribuild</a> tool
 to build the CHERI-RISC-V SDK, CheriBSD, and QEMU on macOS, FreeBSD, and Linux.</p>
-<h2><a class="header" href="#skills-development-exercises" id="skills-development-exercises">Skills development exercises</a></h2>
+<h2 id="skills-development-exercises"><a class="header" href="#skills-development-exercises">Skills development exercises</a></h2>
 <p><strong>Skills development exercises</strong> are intended to take 1-2 hours each,
 and ask you to build and perform minor modifications to simple
 RISC-V and CHERI-RISC-V C/C++ programs. These exercises
@@ -218,10 +230,10 @@ bounds, weaker temporal safety, and C type confusion.</p>
 <li>UNIX program compilation, execution, and debugging</li>
 <li>RISC ISAs and binary structures/reverse engineering (e.g., on MIPS or ARMv8)</li>
 </ul>
-<h2><a class="header" href="#focused-adversarial-missions" id="focused-adversarial-missions">Focused adversarial missions</a></h2>
+<h2 id="focused-adversarial-missions"><a class="header" href="#focused-adversarial-missions">Focused adversarial missions</a></h2>
 <p><strong>Focused adversarial missions</strong> are intended to take
 1-3 days, and ask you to exploit, first on RISC-V, and
-then on CHERI-RISC-V, documented vulnerabilities in simple &quot;potted&quot;
+then on CHERI-RISC-V, documented vulnerabilities in simple "potted"
 C/C++-language programs provided by the CHERI-RISC-V team. These missions
 engage you more specifically in RISC-V exploitation, and CHERI's
 security objectives and mechanisms.</p>
@@ -239,7 +251,7 @@ engineering and exploitation.</p>
 in advance.  We strongly recommend exploiting the RISC-V version of the code
 first, as a starting point for understanding potential CHERI-RISC-V
 exploitability.</p>
-<h1><a class="header" href="#background-reading" id="background-reading">Background reading</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="background-reading"><a class="header" href="#background-reading">Background reading</a></h1>
 <p>To perform these exercises most effectively, we recommend first building a
 working knowledge of CHERI.  The most critical references will be the
 <em>Introduction to CHERI</em> and <em>CHERI C/C++ Programming Guide</em>, but there is a
@@ -253,10 +265,10 @@ broad variety of other reference material available regarding CHERI:</p>
 CHERI Instruction-Set Architecture (Version 8)</a> - Instruction reference and design discussion.</li>
 <li><a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-949.pdf">Complete spatial safety for C and C++ using CHERI capabilities</a> - This PhD dissertation provides an extensive overview of the CHERI-MIPS linking model (also relevant to the current CHERI-RISC-V model), an implementation of opportunistic subobject bounds, and general C/C++ compatibility issues.</li>
 </ul>
-<h1><a class="header" href="#cross-compilation-and-execution" id="cross-compilation-and-execution">Cross compilation and execution</a></h1>
-<h2><a class="header" href="#obtaining-a-compiler-and-sysroot" id="obtaining-a-compiler-and-sysroot">Obtaining a compiler and sysroot</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cross-compilation-and-execution"><a class="header" href="#cross-compilation-and-execution">Cross compilation and execution</a></h1>
+<h2 id="obtaining-a-compiler-and-sysroot"><a class="header" href="#obtaining-a-compiler-and-sysroot">Obtaining a compiler and sysroot</a></h2>
 <p>If you already have a compiler and sysroot (e.g. you have a docker image with pre-compiled versions), you will need to know the path to <code>clang</code> and the path to your sysroot.  You can then proceed to <a href="introduction/cross-compilation-execution.html#compiler-command-line"><strong>Compiler command line</strong></a>.</p>
-<h3><a class="header" href="#building-a-cross-build-environment-with-cheribuild" id="building-a-cross-build-environment-with-cheribuild">Building a cross build environment with cheribuild</a></h3>
+<h3 id="building-a-cross-build-environment-with-cheribuild"><a class="header" href="#building-a-cross-build-environment-with-cheribuild">Building a cross build environment with cheribuild</a></h3>
 <p>First, clone the cheribuild repo:</p>
 <pre><code>git clone https://github.com/CTSRD-CHERI/cheribuild.git
 </code></pre>
@@ -266,32 +278,32 @@ CHERI Instruction-Set Architecture (Version 8)</a> - Instruction reference and d
 <p>This will churn away, prompting occasionally as it bootstraps assorted dependencies.  On a fast machine this will take several hours.</p>
 <!-- XXX: Should we advocate `-f` here? -->
 <p>Upon completion, you will find a usable Clang compiler in <code>~/cheri/output/sdk/bin/clang</code> and a sysroot in <code>~/cheri/output/rootfs-riscv64-purecap</code> (unless you have altered <code>cheribuild</code>'s default paths).</p>
-<h2><a class="header" href="#compiler-command-line" id="compiler-command-line">Compiler command line</a></h2>
+<h2 id="compiler-command-line"><a class="header" href="#compiler-command-line">Compiler command line</a></h2>
 <p>In this set of exercises we cross compile in two basic modes.
 Conventional RISC-V ABI and the CheriABI pure-capability ABI.</p>
-<h3><a class="header" href="#common-elements" id="common-elements">Common elements</a></h3>
+<h3 id="common-elements"><a class="header" href="#common-elements">Common elements</a></h3>
 <p>All command lines will share some comment elements to target 64-bit RISC-V, select the linker, and indicate where to find the sysroot.</p>
 <p>Some conventions:</p>
 <ul>
 <li><code>$SYSROOT</code> is the path to your sysroot.</li>
 <li><code>$CLANG</code> is the path to your compiler.</li>
-<li>All compiler commands begin with <code>$CLANG -target riscv64-unknown-freebsd --sysroot=&quot;$SYSROOT&quot; -fuse-ld=lld -mno-relax</code></li>
+<li>All compiler commands begin with <code>$CLANG -target riscv64-unknown-freebsd --sysroot="$SYSROOT" -fuse-ld=lld -mno-relax</code></li>
 <li>As a rule, you will want to add <code>-g</code> to the command line to compile with debug symbols.</li>
 <li>You will generally want to compile with <code>-O2</code> as the unoptimized assembly is verbose and hard to follow.</li>
 <li>We strongly recommend you compile with warnings on including <code>-Wall</code> and <code>-Wcheri</code>.</li>
 </ul>
-<h3><a class="header" href="#risc-v" id="risc-v">RISC-V</a></h3>
+<h3 id="risc-v"><a class="header" href="#risc-v">RISC-V</a></h3>
 <p>Two additional arguments are required to specify the supported architectural features and ABI.  For conventional RISC-V, those are: <code> -march=rv64gc -mabi=lp64d</code>.
 Putting it all together:</p>
-<pre><code>$CLANG -g -O2 -target riscv64-unknown-freebsd --sysroot=&quot;$SYSROOT&quot; -fuse-ld=lld -mno-relax -march=rv64gc -mabi=lp64d -Wall -Wcheri
+<pre><code>$CLANG -g -O2 -target riscv64-unknown-freebsd --sysroot="$SYSROOT" -fuse-ld=lld -mno-relax -march=rv64gc -mabi=lp64d -Wall -Wcheri
 </code></pre>
-<h3><a class="header" href="#cheriabi" id="cheriabi">CheriABI</a></h3>
+<h3 id="cheriabi"><a class="header" href="#cheriabi">CheriABI</a></h3>
 <p>For CheriABI, the architecture and ABI flags are:
 <code>-march=rv64gcxcheri -mabi=l64pc128d</code>.
 Putting it all together:</p>
-<pre><code>$CLANG -g -O2 -target riscv64-unknown-freebsd --sysroot=&quot;$SYSROOT&quot; -fuse-ld=lld -mno-relax -march=rv64gcxcheri -mabi=l64pc128d -Wall -Wcheri
+<pre><code>$CLANG -g -O2 -target riscv64-unknown-freebsd --sysroot="$SYSROOT" -fuse-ld=lld -mno-relax -march=rv64gcxcheri -mabi=l64pc128d -Wall -Wcheri
 </code></pre>
-<h2><a class="header" href="#executing-binaries" id="executing-binaries">Executing binaries</a></h2>
+<h2 id="executing-binaries"><a class="header" href="#executing-binaries">Executing binaries</a></h2>
 <p>CheriBSD supports running RISC-V and CHERI-RISC-V side-by-side on the same instance, so provided the instance has all features available for the exercise or mission in question, you should be able to complete it on a single CheriBSD instance.</p>
 <p>CheriBSD's <code>file(1)</code> has been extended to distinguish RISC-V binaries from CHERI-RISC-V (CheriABI) binaries. For example, on a CheriBSD instance:</p>
 <pre><code># file riscv-binary
@@ -311,7 +323,7 @@ cheri-binary: ELF 64-bit LSB shared object, UCB RISC-V, RVC, double-float ABI, c
 # readelf -h cheri-binary | grep Flags
   Flags:                             0x30005, double-float ABI, RVC, cheriabi, capmode
 </code></pre>
-<h1><a class="header" href="#helper-script" id="helper-script">Helper script</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="helper-script"><a class="header" href="#helper-script">Helper script</a></h1>
 <p>Because the command line required to compile exercises is quite unwieldy, we've created a wrapper script to help out, shown below.  If you've checked out this repository it's present in <code>tools/ccc</code>.  The usage is:</p>
 <pre><code>ccc &lt;arch&gt; [...]
 
@@ -332,7 +344,7 @@ Supported architectures:
 set -e
 set -u
 
-name=$(basename &quot;$0&quot;)
+name=$(basename "$0")
 
 VERBOSE=${VERBOSE:-0}
 QUIET=${QUIET:-0}
@@ -357,34 +369,34 @@ err()
 {
 	ret=$1
 	shift
-	echo &gt;&amp;2 &quot;$@&quot;
-	exit &quot;$ret&quot;
+	echo &gt;&amp;2 "$@"
+	exit "$ret"
 }
 
 warn()
 {
-	echo &gt;&amp;2 &quot;$@&quot;
+	echo &gt;&amp;2 "$@"
 }
 
 debug()
 {
-	if [ &quot;$VERBOSE&quot; -ne 0 ]; then
-		echo &gt;&amp;2 &quot;$@&quot;
+	if [ "$VERBOSE" -ne 0 ]; then
+		echo &gt;&amp;2 "$@"
 	fi
 }
 
 info()
 {
-	if [ &quot;$QUIET&quot; -eq 0 ]; then
-		echo &gt;&amp;2 &quot;$@&quot;
+	if [ "$QUIET" -eq 0 ]; then
+		echo &gt;&amp;2 "$@"
 	fi
 }
 
 run()
 {
 	debug	# add space before normal multiline output
-	info &quot;Running:&quot; &quot;$@&quot;
-	&quot;$@&quot;
+	info "Running:" "$@"
+	"$@"
 }
 
 if [ $# -eq 0 ]; then
@@ -400,27 +412,27 @@ case $arch in
 aarch64)
 	cheri_arch_basename=morello
 	cheri_sdk_name=morello-sdk
-	arch_flags=&quot;-target aarch64-unknown-freebsd -march=morello+noa64c&quot;
+	arch_flags="-target aarch64-unknown-freebsd -march=morello+noa64c"
 	;;
 morello-hybrid)
 	cheri_sdk_name=morello-sdk
-	arch_flags=&quot;-target aarch64-unknown-freebsd -march=morello -Xclang -morello-vararg=new&quot;
+	arch_flags="-target aarch64-unknown-freebsd -march=morello -Xclang -morello-vararg=new"
 	;;
 morello-purecap)
 	cheri_sdk_name=morello-sdk
-	arch_flags=&quot;-target aarch64-unknown-freebsd -march=morello -mabi=purecap -Xclang -morello-vararg=new&quot;
+	arch_flags="-target aarch64-unknown-freebsd -march=morello -mabi=purecap -Xclang -morello-vararg=new"
 	;;
 riscv64)
-	arch_flags=&quot;-target riscv64-unknown-freebsd -march=rv64gc -mabi=lp64d -mno-relax&quot;
+	arch_flags="-target riscv64-unknown-freebsd -march=rv64gc -mabi=lp64d -mno-relax"
 	;;
 riscv64-hybrid)
-	arch_flags=&quot;-target riscv64-unknown-freebsd -march=rv64gcxcheri -mabi=lp64d -mno-relax&quot;
+	arch_flags="-target riscv64-unknown-freebsd -march=rv64gcxcheri -mabi=lp64d -mno-relax"
 	;;
 riscv64-purecap)
-	arch_flags=&quot;-target riscv64-unknown-freebsd -march=rv64gcxcheri -mabi=l64pc128d -mno-relax&quot;
+	arch_flags="-target riscv64-unknown-freebsd -march=rv64gcxcheri -mabi=l64pc128d -mno-relax"
 	;;
 *)
-	err 1 &quot;Unsupported architecture '$arch'&quot;
+	err 1 "Unsupported architecture '$arch'"
 	;;
 esac
 
@@ -434,79 +446,79 @@ esac
 SDKDIR_SOURCE=${CHERIBUILD_SOURCE:-${HOME}/cheri}
 SDKDIR_OUTPUT=${CHERIBUILD_OUTPUT:-${SDKDIR_SOURCE}/output}
 SDKDIR_SDK=${CHERIBUILD_SDK:-${SDKDIR_OUTPUT}/${cheri_sdk_name}}
-SDKDIR=$(eval echo \${CHERIBUILD_SDK_&quot;${cheri_arch_basename}&quot;:-})
+SDKDIR=$(eval echo \${CHERIBUILD_SDK_"${cheri_arch_basename}":-})
 SDKDIR=${SDKDIR:-${SDKDIR_SDK}}
 
 enverr()
 {
 	echo &gt;&amp;2 $1
-	echo &quot;Perhaps set or adjust one of the following environment variables:&quot;
+	echo "Perhaps set or adjust one of the following environment variables:"
 	for v in SOURCE OUTPUT SDK; do
-		echo &quot; &quot; CHERIBUILD_$v \(currently: \
+		echo " " CHERIBUILD_$v \(currently: \
 		  $(eval echo \${CHERIBUILD_$v:-unset, tried \$SDKDIR_$v})\)
 	done
 
-	A=&quot;CHERIBUILD_SDK_${cheri_arch_basename}&quot;
-	echo &quot; &quot; &quot;$A&quot; \(currently: $(eval echo \${$A:-unset, tried \$SDKDIR})\)
+	A="CHERIBUILD_SDK_${cheri_arch_basename}"
+	echo " " "$A" \(currently: $(eval echo \${$A:-unset, tried \$SDKDIR})\)
 
-	echo &quot; &quot; &quot;$2&quot; \(currently: $(eval echo \${$2:-unset, tried \$SDK_$2})\)
+	echo " " "$2" \(currently: $(eval echo \${$2:-unset, tried \$SDK_$2})\)
 
-	err 1 &quot;Please check your build environment&quot;
+	err 1 "Please check your build environment"
 }
 
 SDK_CLANG=${CLANG:-${SDKDIR}/bin/clang}
 
 case $name in
-*clang|*cc)	prog=&quot;${SDK_CLANG}&quot; ;;
-*clang++|*c++)	prog=&quot;${SDK_CLANG}++&quot; ;;
-*)	err 1 &quot;Unsupported program name '$name'&quot; ;;
+*clang|*cc)	prog="${SDK_CLANG}" ;;
+*clang++|*c++)	prog="${SDK_CLANG}++" ;;
+*)	err 1 "Unsupported program name '$name'" ;;
 esac
-if [ ! -x &quot;$prog&quot; ]; then
-	enverr &quot;Target compiler '$prog' not found.&quot; &quot;CLANG&quot;
+if [ ! -x "$prog" ]; then
+	enverr "Target compiler '$prog' not found." "CLANG"
 fi
-debug &quot;prog: $prog&quot;
+debug "prog: $prog"
 
 SDK_SYSROOT=${SYSROOT:-${SDKDIR}/sysroot-${cheri_arch_basename}-purecap}
-if [ ! -d &quot;$SDK_SYSROOT&quot; ]; then
-	enverr &quot;Sysroot '$SDK_SYSROOT' does not exist.&quot; &quot;SYSROOT&quot;
+if [ ! -d "$SDK_SYSROOT" ]; then
+	enverr "Sysroot '$SDK_SYSROOT' does not exist." "SYSROOT"
 fi
-debug &quot;sysroot: $SDK_SYSROOT&quot;
+debug "sysroot: $SDK_SYSROOT"
 
-debug &quot;arch_flags: $arch_flags&quot;
+debug "arch_flags: $arch_flags"
 
-debug_flags=&quot;-g&quot;
-debug &quot;debug_flags: $debug_flags&quot;
+debug_flags="-g"
+debug "debug_flags: $debug_flags"
 
-opt_flags=&quot;-O2&quot;
-debug &quot;opt_flags: $opt_flags&quot;
+opt_flags="-O2"
+debug "opt_flags: $opt_flags"
 
-sysroot_flags=&quot;--sysroot='$SDK_SYSROOT'&quot;
-debug &quot;sysroot_flags: $sysroot_flags&quot;
+sysroot_flags="--sysroot='$SDK_SYSROOT'"
+debug "sysroot_flags: $sysroot_flags"
 
-linker_flags=&quot;-fuse-ld=lld&quot;
-debug &quot;linker_flags: $linker_flags&quot;
+linker_flags="-fuse-ld=lld"
+debug "linker_flags: $linker_flags"
 
-diag_flags=&quot;-Wall -Wcheri&quot;
-debug &quot;diag_flags: $diag_flags&quot;
+diag_flags="-Wall -Wcheri"
+debug "diag_flags: $diag_flags"
 
-all_flags=&quot;$arch_flags $sysroot_flags $debug_flags $opt_flags $linker_flags $diag_flags&quot;
+all_flags="$arch_flags $sysroot_flags $debug_flags $opt_flags $linker_flags $diag_flags"
 
 all_flags_rev=
 # shellcheck disable=SC2086 # intentional
 eval 'for flag in '$all_flags'; do
-	all_flags_rev=&quot;'&quot;'&quot;'$flag'&quot;'&quot;'${all_flags_rev:+ $all_flags_rev}&quot;
+	all_flags_rev="'"'"'$flag'"'"'${all_flags_rev:+ $all_flags_rev}"
 done'
 
 # shellcheck disable=SC2086 # intentional
 eval 'for flag in '$all_flags_rev'; do
-	set -- &quot;$flag&quot; &quot;$@&quot;
+	set -- "$flag" "$@"
 done'
 
-run &quot;$prog&quot; &quot;$@&quot;
+run "$prog" "$@"
 </code></pre>
 <p>If you were provided a docker image along with these instructions (e.g. as part of a training exercise or bug-bounty), it should be configured such that <code>ccc</code> works without setting environment variables.</p>
 <p>Although not used by these exercises, the tool will instead function as a C++ compiler if invoked via the name <code>cc++</code>, and a <code>tools/cc++</code> symlink exists to facilitate this.</p>
-<h1><a class="header" href="#skills-development-exercises-1" id="skills-development-exercises-1">Skills Development Exercises</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="skills-development-exercises-1"><a class="header" href="#skills-development-exercises-1">Skills Development Exercises</a></h1>
 <p>For a researcher to contribute effectively to CHERI-RISC-V evaluation,
 they will need a baseline skill-set that includes significant existing
 experience with:</p>
@@ -536,7 +548,7 @@ successfully completing these exercises will be able to:</p>
 <li>A short document describing what the program does and the objectives</li>
 <li>Where there are exercise questions, sample answers</li>
 </ul>
-<h1><a class="header" href="#compile-and-run-risc-v-and-cheri-risc-v-programs" id="compile-and-run-risc-v-and-cheri-risc-v-programs">Compile and run RISC-V and CHERI-RISC-V programs</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="compile-and-run-risc-v-and-cheri-risc-v-programs"><a class="header" href="#compile-and-run-risc-v-and-cheri-risc-v-programs">Compile and run RISC-V and CHERI-RISC-V programs</a></h1>
 <p>This exercise steps you through getting up and running with code compilation
 and execution for RISC-V and CHERI-RISC-V programs.</p>
 <p>The first test program is written in conventional C, and can be compiled
@@ -555,9 +567,9 @@ to RISC-V or CHERI-RISC-V targets:</p>
 int
 main(void)
 {
-	printf(&quot;size of pointer: %zu\n&quot;, sizeof(void *));
+	printf("size of pointer: %zu\n", sizeof(void *));
 	/* XXX: ideally we'd use ptraddr_t below */
-	printf(&quot;size of address: %zu\n&quot;, sizeof(size_t));
+	printf("size of address: %zu\n", sizeof(size_t));
 
 	return (0);
 }
@@ -589,8 +601,8 @@ main(void)
 	void *cap_to_int = &amp;i;
 	void *cap_to_cap = &amp;c;
 
-	printf(&quot;cap to int length: %lu\n&quot;, cheri_length_get(cap_to_int));
-	printf(&quot;cap to cap length: %lu\n&quot;, cheri_length_get(cap_to_cap));
+	printf("cap to int length: %lu\n", cheri_length_get(cap_to_int));
+	printf("cap to cap length: %lu\n", cheri_length_get(cap_to_cap));
 
 	return (0);
 }
@@ -599,7 +611,7 @@ main(void)
 <li>Run the binary: note how the length of the capability depends on the size of
 the type it points to.</li>
 </ol>
-<h1><a class="header" href="#answers---compile-and-run-risc-v-and-cheri-risc-v-programs" id="answers---compile-and-run-risc-v-and-cheri-risc-v-programs">Answers - Compile and run RISC-V and CHERI-RISC-V programs</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers---compile-and-run-risc-v-and-cheri-risc-v-programs"><a class="header" href="#answers---compile-and-run-risc-v-and-cheri-risc-v-programs">Answers - Compile and run RISC-V and CHERI-RISC-V programs</a></h1>
 <p>This exercise explores the difference in size between addresses and
 pointers, drawing attention to the pointer-focused nature of CHERI memory
 protection.</p>
@@ -624,7 +636,7 @@ size of address: 8
 cap to int length: 4
 cap to cap length: 16
 </code></pre>
-<h1><a class="header" href="#disassemble-and-debug-risc-v-and-cheri-risc-v-programs" id="disassemble-and-debug-risc-v-and-cheri-risc-v-programs">Disassemble and debug RISC-V and CHERI-RISC-V programs</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="disassemble-and-debug-risc-v-and-cheri-risc-v-programs"><a class="header" href="#disassemble-and-debug-risc-v-and-cheri-risc-v-programs">Disassemble and debug RISC-V and CHERI-RISC-V programs</a></h1>
 <p>This exercise steps you through disassembling and debugging
 RISC-V and CHERI-RISC-V programs. It draws attention to differences in
 program structure and code generation, particularly relating to control
@@ -679,7 +691,7 @@ store), but can be used as a jump target (where they are unsealed and
 installed in <code>pcc</code>).
 What implications does this have for attackers?</li>
 </ol>
-<h1><a class="header" href="#answers---disassemble-and-debug-risc-v-and-cheri-risc-v-programs" id="answers---disassemble-and-debug-risc-v-and-cheri-risc-v-programs">Answers - Disassemble and debug RISC-V and CHERI-RISC-V programs</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers---disassemble-and-debug-risc-v-and-cheri-risc-v-programs"><a class="header" href="#answers---disassemble-and-debug-risc-v-and-cheri-risc-v-programs">Answers - Disassemble and debug RISC-V and CHERI-RISC-V programs</a></h1>
 <ol start="2">
 <li><code>jalr</code>. The target address is a pc-relative address in the <code>.plt</code>
 section addressed by a sequence like:</li>
@@ -752,7 +764,7 @@ pc             0x401bf640       1075574336
 <li>Example session:</li>
 </ol>
 <pre><code>(gdb) b printf
-Function &quot;printf&quot; not defined.
+Function "printf" not defined.
 Make breakpoint pending on future shared library load? (y or [n]) y
 Breakpoint 1 (printf) pending.
 </code></pre>
@@ -763,11 +775,11 @@ Breakpoint 1 (printf) pending.
 Starting program: /root/print-pointer-cheri 
 
 Breakpoint 1, printf (
-    fmt=0x1004ef [rR,0x1004ef-0x100505] &quot;size of pointer: %zu\n&quot;)
+    fmt=0x1004ef [rR,0x1004ef-0x100505] "size of pointer: %zu\n")
     at /Volumes/CheriBSD/cheribsd/lib/libc/stdio/printf.c:54
 54      /Volumes/CheriBSD/cheribsd/lib/libc/stdio/printf.c: No such file or directory.
 (gdb) p fmt
-$1 = 0x1004ef [rR,0x1004ef-0x100505] &quot;size of pointer: %zu\n&quot;
+$1 = 0x1004ef [rR,0x1004ef-0x100505] "size of pointer: %zu\n"
 </code></pre>
 <ol start="10">
 <li>Example session:</li>
@@ -812,7 +824,7 @@ pcc            0xf11720000325d0d4000000004026e9e6       0x4026e9e6 &lt;printf+14
 <ol start="12">
 <li>Left as an exercise to the reader.</li>
 </ol>
-<h1><a class="header" href="#demonstrate-cheri-tag-protection" id="demonstrate-cheri-tag-protection">Demonstrate CHERI Tag Protection</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="demonstrate-cheri-tag-protection"><a class="header" href="#demonstrate-cheri-tag-protection">Demonstrate CHERI Tag Protection</a></h1>
 <p>This exercise demonstrates CHERI's <em>capability provenance tags</em>, in particular
 by showing that capabilities and their constituent bytes are subtly different
 things!</p>
@@ -849,7 +861,7 @@ uint8_t *r = p.ptr;
 memory, why does the CHERI version crash when dereferencing <code>r</code>?</p>
 </li>
 </ol>
-<h2><a class="header" href="#source" id="source">Source</a></h2>
+<h2 id="source"><a class="header" href="#source">Source</a></h2>
 <p><strong>corrupt-pointer.c</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause
@@ -860,9 +872,9 @@ memory, why does the CHERI version crash when dereferencing <code>r</code>?</p>
 #include &lt;stdio.h&gt;
 
 #ifdef __CHERI_PURE_CAPABILITY__
-#define PRINTF_PTR &quot;#p&quot;
+#define PRINTF_PTR "#p"
 #else
-#define PRINTF_PTR &quot;p&quot;
+#define PRINTF_PTR "p"
 #endif
 
 int
@@ -880,29 +892,29 @@ main(void)
 	}
 	p.ptr = &amp;buf[0x10F];
 
-	printf(&quot;buf=%&quot; PRINTF_PTR &quot; &amp;p=%&quot; PRINTF_PTR &quot;\n&quot;, buf, &amp;p);
-	printf(&quot;p.ptr=%&quot; PRINTF_PTR &quot; (0x%zx into buf) *p.ptr=%02x\n&quot;,
+	printf("buf=%" PRINTF_PTR " &amp;p=%" PRINTF_PTR "\n", buf, &amp;p);
+	printf("p.ptr=%" PRINTF_PTR " (0x%zx into buf) *p.ptr=%02x\n",
 	    p.ptr, p.ptr - buf, *p.ptr);
 
 	/* One way to align the address down */
 	char *q = (char*)(((uintptr_t)p.ptr) &amp; ~0xFF);
-	printf(&quot;q=%&quot; PRINTF_PTR &quot; (0x%zx into buf)\n&quot;, q, q - buf);
+	printf("q=%" PRINTF_PTR " (0x%zx into buf)\n", q, q - buf);
 
-	printf(&quot;*q=%02x\n&quot;, *q);
+	printf("*q=%02x\n", *q);
 
 	/* Maybe another, assuming a little-endian machine. */
 	p.bytes[0] = 0;
 	char *r = p.ptr;
 
-	printf(&quot;r=%&quot; PRINTF_PTR &quot; (0x%zx)\n&quot;, r, r - buf);
-	printf(&quot;*r=%02x\n&quot;, *r);
+	printf("r=%" PRINTF_PTR " (0x%zx)\n", r, r - buf);
+	printf("*r=%02x\n", *r);
 
 	return 0;
 }
 </code></pre>
-<h2><a class="header" href="#courseware" id="courseware">Courseware</a></h2>
+<h2 id="courseware"><a class="header" href="#courseware">Courseware</a></h2>
 <p>This exercise has <a href="exercises/cheri-tags/./cheri-tags.pptx">presentation materials</a> available.</p>
-<h1><a class="header" href="#answers" id="answers">Answers</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers"><a class="header" href="#answers">Answers</a></h1>
 <ol start="2">
 <li>
 <p>Example output for the baseline program:</p>
@@ -956,10 +968,11 @@ this book.</p>
 <li>
 <p>Constructing <code>r</code> is very similar on the two targets, differing only by the
 use of integer- or capability-based memory instructions:</p>
-<table><thead><tr><th></th><th align="left">Baseline</th><th align="left">CHERI</th></tr></thead><tbody>
-<tr><td>Store</td><td align="left"><code>sb zero, 0(sp)</code></td><td align="left"><code>csb zero, 32(csp)</code></td></tr>
-<tr><td>Load</td><td align="left"><code>ld s0, 0(sp)</code></td><td align="left"><code>clc cs1, 32(csp)</code></td></tr>
+<div class="table-wrapper"><table><thead><tr><th></th><th style="text-align: left">Baseline</th><th style="text-align: left">CHERI</th></tr></thead><tbody>
+<tr><td>Store</td><td style="text-align: left"><code>sb zero, 0(sp)</code></td><td style="text-align: left"><code>csb zero, 32(csp)</code></td></tr>
+<tr><td>Load</td><td style="text-align: left"><code>ld s0, 0(sp)</code></td><td style="text-align: left"><code>clc cs1, 32(csp)</code></td></tr>
 </tbody></table>
+</div>
 <p>The significant difference is in the construction of <code>q</code>.  On the baseline
 architecture, it is a direct bitwise <code>and</code> of a pointer loaded from memory:</p>
 <pre><code>ld   a0, 0(sp)
@@ -967,12 +980,13 @@ andi s0, a0, -256
 </code></pre>
 <p>On CHERI, on the other hand, the program makes explicit use of capability
 manipulation instructions to...</p>
-<table><thead><tr><th>Instruction</th><th>Action</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Instruction</th><th>Action</th></tr></thead><tbody>
 <tr><td><code>clc       ca0, 32(csp)</code></td><td>Load the capability from memory</td></tr>
 <tr><td><code>cgetaddr  a1, ca0</code></td><td>Extract its address field to a register</td></tr>
 <tr><td><code>andi      a1, a1, -256</code></td><td>Perform the mask operation</td></tr>
 <tr><td><code>csetaddr  cs1, ca0, a1</code></td><td>Update the address field</td></tr>
 </tbody></table>
+</div>
 <p>This longer instruction sequence serves to prove to the processor that the
 resulting capability (in <code>cs1</code>) was constructed using valid transformations.
 In particular, the <code>csetaddr</code> allows the processor to check that the
@@ -987,7 +1001,7 @@ the tag associated with the 16-byte granule pointed to by <code>32(csp)</code>; 
 subsequent <code>clc</code> transferred this zero tag to <code>cs1</code>.)</p>
 </li>
 </ol>
-<h1><a class="header" href="#exercise-an-inter-stack-object-buffer-overflow" id="exercise-an-inter-stack-object-buffer-overflow">Exercise an inter-stack-object buffer overflow</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exercise-an-inter-stack-object-buffer-overflow"><a class="header" href="#exercise-an-inter-stack-object-buffer-overflow">Exercise an inter-stack-object buffer overflow</a></h1>
 <p>This exercise demonstrates an inter-object buffer overflow on baseline and
 CHERI-enabled architectures, and asks you to characterize and fix the bug
 detected by CHERI bounds enforcement.  It also asks you to use GDB for
@@ -1015,7 +1029,7 @@ In particular, focus on the <code>write_buf</code> function and <code>main</code
 and the information flow leading up to it.</p>
 </li>
 </ol>
-<h2><a class="header" href="#source-1" id="source-1">Source</a></h2>
+<h2 id="source-1"><a class="header" href="#source-1">Source</a></h2>
 <p><strong>buffer-overflow-stack.c</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause
@@ -1038,26 +1052,26 @@ main(void)
 	char upper[0x10];
 	char lower[0x10];
 
-	printf(&quot;upper = %p, lower = %p, diff = %zx\n&quot;,
+	printf("upper = %p, lower = %p, diff = %zx\n",
 	    upper, lower, (size_t)(upper - lower));
 
 	/* Assert that these get placed how we expect */
 	assert((ptraddr_t)upper == (ptraddr_t)&amp;lower[sizeof(lower)]);
 
 	upper[0] = 'a';
-	printf(&quot;upper[0] = %c\n&quot;, upper[0]);
+	printf("upper[0] = %c\n", upper[0]);
 
 	write_buf(lower, sizeof(lower));
 
-	printf(&quot;upper[0] = %c\n&quot;, upper[0]);
+	printf("upper[0] = %c\n", upper[0]);
 
 	return 0;
 }
 </code></pre>
-<h2><a class="header" href="#courseware-1" id="courseware-1">Courseware</a></h2>
+<h2 id="courseware-1"><a class="header" href="#courseware-1">Courseware</a></h2>
 <p>This exercise has <a href="exercises/buffer-overflow-stack/./buffer-overflow-stack.pptx">presentation materials</a>
 available.</p>
-<h1><a class="header" href="#answers---exercise-an-inter-stack-object-buffer-overflow" id="answers---exercise-an-inter-stack-object-buffer-overflow">Answers - Exercise an inter-stack-object buffer overflow</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers---exercise-an-inter-stack-object-buffer-overflow"><a class="header" href="#answers---exercise-an-inter-stack-object-buffer-overflow">Answers - Exercise an inter-stack-object buffer overflow</a></h1>
 <ol start="2">
 <li>
 <p>Expected output:</p>
@@ -1175,7 +1189,7 @@ argument register <code>a0</code>.  The subsequent address arithmetic derives an
 out of bounds, clobbering a byte of the <code>upper</code> register.</p>
 </li>
 </ol>
-<h1><a class="header" href="#exercise-an-inter-global-object-buffer-overflow" id="exercise-an-inter-global-object-buffer-overflow">Exercise an inter-global-object buffer overflow</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exercise-an-inter-global-object-buffer-overflow"><a class="header" href="#exercise-an-inter-global-object-buffer-overflow">Exercise an inter-global-object buffer overflow</a></h1>
 <p>This exercise demonstrates an inter-object buffer overflow on baseline and
 CHERI-enabled architectures, and asks you to characterize and fix the bug
 detected by CHERI bounds enforcement.  It also asks you to use GDB for
@@ -1217,7 +1231,7 @@ bytes, and fix the bug by correcting accesses to the allocated array.</p>
 program is now able to continue.</p>
 </li>
 </ol>
-<h2><a class="header" href="#source-files" id="source-files">Source Files</a></h2>
+<h2 id="source-files"><a class="header" href="#source-files">Source Files</a></h2>
 <p><strong>buffer-overflow-global.c</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
@@ -1236,7 +1250,7 @@ fill_buf(char *buf, size_t len)
 		buf[i] = 'b';
 }
 
-#include &quot;main-asserts.inc&quot;
+#include "main-asserts.inc"
 
 int
 main(void)
@@ -1245,16 +1259,16 @@ main(void)
 	main_asserts();
 
 	c = 'c';
-	printf(&quot;c = %c\n&quot;, c);
+	printf("c = %c\n", c);
 
 	fill_buf(buffer, sizeof(buffer));
 
-	printf(&quot;c = %c\n&quot;, c);
+	printf("c = %c\n", c);
 
 	return 0;
 }
 </code></pre>
-<h3><a class="header" href="#support-code" id="support-code">Support code</a></h3>
+<h3 id="support-code"><a class="header" href="#support-code">Support code</a></h3>
 <p><strong>main-asserts.inc</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
@@ -1285,7 +1299,7 @@ main_asserts(void)
 	    );
 }
 </code></pre>
-<h1><a class="header" href="#answers---exercise-an-inter-global-object-buffer-overflow" id="answers---exercise-an-inter-global-object-buffer-overflow">Answers - Exercise an inter-global-object buffer overflow</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers---exercise-an-inter-global-object-buffer-overflow"><a class="header" href="#answers---exercise-an-inter-global-object-buffer-overflow">Answers - Exercise an inter-global-object buffer overflow</a></h1>
 <ol start="2">
 <li>
 <p>Expected output:</p>
@@ -1301,7 +1315,7 @@ In-address space security exception (core dumped)
 <p>Example session:</p>
 <pre><code>Program received signal SIGPROT, CHERI protection violation
 Capability bounds fault caused by register ca4.
-fill_buf (buf=0x104160 &lt;buffer&gt; [rwRW,0x104160-0x1041e0] 'b' &lt;repeats 128 times&gt;, &quot;c&quot;, len=128) at buffer-overflow-global.c:15
+fill_buf (buf=0x104160 &lt;buffer&gt; [rwRW,0x104160-0x1041e0] 'b' &lt;repeats 128 times&gt;, "c", len=128) at buffer-overflow-global.c:15
 15                      buf[i] = 'b';
 (gdb) info reg ca4
 ca4            0xf17d00000479816400000000001041e0       0x1041e0 &lt;c&gt; [rwRW,0x104160-0x1041e0]
@@ -1324,7 +1338,7 @@ Breakpoint 1 at 0x101d26: file buffer-overflow-global.c, line 15.
 Starting program: /root/buffer-overflow-global-cheri
 c = c
 
-Breakpoint 1, fill_buf (buf=0x105000 &lt;buffer&gt; [rwRW,0x105000-0x205800] &quot;&quot;, len=1048577) at buffer-overflow-global.c:15
+Breakpoint 1, fill_buf (buf=0x105000 &lt;buffer&gt; [rwRW,0x105000-0x205800] "", len=1048577) at buffer-overflow-global.c:15
 15                      buf[i] = 'b';
 </code></pre>
 <p>This indicates that buffer has been allocated (1024 * 1026) bytes. This
@@ -1354,13 +1368,13 @@ c = c
 </code></pre>
 </li>
 </ol>
-<h1><a class="header" href="#explore-subobject-bounds" id="explore-subobject-bounds">Explore Subobject Bounds</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="explore-subobject-bounds"><a class="header" href="#explore-subobject-bounds">Explore Subobject Bounds</a></h1>
 <p>In the CheriABI run-time environment, bounds are typically associated with
 memory allocations rather than C types.
 For example, if a heap memory allocation is made for 1024 bytes, and the
 structure within it is 768 bytes, then the bounds associated with a pointer
 will be for the allocation size rather than the structure size.</p>
-<h2><a class="header" href="#subobject-overflows" id="subobject-overflows">Subobject Overflows</a></h2>
+<h2 id="subobject-overflows"><a class="header" href="#subobject-overflows">Subobject Overflows</a></h2>
 <p>With subobject bounds, enforcement occurs on C-language objects within
 allocations.
 This exercise is similar to earlier buffer-overflow exercises, but is for such
@@ -1392,7 +1406,7 @@ flags <code>-Xclang -cheri-bounds=subobject-safe</code>.</p>
 <p>Run the program under <code>gdb</code> and examine the bounds again. What has changed?</p>
 </li>
 </ol>
-<h2><a class="header" href="#deliberately-using-larger-bounds" id="deliberately-using-larger-bounds">Deliberately Using Larger Bounds</a></h2>
+<h2 id="deliberately-using-larger-bounds"><a class="header" href="#deliberately-using-larger-bounds">Deliberately Using Larger Bounds</a></h2>
 <p>Operations like <code>&amp;object-&gt;field</code> that move from super-object to sub-object are
 very natural in C, and there is no similarly concise syntax for the reverse
 operation.  Nevertheless, C programs occasionally do make use of <code>containerof</code>
@@ -1431,8 +1445,8 @@ and observe its output.  Which bounds have not been narrowed?  Which have?
 Why is that OK?</p>
 </li>
 </ol>
-<h2><a class="header" href="#source-files-1" id="source-files-1">Source Files</a></h2>
-<h3><a class="header" href="#subobject-overflows-1" id="subobject-overflows-1">Subobject Overflows</a></h3>
+<h2 id="source-files-1"><a class="header" href="#source-files-1">Source Files</a></h2>
+<h3 id="subobject-overflows-1"><a class="header" href="#subobject-overflows-1">Subobject Overflows</a></h3>
 <p><strong>buffer-overflow-subobject.c</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
@@ -1457,16 +1471,16 @@ int
 main(void)
 {
 	b.i = 'c';
-	printf(&quot;b.i = %c\n&quot;, b.i);
+	printf("b.i = %c\n", b.i);
 
 	fill_buf(b.buffer, sizeof(b.buffer));
 
-	printf(&quot;b.i = %c\n&quot;, b.i);
+	printf("b.i = %c\n", b.i);
 
 	return 0;
 }
 
-#include &quot;asserts.inc&quot;
+#include "asserts.inc"
 </code></pre>
 <p><strong>asserts.inc</strong></p>
 <pre><code class="language-C">/*
@@ -1476,9 +1490,9 @@ main(void)
 #include &lt;stddef.h&gt;
 
 _Static_assert(sizeof(b.buffer) == offsetof(struct buf, i),
-    &quot;There must be no padding in struct buf between buffer and i members&quot;);
+    "There must be no padding in struct buf between buffer and i members");
 </code></pre>
-<h3><a class="header" href="#deliberately-using-larger-bounds-1" id="deliberately-using-larger-bounds-1">Deliberately Using Larger Bounds</a></h3>
+<h3 id="deliberately-using-larger-bounds-1"><a class="header" href="#deliberately-using-larger-bounds-1">Deliberately Using Larger Bounds</a></h3>
 <p><strong>subobject-list.c</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause
@@ -1551,35 +1565,35 @@ main() {
 	ilist_insert_after(&amp;l, &amp;obj1.ilist);
 	ilist_remove(&amp;obj2.ilist);
 
-	printf(&quot;Traversing list=%#p first=%#p lastnp=%#p\n&quot;,
+	printf("Traversing list=%#p first=%#p lastnp=%#p\n",
 		&amp;l, l.ile_next, l.ile_prevnp);
 	ILIST_FOREACH(&amp;l, cursor) {
 		struct obj *co = ILIST_CONTAINER(cursor, struct obj, ilist);
-		printf(&quot; Ilist cursor=%#p\n  next=%#p\n  prevnp=%#p\n&quot;,
+		printf(" Ilist cursor=%#p\n  next=%#p\n  prevnp=%#p\n",
 			cursor, cursor-&gt;ile_next, cursor-&gt;ile_prevnp);
-		printf(&quot;  val field at %#p\n&quot;,
+		printf("  val field at %#p\n",
 			/*
 			 * This ugly bit of syntax is unfortunate, but avoids
 			 * a subobject-bounds-induced trap that isn't the first
 			 * one you should think about.  I'm sorry.  Just pretend
-			 * this says &quot;&amp;co-&gt;val&quot; and, for extra credit, later,
+			 * this says "&amp;co-&gt;val" and, for extra credit, later,
 			 * explain why it isn't spelled like that.
 			 */
 			((char *)co) + __offsetof(struct obj, val));
 	}
 
-	printf(&quot;Traversing list again, accessing superobject field...\n&quot;);
+	printf("Traversing list again, accessing superobject field...\n");
 	ILIST_FOREACH(&amp;l, cursor) {
 		struct obj *co = ILIST_CONTAINER(cursor, struct obj, ilist);
-		printf(&quot; Ilist cursor=%#p value=%d (at %#p)\n&quot;, cursor,
+		printf(" Ilist cursor=%#p value=%d (at %#p)\n", cursor,
 			co-&gt;val, &amp;co-&gt;val);
 	}
 }
 </code></pre>
-<h2><a class="header" href="#courseware-2" id="courseware-2">Courseware</a></h2>
+<h2 id="courseware-2"><a class="header" href="#courseware-2">Courseware</a></h2>
 <p>This exercise has <a href="exercises/subobject-bounds/./subobject-bounds.pptx">presentation materials</a> available.</p>
-<h1><a class="header" href="#answers---explore-subobject-bounds" id="answers---explore-subobject-bounds">Answers - Explore Subobject Bounds</a></h1>
-<h2><a class="header" href="#exercise-a-subobject-buffer-overflow" id="exercise-a-subobject-buffer-overflow">Exercise a subobject buffer overflow</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers---explore-subobject-bounds"><a class="header" href="#answers---explore-subobject-bounds">Answers - Explore Subobject Bounds</a></h1>
+<h2 id="exercise-a-subobject-buffer-overflow"><a class="header" href="#exercise-a-subobject-buffer-overflow">Exercise a subobject buffer overflow</a></h2>
 <p>This exercise demonstrates how subobject bounds can correct and array in a
 structure.</p>
 <ol start="2">
@@ -1601,7 +1615,7 @@ Breakpoint 1 at 0x1bae: file buffer-overflow-subobject.c, line 17.
 Starting program: /root/buffer-overflow-subobject-cheri
 b.i = c
 
-Breakpoint 1, fill_buf (buf=0x103f50 &lt;b&gt; [rwRW,0x103f50-0x103fd4] &quot;&quot;, len=128)
+Breakpoint 1, fill_buf (buf=0x103f50 &lt;b&gt; [rwRW,0x103f50-0x103fd4] "", len=128)
     at buffer-overflow-subobject.c:17
 17                      buf[i] = 'b';
 </code></pre>
@@ -1622,7 +1636,7 @@ Breakpoint 1 at 0x1bae: file buffer-overflow-subobject.c, line 17.
 Starting program: /root/buffer-overflow-subobject-cheri
 b.i = c
 
-Breakpoint 1, fill_buf (buf=0x103f50 &lt;b&gt; [rwRW,0x103f50-0x103fd0] &quot;&quot;, len=128) at buffer-overflow-subobject.c:17
+Breakpoint 1, fill_buf (buf=0x103f50 &lt;b&gt; [rwRW,0x103f50-0x103fd0] "", len=128) at buffer-overflow-subobject.c:17
 17                      buf[i] = 'b';
 </code></pre>
 <p>The pointer to the buffer is now bounded to the array rather than the object.</p>
@@ -1644,7 +1658,7 @@ Dump of assembler code for function main:
 </code></pre>
 </li>
 </ol>
-<h2><a class="header" href="#deliberately-using-larger-bounds-2" id="deliberately-using-larger-bounds-2">Deliberately Using Larger Bounds</a></h2>
+<h2 id="deliberately-using-larger-bounds-2"><a class="header" href="#deliberately-using-larger-bounds-2">Deliberately Using Larger Bounds</a></h2>
 <ol>
 <li>
 <p>Example output:</p>
@@ -1704,7 +1718,7 @@ they point to!</p>
 <li>
 <p>The compiler will emit a pair of warnings about the uses of
 <code>ILIST_CONTAINER</code>:</p>
-<pre><code>./subobject-list.c:75:20: error: static_assert failed due to requirement '__builtin_marked_no_subobject_bounds(struct obj) || __builtin_marked_no_subobject_bounds(struct ilist_elem)' &quot;this type is unsafe for use in containerof() with sub-objectbounds. Please mark the member/type with __subobject_use_container_bounds&quot;
+<pre><code>./subobject-list.c:75:20: error: static_assert failed due to requirement '__builtin_marked_no_subobject_bounds(struct obj) || __builtin_marked_no_subobject_bounds(struct ilist_elem)' "this type is unsafe for use in containerof() with sub-objectbounds. Please mark the member/type with __subobject_use_container_bounds"
 </code></pre>
 </li>
 <li>
@@ -1761,7 +1775,7 @@ Traversing list again, accessing superobject field...
 </ol>
 </li>
 </ol>
-<h1><a class="header" href="#corrupt-a-control-flow-pointer-using-a-subobject-buffer-overflow" id="corrupt-a-control-flow-pointer-using-a-subobject-buffer-overflow">Corrupt a control-flow pointer using a subobject buffer overflow</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="corrupt-a-control-flow-pointer-using-a-subobject-buffer-overflow"><a class="header" href="#corrupt-a-control-flow-pointer-using-a-subobject-buffer-overflow">Corrupt a control-flow pointer using a subobject buffer overflow</a></h1>
 <p>This exercise demonstrates how CHERI pointer integrity protection prevents
 a function pointer overwritten with data due to a buffer overflow from being
 used for further memory access.</p>
@@ -1809,18 +1823,18 @@ main(void)
 {
 	fill_buf(&amp;b);
 
-	printf(&quot;Words of screaming in b.buffer %zu\n&quot;, b.callback(&amp;b));
+	printf("Words of screaming in b.buffer %zu\n", b.callback(&amp;b));
 
 	return 0;
 }
 
-#include &quot;asserts.inc&quot;
+#include "asserts.inc"
 </code></pre>
 <ol start="2">
 <li>Run the RISC-V program under GDB; why does it crash?</li>
 <li>Run the CHERI-RISC-V program under GDB; why does it crash?</li>
 </ol>
-<h2><a class="header" href="#support-code-1" id="support-code-1">Support code</a></h2>
+<h2 id="support-code-1"><a class="header" href="#support-code-1">Support code</a></h2>
 <p><strong>asserts.inc</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
@@ -1830,9 +1844,9 @@ main(void)
 
 _Static_assert(offsetof(struct buf, buffer) + sizeof(b.buffer) ==
     offsetof(struct buf, callback),
-    &quot;There must be no padding between buffer and callback members&quot;);
+    "There must be no padding between buffer and callback members");
 </code></pre>
-<h1><a class="header" href="#answers---corrupt-a-control-flow-pointer-using-a-subobject-buffer-overflow" id="answers---corrupt-a-control-flow-pointer-using-a-subobject-buffer-overflow">Answers - Corrupt a control-flow pointer using a subobject buffer overflow</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers---corrupt-a-control-flow-pointer-using-a-subobject-buffer-overflow"><a class="header" href="#answers---corrupt-a-control-flow-pointer-using-a-subobject-buffer-overflow">Answers - Corrupt a control-flow pointer using a subobject buffer overflow</a></h1>
 <ol start="2">
 <li>Example session:</li>
 </ol>
@@ -1861,7 +1875,7 @@ ca1            0xd11720000801800600000000aaaaaaaa       0xaaaaaaaa [rxR,0xaaaa00
 =&gt; 0x101c5e &lt;main+58&gt;:      cjalr   cra,ca1
 </code></pre>
 <p>The program attempted to load an instruction via an untagged capability <code>ca1</code>.</p>
-<h1><a class="header" href="#exercise-heap-overflows" id="exercise-heap-overflows">Exercise heap overflows</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exercise-heap-overflows"><a class="header" href="#exercise-heap-overflows">Exercise heap overflows</a></h1>
 <p>This exercise demonstrates inter-object <em>heap</em> buffer overflows on baseline and
 CHERI-enabled architectures, and asks you to characterize and fix the bug
 detected by CHERI bounds enforcement.</p>
@@ -1873,8 +1887,8 @@ detected by CHERI bounds enforcement.</p>
 </li>
 <li>
 <p>Run both versions, passing <code>0x20</code> as the (sole) command line argument.
-Observe that the CHERI version crashes with &quot;In-address space security
-exception&quot;.</p>
+Observe that the CHERI version crashes with "In-address space security
+exception".</p>
 </li>
 <li>
 <p>Run the CHERI version, again with <code>0x20</code>, under <code>gdb</code> and examine the crash
@@ -1902,7 +1916,7 @@ bounds, what additional steps must be taken, and by whom, to ensure spatial
 safety of a C program?</p>
 </li>
 </ol>
-<h2><a class="header" href="#source-files-2" id="source-files-2">Source Files</a></h2>
+<h2 id="source-files-2"><a class="header" href="#source-files-2">Source Files</a></h2>
 <p><strong>buffer-overflow-heap.c</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause
@@ -1933,40 +1947,40 @@ main(int argc, char **argv)
 	assert(b2 != NULL);
 
 #ifdef __CHERI_PURE_CAPABILITY__
-	printf(&quot;sz=%zx, CRRL(sz)=%zx\n&quot;, sz,
+	printf("sz=%zx, CRRL(sz)=%zx\n", sz,
 	    __builtin_cheri_round_representable_length(sz));
-	printf(&quot;b1=%#p b2=%#p diff=%tx\n&quot;, b1, b2, b2 - b1);
+	printf("b1=%#p b2=%#p diff=%tx\n", b1, b2, b2 - b1);
 #else
-	printf(&quot;b1=%p b2=%p diff=%tx\n&quot;, b1, b2, b2 - b1);
+	printf("b1=%p b2=%p diff=%tx\n", b1, b2, b2 - b1);
 #endif
 
 	/*
-	 * The default CheriBSD malloc uses &quot;size classes&quot; for allocations.
-	 * Check that we've landed &quot;nearby&quot;.
+	 * The default CheriBSD malloc uses "size classes" for allocations.
+	 * Check that we've landed "nearby".
 	 */
 	assert((ptraddr_t)(b1 + sz) &lt;= (ptraddr_t)b2); 
 	assert((ptraddr_t)(b1 + sz + sz/2) &gt; (ptraddr_t)b2); 
 
 	memset(b2, 'B', sz);
 
-	printf(&quot;Overflowing by 1\n&quot;);
+	printf("Overflowing by 1\n");
 	memset(b1, 'A', sz + 1);
 
-	printf(&quot;b2 begins: %.4s\n&quot;, b2);
+	printf("b2 begins: %.4s\n", b2);
 
 
 	/* And now let's definitely make trouble */
 	const size_t oversz = b2 - b1 + 2 - sz;
-	printf(&quot;Overflowing by %zx\n&quot;, oversz);
+	printf("Overflowing by %zx\n", oversz);
 	memset(b1 + sz, 'A', oversz);
 
-	printf(&quot;b2 begins: %.4s\n&quot;, b2);
+	printf("b2 begins: %.4s\n", b2);
 }
 </code></pre>
-<h2><a class="header" href="#courseware-3" id="courseware-3">Courseware</a></h2>
+<h2 id="courseware-3"><a class="header" href="#courseware-3">Courseware</a></h2>
 <p>This exercise has <a href="exercises/buffer-overflow-heap/./buffer-overflow-heap.pptx">presentation materials</a>
 available.</p>
-<h1><a class="header" href="#answers---exercise-heap-overflows" id="answers---exercise-heap-overflows">Answers - Exercise heap overflows</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers---exercise-heap-overflows"><a class="header" href="#answers---exercise-heap-overflows">Answers - Exercise heap overflows</a></h1>
 <ol start="2">
 <li>
 <p>Example output:</p>
@@ -2025,18 +2039,18 @@ In-address space security exception
 </code></pre>
 <p>Using addresses from the CHERI run, we might draw something that highlighted
 these key addresses:</p>
-<table><thead><tr><th align="right">Address</th><th>Contents</th></tr></thead><tbody>
-<tr><td align="right">↑ <code>0x000...00</code></td><td></td></tr>
-<tr><td align="right"><code>0x407c7000</code></td><td>Start of <code>b1</code></td></tr>
-<tr><td align="right"><code>0x407c8001</code></td><td>Last byte of <code>b1</code> allocation (&quot;end&quot; #1)</td></tr>
-<tr><td align="right"><code>0x407c8002</code></td><td>Start of CHERI representation padding</td></tr>
-<tr><td align="right"><code>0x407c8007</code></td><td>Last byte of CHERI representation padding (&quot;end&quot; #2)</td></tr>
-<tr><td align="right"><code>0x407c8008</code></td><td>Start of allocator size-class padding</td></tr>
-<tr><td align="right"><code>0x407c83FF</code></td><td>Last byte of allocator size-class padding (&quot;end&quot; #3)</td></tr>
-<tr><td align="right"><code>0x407c8400</code></td><td><code>b2</code></td></tr>
-<tr><td align="right">↓ <code>0xFFF...FF</code></td><td></td></tr>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: right">Address</th><th>Contents</th></tr></thead><tbody>
+<tr><td style="text-align: right">↑ <code>0x000...00</code></td><td></td></tr>
+<tr><td style="text-align: right"><code>0x407c7000</code></td><td>Start of <code>b1</code></td></tr>
+<tr><td style="text-align: right"><code>0x407c8001</code></td><td>Last byte of <code>b1</code> allocation ("end" #1)</td></tr>
+<tr><td style="text-align: right"><code>0x407c8002</code></td><td>Start of CHERI representation padding</td></tr>
+<tr><td style="text-align: right"><code>0x407c8007</code></td><td>Last byte of CHERI representation padding ("end" #2)</td></tr>
+<tr><td style="text-align: right"><code>0x407c8008</code></td><td>Start of allocator size-class padding</td></tr>
+<tr><td style="text-align: right"><code>0x407c83FF</code></td><td>Last byte of allocator size-class padding ("end" #3)</td></tr>
+<tr><td style="text-align: right"><code>0x407c8400</code></td><td><code>b2</code></td></tr>
+<tr><td style="text-align: right">↓ <code>0xFFF...FF</code></td><td></td></tr>
 </tbody></table>
-</li>
+</div></li>
 <li>
 <p>The first overflow, by 1 byte, is <em>within bounds</em> due to <em>architectural
 precision</em> and so, as far as the CPU is concerned, is not an overflow despite
@@ -2060,10 +2074,10 @@ compression into consideration:</p>
 <li>The linker, for objects in static storage</li>
 <li>The heap allocator(s), for objects in dynamic storage</li>
 </ul>
-<p>These concerns do not usually reach &quot;application level&quot; C.</p>
+<p>These concerns do not usually reach "application level" C.</p>
 </li>
 </ol>
-<h1><a class="header" href="#exercise-integer-pointer-type-confusion-bug" id="exercise-integer-pointer-type-confusion-bug">Exercise integer-pointer type confusion bug</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exercise-integer-pointer-type-confusion-bug"><a class="header" href="#exercise-integer-pointer-type-confusion-bug">Exercise integer-pointer type confusion bug</a></h1>
 <p>This exercise demonstrates how CHERI distinguishes between integer and pointer
 types, preventing certain types of type confusion.
 In this example, a union allows an integer value to be used as a pointer,
@@ -2080,7 +2094,7 @@ which cannot then be dereferenced.</p>
  */
 #include &lt;stdio.h&gt;
 
-const char hello[] = &quot;Hello World!&quot;;
+const char hello[] = "Hello World!";
 
 union long_ptr {
 	long l;
@@ -2096,9 +2110,9 @@ inc_long_ptr(union long_ptr *lpp)
 int
 main(void)
 {
-	printf(&quot;lp.ptr %s\n&quot;, lp.ptr);
+	printf("lp.ptr %s\n", lp.ptr);
 	inc_long_ptr(&amp;lp);
-	printf(&quot;lp.ptr %s\n&quot;, lp.ptr);
+	printf("lp.ptr %s\n", lp.ptr);
 
 	return 0;
 }
@@ -2108,7 +2122,7 @@ main(void)
 <li>Run the CHERI-RISC-V program.  What is the result?
 Run under <code>gdb</code> and explain why the program crashes in the second <code>printf</code>.</li>
 </ol>
-<h1><a class="header" href="#answers-exercise-integer-pointer-type-confusion-bug" id="answers-exercise-integer-pointer-type-confusion-bug">Answers: Exercise integer-pointer type confusion bug</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers-exercise-integer-pointer-type-confusion-bug"><a class="header" href="#answers-exercise-integer-pointer-type-confusion-bug">Answers: Exercise integer-pointer type confusion bug</a></h1>
 <p>When the integer value is updated, with CHERI-RISC-V compilation the
 pointer side will no longer be dereferenceable, as the tag has been cleared.</p>
 <ol start="2">
@@ -2130,7 +2144,7 @@ In-address space security exception (core dumped)
 </code></pre>
 <p>When the <code>long</code> member was loaded and stored, it caused the tag to be
 cleared on the pointer.</p>
-<h1><a class="header" href="#demonstrate-pointer-injection" id="demonstrate-pointer-injection">Demonstrate pointer injection</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="demonstrate-pointer-injection"><a class="header" href="#demonstrate-pointer-injection">Demonstrate pointer injection</a></h1>
 <p>This exercise demonstrates how CHERI's pointer provenance validity prevents
 injected pointer values from being dereferenced.
 In this example code, a pointer is injected via pipe IPC, and then
@@ -2156,17 +2170,17 @@ main(void)
 	long val;
 
 	if (pipe(fds) == -1)
-		err(1, &quot;pipe&quot;);
+		err(1, "pipe");
 	if ((pid = fork()) == -1)
-		err(1, &quot;fork&quot;);
+		err(1, "fork");
 	if (pid == 0) {
 		val = 42;
 		if (write(fds[0], &amp;val, sizeof(val)) != sizeof(val))
-			err(1, &quot;write&quot;);
+			err(1, "write");
 	} else {
 		if (read(fds[1], &amp;val, sizeof(val)) != sizeof(val))
-			err(1, &quot;read&quot;);
-		printf(&quot;received %ld\n&quot;, val);
+			err(1, "read");
+		printf("received %ld\n", val);
 	}
 
 	return 0;
@@ -2187,7 +2201,7 @@ print the sent and received values.</li>
 #include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 
-const char hello[] = &quot;Hello world!&quot;;
+const char hello[] = "Hello world!";
 
 int
 main(void)
@@ -2197,17 +2211,17 @@ main(void)
 	const char *ptr;
 
 	if (pipe(fds) == -1)
-		err(1, &quot;pipe&quot;);
+		err(1, "pipe");
 	if ((pid = fork()) == -1)
-		err(1, &quot;fork&quot;);
+		err(1, "fork");
 	if (pid == 0) {
 		ptr = hello;
 		if (write(fds[0], &amp;ptr, sizeof(ptr)) != sizeof(ptr))
-			err(1, &quot;write&quot;);
+			err(1, "write");
 	} else {
 		if (read(fds[1], &amp;ptr, sizeof(ptr)) != sizeof(ptr))
-			err(1, &quot;read&quot;);
-		printf(&quot;received %s\n&quot;, ptr);
+			err(1, "read");
+		printf("received %s\n", ptr);
 	}
 
 	return 0;
@@ -2218,7 +2232,7 @@ main(void)
 dereference the received copy to print a string.</li>
 <li>Why does dereferencing the received pointer in a CHERI binary fail?</li>
 </ol>
-<h1><a class="header" href="#answers-1" id="answers-1">Answers</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers-1"><a class="header" href="#answers-1">Answers</a></h1>
 <ol start="2">
 <li>Expected output:</li>
 </ol>
@@ -2239,7 +2253,7 @@ In-address space security exception (core dumped)
 <li>Because the tag is stripped when sent via message-passing IPC, leading
 to a tag violation on dereference.</li>
 </ol>
-<h1><a class="header" href="#adapt-a-c-program-to-cheri-c" id="adapt-a-c-program-to-cheri-c">Adapt a C Program to CHERI C</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="adapt-a-c-program-to-cheri-c"><a class="header" href="#adapt-a-c-program-to-cheri-c">Adapt a C Program to CHERI C</a></h1>
 <p>This excercise presents an example C program that includes capability-related
 issues that might appear as bugs in software initially developed for non-CHERI
 architectures.  The example C program is <code>cat(1)</code> from CheriBSD (and hence
@@ -2284,7 +2298,7 @@ crash.</p>
 trigger crashes in different ways?</p>
 </li>
 </ol>
-<h2><a class="header" href="#source-files-3" id="source-files-3">Source Files</a></h2>
+<h2 id="source-files-3"><a class="header" href="#source-files-3">Source Files</a></h2>
 <p><strong>cat/cat.c</strong></p>
 <pre><code class="language-C">/*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -2323,18 +2337,18 @@ trigger crashes in different ways?</p>
 #if 0
 #ifndef lint
 static char const copyright[] =
-&quot;@(#) Copyright (c) 1989, 1993\n\
-	The Regents of the University of California.  All rights reserved.\n&quot;;
+"@(#) Copyright (c) 1989, 1993\n\
+	The Regents of the University of California.  All rights reserved.\n";
 #endif /* not lint */
 #endif
 
 #ifndef lint
 #if 0
-static char sccsid[] = &quot;@(#)cat.c	8.2 (Berkeley) 4/27/95&quot;;
+static char sccsid[] = "@(#)cat.c	8.2 (Berkeley) 4/27/95";
 #endif
 #endif /* not lint */
 #include &lt;sys/cdefs.h&gt;
-__FBSDID(&quot;$FreeBSD$&quot;);
+__FBSDID("$FreeBSD$");
 
 #include &lt;sys/param.h&gt;
 #include &lt;sys/stat.h&gt;
@@ -2356,7 +2370,7 @@ __FBSDID(&quot;$FreeBSD$&quot;);
 #include &lt;wchar.h&gt;
 #include &lt;wctype.h&gt;
 
-#include &quot;cat.h&quot;
+#include "cat.h"
 
 int bflag, eflag, lflag, nflag, sflag, tflag, vflag;
 int rval;
@@ -2371,7 +2385,7 @@ main(int argc, char *argv[])
 	int ch;
 	struct flock stdout_lock;
 
-	setlocale(LC_CTYPE, &quot;&quot;);
+	setlocale(LC_CTYPE, "");
 
 	while ((ch = getopt(argc, argv, SUPPORTED_FLAGS)) != -1)
 		switch (ch) {
@@ -2410,7 +2424,7 @@ main(int argc, char *argv[])
 		stdout_lock.l_type = F_WRLCK;
 		stdout_lock.l_whence = SEEK_SET;
 		if (fcntl(STDOUT_FILENO, F_SETLKW, &amp;stdout_lock) == -1)
-			err(EXIT_FAILURE, &quot;stdout&quot;);
+			err(EXIT_FAILURE, "stdout");
 	}
 
 	if (bflag || eflag || nflag || sflag || tflag || vflag)
@@ -2418,7 +2432,7 @@ main(int argc, char *argv[])
 	else
 		scanfiles(argv, 0);
 	if (fclose(stdout))
-		err(1, &quot;stdout&quot;);
+		err(1, "stdout");
 	exit(rval);
 	/* NOTREACHED */
 }
@@ -2427,7 +2441,7 @@ static void
 usage(void)
 {
 
-	fprintf(stderr, &quot;usage: cat [-&quot; SUPPORTED_FLAGS &quot;] [file ...]\n&quot;);
+	fprintf(stderr, "usage: cat [-" SUPPORTED_FLAGS "] [file ...]\n");
 	exit(1);
 	/* NOTREACHED */
 }
@@ -2442,21 +2456,21 @@ scanfiles(char *argv[], int verbose)
 	i = 0;
 	fd = -1;
 	while ((path = argv[i]) != NULL || i == 0) {
-		if (path == NULL || strcmp(path, &quot;-&quot;) == 0) {
-			filename = &quot;stdin&quot;;
+		if (path == NULL || strcmp(path, "-") == 0) {
+			filename = "stdin";
 			fd = STDIN_FILENO;
 		} else {
 			filename = path;
 			fd = open(path, O_RDONLY);
 		}
 		if (fd &lt; 0) {
-			warn(&quot;%s&quot;, path);
+			warn("%s", path);
 			rval = 1;
 		} else if (verbose) {
 			if (fd == STDIN_FILENO)
 				do_cat((long)stdin, verbose);
 			else {
-				fp = fdopen(fd, &quot;r&quot;);
+				fp = fdopen(fd, "r");
 				do_cat((long)fp, verbose);
 				fclose(fp);
 			}
@@ -2523,7 +2537,7 @@ scanfiles(char *argv[], int verbose)
  */
 #define	BUFSIZE_SMALL (MAXPHYS)
 
-#define SUPPORTED_FLAGS &quot;belnstuv&quot;
+#define SUPPORTED_FLAGS "belnstuv"
 
 void do_cat(long file, int verbose);
 
@@ -2565,7 +2579,7 @@ void do_cat(long file, int verbose);
  */
 
 #include &lt;sys/cdefs.h&gt;
-__FBSDID(&quot;$FreeBSD$&quot;);
+__FBSDID("$FreeBSD$");
 
 #include &lt;sys/param.h&gt;
 #include &lt;sys/stat.h&gt;
@@ -2587,7 +2601,7 @@ __FBSDID(&quot;$FreeBSD$&quot;);
 #include &lt;wchar.h&gt;
 #include &lt;wctype.h&gt;
 
-#include &quot;cat.h&quot;
+#include "cat.h"
 
 typedef uintptr_t ptroff_t;
 
@@ -2628,11 +2642,11 @@ verbose_cat(long file)
 			}
 			if (nflag) {
 				if (!bflag || ch != '\n') {
-					(void)fprintf(stdout, &quot;%6d\t&quot;, ++line);
+					(void)fprintf(stdout, "%6d\t", ++line);
 					if (ferror(stdout))
 						break;
 				} else if (eflag) {
-					(void)fprintf(stdout, &quot;%6s\t&quot;, &quot;&quot;);
+					(void)fprintf(stdout, "%6s\t", "");
 					if (ferror(stdout))
 						break;
 				}
@@ -2689,12 +2703,12 @@ ilseq:
 			break;
 	}
 	if (ferror(fp)) {
-		warn(&quot;%s&quot;, filename);
+		warn("%s", filename);
 		rval = 1;
 		clearerr(fp);
 	}
 	if (ferror(stdout))
-		err(1, &quot;stdout&quot;);
+		err(1, "stdout");
 }
 
 static void
@@ -2712,7 +2726,7 @@ raw_cat(long file)
 	wfd = fileno(stdout);
 	if (buf == NULL) {
 		if (fstat(wfd, &amp;sbuf))
-			err(1, &quot;stdout&quot;);
+			err(1, "stdout");
 		if (S_ISREG(sbuf.st_mode)) {
 			/* If there's plenty of RAM, use a large copy buffer */
 			if (sysconf(_SC_PHYS_PAGES) &gt; PHYSPAGES_THRESHOLD)
@@ -2726,14 +2740,14 @@ raw_cat(long file)
 				bsize = MAX(bsize, (size_t)pagesize);
 		}
 		if ((buf = malloc(bsize)) == NULL)
-			err(1, &quot;malloc() failure of IO buffer&quot;);
+			err(1, "malloc() failure of IO buffer");
 	}
 	while ((nr = read(rfd, buf, bsize)) &gt; 0)
 		for (off = 0; nr; nr -= nw, off += nw)
 			if ((nw = write_off(wfd, buf, off, (size_t)nr)) &lt; 0)
-				err(1, &quot;write(2) failed&quot;);
+				err(1, "write(2) failed");
 	if (nr &lt; 0) {
-		warn(&quot;%s&quot;, filename);
+		warn("%s", filename);
 		rval = 1;
 	}
 }
@@ -2749,9 +2763,9 @@ do_cat(long file, int verbose)
 	}
 }
 </code></pre>
-<h2><a class="header" href="#courseware-4" id="courseware-4">Courseware</a></h2>
+<h2 id="courseware-4"><a class="header" href="#courseware-4">Courseware</a></h2>
 <p>This exercise has <a href="exercises/adapt-c/./adapt-c.pptx">presentation materials</a> available.</p>
-<h1><a class="header" href="#answers---adapt-a-c-program-to-cheri-c" id="answers---adapt-a-c-program-to-cheri-c">Answers - Adapt a C Program to CHERI C</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers---adapt-a-c-program-to-cheri-c"><a class="header" href="#answers---adapt-a-c-program-to-cheri-c">Answers - Adapt a C Program to CHERI C</a></h1>
 <ol start="2">
 <li>
 <p>Example output:</p>
@@ -2791,7 +2805,7 @@ cat-cheri: write(2) failed: Bad address
 src/exercises/adapt-c/cat/methods.c:write_off(int fildes, const void *buf, ptroff_t off, size_t nbyte)
 src/exercises/adapt-c/cat/methods.c:    return (write(fildes, (const void *)(off + (uintptr_t)buf), nbyte));
 src/exercises/adapt-c/cat/methods.c:                    if ((nw = write_off(wfd, buf, off, (size_t)nr)) &lt; 0)
-src/exercises/adapt-c/cat/methods.c:                            err(1, &quot;write(2) failed&quot;);
+src/exercises/adapt-c/cat/methods.c:                            err(1, "write(2) failed");
 </code></pre>
 <p>The call is in the <code>write_off()</code> function and the message with the error is
 printed in case the call fails. Let's see what are arguments and result
@@ -2799,7 +2813,7 @@ values for the system call by setting a breakpoint for <code>write()</code> in <
 <pre><code># gdb ./cat-cheri
 (...)
 (gdb) b write
-Function &quot;write&quot; not defined.
+Function "write" not defined.
 Make breakpoint pending on future shared library load? (y or [n]) y
 Breakpoint 1 (write) pending.
 (gdb) r /etc/hostid
@@ -2962,7 +2976,7 @@ index 344e505..54cc864 100644
 -                               do_cat((long)stdin, verbose);
 +                               do_cat((uintptr_t)stdin, verbose);
                         else {
-                                fp = fdopen(fd, &quot;r&quot;);
+                                fp = fdopen(fd, "r");
 -                               do_cat((long)fp, verbose);
 +                               do_cat((uintptr_t)fp, verbose);
                                 fclose(fp);
@@ -2974,7 +2988,7 @@ index c88f930..047c0b7 100644
 +++ b/src/exercises/adapt-c/cat/cat.h
 @@ -51,6 +51,6 @@
  
- #define SUPPORTED_FLAGS &quot;belnstuv&quot;
+ #define SUPPORTED_FLAGS "belnstuv"
  
 -void do_cat(long file, int verbose);
 +void do_cat(uintptr_t file, int verbose);
@@ -3025,12 +3039,12 @@ was used to load a word from memory.</p>
 <p>For more information on the C/C++ programming languages, CHERI compiler warnings
 and errors, we recommend to read the
 <a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-947.pdf">CHERI C/C++ Programming Guide</a>.</p>
-<h1><a class="header" href="#cheriabi-showcase" id="cheriabi-showcase">CheriABI Showcase</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cheriabi-showcase"><a class="header" href="#cheriabi-showcase">CheriABI Showcase</a></h1>
 <p>This exercise demonstrates several aspects of CheriABI, which defines how
 CheriBSD processes are constructed, how function calls are made, how a process
 interacts with the kernel through system calls, and other such foundational
 details.</p>
-<h2><a class="header" href="#the-kernel-voluntarily-honors-capability-bounds" id="the-kernel-voluntarily-honors-capability-bounds">The Kernel Voluntarily Honors Capability Bounds</a></h2>
+<h2 id="the-kernel-voluntarily-honors-capability-bounds"><a class="header" href="#the-kernel-voluntarily-honors-capability-bounds">The Kernel Voluntarily Honors Capability Bounds</a></h2>
 <p><code>kern-read-over.c</code> demonstrates a (potential) loss of spatial safety when
 pointers are passed from userspace to the kernel.  The kernel, by convention,
 has full access to all of userspace memory.  Even when CheriBSD is running
@@ -3057,11 +3071,11 @@ exercise</a>, contrast the behaviors of the two
 CHERI-enabled programs.</p>
 </li>
 </ol>
-<h2><a class="header" href="#the-process-memory-map" id="the-process-memory-map">The Process Memory Map</a></h2>
+<h2 id="the-process-memory-map"><a class="header" href="#the-process-memory-map">The Process Memory Map</a></h2>
 <p>In most UNIX programs, the rights to manipulate the virtual memory map are
 <em>ambient</em>: any piece of code can change the virtual memory permissions
 associated with a page, <code>munmap</code> pages, or even request a replacement mapping
-(&quot;fixed <code>mmap</code>&quot;) almost anywhere in the address space.  This risks allowing
+("fixed <code>mmap</code>") almost anywhere in the address space.  This risks allowing
 evasion of CHERI capabilities' protection properties, as CHERI capabilities are
 interpreted in combination with the virtual memory map.</p>
 <p>Therefore, the CheriBSD kernel avails itself of a <em>software permission</em> bit in
@@ -3091,11 +3105,11 @@ permissions field and display it.</p>
 from <code>mmap</code> but are not permitted for the heap-derived pointer.</p>
 </li>
 </ol>
-<h2><a class="header" href="#extra-credit-initial-process-construction" id="extra-credit-initial-process-construction">(Extra Credit!) Initial Process Construction</a></h2>
+<h2 id="extra-credit-initial-process-construction"><a class="header" href="#extra-credit-initial-process-construction">(Extra Credit!) Initial Process Construction</a></h2>
 <p>We have largely focused on program behavior <em>after</em> it has been loaded and is
 running.  Let us look in a little more detail at some aspects of the initial
 construction.  While modern ELF loading is well beyond the scope of this
-document, and is perhaps best summarized as &quot;here be dragons&quot;, we can
+document, and is perhaps best summarized as "here be dragons", we can
 nevertheless take a quick glance at some interesting features of CheriABI
 startup.</p>
 <ol>
@@ -3133,7 +3147,7 @@ contents of the register file.</p>
 <p>First, what may strike you as surprising (and why) about the stack pointer
 being replaced by a capability?</p>
 <p>Second, compare the address space map obtained above with the current <code>csp</code>
-value; what has the kernel arranged to &quot;back&quot; the region of address space
+value; what has the kernel arranged to "back" the region of address space
 within stack bounds?</p>
 <p>If you are familiar with <a href="https://blog.qualys.com/vulnerabilities-threat-research/2017/06/19/the-stack-clash">Stack Clash
 Vulnerabilities</a>,
@@ -3145,8 +3159,8 @@ reported on the two different architectures in step 2 above.</p>
 <li>
 <p>Having access to the stack is all well and good, but surely there is more to
 a process than that.  At the beginning of a CheriABI process's life, the
-capability in <code>ca0</code> (the first &quot;argument register&quot;) points to the &quot;auxiliary
-vector&quot;, an array of <code>Elf_Auxinfo</code> structures constructed by the kernel.</p>
+capability in <code>ca0</code> (the first "argument register") points to the "auxiliary
+vector", an array of <code>Elf_Auxinfo</code> structures constructed by the kernel.</p>
 <p><code>gdb</code> can ask the kernel for, and display, the information in the auxiliary
 vector with <code>info auxv</code>.  However, the pretty-printer is not capability
 aware, so let's also directly spelunk the structure.  Use some <code>gdb</code>
@@ -3173,7 +3187,7 @@ pointed at its entrypoint.</p>
 </li>
 <li>
 <p><code>AT_BASE</code> supplies a full read/write/execute capability to the program's
-&quot;interpreter&quot; (dynamic loader).  The elevated permissions here allow the
+"interpreter" (dynamic loader).  The elevated permissions here allow the
 loader to (relatively) easily relocate <em>itself</em> early in execution.</p>
 </li>
 </ul>
@@ -3190,7 +3204,7 @@ Modify the program to attempt to display the result of computing either</p>
 <li><code>(void*)((uintptr_t)printf + 1)</code>.</li>
 </ul>
 <p>Compile and run this modified version (or both).  What happens?</p>
-<p>Sentry (short for &quot;Sealed Entry&quot;) capabilities are a special form of
+<p>Sentry (short for "Sealed Entry") capabilities are a special form of
 capabilities: they are <em>immutable</em> and <em>inert</em>, conveying to the bearer no
 authority to the target, until they become the program counter, at which
 point they are unsealed into being an ordinary capability.  Thus, we can
@@ -3204,7 +3218,7 @@ architectural provenance requirement combined with pervasive use of sentry
 capabilities for dynamically resolved symbols.</p>
 </li>
 </ol>
-<h2><a class="header" href="#source-2" id="source-2">Source</a></h2>
+<h2 id="source-2"><a class="header" href="#source-2">Source</a></h2>
 <p><strong>kern-read-over.c</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
@@ -3228,9 +3242,9 @@ main(void)
 	pid_t pid;
 
 	if (pipe(fds) == -1)
-		err(1, &quot;pipe&quot;);
+		err(1, "pipe");
 	if ((pid = fork()) == -1)
-		err(1, &quot;fork&quot;);
+		err(1, "fork");
 	if (pid == 0) {
 		char out[2*bsz];
 		for (size_t i = 0; i &lt; sizeof(out); i++) {
@@ -3238,9 +3252,9 @@ main(void)
 		}
 
 		if (write(fds[0], out, sizeof(out)) != sizeof(out)) {
-			err(1, &quot;write&quot;);
+			err(1, "write");
 		}
-		printf(&quot;Write OK\n&quot;);
+		printf("Write OK\n");
 	} else {
 		int res;
 		char upper[bsz] = { 0 };
@@ -3248,16 +3262,16 @@ main(void)
 
 		waitpid(pid, NULL, 0);
 
-		printf(&quot;lower=%p upper=%p\n&quot;, lower, upper);
+		printf("lower=%p upper=%p\n", lower, upper);
 		assert((ptraddr_t)upper == (ptraddr_t)&amp;lower[sizeof(lower)]);
 
 		res = read(fds[1], lower, sizeof(lower) + sizeof(upper));
 		assert(res != 0);
 		if (res &gt; 0) {
-			printf(&quot;Read 0x%x OK; lower[0]=0x%x upper[0]=0x%x\n&quot;,
+			printf("Read 0x%x OK; lower[0]=0x%x upper[0]=0x%x\n",
 			    res, lower[0], upper[0]);
 		} else if (res &lt; 0) {
-			printf(&quot;Bad read (%s); lower[0]=0x%x upper[0]=0x%x\n&quot;,
+			printf("Bad read (%s); lower[0]=0x%x upper[0]=0x%x\n",
 			    strerror(errno), lower[0], upper[0]);
 		}
 	}
@@ -3279,9 +3293,9 @@ main(void)
 
 #ifdef __CHERI_PURE_CAPABILITY__
 #include &lt;cheri/cherireg.h&gt;
-#define PRINTF_PTR &quot;#p&quot;
+#define PRINTF_PTR "#p"
 #else
-#define PRINTF_PTR &quot;p&quot;
+#define PRINTF_PTR "p"
 #endif
 
 int
@@ -3294,9 +3308,9 @@ main(void)
 	p = mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE | MAP_ANON,
 	    -1, 0);
 	assert(p != MAP_FAILED);
-	printf(&quot;Directly mapped page at p=%&quot; PRINTF_PTR &quot;\n&quot;, p);
+	printf("Directly mapped page at p=%" PRINTF_PTR "\n", p);
 #ifdef __CHERI_PURE_CAPABILITY__
-	printf(&quot; p.perms=0x%lx\n&quot;, __builtin_cheri_perms_get(p));
+	printf(" p.perms=0x%lx\n", __builtin_cheri_perms_get(p));
 #endif
 	res = madvise(p, 4096, MADV_FREE);
 	assert(res == 0);
@@ -3311,9 +3325,9 @@ main(void)
 	/* Get a pointer to a whole page of the heap*/
 	m = malloc(8192);
 	p = __builtin_align_up(m, 4096);
-	printf(&quot;Punching hole in the heap at p=%&quot; PRINTF_PTR &quot;\n&quot;, p);
+	printf("Punching hole in the heap at p=%" PRINTF_PTR "\n", p);
 #ifdef __CHERI_PURE_CAPABILITY__
-	printf(&quot; p.perms=0x%lx\n&quot;, __builtin_cheri_perms_get(p));
+	printf(" p.perms=0x%lx\n", __builtin_cheri_perms_get(p));
 #endif
 
 	char *q = mmap(p, 4096, PROT_READ|PROT_WRITE, MAP_FIXED | MAP_PRIVATE | MAP_ANON,
@@ -3321,14 +3335,14 @@ main(void)
 	assert(q != MAP_FAILED);
 
 	if (madvise(p, 4096, MADV_FREE) != 0) {
-		printf(&quot;madvise failed: %s\n&quot;, strerror(errno));
+		printf("madvise failed: %s\n", strerror(errno));
 	}
 
 	if (munmap(p, 4096) != 0) {
-		printf(&quot;munmap failed: %s\n&quot;, strerror(errno));
+		printf("munmap failed: %s\n", strerror(errno));
 	}
 
-	printf(&quot;Done\n&quot;);
+	printf("Done\n");
 }
 </code></pre>
 <p><strong>print-more.c</strong></p>
@@ -3343,9 +3357,9 @@ main(void)
 #include &lt;stdio.h&gt;
 
 #ifdef __CHERI_PURE_CAPABILITY__
-#define PRINTF_PTR &quot;#p&quot;
+#define PRINTF_PTR "#p"
 #else
-#define PRINTF_PTR &quot;p&quot;
+#define PRINTF_PTR "p"
 #endif
 
 static const int rodata_const = 42;
@@ -3357,22 +3371,22 @@ main(int argc, char **argv)
 {
 	int stack_local;
 
-	printf(&quot;&amp;argv[0]=%&quot; PRINTF_PTR &quot;\n&quot;, &amp;argv[0]);
-	printf(&quot; argv[0]=%&quot; PRINTF_PTR &quot;\n&quot;,  argv[0]);
-	printf(&quot;&amp;stack_local=%&quot; PRINTF_PTR &quot;\n&quot;, &amp;stack_local);
+	printf("&amp;argv[0]=%" PRINTF_PTR "\n", &amp;argv[0]);
+	printf(" argv[0]=%" PRINTF_PTR "\n",  argv[0]);
+	printf("&amp;stack_local=%" PRINTF_PTR "\n", &amp;stack_local);
 
-	printf(&quot;&amp;rodata_const=%&quot; PRINTF_PTR &quot;\n&quot;, &amp;rodata_const);
+	printf("&amp;rodata_const=%" PRINTF_PTR "\n", &amp;rodata_const);
 
-	printf(&quot;&amp;relro_ptr=%&quot; PRINTF_PTR &quot;\n&quot;, &amp;relro_ptr);
-	printf(&quot;&amp;rw_ptr=%&quot; PRINTF_PTR &quot;\n&quot;, &amp;rw_ptr);
+	printf("&amp;relro_ptr=%" PRINTF_PTR "\n", &amp;relro_ptr);
+	printf("&amp;rw_ptr=%" PRINTF_PTR "\n", &amp;rw_ptr);
 
-	printf(&quot;printf=%&quot; PRINTF_PTR &quot;\n&quot;, printf);
+	printf("printf=%" PRINTF_PTR "\n", printf);
 }
 </code></pre>
-<h2><a class="header" href="#courseware-5" id="courseware-5">Courseware</a></h2>
+<h2 id="courseware-5"><a class="header" href="#courseware-5">Courseware</a></h2>
 <p>This exercise has <a href="exercises/cheriabi/./cheriabi.pptx">presentation materials</a> available.</p>
-<h1><a class="header" href="#answers-2" id="answers-2">Answers</a></h1>
-<h2><a class="header" href="#the-process-memory-map-1" id="the-process-memory-map-1">The Process Memory Map</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers-2"><a class="header" href="#answers-2">Answers</a></h1>
+<h2 id="the-process-memory-map-1"><a class="header" href="#the-process-memory-map-1">The Process Memory Map</a></h2>
 <ol start="2">
 <li>
 <p>Example output from a baseline architecture:</p>
@@ -3398,7 +3412,7 @@ Additionally, you may wish to check <code>errno</code> in failure cases and the
 expected in both cases.</p>
 </li>
 </ol>
-<h2><a class="header" href="#the-kernel-as-a-potentially-confused-deputy" id="the-kernel-as-a-potentially-confused-deputy">The Kernel as a Potentially Confused Deputy</a></h2>
+<h2 id="the-kernel-as-a-potentially-confused-deputy"><a class="header" href="#the-kernel-as-a-potentially-confused-deputy">The Kernel as a Potentially Confused Deputy</a></h2>
 <ol start="2">
 <li>
 <p>Example output from a baseline architecture:</p>
@@ -3429,7 +3443,7 @@ thrown its way, here, the kernel maps the architectural trap to a <em>failure
 return</em> rather than a fatal signal.</p>
 </li>
 </ol>
-<h2><a class="header" href="#extra-credit-initial-process-construction-1" id="extra-credit-initial-process-construction-1">(Extra Credit!) Initial Process Construction</a></h2>
+<h2 id="extra-credit-initial-process-construction-1"><a class="header" href="#extra-credit-initial-process-construction-1">(Extra Credit!) Initial Process Construction</a></h2>
 <ol start="2">
 <li>
 <p>Example output from a baseline architecture:</p>
@@ -3489,16 +3503,16 @@ beginning of the <em>dynamic loader</em> (<code>rtld</code>).</p>
  1013       0x3fffde0000       0x3fffe00000 rw-RW    0    0   0   0 ---D- -- 
  1013       0x3ffffff000       0x4000000000 r-x--    1    1  13   0 ----- ph 
 </code></pre>
-<table><thead><tr><th>pointer</th><th>mapping</th><th>permissions</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>pointer</th><th>mapping</th><th>permissions</th></tr></thead><tbody>
 <tr><td><code>&amp;argv[0]</code></td><td><code>0x3fbfd80000</code></td><td><code>rw-RW</code></td></tr>
-<tr><td><code>argv</code></td><td>&quot;</td><td>&quot;</td></tr>
+<tr><td><code>argv</code></td><td>"</td><td>"</td></tr>
 <tr><td><code>stack_local</code></td><td><code>0x3fffde0000</code></td><td><code>rw-RW</code></td></tr>
 <tr><td><code>rodata_const</code></td><td><code>0x100000</code></td><td><code>r--R-</code></td></tr>
 <tr><td><code>relro_ptr</code></td><td><code>0x102000</code></td><td><code>rw-RW</code></td></tr>
 <tr><td><code>rw_ptr</code></td><td><code>0x104000</code></td><td><code>rw-RW</code></td></tr>
 <tr><td><code>printf</code></td><td>not initially mapped</td><td>n/a</td></tr>
 </tbody></table>
-</li>
+</div></li>
 <li>
 <p>Abridged output:</p>
 <pre><code>cra            0xd117200009e18201000000004010f040       0x4010f040 &lt;rtld_start&gt; [rxR,0x40104000-0x4012f000] (sentry)
@@ -3510,7 +3524,7 @@ ddc            0x0      0x0
 </li>
 <li>
 <p>In baseline programs, the stack is bounded only by operating system measures
--- the kernel will refuse to grow what it considers to be &quot;the stack&quot; beyond
+-- the kernel will refuse to grow what it considers to be "the stack" beyond
 some limit.  However, architecturally, there is no <em>a priori</em> limit to stack
 growth.  In CHERI, by contrast, the stack is accessed via a capability, which
 must be constructed up front.</p>
@@ -3519,8 +3533,8 @@ with page mappings:</p>
 <pre><code> 1013       0x3fbfe00000       0x3fffde0000 -----    0    0   0   0 G---- gd 
  1013       0x3fffde0000       0x3fffe00000 rw-RW    0    0   0   0 ---D- -- 
 </code></pre>
-<p>The latter of these is marked as &quot;growing down&quot; (the <code>D</code> in the penultimate
-field) while the former is considered a &quot;guard&quot; mapping (the <code>G</code> flag and
+<p>The latter of these is marked as "growing down" (the <code>D</code> in the penultimate
+field) while the former is considered a "guard" mapping (the <code>G</code> flag and
 <code>gd</code> type), serving to prevent any other claimant to the address space.</p>
 <p>The initial bounds on the stack capability prevent half of Stack Clash: the
 stack capability cannot authorize access to a heap region, even if, say,
@@ -3551,7 +3565,7 @@ through the stack capability.</p>
 9    AT_ENTRY             Entry point of program         0x101a30
 7    AT_BASE              Base address of interpreter    0x40104000
 24   AT_EHDRFLAGS         ELF header e_flags             0x30005
-15   AT_EXECPATH          Executable path                0x3fbfdfffa0 &quot;/mnt/tmp/print-more-cheri&quot;
+15   AT_EXECPATH          Executable path                0x3fbfdfffa0 "/mnt/tmp/print-more-cheri"
 18   AT_OSRELDATE         OSRELDATE                      1400051
 16   AT_CANARY            Canary for SSP                 0x3fbfdfff60
 17   AT_CANARYLEN         Length of the SSP canary       64
@@ -3624,11 +3638,11 @@ libraries), so ensuring the use of sentries when crossing segments restricts
 the ability to source gadgets to any that may exist within the segment
 vulnerable to ROP or JOP injection.</p>
 <p>The curious reader should seek out additional information about CHERI's
-&quot;object type&quot; mechanism and sealed capabilities, of which sentries are just
+"object type" mechanism and sealed capabilities, of which sentries are just
 one example.</p>
 </li>
 </ol>
-<h1><a class="header" href="#extending-heap-allocators-for-cheri" id="extending-heap-allocators-for-cheri">Extending heap allocators for CHERI</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="extending-heap-allocators-for-cheri"><a class="header" href="#extending-heap-allocators-for-cheri">Extending heap allocators for CHERI</a></h1>
 <p>CHERI's architectural protection is driven by software -- the compiler,
 linker, OS kernel, run-time linker, run-time libraries, and so on all manage
 capabilities as part of their program execution.  Heap allocators, which are
@@ -3733,7 +3747,7 @@ by the allocator, that the pointer is in bounds, and that it points to the
 start of a current allocation.
 Further temporal safety also requires quarantining freed memory until all
 pointers to it have been revoked.</p>
-<h2><a class="header" href="#source-files-4" id="source-files-4">Source Files</a></h2>
+<h2 id="source-files-4"><a class="header" href="#source-files-4">Source Files</a></h2>
 <p><strong>cheri-allocator.c</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
@@ -3847,63 +3861,63 @@ main(void)
 
 	/* Initialise allocator. */
 	alloc_init();
-	printf(&quot;Allocator initialised\n&quot;);
+	printf("Allocator initialised\n");
 
 	/*
 	 * Allocate some memory.
 	 */
-	printf(&quot;Allocating memory\n&quot;);
+	printf("Allocating memory\n");
 	ptr1 = alloc_allocate();
-	printf(&quot;Allocation returned %p\n&quot;, ptr1);
+	printf("Allocation returned %p\n", ptr1);
 
 	/*
 	 * Run off the end of the memory allocation, corrupting the next
 	 * allocation's metadata.  Free when done.
 	 */
-	printf(&quot;Preparing to overflow %p\n&quot;, ptr1);
+	printf("Preparing to overflow %p\n", ptr1);
 	memset(ptr1 + ALLOC_SIZE, 'A', sizeof(void *));
-	printf(&quot;Overflowed allocation %p\n&quot;, ptr1);
+	printf("Overflowed allocation %p\n", ptr1);
 
-	printf(&quot;Freeing allocation %p\n&quot;, ptr1);
+	printf("Freeing allocation %p\n", ptr1);
 	alloc_free(ptr1);
-	printf(&quot;Allocation %p freed\n&quot;, ptr1);
+	printf("Allocation %p freed\n", ptr1);
 
 	/*
 	 * Perform three sequential allocations to cause the allocator to
 	 * dereference the corrupted pointer, performing a store.
 	 */
-	printf(&quot;Allocating memory\n&quot;);
+	printf("Allocating memory\n");
 	ptr1 = alloc_allocate();
-	printf(&quot;Allocation returned %p\n&quot;, ptr1);
+	printf("Allocation returned %p\n", ptr1);
 
-	printf(&quot;Allocating memory\n&quot;);
+	printf("Allocating memory\n");
 	ptr2 = alloc_allocate();
-	printf(&quot;Allocation returned %p\n&quot;, ptr2);
+	printf("Allocation returned %p\n", ptr2);
 
-	printf(&quot;Allocating memory\n&quot;);
+	printf("Allocating memory\n");
 	ptr3 = alloc_allocate();
-	printf(&quot;Allocation returned %p\n&quot;, ptr3);
+	printf("Allocation returned %p\n", ptr3);
 
 	/*
 	 * Clear up the mess.
 	 */
-	printf(&quot;Freeing allocation %p\n&quot;, ptr3);
+	printf("Freeing allocation %p\n", ptr3);
 	alloc_free(ptr3);
-	printf(&quot;Allocation %p freed\n&quot;, ptr3);
+	printf("Allocation %p freed\n", ptr3);
 
-	printf(&quot;Freeing allocation %p\n&quot;, ptr2);
+	printf("Freeing allocation %p\n", ptr2);
 	alloc_free(ptr2);
-	printf(&quot;Allocation %p freed\n&quot;, ptr2);
+	printf("Allocation %p freed\n", ptr2);
 
-	printf(&quot;Freeing allocation %p\n&quot;, ptr1);
+	printf("Freeing allocation %p\n", ptr1);
 	alloc_free(ptr1);
-	printf(&quot;Allocation %p freed\n&quot;, ptr1);
+	printf("Allocation %p freed\n", ptr1);
 
 	exit(EX_OK);
 }
 </code></pre>
-<h1><a class="header" href="#answers-3" id="answers-3">Answers</a></h1>
-<h2><a class="header" href="#introducing-heap-allocator-bounds" id="introducing-heap-allocator-bounds">Introducing heap-allocator bounds</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers-3"><a class="header" href="#answers-3">Answers</a></h1>
+<h2 id="introducing-heap-allocator-bounds"><a class="header" href="#introducing-heap-allocator-bounds">Introducing heap-allocator bounds</a></h2>
 <ol start="2">
 <li>GDB will show a CHERI tag violation resulting from <code>memset()</code> overwriting
 the <code>a_next</code> field in the second allocation entry, which is tripped over by
@@ -3956,7 +3970,7 @@ Capability bounds fault caused by register ca3.
 memset (dst0=0x1045d0 &lt;alloc_array+144&gt; [rwRW,0x104550-0x1045d0], c0=65, length=15) at /usr/home/john/work/cheri/git/cheribsd/lib/libc/string/memset.c:94
 94                              *dst++ = VAL;
 </code></pre>
-<h2><a class="header" href="#reaching-allocator-metadata" id="reaching-allocator-metadata">Reaching allocator metadata</a></h2>
+<h2 id="reaching-allocator-metadata"><a class="header" href="#reaching-allocator-metadata">Reaching allocator metadata</a></h2>
 <ol start="6">
 <li>Following this change, <code>alloc_free()</code> crashes with a bounds violation,
 due to reaching outside the bounds of the passed memory allocation:</li>
@@ -3994,8 +4008,8 @@ it on the other:</li>
 </code></pre>
 <p>Note that this is not a complete solution to providing spatial safety here:
 software could still accidentally pass an out-of-bounds pointer.</p>
-<h1><a class="header" href="#demonstrate-pointer-revocation" id="demonstrate-pointer-revocation">Demonstrate pointer revocation</a></h1>
-<h2><a class="header" href="#indirect-control-flow-through-aliased-heap-objects" id="indirect-control-flow-through-aliased-heap-objects">Indirect control flow through aliased heap objects</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="demonstrate-pointer-revocation"><a class="header" href="#demonstrate-pointer-revocation">Demonstrate pointer revocation</a></h1>
+<h2 id="indirect-control-flow-through-aliased-heap-objects"><a class="header" href="#indirect-control-flow-through-aliased-heap-objects">Indirect control flow through aliased heap objects</a></h2>
 <p>This exercise demonstrates CheriBSD's <em>pointer revocation</em> facility and its use
 by the system <code>malloc</code>. It asks you to contrast the same program,
 <code>temporal-control.c</code>, built and run in three slightly different environments.
@@ -4030,13 +4044,13 @@ static void *check_malloc_revoke = malloc_revoke;
 static void
 fn1(uintptr_t arg)
 {
-	fprintf(stderr, &quot; First function: %#p\n&quot;, (void *)arg);
+	fprintf(stderr, " First function: %#p\n", (void *)arg);
 }
 
 static void
 fn2(uintptr_t arg)
 {
-	fprintf(stderr, &quot; Second function: %#p\n&quot;, (void *)arg);
+	fprintf(stderr, " Second function: %#p\n", (void *)arg);
 }
 
 struct obj {
@@ -4056,13 +4070,13 @@ main(void)
 {
 	struct obj * volatile obj1 = calloc(1, sizeof(*obj1));
 
-	fprintf(stderr, &quot;Installing function pointer in obj1 at %#p\n&quot;, obj1);
+	fprintf(stderr, "Installing function pointer in obj1 at %#p\n", obj1);
 	obj1-&gt;fn = fn1;
 	obj1-&gt;arg = (uintptr_t)obj1;
 
 	free(obj1);
 
-	fprintf(stderr, &quot;Demonstrating use after free:\n&quot;);
+	fprintf(stderr, "Demonstrating use after free:\n");
 	obj1-&gt;fn(obj1-&gt;arg);
 
 #ifdef CAPREVOKE
@@ -4075,11 +4089,11 @@ main(void)
 	assert(obj1 == obj2);
 #endif
 
-	fprintf(stderr, &quot;Assigning function pointer through obj2 at %#p\n&quot;,
+	fprintf(stderr, "Assigning function pointer through obj2 at %#p\n",
 	    obj2);
 	obj2-&gt;fn = fn2;
 
-	fprintf(stderr, &quot;Calling function pointer through obj1 (now %#p):\n&quot;,
+	fprintf(stderr, "Calling function pointer through obj1 (now %#p):\n",
 	    obj1);
 	obj1-&gt;fn(obj1-&gt;arg);
 
@@ -4115,7 +4129,7 @@ You likely have to call <code>free</code> in the loop for this exercise to work;
 calling <code>malloc</code> may instead simply always return new addresses, even if the
 initial <code>obj1</code> has been <code>free</code>-d.</li>
 </ol>
-<h2><a class="header" href="#more-attacks-through-aliased-heap-objects" id="more-attacks-through-aliased-heap-objects">More attacks through aliased heap objects</a></h2>
+<h2 id="more-attacks-through-aliased-heap-objects"><a class="header" href="#more-attacks-through-aliased-heap-objects">More attacks through aliased heap objects</a></h2>
 <p>The program is called <code>temporal-control.c</code> because it exhibits <em>temporal
 aliasing</em> of heap pointers and because the class of bugs it mimics involve
 transfers of control through function pointers held in heap objects. While
@@ -4123,7 +4137,7 @@ CHERI protects against pointer <em>injection</em>, it cannot so easily defend ag
 either:</p>
 <ul>
 <li><em>capability farming</em>: as in the example, a legitimately-held capability can
-be (caused to be) stored to a &quot;new&quot; heap object, altering an aliased view while
+be (caused to be) stored to a "new" heap object, altering an aliased view while
 preserving the set tag bit; or</li>
 <li><em>data-based</em> corruption through temporal aliasing.</li>
 </ul>
@@ -4140,8 +4154,8 @@ attempt to induce aliasing is thwarted on CHERI-RISC-V with heap temporal
 safety: aliasing becomes possible only after revocation, ensuring that attempts
 to use the old session object fail-stop.</li>
 </ol>
-<h1><a class="header" href="#answers-4" id="answers-4">Answers</a></h1>
-<h2><a class="header" href="#indirect-control-flow-through-aliased-heap-objects-1" id="indirect-control-flow-through-aliased-heap-objects-1">Indirect control flow through aliased heap objects</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="answers-4"><a class="header" href="#answers-4">Answers</a></h1>
+<h2 id="indirect-control-flow-through-aliased-heap-objects-1"><a class="header" href="#indirect-control-flow-through-aliased-heap-objects-1">Indirect control flow through aliased heap objects</a></h2>
 <ol start="2">
 <li>Expected output (addresses may vary):</li>
 </ol>
@@ -4189,8 +4203,8 @@ $1 = (void *) 0x41200040 [,0x41200040-0x41200080]
 <p><code>malloc_revoke()</code> must have replaced the <code>obj1</code> capability, which previously
 had permissions for loading and storing both data and capabilities to the
 memory backing <code>obj1</code>, with this permissionless form.</p>
-<h1><a class="header" href="#focused-adversarial-missions-1" id="focused-adversarial-missions-1">Focused Adversarial Missions</a></h1>
-<h1><a class="header" href="#exploiting-a-buffer-overflow-to-manipulate-control-flow" id="exploiting-a-buffer-overflow-to-manipulate-control-flow">Exploiting a buffer overflow to manipulate control flow</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="focused-adversarial-missions-1"><a class="header" href="#focused-adversarial-missions-1">Focused Adversarial Missions</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exploiting-a-buffer-overflow-to-manipulate-control-flow"><a class="header" href="#exploiting-a-buffer-overflow-to-manipulate-control-flow">Exploiting a buffer overflow to manipulate control flow</a></h1>
 <p>The objective of this mission is to demonstrate arbitrary code execution
 through a control-flow attack, despite CHERI protections. You will attack three
 different versions of the program:</p>
@@ -4226,18 +4240,18 @@ and exploit the binary to execute the <code>success</code> function.</li>
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
-#include &quot;btpalloc.h&quot;
+#include "btpalloc.h"
 
 void
 success(void)
 {
-	puts(&quot;Exploit successful!&quot;);
+	puts("Exploit successful!");
 }
 
 void
 failure(void)
 {
-	puts(&quot;Exploit unsuccessful!&quot;);
+	puts("Exploit unsuccessful!");
 }
 
 static uint16_t
@@ -4256,7 +4270,7 @@ ipv4_checksum(uint16_t *buf, size_t words)
 	return (~sum &amp; 0xffff);
 }
 
-#include &quot;main-asserts.inc&quot;
+#include "main-asserts.inc"
 
 int
 main(void)
@@ -4281,7 +4295,7 @@ main(void)
 		*p++ = '\0';
 
 	sum = ipv4_checksum((uint16_t *)buf, (p - buf) / 2);
-	printf(&quot;Checksum: 0x%04x\n&quot;, sum);
+	printf("Checksum: 0x%04x\n", sum);
 
 	btpfree(buf);
 
@@ -4304,7 +4318,7 @@ exploited, explain why.</li>
  * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
  * Copyright (c) 2020 Jessica Clarke
  */
-#include &quot;btpalloc.h&quot;
+#include "btpalloc.h"
 
 #include &lt;assert.h&gt;
 #include &lt;stddef.h&gt;
@@ -4364,7 +4378,7 @@ btpfree(void *ptr)
 	(void)ptr;
 }
 </code></pre>
-<h2><a class="header" href="#support-code-2" id="support-code-2">Support code</a></h2>
+<h2 id="support-code-2"><a class="header" href="#support-code-2">Support code</a></h2>
 <p><strong>btpalloc.h</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
@@ -4422,7 +4436,7 @@ main_asserts(void *buf, void *fptr)
 #endif
 }
 </code></pre>
-<h1><a class="header" href="#exploiting-an-uninitialized-stack-frame-to-manipulate-control-flow" id="exploiting-an-uninitialized-stack-frame-to-manipulate-control-flow">Exploiting an uninitialized stack frame to manipulate control flow</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exploiting-an-uninitialized-stack-frame-to-manipulate-control-flow"><a class="header" href="#exploiting-an-uninitialized-stack-frame-to-manipulate-control-flow">Exploiting an uninitialized stack frame to manipulate control flow</a></h1>
 <p>The objective of this mission is to demonstrate arbitrary code
 execution through the use of uninitialized variables on the stack,
 despite CHERI protections.  You will attack three different versions
@@ -4444,7 +4458,7 @@ should be non-exploitable due to pointer tagging.</p>
 <p>The success condition for an exploit, given attacker-provided input
 overriding an on-stack buffer, is to modify control flow in the program
 such that the <code>success</code> function is executed.</p>
-<h3><a class="header" href="#program-overview" id="program-overview">Program overview</a></h3>
+<h3 id="program-overview"><a class="header" href="#program-overview">Program overview</a></h3>
 <p>Cookie monster is always hungry for more cookies.  You can sate the
 monster's hunger by providing cookies as standard input.  Cookies are
 provided as a pair of hexadecimal characters (case is ignored).  Each
@@ -4456,11 +4470,11 @@ equals sign ('=') can be used to skip over the number of characters in
 a pointer without providing any new cookies.  Whitespace is ignored in
 the input line.  Input is terminated either by a newline or end of
 file (EOF).</p>
-<h3><a class="header" href="#building-and-running" id="building-and-running">Building and running</a></h3>
+<h3 id="building-and-running"><a class="header" href="#building-and-running">Building and running</a></h3>
 <p>The hardened CHERI-RISC-V version with stack clearing is built by
 adding <code>-ftrivial-auto-var-init=zero -enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang</code>
 to the compiler command line.</p>
-<h3><a class="header" href="#source-code" id="source-code">Source code</a></h3>
+<h3 id="source-code"><a class="header" href="#source-code">Source code</a></h3>
 <p><em><strong>stack-mission.c</strong></em></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
@@ -4478,14 +4492,14 @@ to the compiler command line.</p>
 void
 success(void)
 {
-	fprintf(stderr, &quot;Exploit successful, yum!\n&quot;);
+	fprintf(stderr, "Exploit successful, yum!\n");
 	exit(42);
 }
 
 void
 no_cookies(void)
 {
-	fprintf(stderr, &quot;No cookies??\n&quot;);
+	fprintf(stderr, "No cookies??\n");
 	exit(1);
 }
 
@@ -4513,11 +4527,11 @@ get_cookies(void)
 	char *cookiep;
 	int ch, cookie;
 
-	printf(&quot;Cookie monster is hungry, provide some cookies!\n&quot;);
-	printf(&quot;'=' skips the next %zu bytes\n&quot;, sizeof(void *));
-	printf(&quot;'-' skips to the next character\n&quot;);
-	printf(&quot;XX as two hex digits stores a single cookie\n&quot;);
-	printf(&quot;&gt; &quot;);
+	printf("Cookie monster is hungry, provide some cookies!\n");
+	printf("'=' skips the next %zu bytes\n", sizeof(void *));
+	printf("'-' skips to the next character\n");
+	printf("XX as two hex digits stores a single cookie\n");
+	printf("&gt; ");
 
 	cookiep = cookies;
 	for (;;) {
@@ -4543,15 +4557,15 @@ get_cookies(void)
 			cookie = digittoint(ch) &lt;&lt; 4;
 			ch = getchar();
 			if (ch == EOF)
-				errx(1, &quot;Half-eaten cookie, yuck!&quot;);
+				errx(1, "Half-eaten cookie, yuck!");
 			if (!isxdigit(ch))
-				errx(1, &quot;Malformed cookie&quot;);
+				errx(1, "Malformed cookie");
 			cookie |= digittoint(ch);
 			*cookiep++ = cookie;
 			continue;
 		}
 
-		errx(1, &quot;Malformed cookie&quot;);
+		errx(1, "Malformed cookie");
 	}
 }
 
@@ -4575,7 +4589,7 @@ main(void)
 	return (0);
 }
 </code></pre>
-<h1><a class="header" href="#exploiting-heap-use-after-free-to-manipulate-control-flow" id="exploiting-heap-use-after-free-to-manipulate-control-flow">Exploiting heap use-after-free to manipulate control flow</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exploiting-heap-use-after-free-to-manipulate-control-flow"><a class="header" href="#exploiting-heap-use-after-free-to-manipulate-control-flow">Exploiting heap use-after-free to manipulate control flow</a></h1>
 <p><strong>This mission requires a CheriBSD sysroot and image with temporal safety!</strong>
 The executable can be built for both RISC-V and CHERI-RISC-V (and exploring
 both may be worthwhile), but the mission is for CHERI-RISC-V with heap temporal
@@ -4586,28 +4600,28 @@ without completing authentication, walk the server's protocol state machine
 through erroneous states. Popular bugs facilitating these exploits include
 double free, use-after-reallocation, and type confusion (esp. of temporally
 aliased objects). For this mission, we have simplified the interface to be a
-little &quot;command language&quot; read over <code>stdin</code>, detailed below.</p>
+little "command language" read over <code>stdin</code>, detailed below.</p>
 <p>The success criterion is executing the <code>success</code> function. To ease testing,
 this is the only case in which the program source claims to exit with a code of
 <code>42</code>. Ordinary termination is signaled with <code>0</code> and invalid input results in
 the program terminating with <code>1</code>. While the source does not overtly claim any
 other outcome, if control flow can be redirected, almost anything goes.</p>
-<h3><a class="header" href="#program-overview-1" id="program-overview-1">Program Overview</a></h3>
+<h3 id="program-overview-1"><a class="header" href="#program-overview-1">Program Overview</a></h3>
 <p>This is a (very) minimal simulation of a program that manages multiple
 sessions, objects within each session, and limited information flow between
 those sessions. Rather than network sockets, each session is represented by a
 <code>struct farm</code> and there are up to four such active at any moment. Within each
 <code>struct farm</code> is a circular collection of <code>struct crop</code>s, at most one of which
 may be selected by the <code>cursor</code> of its owning <code>struct farm</code>. If no crop is
-selected, the cursor is said to be &quot;in the gap&quot;. The crop at the cursor, if
+selected, the cursor is said to be "in the gap". The crop at the cursor, if
 any, can be asked to describe itself, using a function pointer within the
 <code>struct crop</code> itself.</p>
 <p>To make matters more exciting, a UFO may be summoned to perform particular
-kinds of mischief. The UFO may &quot;abduct&quot; a pointer into itself and can create
+kinds of mischief. The UFO may "abduct" a pointer into itself and can create
 crop signs within <code>struct crop</code> (with data) or <code>struct farm</code> (with a capability
 to the <code>success()</code> function).</p>
 <p>The gadgets offered by the UFO are somewhat limited (that is, they are not
-&quot;write what where&quot; or arbitrary control transfer) as one might expect to see in
+"write what where" or arbitrary control transfer) as one might expect to see in
 a real application. Nevertheless, they are sufficiently powerful to provide
 <em>myriad</em> exploitation vectors on RISC-V without CHERI, and even a few on
 CHERI-RISC-V. However, we believe that enforced heap temporal safety will
@@ -4615,7 +4629,7 @@ ensure that any use of them is either overwritten by subsequent program
 operations before the gadgets' effects influence control flow or will cause the
 program to fail-stop with a default-fatal signal (e.g., <code>SIGSEGV</code> or
 <code>SIGPROT</code>).</p>
-<h3><a class="header" href="#building-and-running-1" id="building-and-running-1">Building and running</a></h3>
+<h3 id="building-and-running-1"><a class="header" href="#building-and-running-1">Building and running</a></h3>
 <p>We suggest using the <code>ccc</code> tool provided with this book, building for
 <code>riscv64-purecap</code>. For experimentation, this program also builds for
 <code>riscv64</code>, without CHERI. On <code>riscv64-purecap</code> builds, heap temporal safety
@@ -4625,11 +4639,11 @@ flag prior to program loading disqualifies such invocations from completing the
 mission, being able to disable revocation from within <code>main()</code> would be quite
 interesting indeed.)</p>
 <p>As said before, the program expects to read a command language from <code>stdin</code>.
-It will print &quot;Ready&quot; and then await input. Unlike real applications, this
+It will print "Ready" and then await input. Unlike real applications, this
 program is fairly chatty about its own operation to ease exploration.
 Nevertheless, it may be useful to run it within <code>gdb</code>, especially to
 differentiate causes of crashes.</p>
-<h3><a class="header" href="#command-language-directives" id="command-language-directives">Command Language Directives</a></h3>
+<h3 id="command-language-directives"><a class="header" href="#command-language-directives">Command Language Directives</a></h3>
 <ul>
 <li>
 <p>Whitespace is quietly ignored in most cases; this may simplify reading
@@ -4690,7 +4704,7 @@ will force a revocation pass, destroying pointers to free objects and
 allowing reuse of memory and address space.</p>
 </li>
 </ul>
-<h3><a class="header" href="#example-session" id="example-session">Example Session</a></h3>
+<h3 id="example-session"><a class="header" href="#example-session">Example Session</a></h3>
 <p>Here is a short session which creates one <code>struct farm</code>, two <code>struct crop</code>s,
 exhibits cursor control and description of <code>struct crop</code>s, and then tears down
 the <code>struct farm</code>:</p>
@@ -4711,7 +4725,7 @@ FYI:  cursor-&gt;describe 0x10300e
 Colt at 0x41201100
 Tear down farm (index 0) at 0x41201080
 </code></pre>
-<h3><a class="header" href="#source-code-1" id="source-code-1">Source code</a></h3>
+<h3 id="source-code-1"><a class="header" href="#source-code-1">Source code</a></h3>
 <p><strong>temporal-mission.c</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause
@@ -4739,7 +4753,7 @@ struct crop;
 static void
 success(struct farm *f)
 {
-	fprintf(stderr, &quot;Exploit successful: computer bought the farm!\n&quot;);
+	fprintf(stderr, "Exploit successful: computer bought the farm!\n");
 	exit(42);
 }
 
@@ -4756,7 +4770,7 @@ struct crop {
 };
 
 _Static_assert(sizeof(struct crop) == sizeof(struct farm),
-    &quot;Structure size mismatch&quot;);
+    "Structure size mismatch");
 
 union ufo {
 	void	*ptrA;
@@ -4764,18 +4778,18 @@ union ufo {
 };
 
 _Static_assert(sizeof(struct crop) == sizeof(union ufo),
-    &quot;Structure size mismatch&quot;);
+    "Structure size mismatch");
 
 static void
 descr_1(struct crop *c)
 {
-	fprintf(stderr, &quot;Chelan at %p\n&quot;, c); /* Pacific Northwest */
+	fprintf(stderr, "Chelan at %p\n", c); /* Pacific Northwest */
 }
 
 static void
 descr_2(struct crop *c)
 {
-	fprintf(stderr, &quot;Colt at %p\n&quot;, c); /* United Kingdom */
+	fprintf(stderr, "Colt at %p\n", c); /* United Kingdom */
 }
 
 static unsigned int cid;
@@ -4798,7 +4812,7 @@ rm_farm(int fix)
 			free(c);
 		}
 
-		fprintf(stderr, &quot;Tear down farm (index %d) at %p\n&quot;, fix, f);
+		fprintf(stderr, "Tear down farm (index %d) at %p\n", fix, f);
 		free(f);
 	}
 }
@@ -4818,14 +4832,14 @@ mk_farm(int fix)
 
 	farmp[fix] = f;
 
-	fprintf(stderr, &quot;New farm (index %d) at %p\n&quot;, fix, f);
+	fprintf(stderr, "New farm (index %d) at %p\n", fix, f);
 	return f;
 }
 
 static void
 rm_crop(struct farm *f, struct crop *c)
 {
-	fprintf(stderr, &quot;Del crop at %p\n&quot;, c);
+	fprintf(stderr, "Del crop at %p\n", c);
 	TAILQ_REMOVE(&amp;f-&gt;cropq, c, farm_cropq);
 	free(c);
 }
@@ -4848,7 +4862,7 @@ mk_crop(struct farm *f)
 
 	TAILQ_INSERT_HEAD(&amp;f-&gt;cropq, c, farm_cropq);
 
-	fprintf(stderr, &quot;New crop at %p\n&quot;, c);
+	fprintf(stderr, "New crop at %p\n", c);
 
 	return c;
 }
@@ -4857,7 +4871,7 @@ static void
 rm_ufo(void)
 {
 	if (ufo != NULL) {
-		fprintf(stderr, &quot;Del UFO at %p\n&quot;, ufo);
+		fprintf(stderr, "Del UFO at %p\n", ufo);
 		free(ufo);
 	}
 }
@@ -4869,13 +4883,13 @@ main(void)
 	size_t fix = 0;
 
 #if defined(__CHERI_PURE_CAPABILITY__)
-	if (getenv(&quot;MALLOC_DISABLE_REVOCATION&quot;) == NULL) {
-		fprintf(stderr, &quot;Ready (CHERI-RISC-V)\n&quot;);
+	if (getenv("MALLOC_DISABLE_REVOCATION") == NULL) {
+		fprintf(stderr, "Ready (CHERI-RISC-V)\n");
 	} else {
-		fprintf(stderr, &quot;Ready (CHERI-RISC-V, reduced heap safety)\n&quot;);
+		fprintf(stderr, "Ready (CHERI-RISC-V, reduced heap safety)\n");
 	}
 #else
-	fprintf(stderr, &quot;Ready (RISC-V)\n&quot;);
+	fprintf(stderr, "Ready (RISC-V)\n");
 #endif
 
 	while ((c = getchar()) != EOF) {
@@ -4884,7 +4898,7 @@ main(void)
 
 		if (('0' &lt;= c) &amp;&amp; (c &lt; '0' + NFARM)) {
 			fix = c - '0';
-			fprintf(stderr, &quot;Selected farm %zu (%p)\n&quot;, fix,
+			fprintf(stderr, "Selected farm %zu (%p)\n", fix,
 			    farmp[fix]);
 			continue;
 		}
@@ -4895,7 +4909,7 @@ main(void)
 #if defined(__CHERI_PURE_CAPABILITY__)
 			malloc_revoke();
 #else
-			fprintf(stderr, &quot;No revocation without CHERI!\n&quot;);
+			fprintf(stderr, "No revocation without CHERI!\n");
 #endif
 			break;
 
@@ -4909,10 +4923,10 @@ main(void)
 				rm_crop(f, f-&gt;cursor);
 			break;
 		case 'D':
-			fprintf(stderr, &quot;FYI: Current farm is %p\n&quot;, f);
+			fprintf(stderr, "FYI: Current farm is %p\n", f);
 			if ((f != NULL) &amp;&amp; (f-&gt;cursor != NULL)) {
-				fprintf(stderr, &quot;FYI:  cursor %p\n&quot;, f-&gt;cursor);
-				fprintf(stderr, &quot;FYI:  cursor-&gt;describe %p\n&quot;,
+				fprintf(stderr, "FYI:  cursor %p\n", f-&gt;cursor);
+				fprintf(stderr, "FYI:  cursor-&gt;describe %p\n",
 				    f-&gt;cursor-&gt;describe);
 				f-&gt;cursor-&gt;describe(f-&gt;cursor);
 			}
@@ -4937,7 +4951,7 @@ main(void)
 					    cropq);
 				}
 			}
-			fprintf(stderr, &quot;Farm %zu cursor %p\n&quot;, fix, f-&gt;cursor);
+			fprintf(stderr, "Farm %zu cursor %p\n", fix, f-&gt;cursor);
 			break;
 		case 'R':
 			if (f != NULL) {
@@ -4948,7 +4962,7 @@ main(void)
 					f-&gt;cursor = TAILQ_FIRST(&amp;f-&gt;cropq);
 				}
 			}
-			fprintf(stderr, &quot;Farm %zu cursor %p\n&quot;, fix, f-&gt;cursor);
+			fprintf(stderr, "Farm %zu cursor %p\n", fix, f-&gt;cursor);
 			break;
 		case 'Z':
 			if (f != NULL)
@@ -4958,14 +4972,14 @@ main(void)
 		/* UFO control sequences */
 		case 'A':
 			if ((ufo != NULL) &amp;&amp; (f != NULL)) {
-				fprintf(stderr, &quot;UFO abduct %p\n&quot;, f-&gt;cursor);
+				fprintf(stderr, "UFO abduct %p\n", f-&gt;cursor);
 				ufo-&gt;ptrA = f-&gt;cursor;
 			}
 			break;
 		case 'S':
 			if (f != NULL) {
 				/* Jess's Organic Farm-to-Vtable Capability */
-				fprintf(stderr, &quot;Crop sign at farm %p\n&quot;, f);
+				fprintf(stderr, "Crop sign at farm %p\n", f);
 				f-&gt;cursor = (void *)success;
 			}
 			break;
@@ -4975,7 +4989,7 @@ main(void)
 				for (size_t i = 0; i &lt; sizeof buf; i++) {
 					buf[i] = getchar();
 				}
-				fprintf(stderr, &quot;Signing crop %p\n&quot;, f-&gt;cursor);
+				fprintf(stderr, "Signing crop %p\n", f-&gt;cursor);
 				memmove((char *)f-&gt;cursor, buf, sizeof(buf));
 			}
 			break;
@@ -4983,14 +4997,14 @@ main(void)
 			rm_ufo();
 			ufo = malloc(sizeof(union ufo));
 			assert(ufo != NULL);
-			fprintf(stderr, &quot;UFO at %p\n&quot;, ufo);
+			fprintf(stderr, "UFO at %p\n", ufo);
 			break;
 		case 'u':
 			rm_ufo();
 			break;
 
 		default:
-			fprintf(stderr, &quot;Did not understand %x; bail!\n&quot;, c);
+			fprintf(stderr, "Did not understand %x; bail!\n", c);
 			return 1;
 		}
 	}
@@ -4998,7 +5012,7 @@ main(void)
 	return 0;
 }
 </code></pre>
-<h1><a class="header" href="#exploit-vulnerability-freebsd-sa-0906ktimer-kernel-buffer-overflow" id="exploit-vulnerability-freebsd-sa-0906ktimer-kernel-buffer-overflow">Exploit vulnerability FreeBSD-SA-09:06.ktimer: kernel buffer overflow</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exploit-vulnerability-freebsd-sa-0906ktimer-kernel-buffer-overflow"><a class="header" href="#exploit-vulnerability-freebsd-sa-0906ktimer-kernel-buffer-overflow">Exploit vulnerability FreeBSD-SA-09:06.ktimer: kernel buffer overflow</a></h1>
 <p>This mission depends on the pure-capability CheriBSD FETT kernel included in FETT CHERI-RISC-V Release 2 (kernel spatial memory safety).</p>
 <p>The objective of this mission is to demonstrate arbitrary code execution in a pure-capability kernel.
 This must be achieved via a reintroduced past FreeBSD security vulnerability, <a href="https://www.freebsd.org/security/advisories/FreeBSD-SA-09:06.ktimer.asc">FreeBSD-SA-09:06.ktimer</a>.
@@ -5011,7 +5025,7 @@ If <code>flag_captured(9)</code> is called, the sysctl <code>security.kernel_fla
 This corresponds to a partially successful exploit.
 If the function is called with the designated argument, the sysctl <code>security.kernel_flags_captured_key</code> counter will be incremented.
 This corresponds to a fully successful exploit.</p>
-<h1><a class="header" href="#exploit-vulnerability-freebsd-sa-1813nfs-out-of-bounds-access" id="exploit-vulnerability-freebsd-sa-1813nfs-out-of-bounds-access">Exploit vulnerability FreeBSD-SA-18:13.nfs: out-of-bounds access</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exploit-vulnerability-freebsd-sa-1813nfs-out-of-bounds-access"><a class="header" href="#exploit-vulnerability-freebsd-sa-1813nfs-out-of-bounds-access">Exploit vulnerability FreeBSD-SA-18:13.nfs: out-of-bounds access</a></h1>
 <p>This mission depends on the pure-capability CheriBSD FETT kernel included in FETT CHERI-RISC-V Release 2 (kernel spatial memory safety).</p>
 <p>The objective of this mission is to demonstrate arbitrary code execution in a pure-capability kernel.
 This must be achieved via a reintroduced past FreeBSD security vulnerability, <a href="https://www.freebsd.org/security/advisories/FreeBSD-SA-18:13.nfs.asc">FreeBSD-SA-18:13.nfs</a>.
@@ -5024,7 +5038,7 @@ If <code>flag_captured(9)</code> is called, the sysctl <code>security.flags_capt
 This corresponds to a partially successful exploit.
 If the function is called with the designated argument, the sysctl <code>security.flags_captured_key</code> counter will be incremented.
 This corresponds to a fully successful exploit.</p>
-<h1><a class="header" href="#appendix" id="appendix">Appendix</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="appendix"><a class="header" href="#appendix">Appendix</a></h1>
 <p>This book and related source code are released under the following license:</p>
 <pre><code>SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
 
@@ -5035,7 +5049,7 @@ Copyright (c) 2022 Microsoft Corporation
 
 This software was developed by SRI International and the University of
 Cambridge Computer Laboratory (Department of Computer Science and
-Technology) under DARPA contract HR0011-18-C-0016 (&quot;ECATS&quot;), as part of the
+Technology) under DARPA contract HR0011-18-C-0016 ("ECATS"), as part of the
 DARPA SSITH research programme.
 
 Redistribution and use in source and binary forms, with or without
@@ -5064,9 +5078,7 @@ SUCH DAMAGE.
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
 
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -5074,49 +5086,35 @@ SUCH DAMAGE.
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
 
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
-        
-        <script type="text/javascript">
+        <script>
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });
         </script>
-        
-        
 
+    </div>
     </body>
 </html>

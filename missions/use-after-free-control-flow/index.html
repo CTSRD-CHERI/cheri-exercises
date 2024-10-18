@@ -1,28 +1,19 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Exploiting heap use-after-free to manipulate control flow - Adversarial CHERI Exercises and Missions</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
-        
         <link rel="icon" href="../../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../../favicon.png">
-        
         <link rel="stylesheet" href="../../css/variables.css">
         <link rel="stylesheet" href="../../css/general.css">
         <link rel="stylesheet" href="../../css/chrome.css">
@@ -30,9 +21,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../../highlight.css">
@@ -40,19 +29,18 @@
         <link rel="stylesheet" href="../../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "../../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -68,61 +56,89 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
 
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../cover/index.html">Adversarial CHERI Exercises and Missions</a></li><li class="chapter-item expanded "><a href="../../introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/background.html"><strong aria-hidden="true">1.1.</strong> Background reading</a></li><li class="chapter-item expanded "><a href="../../introduction/cross-compilation-execution.html"><strong aria-hidden="true">1.2.</strong> Cross compilation and execution</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../introduction/ccc.html"><strong aria-hidden="true">1.2.1.</strong> Helper script</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/index.html"><strong aria-hidden="true">2.</strong> Skills Development Exercises</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/index.html"><strong aria-hidden="true">2.1.</strong> Compile and run RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/compile-and-run/answers.html"><strong aria-hidden="true">2.1.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/index.html"><strong aria-hidden="true">2.2.</strong> Disassemble and debug RISC-V and CHERI-RISC-V programs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/debug-and-disassemble/answers.html"><strong aria-hidden="true">2.2.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/index.html"><strong aria-hidden="true">2.3.</strong> Demonstrate CHERI Tag Protection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-tags/answers.html"><strong aria-hidden="true">2.3.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/index.html"><strong aria-hidden="true">2.4.</strong> Exercise an inter-object stack buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-stack/answers.html"><strong aria-hidden="true">2.4.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/index.html"><strong aria-hidden="true">2.5.</strong> Exercise an inter-object global buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-global/answers.html"><strong aria-hidden="true">2.5.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/index.html"><strong aria-hidden="true">2.6.</strong> Explore subobject bounds</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/subobject-bounds/answers.html"><strong aria-hidden="true">2.6.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/index.html"><strong aria-hidden="true">2.7.</strong> Corrupt a control-flow pointer using a subobject buffer overflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/control-flow-pointer/answers.html"><strong aria-hidden="true">2.7.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/index.html"><strong aria-hidden="true">2.8.</strong> Exercise heap overflows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/buffer-overflow-heap/answers.html"><strong aria-hidden="true">2.8.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/type-confusion/index.html"><strong aria-hidden="true">2.9.</strong> Exercise integer-pointer type confusion bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/type-confusion/answers.html"><strong aria-hidden="true">2.9.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/index.html"><strong aria-hidden="true">2.10.</strong> Demonstrate pointer injection</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-injection/answers.html"><strong aria-hidden="true">2.10.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/adapt-c/index.html"><strong aria-hidden="true">2.11.</strong> Adapt a C Program to CHERI C</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/adapt-c/answers.html"><strong aria-hidden="true">2.11.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheriabi/index.html"><strong aria-hidden="true">2.12.</strong> CheriABI Showcase</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheriabi/answers.html"><strong aria-hidden="true">2.12.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/index.html"><strong aria-hidden="true">2.13.</strong> Extending Heap Allocators for CHERI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/cheri-allocator/answers.html"><strong aria-hidden="true">2.13.1.</strong> Answers</a></li></ol></li><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/index.html"><strong aria-hidden="true">2.14.</strong> Demonstrate pointer revocation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../exercises/pointer-revocation/answers.html"><strong aria-hidden="true">2.14.1.</strong> Answers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../missions/index.html"><strong aria-hidden="true">3.</strong> Focused Adversarial Missions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../missions/buffer-overflow-control-flow/index.html"><strong aria-hidden="true">3.1.</strong> Exploiting a buffer overflow to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/uninitialized-stack-frame-control-flow/index.html"><strong aria-hidden="true">3.2.</strong> Exploiting an uninitialized stack frame to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/use-after-free-control-flow/index.html" class="active"><strong aria-hidden="true">3.3.</strong> Exploiting heap use-after-free to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-09-06.ktimer/index.html"><strong aria-hidden="true">3.4.</strong> Exploiting kernel system-call vulnerability to manipulate control flow</a></li><li class="chapter-item expanded "><a href="../../missions/kernel-FreeBSD-SA-18-13.nfs/index.html"><strong aria-hidden="true">3.5.</strong> Exploiting kernel NFS-server vulnerability to manipulate control flow</a></li></ol></li><li class="chapter-item expanded "><a href="../../appendix/index.html"><strong aria-hidden="true">4.</strong> Appendix</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Adversarial CHERI Exercises and Missions</h1>
@@ -131,18 +147,16 @@
                         <a href="../../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
                         <a href="https://github.com/CTSRD-CHERI/cheri-exercises" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -150,10 +164,9 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -163,7 +176,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#exploiting-heap-use-after-free-to-manipulate-control-flow" id="exploiting-heap-use-after-free-to-manipulate-control-flow">Exploiting heap use-after-free to manipulate control flow</a></h1>
+                        <h1 id="exploiting-heap-use-after-free-to-manipulate-control-flow"><a class="header" href="#exploiting-heap-use-after-free-to-manipulate-control-flow">Exploiting heap use-after-free to manipulate control flow</a></h1>
 <p><strong>This mission requires a CheriBSD sysroot and image with temporal safety!</strong>
 The executable can be built for both RISC-V and CHERI-RISC-V (and exploring
 both may be worthwhile), but the mission is for CHERI-RISC-V with heap temporal
@@ -174,28 +187,28 @@ without completing authentication, walk the server's protocol state machine
 through erroneous states. Popular bugs facilitating these exploits include
 double free, use-after-reallocation, and type confusion (esp. of temporally
 aliased objects). For this mission, we have simplified the interface to be a
-little &quot;command language&quot; read over <code>stdin</code>, detailed below.</p>
+little "command language" read over <code>stdin</code>, detailed below.</p>
 <p>The success criterion is executing the <code>success</code> function. To ease testing,
 this is the only case in which the program source claims to exit with a code of
 <code>42</code>. Ordinary termination is signaled with <code>0</code> and invalid input results in
 the program terminating with <code>1</code>. While the source does not overtly claim any
 other outcome, if control flow can be redirected, almost anything goes.</p>
-<h3><a class="header" href="#program-overview" id="program-overview">Program Overview</a></h3>
+<h3 id="program-overview"><a class="header" href="#program-overview">Program Overview</a></h3>
 <p>This is a (very) minimal simulation of a program that manages multiple
 sessions, objects within each session, and limited information flow between
 those sessions. Rather than network sockets, each session is represented by a
 <code>struct farm</code> and there are up to four such active at any moment. Within each
 <code>struct farm</code> is a circular collection of <code>struct crop</code>s, at most one of which
 may be selected by the <code>cursor</code> of its owning <code>struct farm</code>. If no crop is
-selected, the cursor is said to be &quot;in the gap&quot;. The crop at the cursor, if
+selected, the cursor is said to be "in the gap". The crop at the cursor, if
 any, can be asked to describe itself, using a function pointer within the
 <code>struct crop</code> itself.</p>
 <p>To make matters more exciting, a UFO may be summoned to perform particular
-kinds of mischief. The UFO may &quot;abduct&quot; a pointer into itself and can create
+kinds of mischief. The UFO may "abduct" a pointer into itself and can create
 crop signs within <code>struct crop</code> (with data) or <code>struct farm</code> (with a capability
 to the <code>success()</code> function).</p>
 <p>The gadgets offered by the UFO are somewhat limited (that is, they are not
-&quot;write what where&quot; or arbitrary control transfer) as one might expect to see in
+"write what where" or arbitrary control transfer) as one might expect to see in
 a real application. Nevertheless, they are sufficiently powerful to provide
 <em>myriad</em> exploitation vectors on RISC-V without CHERI, and even a few on
 CHERI-RISC-V. However, we believe that enforced heap temporal safety will
@@ -203,7 +216,7 @@ ensure that any use of them is either overwritten by subsequent program
 operations before the gadgets' effects influence control flow or will cause the
 program to fail-stop with a default-fatal signal (e.g., <code>SIGSEGV</code> or
 <code>SIGPROT</code>).</p>
-<h3><a class="header" href="#building-and-running" id="building-and-running">Building and running</a></h3>
+<h3 id="building-and-running"><a class="header" href="#building-and-running">Building and running</a></h3>
 <p>We suggest using the <code>ccc</code> tool provided with this book, building for
 <code>riscv64-purecap</code>. For experimentation, this program also builds for
 <code>riscv64</code>, without CHERI. On <code>riscv64-purecap</code> builds, heap temporal safety
@@ -213,11 +226,11 @@ flag prior to program loading disqualifies such invocations from completing the
 mission, being able to disable revocation from within <code>main()</code> would be quite
 interesting indeed.)</p>
 <p>As said before, the program expects to read a command language from <code>stdin</code>.
-It will print &quot;Ready&quot; and then await input. Unlike real applications, this
+It will print "Ready" and then await input. Unlike real applications, this
 program is fairly chatty about its own operation to ease exploration.
 Nevertheless, it may be useful to run it within <code>gdb</code>, especially to
 differentiate causes of crashes.</p>
-<h3><a class="header" href="#command-language-directives" id="command-language-directives">Command Language Directives</a></h3>
+<h3 id="command-language-directives"><a class="header" href="#command-language-directives">Command Language Directives</a></h3>
 <ul>
 <li>
 <p>Whitespace is quietly ignored in most cases; this may simplify reading
@@ -278,7 +291,7 @@ will force a revocation pass, destroying pointers to free objects and
 allowing reuse of memory and address space.</p>
 </li>
 </ul>
-<h3><a class="header" href="#example-session" id="example-session">Example Session</a></h3>
+<h3 id="example-session"><a class="header" href="#example-session">Example Session</a></h3>
 <p>Here is a short session which creates one <code>struct farm</code>, two <code>struct crop</code>s,
 exhibits cursor control and description of <code>struct crop</code>s, and then tears down
 the <code>struct farm</code>:</p>
@@ -299,7 +312,7 @@ FYI:  cursor-&gt;describe 0x10300e
 Colt at 0x41201100
 Tear down farm (index 0) at 0x41201080
 </code></pre>
-<h3><a class="header" href="#source-code" id="source-code">Source code</a></h3>
+<h3 id="source-code"><a class="header" href="#source-code">Source code</a></h3>
 <p><strong>temporal-mission.c</strong></p>
 <pre><code class="language-C">/*
  * SPDX-License-Identifier: BSD-2-Clause
@@ -327,7 +340,7 @@ struct crop;
 static void
 success(struct farm *f)
 {
-	fprintf(stderr, &quot;Exploit successful: computer bought the farm!\n&quot;);
+	fprintf(stderr, "Exploit successful: computer bought the farm!\n");
 	exit(42);
 }
 
@@ -344,7 +357,7 @@ struct crop {
 };
 
 _Static_assert(sizeof(struct crop) == sizeof(struct farm),
-    &quot;Structure size mismatch&quot;);
+    "Structure size mismatch");
 
 union ufo {
 	void	*ptrA;
@@ -352,18 +365,18 @@ union ufo {
 };
 
 _Static_assert(sizeof(struct crop) == sizeof(union ufo),
-    &quot;Structure size mismatch&quot;);
+    "Structure size mismatch");
 
 static void
 descr_1(struct crop *c)
 {
-	fprintf(stderr, &quot;Chelan at %p\n&quot;, c); /* Pacific Northwest */
+	fprintf(stderr, "Chelan at %p\n", c); /* Pacific Northwest */
 }
 
 static void
 descr_2(struct crop *c)
 {
-	fprintf(stderr, &quot;Colt at %p\n&quot;, c); /* United Kingdom */
+	fprintf(stderr, "Colt at %p\n", c); /* United Kingdom */
 }
 
 static unsigned int cid;
@@ -386,7 +399,7 @@ rm_farm(int fix)
 			free(c);
 		}
 
-		fprintf(stderr, &quot;Tear down farm (index %d) at %p\n&quot;, fix, f);
+		fprintf(stderr, "Tear down farm (index %d) at %p\n", fix, f);
 		free(f);
 	}
 }
@@ -406,14 +419,14 @@ mk_farm(int fix)
 
 	farmp[fix] = f;
 
-	fprintf(stderr, &quot;New farm (index %d) at %p\n&quot;, fix, f);
+	fprintf(stderr, "New farm (index %d) at %p\n", fix, f);
 	return f;
 }
 
 static void
 rm_crop(struct farm *f, struct crop *c)
 {
-	fprintf(stderr, &quot;Del crop at %p\n&quot;, c);
+	fprintf(stderr, "Del crop at %p\n", c);
 	TAILQ_REMOVE(&amp;f-&gt;cropq, c, farm_cropq);
 	free(c);
 }
@@ -436,7 +449,7 @@ mk_crop(struct farm *f)
 
 	TAILQ_INSERT_HEAD(&amp;f-&gt;cropq, c, farm_cropq);
 
-	fprintf(stderr, &quot;New crop at %p\n&quot;, c);
+	fprintf(stderr, "New crop at %p\n", c);
 
 	return c;
 }
@@ -445,7 +458,7 @@ static void
 rm_ufo(void)
 {
 	if (ufo != NULL) {
-		fprintf(stderr, &quot;Del UFO at %p\n&quot;, ufo);
+		fprintf(stderr, "Del UFO at %p\n", ufo);
 		free(ufo);
 	}
 }
@@ -457,13 +470,13 @@ main(void)
 	size_t fix = 0;
 
 #if defined(__CHERI_PURE_CAPABILITY__)
-	if (getenv(&quot;MALLOC_DISABLE_REVOCATION&quot;) == NULL) {
-		fprintf(stderr, &quot;Ready (CHERI-RISC-V)\n&quot;);
+	if (getenv("MALLOC_DISABLE_REVOCATION") == NULL) {
+		fprintf(stderr, "Ready (CHERI-RISC-V)\n");
 	} else {
-		fprintf(stderr, &quot;Ready (CHERI-RISC-V, reduced heap safety)\n&quot;);
+		fprintf(stderr, "Ready (CHERI-RISC-V, reduced heap safety)\n");
 	}
 #else
-	fprintf(stderr, &quot;Ready (RISC-V)\n&quot;);
+	fprintf(stderr, "Ready (RISC-V)\n");
 #endif
 
 	while ((c = getchar()) != EOF) {
@@ -472,7 +485,7 @@ main(void)
 
 		if (('0' &lt;= c) &amp;&amp; (c &lt; '0' + NFARM)) {
 			fix = c - '0';
-			fprintf(stderr, &quot;Selected farm %zu (%p)\n&quot;, fix,
+			fprintf(stderr, "Selected farm %zu (%p)\n", fix,
 			    farmp[fix]);
 			continue;
 		}
@@ -483,7 +496,7 @@ main(void)
 #if defined(__CHERI_PURE_CAPABILITY__)
 			malloc_revoke();
 #else
-			fprintf(stderr, &quot;No revocation without CHERI!\n&quot;);
+			fprintf(stderr, "No revocation without CHERI!\n");
 #endif
 			break;
 
@@ -497,10 +510,10 @@ main(void)
 				rm_crop(f, f-&gt;cursor);
 			break;
 		case 'D':
-			fprintf(stderr, &quot;FYI: Current farm is %p\n&quot;, f);
+			fprintf(stderr, "FYI: Current farm is %p\n", f);
 			if ((f != NULL) &amp;&amp; (f-&gt;cursor != NULL)) {
-				fprintf(stderr, &quot;FYI:  cursor %p\n&quot;, f-&gt;cursor);
-				fprintf(stderr, &quot;FYI:  cursor-&gt;describe %p\n&quot;,
+				fprintf(stderr, "FYI:  cursor %p\n", f-&gt;cursor);
+				fprintf(stderr, "FYI:  cursor-&gt;describe %p\n",
 				    f-&gt;cursor-&gt;describe);
 				f-&gt;cursor-&gt;describe(f-&gt;cursor);
 			}
@@ -525,7 +538,7 @@ main(void)
 					    cropq);
 				}
 			}
-			fprintf(stderr, &quot;Farm %zu cursor %p\n&quot;, fix, f-&gt;cursor);
+			fprintf(stderr, "Farm %zu cursor %p\n", fix, f-&gt;cursor);
 			break;
 		case 'R':
 			if (f != NULL) {
@@ -536,7 +549,7 @@ main(void)
 					f-&gt;cursor = TAILQ_FIRST(&amp;f-&gt;cropq);
 				}
 			}
-			fprintf(stderr, &quot;Farm %zu cursor %p\n&quot;, fix, f-&gt;cursor);
+			fprintf(stderr, "Farm %zu cursor %p\n", fix, f-&gt;cursor);
 			break;
 		case 'Z':
 			if (f != NULL)
@@ -546,14 +559,14 @@ main(void)
 		/* UFO control sequences */
 		case 'A':
 			if ((ufo != NULL) &amp;&amp; (f != NULL)) {
-				fprintf(stderr, &quot;UFO abduct %p\n&quot;, f-&gt;cursor);
+				fprintf(stderr, "UFO abduct %p\n", f-&gt;cursor);
 				ufo-&gt;ptrA = f-&gt;cursor;
 			}
 			break;
 		case 'S':
 			if (f != NULL) {
 				/* Jess's Organic Farm-to-Vtable Capability */
-				fprintf(stderr, &quot;Crop sign at farm %p\n&quot;, f);
+				fprintf(stderr, "Crop sign at farm %p\n", f);
 				f-&gt;cursor = (void *)success;
 			}
 			break;
@@ -563,7 +576,7 @@ main(void)
 				for (size_t i = 0; i &lt; sizeof buf; i++) {
 					buf[i] = getchar();
 				}
-				fprintf(stderr, &quot;Signing crop %p\n&quot;, f-&gt;cursor);
+				fprintf(stderr, "Signing crop %p\n", f-&gt;cursor);
 				memmove((char *)f-&gt;cursor, buf, sizeof(buf));
 			}
 			break;
@@ -571,14 +584,14 @@ main(void)
 			rm_ufo();
 			ufo = malloc(sizeof(union ufo));
 			assert(ufo != NULL);
-			fprintf(stderr, &quot;UFO at %p\n&quot;, ufo);
+			fprintf(stderr, "UFO at %p\n", ufo);
 			break;
 		case 'u':
 			rm_ufo();
 			break;
 
 		default:
-			fprintf(stderr, &quot;Did not understand %x; bail!\n&quot;, c);
+			fprintf(stderr, "Did not understand %x; bail!\n", c);
 			return 1;
 		}
 	}
@@ -591,17 +604,13 @@ main(void)
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../../missions/uninitialized-stack-frame-control-flow/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
-                            <a rel="next" href="../../missions/kernel-FreeBSD-SA-09-06.ktimer/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../../missions/kernel-FreeBSD-SA-09-06.ktimer/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -609,49 +618,36 @@ main(void)
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../../missions/uninitialized-stack-frame-control-flow/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
-                    <a rel="next" href="../../missions/kernel-FreeBSD-SA-09-06.ktimer/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../../missions/kernel-FreeBSD-SA-09-06.ktimer/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
-        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
-        
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
 
-        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
+    </div>
     </body>
 </html>
