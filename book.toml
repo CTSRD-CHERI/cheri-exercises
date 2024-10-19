@@ -8,3 +8,5 @@ title = "Adversarial CHERI Exercises and Missions"
 [output.html]
 git-repository-url = "https://github.com/CTSRD-CHERI/cheri-exercises"
 site-url = "/cheri-exercises/"
+
+[output.linkcheck]
