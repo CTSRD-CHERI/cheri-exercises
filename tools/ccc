@@ -73,23 +73,32 @@ aarch64)
 	cheri_arch_basename=morello
 	cheri_sdk_name=morello-sdk
 	arch_flags="-target aarch64-unknown-freebsd -march=morello+noa64c"
+    microkit_ldflags="-lmicrokit -lutils"
 	;;
 morello-hybrid)
 	cheri_sdk_name=morello-sdk
 	arch_flags="-target aarch64-unknown-freebsd -march=morello -Xclang -morello-vararg=new"
+    microkit_ldflags="-lmicrokit -lutils"
 	;;
 morello-purecap)
 	cheri_sdk_name=morello-sdk
 	arch_flags="-target aarch64-unknown-freebsd -march=morello -mabi=purecap -Xclang -morello-vararg=new"
+    microkit_ldflags="-lmicrokit_purecap -lutils_purecap"
 	;;
 riscv64)
-	arch_flags="-target riscv64-unknown-freebsd -march=rv64gc -mabi=lp64d -mno-relax"
+	cheri_sdk_name=cheri-alliance-sdk
+	arch_flags="-target riscv64-unknown-elf -march=rv64gc -mabi=lp64d -mno-relax"
+    microkit_ldflags="-lmicrokit -lutils"
 	;;
 riscv64-hybrid)
-	arch_flags="-target riscv64-unknown-freebsd -march=rv64gcxcheri -mabi=lp64d -mno-relax"
+	cheri_sdk_name=cheri-alliance-sdk
+	arch_flags="-target riscv64-unknown-elf -march=rv64gc_zcherihybrid -mabi=lp64d -mno-relax"
+    microkit_ldflags="-lmicrokit -lutils"
 	;;
 riscv64-purecap)
-	arch_flags="-target riscv64-unknown-freebsd -march=rv64gcxcheri -mabi=l64pc128d -mno-relax"
+	cheri_sdk_name=cheri-alliance-sdk
+	arch_flags="-target riscv64-unknown-elf -march=rv64gc_zcherihybrid -mabi=l64pc128d -mno-relax"
+    microkit_ldflags="-lmicrokit_purecap -lutils_purecap"
 	;;
 *)
 	err 1 "Unsupported architecture '$arch'"
@@ -138,11 +147,11 @@ if [ ! -x "$prog" ]; then
 fi
 debug "prog: $prog"
 
-SDK_SYSROOT=${SYSROOT:-${SDKDIR}/sysroot-${cheri_arch_basename}-purecap}
-if [ ! -d "$SDK_SYSROOT" ]; then
-	enverr "Sysroot '$SDK_SYSROOT' does not exist." "SYSROOT"
+MICROKIT_SDK=${MICROKIT_SDK:-${SDKDIR}/baremetal/baremetal-riscv64-zpurecap/microkit-sdk-2.0.1-dev}
+if [ ! -d "$MICROKIT_SDK" ]; then
+       enverr "Microkit '$MICROKIT_SDK' does not exist." "MICROKIT_SDK"
 fi
-debug "sysroot: $SDK_SYSROOT"
+debug "microkit: $MICROKIT_SDK"
 
 debug "arch_flags: $arch_flags"
 
@@ -152,8 +161,8 @@ debug "debug_flags: $debug_flags"
 opt_flags="-O2"
 debug "opt_flags: $opt_flags"
 
-sysroot_flags="--sysroot='$SDK_SYSROOT'"
-debug "sysroot_flags: $sysroot_flags"
+microkit_flags="-L'$MICROKIT_SDK/board/qemu_virt_riscv64/cheri/lib' -I'$MICROKIT_SDK/board/qemu_virt_riscv64/cheri/include' -Tmicrokit.ld -nostdlib -ffreestanding"
+debug "microkit_flags: $microkit_flags"
 
 linker_flags="-fuse-ld=lld"
 debug "linker_flags: $linker_flags"
@@ -161,7 +170,7 @@ debug "linker_flags: $linker_flags"
 diag_flags="-Wall -Wcheri"
 debug "diag_flags: $diag_flags"
 
-all_flags="$arch_flags $sysroot_flags $debug_flags $opt_flags $linker_flags $diag_flags"
+all_flags="$arch_flags $debug_flags $opt_flags $linker_flags $diag_flags $microkit_flags $microkit_ldflags"
 
 all_flags_rev=
 # shellcheck disable=SC2086 # intentional

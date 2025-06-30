@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+    <!-- Define your system here -->
+    <protection_domain name="type-confusion" priority="253">
+        <program_image path="type-confusion.elf" />
+    </protection_domain>
+</system>

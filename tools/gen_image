@@ -1,0 +1,140 @@
+#!/bin/sh
+#
+# gen_image - Generate bootable Microkit image script
+set -e
+set -u
+
+name=$(basename "$0")
+
+VERBOSE=${VERBOSE:-0}
+QUIET=${QUIET:-0}
+
+# Print usage information
+usage() {
+    echo "Usage: $0 [-o output_image] input1 [input2 ...]"
+    echo ""
+    echo "  -o output_image   Optional output image name (default: loader.img)"
+    echo "  inputN            One or more input ELF (or binary) files"
+    echo ""
+    echo "Example:"
+    echo "  $0 -o myos.img hello foo bar"
+    exit 1
+}
+
+err()
+{
+	ret=$1
+	shift
+	echo >&2 "$@"
+	exit "$ret"
+}
+
+warn()
+{
+	echo >&2 "$@"
+}
+
+debug()
+{
+	if [ "$VERBOSE" -ne 0 ]; then
+		echo >&2 "$@"
+	fi
+}
+
+info()
+{
+	if [ "$QUIET" -eq 0 ]; then
+		echo >&2 "$@"
+	fi
+}
+
+run()
+{
+	debug	# add space before normal multiline output
+	info "Running:" "$@"
+	"$@"
+}
+
+if [ $# -eq 0 ]; then
+	usage
+fi
+
+cheri_sdk_name=cheri-alliance-sdk
+# Find our SDK, using the first of these that expands only defined variables:
+#  ${CHERIBUILD_SDK_${cheri_sdk_name}} (if that syntax worked)
+#  ${CHERIBUILD_SDK}
+#  ${CHERIBUILD_OUTPUT}/${cheri_sdk_name}
+#  ${CHERIBUILD_SOURCE}/output/${cheri_sdk_name}
+#  ~/cheri/output/${cheri_sdk_name}
+
+SDKDIR_SOURCE=${CHERIBUILD_SOURCE:-${HOME}/cheri}
+SDKDIR_OUTPUT=${CHERIBUILD_OUTPUT:-${SDKDIR_SOURCE}/output}
+SDKDIR_SDK=${CHERIBUILD_SDK:-${SDKDIR_OUTPUT}/${cheri_sdk_name}}
+SDKDIR=${SDKDIR:-${SDKDIR_SDK}}
+
+enverr()
+{
+	echo >&2 $1
+	echo "Perhaps set or adjust one of the following environment variables:"
+	for v in SOURCE OUTPUT SDK; do
+		echo " " CHERIBUILD_$v \(currently: \
+		  $(eval echo \${CHERIBUILD_$v:-unset, tried \$SDKDIR_$v})\)
+	done
+
+	err 1 "Please check your build environment"
+}
+
+SDK_MICROKIT=${CLANG:-${SDKDIR}/bin/clang}
+
+MICROKIT_SDK=${MICROKIT_SDK:-${SDKDIR}/baremetal/baremetal-riscv64-zpurecap/microkit-sdk-2.0.1-dev}
+if [ ! -d "$MICROKIT_SDK" ]; then
+       enverr "Microkit '$MICROKIT_SDK' does not exist." "MICROKIT_SDK"
+fi
+debug "microkit: $MICROKIT_SDK"
+
+MICROKIT_TOOL=${MICROKIT_SDK}/bin/microkit
+debug "MICROKIT_TOOL: $MICROKIT_TOOL"
+
+# Parse args
+OUTPUT_FILE="generated.system"
+IMAGE_NAME="loader.img"
+INPUT_FILES=""
+SEARCH_PATH="$(pwd)"
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -o)
+            shift
+            [ $# -eq 0 ] && echo "Error: -o requires an argument" && usage
+            IMAGE_NAME="$1"
+            ;;
+        -*)
+            echo "Error: Unknown option: $1"
+            usage
+            ;;
+        *)
+            INPUT_FILES="$INPUT_FILES $1"
+            ;;
+    esac
+    shift
+done
+
+[ -z "$INPUT_FILES" ] && echo "Error: No input files provided" && usage
+
+# Generate XML
+{
+    echo '<?xml version="1.0" encoding="UTF-8"?>'
+    echo '<system>'
+    for file in $INPUT_FILES; do
+        base=$(basename "$file")
+        echo "    <protection_domain name=\"$base\">"
+        echo "        <program_image path=\"$base\" />"
+        echo "    </protection_domain>"
+    done
+    echo '</system>'
+} > "$OUTPUT_FILE"
+
+echo "Generated $OUTPUT_FILE from input files:$INPUT_FILES"
+echo "Running Microkit tool to generate image: $IMAGE_NAME"
+
+"$MICROKIT_TOOL" "$OUTPUT_FILE" -o "$IMAGE_NAME"  --search-path "$SEARCH_PATH" --board "qemu_virt_riscv64" --config "cheri"

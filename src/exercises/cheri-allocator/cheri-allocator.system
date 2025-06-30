@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+    <!-- Define your system here -->
+    <protection_domain name="cheri-allocator">
+        <program_image path="cheri-allocator.elf" />
+    </protection_domain>
+</system>

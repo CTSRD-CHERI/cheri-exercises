@@ -1,0 +1,50 @@
+#!/bin/sh
+
+set -e
+
+# --- Configuration ---
+# Find path to this script and to gen_image
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+GEN_IMAGE="$SCRIPT_DIR/gen_image"
+
+cheri_sdk_name=cheri-alliance-sdk
+# Setup SDK path
+SDKDIR_SOURCE=${CHERIBUILD_SOURCE:-$HOME/cheri}
+SDKDIR_OUTPUT=${CHERIBUILD_OUTPUT:-$SDKDIR_SOURCE/output}
+SDKDIR_SDK=${CHERIBUILD_SDK:-$SDKDIR_OUTPUT/${cheri_sdk_name}}
+SDKDIR=${SDKDIR:-$SDKDIR_SDK}
+
+QEMU_BIN="$SDKDIR/bin/qemu-system-riscv64cheri"
+
+# Default BIOS path, relative to SDKDIR
+BIOS="$SDKDIR/cheri-alliance-opensbi/riscv64/share/opensbi/l64pc128/generic/firmware/fw_jump.elf"
+
+# --- Input Parsing ---
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 <image.elf | image.img>"
+    exit 1
+fi
+
+INPUT="$1"
+shift  # Remaining args are passed to QEMU
+QEMU_EXTRA_ARGS="$@"
+
+# --- ELF detection using 'file' ---
+FILE_TYPE=$(file -b "$INPUT")
+case "$FILE_TYPE" in
+    *"ELF "*)
+        echo "Detected ELF binary. Generating image..."
+        "$GEN_IMAGE" "$INPUT"
+        KERNEL_IMAGE="loader.img"
+        ;;
+    *)
+        echo "Detected non-ELF image. Using it directly."
+        KERNEL_IMAGE="$INPUT"
+        ;;
+esac
+
+# --- Run QEMU ---
+CMD="$QEMU_BIN -M virt -cpu codasip-a730,cheri_levels=2 -smp 1 -serial pty -m 2G -nographic -bios \"$BIOS\" -kernel \"$KERNEL_IMAGE\" $QEMU_EXTRA_ARGS"
+echo "Running QEMU command:"
+echo "$CMD"
+eval "$CMD"

@@ -2,9 +2,9 @@
  * SPDX-License-Identifier: BSD-2-Clause
  * Copyright (c) 2022 Microsoft Corporation
  */
-#include <assert.h>
 #include <stddef.h>
-#include <stdio.h>
+#include <printf.h>
+#include <sel4/assert.h>
 
 #pragma weak write_buf
 void
@@ -13,8 +13,8 @@ write_buf(char *buf, size_t ix)
 	buf[ix] = 'b';
 }
 
-int
-main(void)
+void
+init(void)
 {
 	char upper[0x10];
 	char lower[0x10];
@@ -23,7 +23,7 @@ main(void)
 	    upper, lower, (size_t)(upper - lower));
 
 	/* Assert that these get placed how we expect */
-	assert((ptraddr_t)upper == (ptraddr_t)&lower[sizeof(lower)]);
+	seL4_Assert((ptraddr_t)upper == (ptraddr_t)&lower[sizeof(lower)]);
 
 	upper[0] = 'a';
 	printf("upper[0] = %c\n", upper[0]);
@@ -31,6 +31,6 @@ main(void)
 	write_buf(lower, sizeof(lower));
 
 	printf("upper[0] = %c\n", upper[0]);
-
-	return 0;
 }
+
+void notified(){}

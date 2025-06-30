@@ -5,14 +5,14 @@ types, preventing certain types of type confusion.
 In this example, a union allows an integer value to be used as a pointer,
 which cannot then be dereferenced.
 
-1. Compile `union-int-ptr.c` with a RISC-V target and binary name of
-   `union-int-ptr-riscv`, and with a CHERI-RISC-V target and binary name
-   `union-int-ptr-cheri`.
+1. Compile `type-confusion.c` with a RISC-V target and binary name of
+   `type-confusion-riscv`, and with a CHERI-RISC-V target and binary name
+   `type-confusion-cheri`.
 
-**union-int-ptr.c**
+**type-confusion.c**
 ```C
-{{#include union-int-ptr.c}}
+{{#include type-confusion.c}}
 ```
 2. Run the RISC-V program. What is the result?
 3. Run the CHERI-RISC-V program.  What is the result?
-   Run under `gdb` and explain why the program crashes in the second `printf`.
+   Run under QEMU and `gdb` and explain why the program crashes in the second `printf`.

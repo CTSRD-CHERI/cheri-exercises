@@ -15,15 +15,17 @@ and software stacks.
 
 ## Platform
 
-These exercises are designed to be run on the CheriBSD operating system in its
-pure-capability CheriABI process environment.
+These exercises are designed to be run on the CHERI-seL4 microkernel (in hybrid
+mode) and its CHERI-Microkit userspace framework that enables pure-capability
+protection domain environment.
 They can be run on various instantiations of CHERI-RISC-V, including on QEMU
 and on FPGA implementations.
 QEMU-CHERI is a convenient instruction-set-level emulator, and is usually the
 best starting point for most users (even those intending to eventually run on
 hardware).
 You can use our [cheribuild](https://github.com/CTSRD-CHERI/cheribuild) tool
-to build the CHERI-RISC-V SDK, CheriBSD, and QEMU on macOS, FreeBSD, and Linux.
+to build the CHERI-RISC-V SDK, CHERI-seL4, CHERI-Microkit, and QEMU on macOS,
+FreeBSD, and Linux.
 
 ## Skills development exercises
 

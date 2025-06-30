@@ -2,7 +2,7 @@
  * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
  * Copyright (c) 2020 SRI International
  */
-#include <assert.h>
+#include <sel4/assert.h>
 #include <stddef.h>
 #ifdef __CHERI_PURE_CAPABILITY__
 #include <cheriintrin.h>
@@ -20,7 +20,7 @@ main_asserts(void)
 	 * In the pure-capabilty case, don't assert if the size of
 	 * `buffer` requires padding.
 	 */
-	assert((ptraddr_t)&buffer[nitems(buffer)] == (ptraddr_t)&c
+	seL4_Assert((ptraddr_t)&buffer[nitems(buffer)] == (ptraddr_t)&c
 #ifdef __CHERI_PURE_CAPABILITY__
 	    || sizeof(buffer) < cheri_representable_length(sizeof(buffer))
 #endif

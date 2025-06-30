@@ -4,7 +4,8 @@
 
 Robert N. M. Watson (University of Cambridge), Brooks Davis (SRI
 International), Wes Filardo (Microsoft Research), Jessica Clarke (University of
-Cambridge) and John Baldwin (Ararat River Consulting).
+Cambridge), John Baldwin (Ararat River Consulting), and Hesham Almatary
+(Capabilities Limited).
 
 This repository contains a series of skills development and adversarial
 exercises for [CHERI](http://cheri-cpu.org), specifically aimed at the

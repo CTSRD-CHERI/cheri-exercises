@@ -2,49 +2,73 @@
 
 2. Expected output:
    ```
-   # ./buffer-overflow-stack-baseline
-   upper = 0x80d879d0, lower = 0x80d879c0, diff = 10
+   # run_qemu ./buffer-overflow-stack-baseline
+   upper = 0000003FFFFFEFA0, lower = 0000003FFFFFEF90, diff = 10
    upper[0] = a
    upper[0] = b
-   # ./buffer-overflow-stack-cheri
-   upper = 0x3fffdfff50, lower = 0x3fffdfff40, diff = 10
+   # run_qemu ./buffer-overflow-stack-cheri
+   upper = 00000000000000000000003FFFFFEF30, lower = 00000000000000000000003FFFFFEF20, diff = 10
    upper[0] = a
-   In-address space security exception
+   MON|ERROR: received message 0x00000006  badge: 0x0000000000000001  tcb cap: 0x8000000000000008
+   MON|ERROR: faulting PD: buffer-overflow-stack-cheri
    ```
 
-3. An example session of `gdb-run.sh ./buffer-overflow-stack-cheri` on CHERI-RISC-V:
+3. An example of the Monitor's output for buffer-overflow-stack-cheri` on CHERI-RISC-V:
    ```
-   Reading symbols from ./buffer-overflow-stack-cheri...
-   Starting program: /mnt/buffer-overflow-stack-cheri
-   upper = 0x3fffdfff50, lower = 0x3fffdfff40, diff = 10
-   upper[0] = a
-
-   Program received signal SIGPROT, CHERI protection violation
-   Capability bounds fault caused by register ca0.
-   0x0000000000101cf0 in write_buf (buf=<optimized out>, ix=<optimized out>) at buffer-overflow-stack.c:13
-   13              buf[ix] = 'b';
-
-   Thread 1 (LWP 100055 of process 829):
-   #0  0x0000000000101cf0 in write_buf (buf=<optimized out>, ix=<optimized out>) at buffer-overflow-stack.c:13
-   #1  0x0000000000101d7a in main () at buffer-overflow-stack.c:31
-   (gdb) disass
-   Dump of assembler code for function write_buf:
-      0x0000000000101ce8 <+0>:     cincoffset      ca0,ca0,a1
-      0x0000000000101cec <+4>:     li      a1,98
-   => 0x0000000000101cf0 <+8>:     csb     a1,0(ca0)
-      0x0000000000101cf4 <+12>:    cret
-   End of assembler dump.
+    MON|ERROR: received message 0x00000006  badge: 0x0000000000000001  tcb cap: 0x8000000000000008
+    MON|ERROR: faulting PD: buffer-overflow-stack-cheri
+    Registers:
+    ddc : 0x0
+    pcc : 0x200060 [rxCM1111,0x200000-0x204000] (capmode)
+    cra : 0x2000ea [rxCM1111,0x200000-0x204000] (capmode) (sentry)
+    csp : 0x3fffffeef0 [rwCM1111,0x3fffffe000-0x3ffffff000]
+    cgp : 0x0
+    cs0 : 0x3fffffef20 [rwCM1111,0x3fffffef20-0x3fffffef30]
+    cs1 : 0x202693 [rCM1111,0x202693-0x2026a2]
+    cs2 : 0x0
+    cs3 : 0x203000 [rwCM1111,0x203000-0x203010]
+    cs4 : 0x0
+    cs5 : 0x0
+    cs6 : 0x0
+    cs7 : 0x0
+    cs8 : 0x0
+    cs9 : 0x0
+    cs10 : 0x0
+    cs11 : 0x0
+    ca0 : 0x3fffffef30 [rwCM1111,0x3fffffef20-0x3fffffef30]
+    ca1 : 0x62
+    ca2 : 0xd
+    ca3 : 0xffffffffffffffff
+    ca4 : 0x0
+    ca5 : 0x0
+    ca6 : 0x0
+    ca7 : 0xfffffffffffffff4
+    ct0 : 0x0
+    ct1 : 0x201d46 [rxCM1111,0x200000-0x202cf0] (capmode)
+    ct2 : 0x0
+    ct3 : 0x0
+    ct4 : 0x0
+    ct5 : 0x0
+    ct6 : 0x0
+    ctp : 0x0
+    MON|ERROR: CHERI Security Violation: ip=0x0000000000200060  fault_addr=0x0000003fffffef30  fsr=0x0000000000000814  (data fault)
+    MON|ERROR: description of fault: Bounds violation
+    MON|ERROR: CHERI fault type: CHERI data fault due to load, store or AMO
+    <<seL4(CPU 0) [receiveIPC/142 T0xffffffc0fffe6400 "rootserver" @8a000460]: Reply object already has unexecuted reply!>
    ```
 
-   Asking `gdb` about the registers with `info registers` and focusing
-   on the ones involved here, we see
+   Using GDB or llvm-objdump to see what instructions at the faulting PC (ip=0x000200060), we see:
    ```
-   a0             0x3fffdfff50     274875809616
-   a1             0x62     98
+   ;       buf[ix] = 'b';
+   200060: 23 00 b5 00   sb      a1, 0(ca0)
+   ```
 
-   ca0            0xd17d000007d5bf440000003fffdfff50       0x3fffdfff50 [rwRW,0x3fffdfff40-0x3fffdfff50]
-   ca1            0x62     0x62
+   If we investigate the content of `ca0` (either using GDB's `info reg $ca0` or from the register dump), we can see it does have something
+   like:
    ```
+   ca0 : 0x3fffffef30 [rwCM1111,0x3fffffef20-0x3fffffef30]
+   ```
+
    The capability in `ca0`, which is a pointer into the `lower` buffer, has been
    taken beyond the end of the allocation, as out of bounds store has been
    attempted (`Capability bounds fault`).
@@ -52,24 +76,24 @@
    But where did those bounds originate?  Heading `up` a stack frame and
    `disass`embling, we see (eliding irrelevant instructions):
    ```
-   (gdb) up
-   #1  0x0000000000101d7a in main () at buffer-overflow-stack.c:31
-   31              write_buf(lower, sizeof(lower));
-   (gdb) disass
-   Dump of assembler code for function main:
-      0x0000000000101cf8 <+0>:     cincoffset      csp,csp,-144
+(gdb) up
+#1  0x00000000002000ea in init () at buffer-overflow-stack.c:31
+31              write_buf(lower, sizeof(lower));
+(gdb) disass
+Dump of assembler code for function init:
+   0x0000000000200066 <+0>:     c.addi16sp      csp,-128
 
-      0x0000000000101d14 <+28>:    cincoffset      ca0,csp,48
-      0x0000000000101d18 <+32>:    csetbounds      cs0,ca0,16
+   0x0000000000200074 <+14>:    c.addi4spn      a0,csp,48
+   0x0000000000200076 <+16>:    scbndsi cs0,ca0,16
 
-      0x0000000000101d6c <+116>:   li      a1,16
-      0x0000000000101d6e <+118>:   cmove   ca0,cs0
-      0x0000000000101d72 <+122>:   auipcc  cra,0x0
-      0x0000000000101d76 <+126>:   cjalr   -138(cra)
-   => 0x0000000000101d7a <+130>:   clbu    a0,0(cs1)
+   0x00000000002000dc <+118>:   li      a1,16
+   0x00000000002000de <+120>:   mv      ca0,cs0
+   0x00000000002000e2 <+124>:   auipcc  cra,0x0
+   0x00000000002000e6 <+128>:   jalr    -138(cra)
+=> 0x00000000002000ea <+132>:   lbu     a0,64(csp)
    ```
-   The compiler has arranged for `main` to allocate 144 bytes on the stack by
-   decrementing the *capability stack pointer* register (`csp`) by 144 bytes.
+   The compiler has arranged for `init` to allocate 128 bytes on the stack by
+   decrementing the *capability stack pointer* register (`csp`) by 128 bytes.
    Further, the compiler has placed `lower` 48 bytes up into that allocation:
    `ca0` is made to point at its lowest address and then the pointer to `lower`
    is materialized in `cs0` by *bounding* the capability in `ca0` to be 16
@@ -79,19 +103,19 @@
 4. The code for `write_buf` function is only slightly changed.  On
    RISC-V it compiles to
    ```
-   <write_buf>:
-    add     a0, a0, a1
-    addi    a1, zero, 98
-    sb      a1, 0(a0)
-    ret
+    20004c <write_buf>:
+    20004c: 2e 95         add     a0, a0, a1
+    20004e: 93 05 20 06   li      a1, 98
+    200052: 23 00 b5 00   sb      a1, 0(a0)
+    200056: 82 80         ret
    ```
    while on CHERI-RISC-V, it is
    ```
-   <write_buf>:
-    cincoffset      ca0, ca0, a1
-    addi    a1, zero, 98
-    csb     a1, 0(ca0)
-    cret
+    200058 <write_buf>:
+    200058: 33 05 b5 0c   cadd    ca0, ca0, a1
+    20005c: 93 05 20 06   li      a1, 98
+    200060: 23 00 b5 00   sb      a1, 0(ca0)
+    200064: 82 80         ret
    ```
    In both cases, it amounts to displacing the pointer passed in `a0` (resp.
    `ca0`) by the offset passed in `a1` and then performing a store-byte
@@ -102,18 +126,21 @@
    instruction itself enforces the requirement for authority to write to memory,
    in the shape of a valid, in-bounds capability.
 
-   We have already seen the CHERI program's call site to `write_buf` in `main`,
+   We have already seen the CHERI program's call site to `write_buf` in `init`,
    and the derivation of the capability to the `lower` buffer, above.  In the
    baseline version, the corresponding instructions are shown as
    ```
-   (gdb) disass main
-   Dump of assembler code for function main:
-      0x0000000000011b44 <+0>:       addi    sp,sp,-48
+    Breakpoint 1, init () at buffer-overflow-stack.c:23
+    23                  upper, lower, (size_t)(upper - lower));
+    (gdb) disassemble init
+    Dump of assembler code for function init:
+       0x0000000000200058 <+0>:     addi    sp,sp,-48
 
-      0x0000000000011b8a <+70>:      mv      a0,sp
-      0x0000000000011b8c <+72>:      li      a1,16
-      0x0000000000011b8e <+74>:      auipc   ra,0x0
-      0x0000000000011b92 <+78>:      jalr    -86(ra) # 0x11b38 <write_buf>
+       0x00000000002000c0 <+104>:   mv      a0,sp
+       0x00000000002000c2 <+106>:   li      a1,16
+       0x00000000002000c4 <+108>:   auipc   ra,0x0
+       0x00000000002000c8 <+112>:   jalr    -120(ra) # 0x20004c <write_buf>
+
    ```
    Here, the compiler has reserved only 48 bytes of stack space and has placed the
    `lower` buffer at the lowest bytes of this reservation.  Thus, to pass a

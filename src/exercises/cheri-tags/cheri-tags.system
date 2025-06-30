@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+    <!-- Define your system here -->
+    <protection_domain name="cheri-tags" priority="253">
+        <program_image path="cheri-tags.elf" />
+    </protection_domain>
+</system>

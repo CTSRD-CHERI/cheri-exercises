@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+    <!-- Define your system here -->
+
+    <memory_region name="uart" size="0x1_000" phys_addr="0x60101000"/>
+    <memory_region name="client_to_serial" size="0x1000" />
+    <memory_region name="serial_to_client" size="0x1000" />
+
+    <protection_domain name="serial_server" priority="254">
+        <program_image path="serial_server.elf" />
+        <map mr="uart" vaddr="0x2000000" perms="rw" cached="false" setvar_vaddr="uart_base_vaddr"/>
+        <map mr="serial_to_client" vaddr="0x4000000" perms="wr" setvar_vaddr="serial_to_client_vaddr"/>
+        <map mr="client_to_serial" vaddr="0x4001000" perms="r" setvar_vaddr="client_to_serial_vaddr"/>
+        <irq irq="1" id="1" />
+    </protection_domain>
+
+    <protection_domain name="control-flow-pointer" priority="253">
+        <program_image path="control-flow-pointer.elf" />
+        <map mr="serial_to_client" vaddr="0x4000000" perms="r" setvar_vaddr="serial_to_client_vaddr"/>
+        <map mr="client_to_serial" vaddr="0x4001000" perms="rw" setvar_vaddr="client_to_serial_vaddr"/>
+    </protection_domain>
+
+    <channel>
+        <end pd="control-flow-pointer" id="1" />
+        <end pd="serial_server" id="2" />
+    </channel>
+</system>

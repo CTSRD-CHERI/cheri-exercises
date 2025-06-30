@@ -5,7 +5,7 @@ pointer side will no longer be dereferenceable, as the tag has been cleared.
 
 2. Expected output:
 ```
-# ./union-int-ptr-riscv
+# run_qemu ./type-confusion-riscv
 lp.ptr Hello World!
 lp.ptr ello World!
 ```
@@ -15,9 +15,12 @@ incremented instead).
 
 3. Expected output:
 ```
-# ./union-int-ptr-cheri
+# run_qemu ./type-confusion-cheri
 lp.ptr Hello World!
-In-address space security exception (core dumped)
+...
+MON|ERROR: CHERI Security Violation: ip=0x0000000000200750  fault_addr=0x00000000002023f1  fsr=0x0000000000000810  (data fault)
+MON|ERROR: description of fault: Tag violation
+MON|ERROR: CHERI fault type: CHERI data fault due to load, store or AMO
 ```
 When the `long` member was loaded and stored, it caused the tag to be
 cleared on the pointer.

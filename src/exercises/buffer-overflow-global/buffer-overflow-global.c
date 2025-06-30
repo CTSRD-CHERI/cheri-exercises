@@ -2,7 +2,8 @@
  * SPDX-License-Identifier: BSD-2-Clause-DARPA-SSITH-ECATS-HR0011-18-C-0016
  * Copyright (c) 2020 SRI International
  */
-#include <stdio.h>
+#include <stdint.h>
+#include <printf.h>
 
 char buffer[128];
 char c;
@@ -17,8 +18,8 @@ fill_buf(char *buf, size_t len)
 
 #include "main-asserts.inc"
 
-int
-main(void)
+void
+init(void)
 {
 	(void)buffer;
 	main_asserts();
@@ -29,6 +30,6 @@ main(void)
 	fill_buf(buffer, sizeof(buffer));
 
 	printf("c = %c\n", c);
-
-	return 0;
 }
+
+void notified(){}

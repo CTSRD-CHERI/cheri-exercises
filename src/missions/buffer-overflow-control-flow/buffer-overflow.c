@@ -3,21 +3,33 @@
  * Copyright (c) 2020 Jessica Clarke
  */
 #include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <printf.h>
+#include <microkit.h>
+#include <sel4/sel4.h>
 
 #include "btpalloc.h"
+
+#define SERIAL_CHANNEL 1
+
+uintptr_t serial_to_client_vaddr;
+uintptr_t client_to_serial_vaddr;
+
+#define MOVE_CURSOR_UP "\033[5A"
+#define CLEAR_TERMINAL_BELOW_CURSOR "\033[0J"
+#define GREEN "\033[32;1;40m"
+#define YELLOW "\033[39;103m"
+#define DEFAULT_COLOUR "\033[0m"
 
 void
 success(void)
 {
-	puts("Exploit successful!");
+	printf("Exploit successful!");
 }
 
 void
 failure(void)
 {
-	puts("Exploit unsuccessful!");
+	printf("Exploit unsuccessful!");
 }
 
 static uint16_t
@@ -36,10 +48,15 @@ ipv4_checksum(uint16_t *buf, size_t words)
 	return (~sum & 0xffff);
 }
 
-#include "main-asserts.inc"
+static volatile int empty = 1;
 
-int
-main(void)
+static char getchar() {
+    microkit_ppcall(SERIAL_CHANNEL, microkit_msginfo_new(1, 0));
+    return ((char *)serial_to_client_vaddr)[0];
+}
+
+void
+init(void)
 {
 	int ch;
 	char *buf, *p;
@@ -49,13 +66,15 @@ main(void)
 	buf = btpmalloc(25000);
 	fptr = btpmalloc(sizeof(*fptr));
 
-	main_asserts(buf, fptr);
-
 	*fptr = &failure;
 
 	p = buf;
-	while ((ch = getchar()) != EOF)
+	while ((ch = getchar()) != -1) {
+    if(ch == '\n' || ch == '\r')
+        break;
+
 		*p++ = (char)ch;
+  }
 
 	if ((uintptr_t)p & 1)
 		*p++ = '\0';
@@ -68,6 +87,15 @@ main(void)
 	(**fptr)();
 
 	btpfree(fptr);
+}
 
-	return (0);
+void notified(microkit_channel channel) {
+    switch (channel) {
+        case SERIAL_CHANNEL: {
+            char ch = ((char *)serial_to_client_vaddr)[0];
+            microkit_dbg_putc(ch);
+            empty = 0;
+            break;
+        }
+    }
 }

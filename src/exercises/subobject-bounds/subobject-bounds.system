@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+    <!-- Define your system here -->
+    <protection_domain name="subobject-bounds" priority="253">
+        <program_image path="subobject-bounds.elf" />
+    </protection_domain>
+</system>

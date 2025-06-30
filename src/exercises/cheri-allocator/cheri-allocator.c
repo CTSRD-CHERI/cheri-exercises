@@ -3,18 +3,17 @@
  * Copyright (c) 2022 Robert N. M. Watson
  */
 
-#include <sys/cdefs.h>
-
-#include <assert.h>
-#include <stdio.h>
 #include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sysexits.h>
+#include <stddef.h>
+#include <printf.h>
+#include <sel4/assert.h>
 
 #ifdef __CHERI_PURE_CAPABILITY__
 #include <cheriintrin.h>
 #endif
+
+#define __containerof(ptr, type, member) \
+    ((type *)((uintptr_t)(ptr) - offsetof(type, member)))
 
 /*
  * Implement a very simple allocator for a fixed-size data type, with inline
@@ -65,7 +64,7 @@ alloc_init(void)
 	for (i = 0; i < ALLOC_MAX - 1; i++)
 		alloc_array[i].a_next = &alloc_array[i + 1];
 	alloc_array[ALLOC_MAX - 1].a_next = NULL;
-	assert(alloc_array[ALLOC_MAX - 1].a_next == NULL);
+	seL4_Assert(alloc_array[ALLOC_MAX - 1].a_next == NULL);
 }
 
 /*
@@ -103,8 +102,8 @@ alloc_free(void *ptr)
 	alloc_nextfree = alloc;
 }
 
-int
-main(void)
+void
+init(void)
 {
 	void *ptr1, *ptr2, *ptr3;
 
@@ -161,6 +160,6 @@ main(void)
 	printf("Freeing allocation %p\n", ptr1);
 	alloc_free(ptr1);
 	printf("Allocation %p freed\n", ptr1);
-
-	exit(EX_OK);
 }
+
+void notified(){}

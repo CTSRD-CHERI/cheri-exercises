@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+    <protection_domain name="print-pointer-cheri">
+        <program_image path="print-pointer-cheri" />
+    </protection_domain>
+</system>
